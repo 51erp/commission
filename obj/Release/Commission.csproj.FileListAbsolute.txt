@@ -1,0 +1,122 @@
+D:\Projects\Commission\bin\Release\Lib\log4net.dll
+D:\Projects\Commission\bin\Release\Lib\log4net.pdb
+D:\Projects\Commission\bin\Release\Lib\log4net.xml
+D:\Projects\Commission\bin\Release\log4net.Config
+D:\Projects\Commission\bin\Release\Commission.exe.config
+D:\Projects\Commission\bin\Release\Commission.exe
+D:\Projects\Commission\bin\Release\EPPlus.dll
+D:\Projects\Commission\bin\Release\EPPlus.xml
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmAppend.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmBaseSaleItem.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmBottomSet.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmChangeAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmConfig.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmCreditAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmCustomerAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmItemImport.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmProjectAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.BaseFrmAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmReceiptAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmRename.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSaleItemAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSalesAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmContractAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSettleDetail.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSettleSave.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSettleSet.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSubscribeAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSubscribeBase.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmSupplement.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmUpSet.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmUpValueAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmUserAdd.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmUserPwd.resources
+D:\Projects\Commission\obj\Release\Commission.FrmLogin.resources
+D:\Projects\Commission\obj\Release\Commission.FrmMain.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmHandover.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSettleReport.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSubscribe.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmCredit.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmConfirm.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmChange.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmContract.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSales.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmCustomer.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmProject.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmReceipt.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSaleItem.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSettlement.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmUpSettle.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmUser.resources
+D:\Projects\Commission\obj\Release\Commission.Properties.Resources.resources
+D:\Projects\Commission\obj\Release\Commission.Report.RepReturn.resources
+D:\Projects\Commission\obj\Release\Commission.csproj.GenerateResource.Cache
+D:\Projects\Commission\obj\Release\Commission.exe
+D:\Projects\Commission\obj\Release\Commission.Report.RepList.resources
+D:\Projects\Commission - 20170306\bin\Release\Lib\log4net.dll
+D:\Projects\Commission - 20170306\bin\Release\Lib\log4net.pdb
+D:\Projects\Commission - 20170306\bin\Release\Lib\log4net.xml
+D:\Projects\Commission - 20170306\bin\Release\log4net.Config
+D:\Projects\Commission - 20170306\bin\Release\Commission.exe.config
+D:\Projects\Commission - 20170306\bin\Release\Commission.exe
+D:\Projects\Commission - 20170306\bin\Release\EPPlus.dll
+D:\Projects\Commission - 20170306\bin\Release\EPPlus.xml
+D:\Projects\Commission - 20170306\obj\Release\Commission.csprojResolveAssemblyReference.cache
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmAppend.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmBaseSaleItem.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmBottomSet.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmChangeAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmConfig.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmCreditAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmCustomerAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmItemImport.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmProjectAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.BaseFrmAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmReceiptAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmRename.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSaleItemAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSalesAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmContractAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSettleDetail.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSettleSave.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSettleSet.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSubscribeAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSubscribeBase.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmSupplement.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmUpSet.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmUpValueAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmUserAdd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Forms.FrmUserPwd.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.FrmLogin.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.FrmMain.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmHandover.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmSettleReport.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmSubscribe.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmCredit.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmConfirm.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmChange.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmContract.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmSales.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmCustomer.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmProject.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmReceipt.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmSaleItem.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmSettlement.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmUpSettle.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.MenuForms.FrmUser.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Properties.Resources.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Report.RepList.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.Report.RepReturn.resources
+D:\Projects\Commission - 20170306\obj\Release\Commission.csproj.GenerateResource.Cache
+D:\Projects\Commission - 20170306\obj\Release\Commission.exe
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmChangeProject.resources
+D:\Projects\Commission\obj\Release\Commission.csprojResolveAssemblyReference.cache
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmCreditDate.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmSaleItemMng.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmInstallment.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmReSettle.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmReSettleDetail.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmReSettleReport.resources
+D:\Projects\Commission\obj\Release\Commission.Forms.FrmUpSettleDetail.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmUpSettleReport.resources
+D:\Projects\Commission\obj\Release\Commission.MenuForms.FrmBottomPriceImp.resources

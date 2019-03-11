@@ -1,0 +1,182 @@
+﻿datagridview删除记录
+可以在删除记录的同时，后台删除数据库，不用再次连接数据库并刷新
+
+//四舍五入并保留指定小数位
+Math.Round(double.Parse("1.9999"), 0, MidpointRounding.AwayFromZero).ToString("N0");
+
+//允许千分符和小数位
+//AllowThousands：千分符
+//AllowDecimalPoint：小数点
+double.Parse(amount, NumberStyles.AllowThousands | NumberStyles.AllowDecimalPoint).ToString()
+
+
+string.Format("{0:F}",double)
+double.toString("F0")
+Fn:固定小数位的
+Nn:千分位
+#:占位
+0:强制填写占位
+
+
+
+//新增列到指定位置
+DataTable.Columns.Add().SetOrdinal(0);
+
+//文件写
+        public static void Write(string str)
+        {
+            System.IO.FileStream fs = new System.IO.FileStream(@"c:\app.txt", System.IO.FileMode.Append);
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(fs);
+
+            sw.WriteLine(str);
+
+            sw.Flush();
+
+            sw.Close();
+            fs.Close();
+        }
+
+
+//清空绑定DataTable的dataGridView
+DataTable  dt  =  (DataTable)dataGridView1.DataSource;
+dt.Rows.Clear();
+dataGridView1.DataSource  =  dt;
+
+//清空无绑定dataGridView
+DataGridview.Rows.Clear();
+
+//查看DataTable字段名及值
+            Console.WriteLine("***************");
+            for (int i = 0; i < dt_Settlement.Rows.Count; i++)
+            {
+                for (int j = 0; j < dt_Settlement.Columns.Count; j++)
+                {
+                    string a = dt_Settlement.Columns[j].ColumnName;
+                    Console.WriteLine(a + ":" + i + "-" + j +": "+ dt_Settlement.Rows[i][j].ToString());    
+                }
+                
+            }
+
+//================================================================
+
+--不知道有没有
+--IDENT_CURRENT 返回为任何会话和任何作用域中的特定表最后生成的标识值。
+--语法：IDENT_CURRENT('table_name')
+ 
+ 
+--@@IDENTITY 返回为当前会话的所有作用域中的任何表最后生成的标识值。
+--语法：@@IDENTITY
+ 
+--SCOPE_IDENTITY 返回为当前会话和当前作用域中的任何表最后生成的标识值。
+-- 语法：SCOPE_IDENTITY()  
+ 
+
+ ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+using (SqlConnection connection = SqlHelper.OpenConnection())
+{
+    SqlTransaction sqlTran = connection.BeginTransaction(); 
+    SqlCommand cmd = connection.CreateCommand(); 
+    cmd.Transaction = sqlTran; 
+
+	try
+	{
+
+
+	    sqlTran.Commit();
+    }
+    catch (Exception ex)
+    {
+        sqlTran.Rollback();
+        Prompt.Error("操作失败， 错误：" + ex.Message);
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// 获取绑定房源（多次合并到主表）
+        /// </summary>
+        /// <param name="dtBase"></param>
+        private void  GetContractBaseData(DataTable dtBase)
+        {
+            int iBindQuantity = 0;
+            string sql = string.Empty;
+
+            dtBase.PrimaryKey = new DataColumn[] { dtBase.Columns["ContractID"] };
+            
+            string formatAmount = "{0:F" + Login.Parameters.PrecisionAmount + "}";
+
+            //获取绑定（附属）物业相关信息
+            for (int i = 0; i < dtBase.Rows.Count; i++)
+            {
+                string subId = dtBase.Rows[i]["ContractID"].ToString();
+
+                sql = "select ItemNum, Area, Price, Amount from ContractDetail where IsBind = 1 and ContractID = " + subId;
+
+                DataTable dtBind = SqlHelper.ExecuteDataTable(sql);
+
+                if (dtBind.Rows.Count > 0)
+                {
+                    if (dtBind.Rows.Count > iBindQuantity)
+                        iBindQuantity = dtBind.Rows.Count;
+
+                    DataTable dt = new DataTable();
+
+                    dt.Columns.Add("ContractID", typeof(int));
+                    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
+
+                    string fieldValue = subId;
+
+                    for (int rowIdx = 0; rowIdx < dtBind.Rows.Count; rowIdx++)
+                    {
+                        for (int colIdx = 0; colIdx < dtBind.Columns.Count; colIdx++)
+                        {
+                            string fieldName = "BIND_" + dtBind.Columns[colIdx].ColumnName + rowIdx;
+
+                            dt.Columns.Add(fieldName, dtBind.Columns[colIdx].DataType);
+
+                            fieldValue += "," + dtBind.Rows[rowIdx][colIdx].ToString();
+                        }
+                    }
+                    string[] strArray = fieldValue.Split(',');
+
+                    dt.Rows.Add(strArray);
+
+                    dtBase.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+                }
+            }
+        }
+
+
+/////////////////////////////////////////////////////////////////////
+        public bool BackUpDataBase(string databasefile)
+        {
+            SqlConnection conn = SqlHelper.OpenConnection();
+
+            //还原的数据库MyDataBase
+            string sql = "BACKUP DATABASE " + "commission_new" + " TO DISK = '" + databasefile + "' ";
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            SqlCommand comm = new SqlCommand(sql, conn);
+            comm.CommandType = CommandType.Text;
+            try
+            {
+                comm.ExecuteNonQuery();
+                MessageBox.Show("OK");
+            }
+            catch (Exception err)
+            {
+                conn.Close();
+                MessageBox.Show(err.Message);
+                return false;
+            }
+
+            conn.Close();//关闭数据库连接
+            return true;
+        }
+
+
