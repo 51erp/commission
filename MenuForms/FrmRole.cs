@@ -159,11 +159,6 @@ namespace Commission.MenuForms
 
 
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            setNodeChecked("");
-        }
-
         private void button_Add_Click(object sender, EventArgs e)
         {
             string roleName = textBox_RoleName.Text.Trim();

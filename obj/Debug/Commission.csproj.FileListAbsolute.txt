@@ -174,3 +174,5 @@ D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmSubscribeDate.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmRateSet.resources
 D:\VSProjects\Commission\obj\Debug\Commission.csprojResolveAssemblyReference.cache
 D:\VSProjects\Commission\bin\Debug\App.config
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganization.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganizationAdd.resources

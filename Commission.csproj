@@ -218,6 +218,18 @@
     <Compile Include="Forms\FrmItemTypeMng.Designer.cs">
       <DependentUpon>FrmItemTypeMng.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmOrganization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOrganization.Designer.cs">
+      <DependentUpon>FrmOrganization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmOrganizationAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmOrganizationAdd.Designer.cs">
+      <DependentUpon>FrmOrganizationAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmParameterSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -657,6 +669,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmItemTypeMng.resx">
       <DependentUpon>FrmItemTypeMng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOrganization.resx">
+      <DependentUpon>FrmOrganization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmOrganizationAdd.resx">
+      <DependentUpon>FrmOrganizationAdd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmParameterSet.resx">
       <DependentUpon>FrmParameterSet.cs</DependentUpon>

@@ -562,5 +562,11 @@ namespace Commission
             confirm.IsConfirm = false;
             FormShow(confirm, sender);
         }
+
+        private void ToolStripMenuItem_organiz_Click(object sender, EventArgs e)
+        {
+            FrmOrganization organiz = new FrmOrganization();
+            organiz.ShowDialog();
+        }
     }
 }
