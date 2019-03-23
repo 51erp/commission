@@ -12,7 +12,6 @@ namespace Commission.Forms
 {
     public partial class FrmOrganization : Form
     {
-        int iSubNodeNum = 0;
         public FrmOrganization()
         {
             InitializeComponent();
@@ -77,7 +76,6 @@ namespace Commission.Forms
 
             LoadDeptSubNode(root);
 
-
             treeView_Dept.ExpandAll();
         }
 
@@ -137,7 +135,7 @@ namespace Commission.Forms
 
         }
 
-
+        #region    treeView 加载测试
         private void InitDeptNode_Test()
         {
             TreeNode node1 = new TreeNode();
@@ -181,6 +179,6 @@ namespace Commission.Forms
 
             treeView_Dept.ExpandAll();
         }
-        
+        #endregion
     }
 }

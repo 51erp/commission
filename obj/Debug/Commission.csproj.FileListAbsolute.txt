@@ -176,3 +176,5 @@ D:\VSProjects\Commission\obj\Debug\Commission.csprojResolveAssemblyReference.cac
 D:\VSProjects\Commission\bin\Debug\App.config
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganization.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganizationAdd.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmEmploye.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmEmployeAdd.resources

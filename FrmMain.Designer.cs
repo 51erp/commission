@@ -75,6 +75,7 @@
             this.ToolStripMenuItem_Credit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItem_Handover = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItem_JobChange = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_CommSettle = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_SettleMng = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem11 = new System.Windows.Forms.ToolStripSeparator();
@@ -128,7 +129,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolStripMenuItem_JobChange = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton_Project = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_SaleItem = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Customer = new System.Windows.Forms.ToolStripButton();
@@ -150,6 +150,8 @@
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_CreateMenuList = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Temp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItem_JobChangeRep = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_Main.SuspendLayout();
             this.statusStrip_Main.SuspendLayout();
             this.toolStrip_Main.SuspendLayout();
@@ -259,68 +261,68 @@
             // ToolStripMenuItem_Project
             // 
             this.ToolStripMenuItem_Project.Name = "ToolStripMenuItem_Project";
-            this.ToolStripMenuItem_Project.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Project.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_Project.Text = "项目信息";
             this.ToolStripMenuItem_Project.Click += new System.EventHandler(this.ToolStripMenuItem_Project_Click_1);
             // 
             // ToolStripMenuItem_organiz
             // 
             this.ToolStripMenuItem_organiz.Name = "ToolStripMenuItem_organiz";
-            this.ToolStripMenuItem_organiz.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_organiz.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_organiz.Text = "部门管理";
             this.ToolStripMenuItem_organiz.Click += new System.EventHandler(this.ToolStripMenuItem_organiz_Click);
             // 
             // ToolStripMenuItem_ItemType
             // 
             this.ToolStripMenuItem_ItemType.Name = "ToolStripMenuItem_ItemType";
-            this.ToolStripMenuItem_ItemType.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ItemType.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ItemType.Text = "房源类型";
             this.ToolStripMenuItem_ItemType.Click += new System.EventHandler(this.ToolStripMenuItem_ItemType_Click);
             // 
             // ToolStripMenuItem_ContractDate
             // 
             this.ToolStripMenuItem_ContractDate.Name = "ToolStripMenuItem_ContractDate";
-            this.ToolStripMenuItem_ContractDate.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ContractDate.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ContractDate.Text = "签约预期";
             this.ToolStripMenuItem_ContractDate.Click += new System.EventHandler(this.ToolStripMenuItem_ContractDate_Click);
             // 
             // ToolStripMenuItem_SubscribeDate
             // 
             this.ToolStripMenuItem_SubscribeDate.Name = "ToolStripMenuItem_SubscribeDate";
-            this.ToolStripMenuItem_SubscribeDate.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_SubscribeDate.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_SubscribeDate.Text = "认购日期";
             this.ToolStripMenuItem_SubscribeDate.Click += new System.EventHandler(this.ToolStripMenuItem_SubscribeDate_Click);
             // 
             // toolStripMenuItem14
             // 
             this.toolStripMenuItem14.Name = "toolStripMenuItem14";
-            this.toolStripMenuItem14.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem14.Size = new System.Drawing.Size(121, 6);
             // 
             // ToolStripMenuItem_PayMode
             // 
             this.ToolStripMenuItem_PayMode.Name = "ToolStripMenuItem_PayMode";
-            this.ToolStripMenuItem_PayMode.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_PayMode.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_PayMode.Text = "付款方式";
             this.ToolStripMenuItem_PayMode.Click += new System.EventHandler(this.ToolStripMenuItem_PayMode_Click);
             // 
             // ToolStripMenuItem_RateMng
             // 
             this.ToolStripMenuItem_RateMng.Name = "ToolStripMenuItem_RateMng";
-            this.ToolStripMenuItem_RateMng.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_RateMng.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_RateMng.Text = "提点设置";
             this.ToolStripMenuItem_RateMng.Click += new System.EventHandler(this.ToolStripMenuItem_RateMng_Click);
             // 
             // ToolStripMenuItem_UpMng
             // 
             this.ToolStripMenuItem_UpMng.Name = "ToolStripMenuItem_UpMng";
-            this.ToolStripMenuItem_UpMng.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_UpMng.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_UpMng.Text = "跳点设置";
             this.ToolStripMenuItem_UpMng.Click += new System.EventHandler(this.ToolStripMenuItem_UpMng_Click);
             // 
             // ToolStripMenuItem_SettlePara
             // 
             this.ToolStripMenuItem_SettlePara.Name = "ToolStripMenuItem_SettlePara";
-            this.ToolStripMenuItem_SettlePara.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_SettlePara.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_SettlePara.Text = "结算期间";
             this.ToolStripMenuItem_SettlePara.Click += new System.EventHandler(this.ToolStripMenuItem_SettlePara_Click);
             // 
@@ -347,7 +349,7 @@
             // ToolStripMenuItem_SaleItem
             // 
             this.ToolStripMenuItem_SaleItem.Name = "ToolStripMenuItem_SaleItem";
-            this.ToolStripMenuItem_SaleItem.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_SaleItem.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_SaleItem.Tag = "toolStripButton_SaleItem";
             this.ToolStripMenuItem_SaleItem.Text = "楼盘";
             this.ToolStripMenuItem_SaleItem.Click += new System.EventHandler(this.SaleItem_ToolStripMenuItem_Click);
@@ -355,7 +357,7 @@
             // ToolStripMenuItem_Customer
             // 
             this.ToolStripMenuItem_Customer.Name = "ToolStripMenuItem_Customer";
-            this.ToolStripMenuItem_Customer.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Customer.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_Customer.Tag = "toolStripButton_Customer";
             this.ToolStripMenuItem_Customer.Text = "客户";
             this.ToolStripMenuItem_Customer.Click += new System.EventHandler(this.Customer_ToolStripMenuItem_Click);
@@ -363,19 +365,19 @@
             // ToolStripMenuItem_Sales
             // 
             this.ToolStripMenuItem_Sales.Name = "ToolStripMenuItem_Sales";
-            this.ToolStripMenuItem_Sales.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Sales.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_Sales.Text = "置业顾问";
             this.ToolStripMenuItem_Sales.Click += new System.EventHandler(this.Sales_ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(121, 6);
             // 
             // ToolStripMenuItem_SaleItemMng
             // 
             this.ToolStripMenuItem_SaleItemMng.Name = "ToolStripMenuItem_SaleItemMng";
-            this.ToolStripMenuItem_SaleItemMng.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_SaleItemMng.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_SaleItemMng.Tag = "toolStripButton_BuildingMng";
             this.ToolStripMenuItem_SaleItemMng.Text = "楼盘管理";
             this.ToolStripMenuItem_SaleItemMng.Click += new System.EventHandler(this.SaleItemMng_ToolStripMenuItem_Click);
@@ -383,52 +385,52 @@
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(121, 6);
             // 
             // ToolStripMenuItem_ImpSaleItem
             // 
             this.ToolStripMenuItem_ImpSaleItem.Name = "ToolStripMenuItem_ImpSaleItem";
-            this.ToolStripMenuItem_ImpSaleItem.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpSaleItem.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpSaleItem.Text = "楼盘导入";
             this.ToolStripMenuItem_ImpSaleItem.Click += new System.EventHandler(this.ToolStripMenuItem_Import_Click);
             // 
             // ToolStripMenuItem_ImpBottomPrice
             // 
             this.ToolStripMenuItem_ImpBottomPrice.Name = "ToolStripMenuItem_ImpBottomPrice";
-            this.ToolStripMenuItem_ImpBottomPrice.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpBottomPrice.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpBottomPrice.Text = "底价导入";
             this.ToolStripMenuItem_ImpBottomPrice.Click += new System.EventHandler(this.BPImport_ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem_ImpCustomer
             // 
             this.ToolStripMenuItem_ImpCustomer.Name = "ToolStripMenuItem_ImpCustomer";
-            this.ToolStripMenuItem_ImpCustomer.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpCustomer.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpCustomer.Text = "客户导入";
             this.ToolStripMenuItem_ImpCustomer.Click += new System.EventHandler(this.ToolStripMenuItem_ImpCustomer_Click);
             // 
             // ToolStripMenuItem_ImpSales
             // 
             this.ToolStripMenuItem_ImpSales.Name = "ToolStripMenuItem_ImpSales";
-            this.ToolStripMenuItem_ImpSales.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpSales.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpSales.Text = "顾问导入";
             this.ToolStripMenuItem_ImpSales.Click += new System.EventHandler(this.ToolStripMenuItem_ImpSales_Click);
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(121, 6);
             // 
             // ToolStripMenuItem_ImpSubscribe
             // 
             this.ToolStripMenuItem_ImpSubscribe.Name = "ToolStripMenuItem_ImpSubscribe";
-            this.ToolStripMenuItem_ImpSubscribe.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpSubscribe.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpSubscribe.Text = "认购导入";
             this.ToolStripMenuItem_ImpSubscribe.Click += new System.EventHandler(this.ToolStripMenuItem_ImpSubscribe_Click);
             // 
             // ToolStripMenuItem_ImpContract
             // 
             this.ToolStripMenuItem_ImpContract.Name = "ToolStripMenuItem_ImpContract";
-            this.ToolStripMenuItem_ImpContract.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_ImpContract.Size = new System.Drawing.Size(124, 22);
             this.ToolStripMenuItem_ImpContract.Text = "签约导入";
             this.ToolStripMenuItem_ImpContract.Click += new System.EventHandler(this.ToolStripMenuItem_ImpContract_Click);
             // 
@@ -453,7 +455,7 @@
             // ToolStripMenuItem_Subscribe
             // 
             this.ToolStripMenuItem_Subscribe.Name = "ToolStripMenuItem_Subscribe";
-            this.ToolStripMenuItem_Subscribe.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Subscribe.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Subscribe.Tag = "toolStripButton_Subscribe";
             this.ToolStripMenuItem_Subscribe.Text = "认购";
             this.ToolStripMenuItem_Subscribe.Click += new System.EventHandler(this.Subscribe_ToolStripMenuItem_Click);
@@ -461,7 +463,7 @@
             // ToolStripMenuItem_Contract
             // 
             this.ToolStripMenuItem_Contract.Name = "ToolStripMenuItem_Contract";
-            this.ToolStripMenuItem_Contract.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Contract.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Contract.Tag = "toolStripButton_Contract";
             this.ToolStripMenuItem_Contract.Text = "签约";
             this.ToolStripMenuItem_Contract.Click += new System.EventHandler(this.Contract_ToolStripMenuItem_Click);
@@ -469,12 +471,12 @@
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(109, 6);
             // 
             // ToolStripMenuItem_Receipt
             // 
             this.ToolStripMenuItem_Receipt.Name = "ToolStripMenuItem_Receipt";
-            this.ToolStripMenuItem_Receipt.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Receipt.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Receipt.Tag = "toolStripButton_Receipt";
             this.ToolStripMenuItem_Receipt.Text = "收款";
             this.ToolStripMenuItem_Receipt.Click += new System.EventHandler(this.Receipt_ToolStripMenuItem_Click);
@@ -482,7 +484,7 @@
             // ToolStripMenuItem_AreaChange
             // 
             this.ToolStripMenuItem_AreaChange.Name = "ToolStripMenuItem_AreaChange";
-            this.ToolStripMenuItem_AreaChange.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_AreaChange.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_AreaChange.Tag = "toolStripButton_Change";
             this.ToolStripMenuItem_AreaChange.Text = "面积";
             this.ToolStripMenuItem_AreaChange.Click += new System.EventHandler(this.Change_ToolStripMenuItem_Click);
@@ -490,7 +492,7 @@
             // ToolStripMenuItem_Confirm
             // 
             this.ToolStripMenuItem_Confirm.Name = "ToolStripMenuItem_Confirm";
-            this.ToolStripMenuItem_Confirm.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Confirm.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Confirm.Tag = "toolStripButton_Confirm";
             this.ToolStripMenuItem_Confirm.Text = "确权";
             this.ToolStripMenuItem_Confirm.Click += new System.EventHandler(this.Confirm_ToolStripMenuItem_Click);
@@ -498,14 +500,14 @@
             // ToolStripMenuItem_NoConfirm
             // 
             this.ToolStripMenuItem_NoConfirm.Name = "ToolStripMenuItem_NoConfirm";
-            this.ToolStripMenuItem_NoConfirm.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_NoConfirm.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_NoConfirm.Text = "反确权";
             this.ToolStripMenuItem_NoConfirm.Click += new System.EventHandler(this.ToolStripMenuItem_NoConfirm_Click);
             // 
             // ToolStripMenuItem_Credit
             // 
             this.ToolStripMenuItem_Credit.Name = "ToolStripMenuItem_Credit";
-            this.ToolStripMenuItem_Credit.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Credit.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Credit.Tag = "toolStripButton_Credit";
             this.ToolStripMenuItem_Credit.Text = "放贷";
             this.ToolStripMenuItem_Credit.Click += new System.EventHandler(this.Credit_ToolStripMenuItem_Click);
@@ -513,14 +515,20 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(109, 6);
             // 
             // ToolStripMenuItem_Handover
             // 
             this.ToolStripMenuItem_Handover.Name = "ToolStripMenuItem_Handover";
-            this.ToolStripMenuItem_Handover.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_Handover.Size = new System.Drawing.Size(112, 22);
             this.ToolStripMenuItem_Handover.Text = "交接";
             this.ToolStripMenuItem_Handover.Click += new System.EventHandler(this.ToolStripMenuItem_Handover_Click);
+            // 
+            // ToolStripMenuItem_JobChange
+            // 
+            this.ToolStripMenuItem_JobChange.Name = "ToolStripMenuItem_JobChange";
+            this.ToolStripMenuItem_JobChange.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItem_JobChange.Text = "调岗";
             // 
             // ToolStripMenuItem_CommSettle
             // 
@@ -683,7 +691,9 @@
             this.ToolStripMenuIte_Handover,
             this.toolStripMenuItem13,
             this.ToolStripMenuItem_BindSale,
-            this.ToolStripMenuItem_ContractInterval});
+            this.ToolStripMenuItem_ContractInterval,
+            this.toolStripMenuItem5,
+            this.ToolStripMenuItem_JobChangeRep});
             this.ToolStripMenuItem_Report.Name = "ToolStripMenuItem_Report";
             this.ToolStripMenuItem_Report.Size = new System.Drawing.Size(68, 21);
             this.ToolStripMenuItem_Report.Text = "查询报表";
@@ -691,73 +701,73 @@
             // ToolStripMenuItem_ListReport
             // 
             this.ToolStripMenuItem_ListReport.Name = "ToolStripMenuItem_ListReport";
-            this.ToolStripMenuItem_ListReport.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_ListReport.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ListReport.Text = "台帐";
             this.ToolStripMenuItem_ListReport.Click += new System.EventHandler(this.ToolStripMenuItem_ListReport_Click);
             // 
             // ToolStripMenuItem_ReceiptReport
             // 
             this.ToolStripMenuItem_ReceiptReport.Name = "ToolStripMenuItem_ReceiptReport";
-            this.ToolStripMenuItem_ReceiptReport.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_ReceiptReport.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ReceiptReport.Text = "回款";
             this.ToolStripMenuItem_ReceiptReport.Click += new System.EventHandler(this.ToolStripMenuItem_ReceiptReport_Click);
             // 
             // toolStripMenuItem12
             // 
             this.toolStripMenuItem12.Name = "toolStripMenuItem12";
-            this.toolStripMenuItem12.Size = new System.Drawing.Size(121, 6);
+            this.toolStripMenuItem12.Size = new System.Drawing.Size(149, 6);
             // 
             // ToolStripMenuItem_SubscribeReturn
             // 
             this.ToolStripMenuItem_SubscribeReturn.Name = "ToolStripMenuItem_SubscribeReturn";
-            this.ToolStripMenuItem_SubscribeReturn.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_SubscribeReturn.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_SubscribeReturn.Text = "认购退房";
             this.ToolStripMenuItem_SubscribeReturn.Click += new System.EventHandler(this.ToolStripMenuItem_SubscribeReturn_Click);
             // 
             // ToolStripMenuItem_ContractReturn
             // 
             this.ToolStripMenuItem_ContractReturn.Name = "ToolStripMenuItem_ContractReturn";
-            this.ToolStripMenuItem_ContractReturn.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_ContractReturn.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ContractReturn.Text = "签约退房";
             this.ToolStripMenuItem_ContractReturn.Click += new System.EventHandler(this.ToolStripMenuItem_Return_Click);
             // 
             // ToolStripMenuItem_Exchange
             // 
             this.ToolStripMenuItem_Exchange.Name = "ToolStripMenuItem_Exchange";
-            this.ToolStripMenuItem_Exchange.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_Exchange.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_Exchange.Text = "换房明细";
             this.ToolStripMenuItem_Exchange.Click += new System.EventHandler(this.ToolStripMenuItem_Exchange_Click);
             // 
             // ToolStripMenuItem_NameChange
             // 
             this.ToolStripMenuItem_NameChange.Name = "ToolStripMenuItem_NameChange";
-            this.ToolStripMenuItem_NameChange.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_NameChange.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_NameChange.Text = "客户更名";
             this.ToolStripMenuItem_NameChange.Click += new System.EventHandler(this.ToolStripMenuItem_NameChange_Click);
             // 
             // ToolStripMenuIte_Handover
             // 
             this.ToolStripMenuIte_Handover.Name = "ToolStripMenuIte_Handover";
-            this.ToolStripMenuIte_Handover.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuIte_Handover.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuIte_Handover.Text = "交接";
             this.ToolStripMenuIte_Handover.Click += new System.EventHandler(this.ToolStripMenuIte_Handover_Click);
             // 
             // toolStripMenuItem13
             // 
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
-            this.toolStripMenuItem13.Size = new System.Drawing.Size(121, 6);
+            this.toolStripMenuItem13.Size = new System.Drawing.Size(149, 6);
             // 
             // ToolStripMenuItem_BindSale
             // 
             this.ToolStripMenuItem_BindSale.Name = "ToolStripMenuItem_BindSale";
-            this.ToolStripMenuItem_BindSale.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_BindSale.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_BindSale.Text = "附属销售";
             this.ToolStripMenuItem_BindSale.Click += new System.EventHandler(this.ToolStripMenuItem_BindSale_Click);
             // 
             // ToolStripMenuItem_ContractInterval
             // 
             this.ToolStripMenuItem_ContractInterval.Name = "ToolStripMenuItem_ContractInterval";
-            this.ToolStripMenuItem_ContractInterval.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_ContractInterval.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ContractInterval.Text = "签约逾期";
             this.ToolStripMenuItem_ContractInterval.Click += new System.EventHandler(this.ToolStripMenuItem_ContractInterval_Click);
             // 
@@ -953,12 +963,6 @@
             this.toolStripSeparator6.AutoSize = false;
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 53);
-            // 
-            // ToolStripMenuItem_JobChange
-            // 
-            this.ToolStripMenuItem_JobChange.Name = "ToolStripMenuItem_JobChange";
-            this.ToolStripMenuItem_JobChange.Size = new System.Drawing.Size(152, 22);
-            this.ToolStripMenuItem_JobChange.Text = "调岗";
             // 
             // toolStripButton_Project
             // 
@@ -1208,6 +1212,17 @@
             this.toolStripButton_Temp.Visible = false;
             this.toolStripButton_Temp.Click += new System.EventHandler(this.toolStripButton_Temp_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolStripMenuItem_JobChangeRep
+            // 
+            this.ToolStripMenuItem_JobChangeRep.Name = "ToolStripMenuItem_JobChangeRep";
+            this.ToolStripMenuItem_JobChangeRep.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_JobChangeRep.Text = "员工岗位变动";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1360,6 +1375,8 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SubscribeDate;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_NoConfirm;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_JobChange;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_JobChangeRep;
     }
 }
 

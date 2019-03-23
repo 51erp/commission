@@ -170,6 +170,18 @@
     <Compile Include="Forms\FrmDelay.Designer.cs">
       <DependentUpon>FrmDelay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmEmploye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmEmploye.Designer.cs">
+      <DependentUpon>FrmEmploye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmEmployeAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmEmployeAdd.Designer.cs">
+      <DependentUpon>FrmEmployeAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmImpContract.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -646,6 +658,12 @@
     <EmbeddedResource Include="Forms\FrmDelay.resx">
       <DependentUpon>FrmDelay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmEmploye.resx">
+      <DependentUpon>FrmEmploye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmEmployeAdd.resx">
+      <DependentUpon>FrmEmployeAdd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmImpContract.resx">
       <DependentUpon>FrmImpContract.cs</DependentUpon>
     </EmbeddedResource>
@@ -991,6 +1009,15 @@
     <None Include="Resources\unlock_241.png" />
     <None Include="Resources\lock_241.png" />
     <None Include="Resources\lock_242.png" />
+    <None Include="Resources\move_24.png" />
+    <None Include="Resources\in_24.png" />
+    <None Include="Resources\out_24.png" />
+    <None Include="Resources\leave.png" />
+    <None Include="Resources\in.png" />
+    <None Include="Resources\move.png" />
+    <None Include="Resources\in_241.png" />
+    <None Include="Resources\move1.png" />
+    <None Include="Resources\ChangeJob.png" />
     <Content Include="summary.txt" />
     <None Include="Resources\remove2_16.png" />
     <None Include="Resources\outline_remove_16px_21331_easyicon.net.png" />

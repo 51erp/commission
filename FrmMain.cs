@@ -155,8 +155,6 @@ namespace Commission
             FormShow(settle, sender);
         }
 
-
-
         private void Customer_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmCustomer customer = new FrmCustomer();
@@ -165,8 +163,13 @@ namespace Commission
 
         private void Sales_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmSales sales = new FrmSales();
-            sales.ShowDialog();
+            FrmEmploye employe = new FrmEmploye();
+            FormShow(employe, sender);
+
+
+            //FrmSales sales = new FrmSales();
+            //sales.ShowDialog();
+
         }
 
         private void Confirm_ToolStripMenuItem_Click(object sender, EventArgs e)
