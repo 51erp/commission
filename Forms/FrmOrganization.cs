@@ -12,6 +12,9 @@ namespace Commission.Forms
 {
     public partial class FrmOrganization : Form
     {
+        public string DeptID = string.Empty;
+        public string DeptName = string.Empty;
+
         public FrmOrganization()
         {
             InitializeComponent();
@@ -180,5 +183,25 @@ namespace Commission.Forms
             treeView_Dept.ExpandAll();
         }
         #endregion
+
+        private void toolStripButton_OK_Click(object sender, EventArgs e)
+        {
+            if (treeView_Dept.SelectedNode == null)
+            {
+                Prompt.Error("未选择调岗的调入部门！");
+                return;
+            }
+
+            if (treeView_Dept.SelectedNode.Parent == null)
+            {
+                Prompt.Error("所选择的节点不是部门！");
+                return;
+            }
+
+            DeptID = treeView_Dept.SelectedNode.Name;
+            DeptName = treeView_Dept.SelectedNode.Text;
+
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
     }
 }

@@ -37,6 +37,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.treeView_Dept = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripButton_OK = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +49,7 @@
             this.toolStripButton_Add,
             this.toolStripButton_Del,
             this.toolStripSeparator1,
+            this.toolStripButton_OK,
             this.toolStripButton_Close});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -119,6 +121,16 @@
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // toolStripButton_OK
+            // 
+            this.toolStripButton_OK.AutoSize = false;
+            this.toolStripButton_OK.Image = global::Commission.Properties.Resources.OK;
+            this.toolStripButton_OK.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_OK.Name = "toolStripButton_OK";
+            this.toolStripButton_OK.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton_OK.Text = "确定";
+            this.toolStripButton_OK.Click += new System.EventHandler(this.toolStripButton_OK_Click);
+            // 
             // FrmOrganization
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TreeView treeView_Dept;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolStripButton toolStripButton_OK;
     }
 }
