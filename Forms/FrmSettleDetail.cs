@@ -317,5 +317,10 @@ namespace Commission.Forms
 
             }
         }
+
+        private void toolStripButton_Perfomance_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

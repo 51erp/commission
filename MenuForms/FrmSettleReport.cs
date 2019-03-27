@@ -170,6 +170,7 @@ namespace Commission.MenuForms
                 Prompt.Warning("记录未审核！");
                 return;
             }
+
             if (MessageBox.Show("确定要进行反审操作？", Common.MsgCaption,  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
                 string settleId = dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString();
@@ -182,6 +183,41 @@ namespace Commission.MenuForms
             }
 
 
+        }
+
+        private void toolStripButton_Performance_Click(object sender, EventArgs e)
+        {
+            if ((dataGridView_SettleMain.Rows.Count == 0) || (dataGridView_SettleMain.CurrentRow == null))
+            {
+                Prompt.Warning("没有选择记录！");
+                return;
+            }
+
+
+            if (dataGridView_SettleMain.CurrentRow.Cells["ColChecker"].Value.ToString().Equals(""))
+            {
+                Prompt.Warning("记录未审核！");
+                return;
+            }
+
+
+
+        }
+
+        private void Performance()
+        {
+            string settleId = dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString();
+            string sql = string.Format("select SettleID, SubscribeSalesID, SalesID, SalesName, RecSettleTotal, FirstSettle from SettleDetail where SettleID = {0}", settleId);
+
+            DataTable dtSettleDetail = SqlHelper.ExecuteDataTable(sql);
+
+            foreach (DataRow row in dtSettleDetail.Rows)
+            {
+                if (row["FirstSettle"].ToString().Equals("1"))
+                {
+
+                }
+            }
         }
 
     }

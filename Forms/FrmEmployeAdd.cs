@@ -102,8 +102,8 @@ namespace Commission.Forms
                     cmd.CommandText = sqlSales;
                     string salesid = cmd.ExecuteScalar().ToString();
 
-                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, JobType, BeginDate) values ({0},{1},'{2}','{3}')",
-                        salesid, DeptId, comboBox_JobType.Text, dateTimePicker_JobBeginDate.Value.ToString("yyyy-MM-dd"));
+                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate) values ({0},{1},'{2}','{3}','{4}')",
+                        salesid, DeptId, DeptName, comboBox_JobType.Text, dateTimePicker_JobBeginDate.Value.ToString("yyyy-MM-dd"));
                     cmd.ExecuteNonQuery();
 
                     sqlTran.Commit();

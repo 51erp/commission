@@ -32,14 +32,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView_Dept = new System.Windows.Forms.TreeView();
             this.dataGridView_Employe = new System.Windows.Forms.DataGridView();
-            this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColInDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColOutDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColJobType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
@@ -50,12 +42,22 @@
             this.toolStripButton_JobOut = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Dimission = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_Close = new System.Windows.Forms.Button();
             this.textBox_Phone = new System.Windows.Forms.TextBox();
             this.textBox_Name = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button_Search = new System.Windows.Forms.Button();
-            this.button_Close = new System.Windows.Forms.Button();
+            this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDeptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColInDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColOutDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDeptName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColJobType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -99,10 +101,12 @@
             this.dataGridView_Employe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Employe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColID,
+            this.ColDeptID,
             this.ColSalesName,
             this.ColPhone,
             this.ColInDate,
             this.ColOutDate,
+            this.ColDeptName,
             this.ColPosition,
             this.ColJobType,
             this.ColMemo});
@@ -116,65 +120,6 @@
             this.dataGridView_Employe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Employe.Size = new System.Drawing.Size(717, 408);
             this.dataGridView_Employe.TabIndex = 3;
-            // 
-            // ColID
-            // 
-            this.ColID.DataPropertyName = "SalesID";
-            this.ColID.HeaderText = "ID";
-            this.ColID.Name = "ColID";
-            this.ColID.ReadOnly = true;
-            this.ColID.Visible = false;
-            // 
-            // ColSalesName
-            // 
-            this.ColSalesName.DataPropertyName = "SalesName";
-            this.ColSalesName.HeaderText = "姓名";
-            this.ColSalesName.Name = "ColSalesName";
-            this.ColSalesName.ReadOnly = true;
-            // 
-            // ColPhone
-            // 
-            this.ColPhone.DataPropertyName = "Phone";
-            this.ColPhone.HeaderText = "电话";
-            this.ColPhone.Name = "ColPhone";
-            this.ColPhone.ReadOnly = true;
-            // 
-            // ColInDate
-            // 
-            this.ColInDate.DataPropertyName = "InDate";
-            this.ColInDate.HeaderText = "入职时间";
-            this.ColInDate.Name = "ColInDate";
-            this.ColInDate.ReadOnly = true;
-            // 
-            // ColOutDate
-            // 
-            this.ColOutDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ColOutDate.DataPropertyName = "BeginDate";
-            this.ColOutDate.HeaderText = "调入时间";
-            this.ColOutDate.Name = "ColOutDate";
-            this.ColOutDate.ReadOnly = true;
-            // 
-            // ColPosition
-            // 
-            this.ColPosition.DataPropertyName = "Position";
-            this.ColPosition.HeaderText = "职位";
-            this.ColPosition.Name = "ColPosition";
-            this.ColPosition.ReadOnly = true;
-            // 
-            // ColJobType
-            // 
-            this.ColJobType.DataPropertyName = "JobType";
-            this.ColJobType.HeaderText = "岗位类型";
-            this.ColJobType.Name = "ColJobType";
-            this.ColJobType.ReadOnly = true;
-            // 
-            // ColMemo
-            // 
-            this.ColMemo.DataPropertyName = "Memo";
-            this.ColMemo.HeaderText = "备注";
-            this.ColMemo.Name = "ColMemo";
-            this.ColMemo.ReadOnly = true;
-            this.ColMemo.Width = 200;
             // 
             // toolStrip2
             // 
@@ -285,6 +230,19 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
+            // button_Close
+            // 
+            this.button_Close.Image = global::Commission.Properties.Resources.exit;
+            this.button_Close.Location = new System.Drawing.Point(377, 13);
+            this.button_Close.Name = "button_Close";
+            this.button_Close.Size = new System.Drawing.Size(75, 23);
+            this.button_Close.TabIndex = 14;
+            this.button_Close.Text = " 退出";
+            this.button_Close.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Close.UseVisualStyleBackColor = true;
+            this.button_Close.Click += new System.EventHandler(this.button_Close_Click);
+            // 
             // textBox_Phone
             // 
             this.textBox_Phone.Location = new System.Drawing.Point(182, 14);
@@ -328,19 +286,81 @@
             this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
-            // button_Close
+            // ColID
             // 
-            this.button_Close.Image = global::Commission.Properties.Resources.exit;
-            this.button_Close.Location = new System.Drawing.Point(377, 13);
-            this.button_Close.Name = "button_Close";
-            this.button_Close.Size = new System.Drawing.Size(75, 23);
-            this.button_Close.TabIndex = 14;
-            this.button_Close.Text = " 退出";
-            this.button_Close.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Close.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Close.UseVisualStyleBackColor = true;
-            this.button_Close.Click += new System.EventHandler(this.button_Close_Click);
+            this.ColID.DataPropertyName = "SalesID";
+            this.ColID.HeaderText = "ID";
+            this.ColID.Name = "ColID";
+            this.ColID.ReadOnly = true;
+            this.ColID.Visible = false;
+            // 
+            // ColDeptID
+            // 
+            this.ColDeptID.DataPropertyName = "DeptID";
+            this.ColDeptID.HeaderText = "DeptID";
+            this.ColDeptID.Name = "ColDeptID";
+            this.ColDeptID.ReadOnly = true;
+            this.ColDeptID.Visible = false;
+            // 
+            // ColSalesName
+            // 
+            this.ColSalesName.DataPropertyName = "SalesName";
+            this.ColSalesName.HeaderText = "姓名";
+            this.ColSalesName.Name = "ColSalesName";
+            this.ColSalesName.ReadOnly = true;
+            // 
+            // ColPhone
+            // 
+            this.ColPhone.DataPropertyName = "Phone";
+            this.ColPhone.HeaderText = "电话";
+            this.ColPhone.Name = "ColPhone";
+            this.ColPhone.ReadOnly = true;
+            // 
+            // ColInDate
+            // 
+            this.ColInDate.DataPropertyName = "InDate";
+            this.ColInDate.HeaderText = "入职时间";
+            this.ColInDate.Name = "ColInDate";
+            this.ColInDate.ReadOnly = true;
+            // 
+            // ColOutDate
+            // 
+            this.ColOutDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColOutDate.DataPropertyName = "BeginDate";
+            this.ColOutDate.HeaderText = "调入时间";
+            this.ColOutDate.Name = "ColOutDate";
+            this.ColOutDate.ReadOnly = true;
+            // 
+            // ColDeptName
+            // 
+            this.ColDeptName.DataPropertyName = "DeptName";
+            this.ColDeptName.HeaderText = "部门";
+            this.ColDeptName.Name = "ColDeptName";
+            this.ColDeptName.ReadOnly = true;
+            // 
+            // ColPosition
+            // 
+            this.ColPosition.DataPropertyName = "Position";
+            this.ColPosition.HeaderText = "职位";
+            this.ColPosition.Name = "ColPosition";
+            this.ColPosition.ReadOnly = true;
+            // 
+            // ColJobType
+            // 
+            this.ColJobType.DataPropertyName = "JobType";
+            this.ColJobType.HeaderText = "岗位类型";
+            this.ColJobType.Name = "ColJobType";
+            this.ColJobType.ReadOnly = true;
+            // 
+            // ColMemo
+            // 
+            this.ColMemo.DataPropertyName = "Memo";
+            this.ColMemo.HeaderText = "备注";
+            this.ColMemo.Name = "ColMemo";
+            this.ColMemo.ReadOnly = true;
+            this.ColMemo.Width = 200;
             // 
             // FrmEmploye
             // 
@@ -371,14 +391,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeView_Dept;
         private System.Windows.Forms.DataGridView dataGridView_Employe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColPhone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColInDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColOutDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColPosition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColJobType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColMemo;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton_Add;
         private System.Windows.Forms.ToolStripButton toolStripButton_Del;
@@ -395,5 +407,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.Button button_Close;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDeptID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColPhone;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColInDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColOutDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColDeptName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColJobType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColMemo;
     }
 }

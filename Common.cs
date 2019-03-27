@@ -272,9 +272,10 @@ namespace Commission
 
     public enum AchievementType
     {
-        own,
-        allot,
-        hold
+        own,     //个人   认购、收款同一人
+        allot,   //分配   认购离职
+        hold,    //调岗－认购
+        takeover //调岗－接管
     }
 
 }

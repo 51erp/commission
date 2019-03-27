@@ -77,7 +77,7 @@ namespace Commission.Forms
         {
             string sql = string.Empty;
 
-            sql = string.Format("select a.SalesID, SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
+            sql = string.Format("select a.SalesID, DeptID, DeptName, SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
                 + "inner join JobTrack b on a.SalesID = b.SalesID "
                 + "where EndDate is null and DeptId = {0} order by JobType desc, a.SalesID ", deptId);
             dataGridView_Employe.DataSource = SqlHelper.ExecuteDataTable(sql);
@@ -178,7 +178,7 @@ namespace Commission.Forms
             if (Prompt.Question("确定将员工 [ " + dataGridView_Employe.CurrentRow.Cells["ColSalesName"].Value.ToString() + " ] 调出该部门？") == System.Windows.Forms.DialogResult.Yes)
             {
                 string sql = string.Format("update JobTrack set EndDate = {0} where SalesID = {1} and DeptID = {2} and EndDate is null",
-                                    "Convert(varchar(10),GETDATE(),120)", dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), treeView_Dept.SelectedNode.Name);
+                                    "Convert(varchar(10),GETDATE(),120)", dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), dataGridView_Employe.CurrentRow.Cells["ColDeptID"].Value.ToString());
                 SqlHelper.ExecuteNonQuery(sql);
 
                 dataGridView_Employe.Rows.RemoveAt(dataGridView_Employe.CurrentRow.Index);
@@ -269,13 +269,14 @@ namespace Commission.Forms
 
                             case  0: //调岗
                                 cmd.CommandText = string.Format("update JobTrack set EndDate = {0} where SalesID = {1} and DeptID = {2} and EndDate is null",
-                                    sysDate, dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), treeView_Dept.SelectedNode.Name);
+                                    sysDate, dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), dataGridView_Employe.CurrentRow.Cells["ColDeptID"].Value.ToString());
 
                                 cmd.ExecuteNonQuery();
 
-                                cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, JobType, BeginDate) values ({0},{1},'{2}',{3})",
+                                cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate) values ({0},{1},'{2}','{3}',{4})",
                                     dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(),
                                     destDept.DeptID,
+                                    destDept.DeptName,
                                     dataGridView_Employe.CurrentRow.Cells["ColJobType"].Value.ToString(), sysDate);
 
                                 cmd.ExecuteNonQuery();
@@ -283,9 +284,10 @@ namespace Commission.Forms
                                 break;
 
                             case 1: //调入
-                                cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, JobType, BeginDate) values ({0},{1},'{2}',{3})",
+                                cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate) values ({0},{1},'{2}','{3}', {4})",
                                     dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(),
                                     destDept.DeptID,
+                                    destDept.DeptName,
                                     dataGridView_Employe.CurrentRow.Cells["ColJobType"].Value.ToString(), sysDate);
 
                                 cmd.ExecuteNonQuery();
@@ -310,6 +312,26 @@ namespace Commission.Forms
                     }
                 }
             }
+
+        }
+
+        private void button_Search_Click(object sender, EventArgs e)
+        {
+            if (textBox_Name.Text.Trim().Equals("") && textBox_Phone.Text.Trim().Equals(""))
+            {
+                DataTable dt = dataGridView_Employe.DataSource as DataTable;
+
+                dt.Clear();
+
+                dataGridView_Employe.DataSource = dt;
+
+                return;
+            }
+
+            string sql = string.Format("select a.SalesID, DeptID, DeptName, SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
+                + "inner join JobTrack b on a.SalesID = b.SalesID "
+                + "where EndDate is null and SalesName like '%{0}%' and Phone like '%{1}%' order by JobType desc, a.SalesID ", textBox_Name.Text.Trim(), textBox_Phone.Text.Trim());
+            dataGridView_Employe.DataSource = SqlHelper.ExecuteDataTable(sql);
 
         }
 

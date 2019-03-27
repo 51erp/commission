@@ -45,14 +45,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateTimePicker_CloseDate = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_SettlePeriod = new System.Windows.Forms.DateTimePicker();
-            this.button_Exit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button_Settle = new System.Windows.Forms.Button();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
             this.dataGridView_Settlement = new System.Windows.Forms.DataGridView();
             this.ColSettleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +87,11 @@
             this.ColCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCommTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
+            this.button_Exit = new System.Windows.Forms.Button();
+            this.button_Settle = new System.Windows.Forms.Button();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -144,19 +145,6 @@
             this.dateTimePicker_SettlePeriod.TabIndex = 18;
             this.dateTimePicker_SettlePeriod.ValueChanged += new System.EventHandler(this.dateTimePicker_ContractDate_ValueChanged);
             // 
-            // button_Exit
-            // 
-            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(406, 20);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 27);
-            this.button_Exit.TabIndex = 17;
-            this.button_Exit.Text = " 关闭";
-            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -175,55 +163,23 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "结算月份";
             // 
-            // button_Settle
-            // 
-            this.button_Settle.Image = global::Commission.Properties.Resources.calc;
-            this.button_Settle.Location = new System.Drawing.Point(325, 20);
-            this.button_Settle.Name = "button_Settle";
-            this.button_Settle.Size = new System.Drawing.Size(75, 27);
-            this.button_Settle.TabIndex = 1;
-            this.button_Settle.Text = " 结算";
-            this.button_Settle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Settle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Settle.UseVisualStyleBackColor = true;
-            this.button_Settle.Click += new System.EventHandler(this.button_Settle_Click);
-            // 
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_Add,
             this.toolStripSeparator1,
-            this.toolStripButton_Export});
+            this.toolStripButton_Export,
+            this.toolStripButton1});
             this.toolStrip2.Location = new System.Drawing.Point(0, 62);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(863, 31);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStripButton_Add
-            // 
-            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.save_24;
-            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Add.Name = "toolStripButton_Add";
-            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Add.Text = "保存";
-            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
-            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripButton_Export
-            // 
-            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.excel;
-            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Export.Name = "toolStripButton_Export";
-            this.toolStripButton_Export.Size = new System.Drawing.Size(52, 28);
-            this.toolStripButton_Export.Text = "导出";
-            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
             // 
             // dataGridView_Settlement
             // 
@@ -625,6 +581,61 @@
             this.ColSalesName.ReadOnly = true;
             this.ColSalesName.Width = 78;
             // 
+            // toolStripButton_Add
+            // 
+            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.save_24;
+            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Add.Name = "toolStripButton_Add";
+            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Add.Text = "保存";
+            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
+            // 
+            // toolStripButton_Export
+            // 
+            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.excel;
+            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Export.Name = "toolStripButton_Export";
+            this.toolStripButton_Export.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton_Export.Text = "导出";
+            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
+            this.button_Exit.Location = new System.Drawing.Point(406, 20);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(75, 27);
+            this.button_Exit.TabIndex = 17;
+            this.button_Exit.Text = " 关闭";
+            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
+            // 
+            // button_Settle
+            // 
+            this.button_Settle.Image = global::Commission.Properties.Resources.calc;
+            this.button_Settle.Location = new System.Drawing.Point(325, 20);
+            this.button_Settle.Name = "button_Settle";
+            this.button_Settle.Size = new System.Drawing.Size(75, 27);
+            this.button_Settle.TabIndex = 1;
+            this.button_Settle.Text = " 结算";
+            this.button_Settle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Settle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Settle.UseVisualStyleBackColor = true;
+            this.button_Settle.Click += new System.EventHandler(this.button_Settle_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::Commission.Properties.Resources.Coins_24;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 28);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
             // FrmSettlement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -699,6 +710,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
 
     }
 }

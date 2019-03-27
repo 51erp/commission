@@ -37,11 +37,6 @@
             this.comboBox_CheckState = new System.Windows.Forms.ComboBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.dataGridView_SettleMain = new System.Windows.Forms.DataGridView();
-            this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Restore = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Detail = new System.Windows.Forms.ToolStripButton();
-            this.button_Exit = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
             this.ColSettleID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProjectID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +46,12 @@
             this.ColTableMaker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColChecker = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCheckDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Restore = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Detail = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Performance = new System.Windows.Forms.ToolStripButton();
+            this.button_Exit = new System.Windows.Forms.Button();
+            this.button_Search = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -129,7 +130,8 @@
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton_Del,
             this.toolStripButton_Restore,
-            this.toolStripButton_Detail});
+            this.toolStripButton_Detail,
+            this.toolStripButton_Performance});
             this.toolStrip2.Location = new System.Drawing.Point(0, 67);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(901, 31);
@@ -162,65 +164,6 @@
             this.dataGridView_SettleMain.Size = new System.Drawing.Size(901, 292);
             this.dataGridView_SettleMain.TabIndex = 4;
             this.dataGridView_SettleMain.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_SettleMain_CellMouseDoubleClick);
-            // 
-            // toolStripButton_Del
-            // 
-            this.toolStripButton_Del.Image = global::Commission.Properties.Resources.file_del;
-            this.toolStripButton_Del.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Del.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Del.Name = "toolStripButton_Del";
-            this.toolStripButton_Del.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Del.Text = "删除";
-            this.toolStripButton_Del.ToolTipText = "删除当前选定记录";
-            this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
-            // 
-            // toolStripButton_Restore
-            // 
-            this.toolStripButton_Restore.Image = global::Commission.Properties.Resources.wand;
-            this.toolStripButton_Restore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Restore.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Restore.Name = "toolStripButton_Restore";
-            this.toolStripButton_Restore.Size = new System.Drawing.Size(52, 28);
-            this.toolStripButton_Restore.Text = "反审";
-            this.toolStripButton_Restore.ToolTipText = "删除当前选定记录";
-            this.toolStripButton_Restore.Click += new System.EventHandler(this.toolStripButton_Restore_Click);
-            // 
-            // toolStripButton_Detail
-            // 
-            this.toolStripButton_Detail.Image = global::Commission.Properties.Resources.details_24;
-            this.toolStripButton_Detail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Detail.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Detail.Name = "toolStripButton_Detail";
-            this.toolStripButton_Detail.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Detail.Text = "显示";
-            this.toolStripButton_Detail.ToolTipText = "查看详细并审核";
-            this.toolStripButton_Detail.Click += new System.EventHandler(this.toolStripButton_Detail_Click);
-            // 
-            // button_Exit
-            // 
-            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(389, 23);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 23);
-            this.button_Exit.TabIndex = 17;
-            this.button_Exit.Text = " 关闭";
-            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
-            // 
-            // button_Search
-            // 
-            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(308, 23);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
-            this.button_Search.TabIndex = 1;
-            this.button_Search.Text = " 查询";
-            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Search.UseVisualStyleBackColor = true;
-            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
             // ColSettleID
             // 
@@ -291,6 +234,76 @@
             this.ColCheckDate.Name = "ColCheckDate";
             this.ColCheckDate.ReadOnly = true;
             // 
+            // toolStripButton_Del
+            // 
+            this.toolStripButton_Del.Image = global::Commission.Properties.Resources.file_del;
+            this.toolStripButton_Del.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Del.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Del.Name = "toolStripButton_Del";
+            this.toolStripButton_Del.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Del.Text = "删除";
+            this.toolStripButton_Del.ToolTipText = "删除当前选定记录";
+            this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
+            // 
+            // toolStripButton_Restore
+            // 
+            this.toolStripButton_Restore.Image = global::Commission.Properties.Resources.wand;
+            this.toolStripButton_Restore.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Restore.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Restore.Name = "toolStripButton_Restore";
+            this.toolStripButton_Restore.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton_Restore.Text = "反审";
+            this.toolStripButton_Restore.ToolTipText = "删除当前选定记录";
+            this.toolStripButton_Restore.Click += new System.EventHandler(this.toolStripButton_Restore_Click);
+            // 
+            // toolStripButton_Detail
+            // 
+            this.toolStripButton_Detail.Image = global::Commission.Properties.Resources.view1;
+            this.toolStripButton_Detail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Detail.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Detail.Name = "toolStripButton_Detail";
+            this.toolStripButton_Detail.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Detail.Text = "显示";
+            this.toolStripButton_Detail.ToolTipText = "查看详细并审核";
+            this.toolStripButton_Detail.Click += new System.EventHandler(this.toolStripButton_Detail_Click);
+            // 
+            // toolStripButton_Performance
+            // 
+            this.toolStripButton_Performance.Image = global::Commission.Properties.Resources.medal_24;
+            this.toolStripButton_Performance.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Performance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Performance.Name = "toolStripButton_Performance";
+            this.toolStripButton_Performance.Size = new System.Drawing.Size(50, 28);
+            this.toolStripButton_Performance.Text = "业绩";
+            this.toolStripButton_Performance.ToolTipText = "查看详细并审核";
+            this.toolStripButton_Performance.Click += new System.EventHandler(this.toolStripButton_Performance_Click);
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
+            this.button_Exit.Location = new System.Drawing.Point(389, 23);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(75, 23);
+            this.button_Exit.TabIndex = 17;
+            this.button_Exit.Text = " 关闭";
+            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
+            // 
+            // button_Search
+            // 
+            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
+            this.button_Search.Location = new System.Drawing.Point(308, 23);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.TabIndex = 1;
+            this.button_Search.Text = " 查询";
+            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            // 
             // FrmSettleReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -336,5 +349,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTableMaker;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColChecker;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCheckDate;
+        private System.Windows.Forms.ToolStripButton toolStripButton_Performance;
     }
 }

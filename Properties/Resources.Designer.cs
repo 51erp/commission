@@ -463,6 +463,16 @@ namespace Commission.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap detail {
+            get {
+                object obj = ResourceManager.GetObject("detail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap details_24 {
             get {
                 object obj = ResourceManager.GetObject("details_24", resourceCulture);
@@ -626,26 +636,6 @@ namespace Commission.Properties {
         internal static System.Drawing.Bitmap exchange2_24 {
             get {
                 object obj = ResourceManager.GetObject("exchange2_24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap exchange24 {
-            get {
-                object obj = ResourceManager.GetObject("exchange24", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap exchange3_24 {
-            get {
-                object obj = ResourceManager.GetObject("exchange3_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -846,6 +836,16 @@ namespace Commission.Properties {
         internal static System.Drawing.Bitmap logout {
             get {
                 object obj = ResourceManager.GetObject("logout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap medal_24 {
+            get {
+                object obj = ResourceManager.GetObject("medal_24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1173,6 +1173,16 @@ namespace Commission.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap reports_24 {
+            get {
+                object obj = ResourceManager.GetObject("reports_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap return0 {
             get {
                 object obj = ResourceManager.GetObject("return0", resourceCulture);
@@ -1306,6 +1316,16 @@ namespace Commission.Properties {
         internal static System.Drawing.Bitmap view_16 {
             get {
                 object obj = ResourceManager.GetObject("view_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap view1 {
+            get {
+                object obj = ResourceManager.GetObject("view1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
