@@ -77,7 +77,7 @@ namespace Commission.Forms
         {
             string sql = string.Empty;
 
-            sql = string.Format("select a.SalesID, DeptID, DeptName, SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
+            sql = string.Format("select DeptID, DeptName,a.SalesID, a.SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
                 + "inner join JobTrack b on a.SalesID = b.SalesID "
                 + "where EndDate is null and DeptId = {0} order by JobType desc, a.SalesID ", deptId);
             dataGridView_Employe.DataSource = SqlHelper.ExecuteDataTable(sql);

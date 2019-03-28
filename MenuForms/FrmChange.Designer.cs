@@ -35,10 +35,6 @@
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
             this.dataGridView_Change = new System.Windows.Forms.DataGridView();
-            this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColChangeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColConfirmType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_Phone = new System.Windows.Forms.TextBox();
@@ -56,8 +52,6 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,6 +78,12 @@
             this.ColExtField7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColChangeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColConfirmType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Change)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -138,35 +138,6 @@
             this.dataGridView_Change.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Change.Size = new System.Drawing.Size(883, 116);
             this.dataGridView_Change.TabIndex = 5;
-            // 
-            // ColID
-            // 
-            this.ColID.DataPropertyName = "ID";
-            this.ColID.HeaderText = "ID";
-            this.ColID.Name = "ColID";
-            this.ColID.ReadOnly = true;
-            this.ColID.Visible = false;
-            // 
-            // ColChangeDate
-            // 
-            this.ColChangeDate.DataPropertyName = "ChangeDate";
-            this.ColChangeDate.HeaderText = "变更日期";
-            this.ColChangeDate.Name = "ColChangeDate";
-            this.ColChangeDate.ReadOnly = true;
-            // 
-            // ColConfirmType
-            // 
-            this.ColConfirmType.DataPropertyName = "ConfirmType";
-            this.ColConfirmType.HeaderText = "变更类型";
-            this.ColConfirmType.Name = "ColConfirmType";
-            this.ColConfirmType.ReadOnly = true;
-            // 
-            // ColMemo
-            // 
-            this.ColMemo.DataPropertyName = "Memo";
-            this.ColMemo.HeaderText = "变更说明";
-            this.ColMemo.Name = "ColMemo";
-            this.ColMemo.ReadOnly = true;
             // 
             // panel1
             // 
@@ -380,30 +351,6 @@
             this.dataGridView_Contract.Size = new System.Drawing.Size(883, 286);
             this.dataGridView_Contract.TabIndex = 5;
             this.dataGridView_Contract.SelectionChanged += new System.EventHandler(this.dataGridView_Contract_SelectionChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dataGridView_Change);
-            this.groupBox3.Controls.Add(this.toolStrip2);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 5);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.groupBox3.Size = new System.Drawing.Size(889, 169);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "变更记录";
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_Add,
-            this.toolStripButton_Del});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 19);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(883, 31);
-            this.toolStrip2.TabIndex = 4;
-            this.toolStrip2.Text = "toolStrip2";
             // 
             // ColContractID
             // 
@@ -627,6 +574,60 @@
             this.ColExtField9.ReadOnly = true;
             this.ColExtField9.Width = 60;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dataGridView_Change);
+            this.groupBox3.Controls.Add(this.toolStrip2);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 5);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.groupBox3.Size = new System.Drawing.Size(889, 169);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "变更记录";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_Add,
+            this.toolStripButton_Del});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 19);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(883, 31);
+            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // ColID
+            // 
+            this.ColID.DataPropertyName = "ID";
+            this.ColID.HeaderText = "ID";
+            this.ColID.Name = "ColID";
+            this.ColID.ReadOnly = true;
+            this.ColID.Visible = false;
+            // 
+            // ColChangeDate
+            // 
+            this.ColChangeDate.DataPropertyName = "ChangeDate";
+            this.ColChangeDate.HeaderText = "变更日期";
+            this.ColChangeDate.Name = "ColChangeDate";
+            this.ColChangeDate.ReadOnly = true;
+            // 
+            // ColConfirmType
+            // 
+            this.ColConfirmType.DataPropertyName = "ConfirmType";
+            this.ColConfirmType.HeaderText = "变更类型";
+            this.ColConfirmType.Name = "ColConfirmType";
+            this.ColConfirmType.ReadOnly = true;
+            this.ColConfirmType.Visible = false;
+            // 
+            // ColMemo
+            // 
+            this.ColMemo.DataPropertyName = "Memo";
+            this.ColMemo.HeaderText = "变更说明";
+            this.ColMemo.Name = "ColMemo";
+            this.ColMemo.ReadOnly = true;
+            // 
             // FrmChange
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -678,10 +679,6 @@
         private System.Windows.Forms.Button button_Exit;
         private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.DataGridView dataGridView_Contract;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColChangeDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColConfirmType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColMemo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCusName;
@@ -708,5 +705,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField8;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColChangeDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColConfirmType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColMemo;
     }
 }

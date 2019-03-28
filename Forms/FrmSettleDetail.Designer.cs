@@ -486,6 +486,7 @@
             // 
             // ColReciptDate
             // 
+            this.ColReciptDate.DataPropertyName = "ReceiptDate";
             this.ColReciptDate.HeaderText = "交款日期";
             this.ColReciptDate.Name = "ColReciptDate";
             this.ColReciptDate.ReadOnly = true;

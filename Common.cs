@@ -270,7 +270,7 @@ namespace Commission
         Quantity = 5   //5,销售套数
     }
 
-    public enum AchievementType
+    public enum PerformanceType
     {
         own,     //个人   认购、收款同一人
         allot,   //分配   认购离职

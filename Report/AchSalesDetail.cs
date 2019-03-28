@@ -12,7 +12,7 @@ namespace Commission.Report
 {
     public partial class AchSalesDetail : Form
     {
-        public AchievementType AchieveType;
+        public PerformanceType AchieveType;
         public AchSalesDetail()
         {
             InitializeComponent();
@@ -26,15 +26,15 @@ namespace Commission.Report
 
             switch (AchieveType)
             {
-                case AchievementType.own:
+                case PerformanceType.own:
                     this.Text = "置业顾问个人业绩统计";
                     break;
 
-                case AchievementType.allot:
+                case PerformanceType.allot:
                     this.Text = "置业顾问分配业绩统计";
                     break;
 
-                case AchievementType.hold:
+                case PerformanceType.hold:
                     this.Text = "置业顾问调岗业绩统计";
                     break;
 
@@ -91,7 +91,7 @@ namespace Commission.Report
                 Prompt.Warning("没有符合条件的记录！");
         }
 
-        private DataTable GetAchievementData(AchievementType type)
+        private DataTable GetAchievementData(PerformanceType type)
         {
             DataTable dtAchievement;
 
@@ -120,21 +120,21 @@ namespace Commission.Report
 
             switch (type)
             {
-                case AchievementType.own:   //回款业绩-个人
+                case PerformanceType.own:   //回款业绩-个人
                     sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) as Achievement from Receipt a "
                         + "inner join ContractMain b on b.ContractID = a.ContractID "
                         + "where a.SalesID = b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
 
                     break;
 
-                case AchievementType.allot: //回款业绩-分配
+                case PerformanceType.allot: //回款业绩-分配
                     sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) * 0.7 as Achievement from Receipt a "
                         + "inner join ContractMain b on b.ContractID = a.ContractID "
                         + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
 
                     break;
 
-                case AchievementType.hold:  //回款业绩-调岗
+                case PerformanceType.hold:  //回款业绩-调岗
                     sql = string.Format("select a.ContractID, b.SubscribeSalesID as SalesID,  b.SubscribeSalesName as SalesName, SUM(Amount) * 0.3 as Achievement from Receipt a "
                         + "inner join ContractMain b on b.ContractID = a.ContractID "
                         + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, b.SubscribeSalesID,  b.SubscribeSalesName order by b.SubscribeSalesID", condition);

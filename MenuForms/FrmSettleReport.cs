@@ -17,11 +17,13 @@ namespace Commission.MenuForms
 
         private string ProjectID = string.Empty;
         private string Period = string.Empty;
+        DataTable dtRate;
 
         public FrmSettleReport()
         {
             InitializeComponent();
             comboBox_CheckState.SelectedIndex = 0;
+            dtRate = SqlHelper.ExecuteDataTable("select Code, Name, Rate from PerformanceRate");
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
@@ -200,25 +202,320 @@ namespace Commission.MenuForms
                 return;
             }
 
+            Performance();
 
+            Prompt.Information("操作完成，业绩报表已生成！");
 
         }
 
         private void Performance()
         {
             string settleId = dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString();
-            string sql = string.Format("select SettleID, SubscribeSalesID, SalesID, SalesName, RecSettleTotal, FirstSettle from SettleDetail where SettleID = {0}", settleId);
+            string sql = string.Format("select ID, SettleID, ContractID, ItemTypeCode, ItemTypeName, SubscribeDate, SubscribeSalesID,SubscribeSalesName, ReceiptDate, SalesID, SalesName, RecSettleTotal, FirstSettle from SettleDetail where SettleID = {0}", settleId);
 
             DataTable dtSettleDetail = SqlHelper.ExecuteDataTable(sql);
 
-            foreach (DataRow row in dtSettleDetail.Rows)
+            foreach (DataRow drSettle in dtSettleDetail.Rows)
             {
-                if (row["FirstSettle"].ToString().Equals("1"))
-                {
+                double rate = 0;
+                int performanceType = 0;
 
+                if (drSettle["FirstSettle"].ToString().Equals("1")) //成销
+                {
+                    performanceType = GetSalesPerformanceType(drSettle["SubscribeSalesID"].ToString(), drSettle["SalesID"].ToString());
+
+                    switch (performanceType)
+                    {
+                        case 0:  //个人
+                            SalesPerformance(drSettle, Receivables.成销, 100);
+                            break;
+
+                        case 1: //分配
+                            drRate = dtRate.Select("Code = 1"); //allot
+                            rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                            SalesPerformance(drSettle, Receivables.成销, rate);
+
+                            break;
+                        case 2: //调岗
+                            drRate = dtRate.Select("Code = 2"); //hold
+
+                            rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                            SalesPerformance(drSettle, Receivables.成销, rate, true);
+
+
+                            drRate = dtRate.Select("Code = 3"); //takeover
+
+                            rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                            SalesPerformance(drSettle, Receivables.成销, rate);
+
+                            break;
+                    }
+
+                    string deptID = GetDeptID(drSettle["SalesID"].ToString(),drSettle["ReceiptDate"].ToString());
+
+                    MngPerformance(drSettle, Receivables.成销, deptID);
+
+                }
+                else
+                {
+                    sql = string.Format("select a.ID, a.SettleID, ItemTypeCode, ItemTypeName, SubscribeDate, SubscribeSalesID,SubscribeSalesName,"
+                        + "b.SalesID, b.SalesName, RecDate as ReceiptDate, b.Amount as RecSettleTotal,TypeCode from SettleDetail a "
+                        + "inner join Receipt b on a.ContractID = b.ContractID and a.SettleID = b.SettleState " 
+                        + "where a.ContractID = {0} and SettleState = {1}", drSettle["ContractID"].ToString(), settleId);
+
+                    DataTable dtReceipt = SqlHelper.ExecuteDataTable(sql);
+
+                    foreach (DataRow drReceipt in dtReceipt.Rows)
+                    {
+                        performanceType = GetSalesPerformanceType(drReceipt["SubscribeSalesID"].ToString(), drReceipt["SalesID"].ToString());
+
+                        Receivables recType = (Receivables)int.Parse(drReceipt["TypeCode"].ToString());
+
+                        switch (performanceType)
+                        {
+                            case 0:  //个人
+                                SalesPerformance(drReceipt, recType, 100);
+                                break;
+
+                            case 1: //分配
+                                drRate = dtRate.Select("Code = 1"); //allot
+                                rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                                SalesPerformance(drReceipt, recType, rate);
+
+                                break;
+                            case 2: //调岗
+                                drRate = dtRate.Select("Code = 2"); //hold
+
+                                rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                                SalesPerformance(drReceipt, recType, rate, true);
+
+
+                                drRate = dtRate.Select("Code = 3"); //takeover
+
+                                rate = double.Parse(drRate[0]["Rate"].ToString());
+
+                                SalesPerformance(drReceipt, recType, rate);
+
+                                break;
+                        }
+
+                        string deptID = GetDeptID(drReceipt["SalesID"].ToString(), drSettle["ReceiptDate"].ToString());
+
+                        MngPerformance(drReceipt, recType, deptID);
+
+                    }
                 }
             }
         }
 
+
+        /// <summary>
+        /// 计算业务员业绩
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="recType"></param>
+        /// <param name="rate"></param>
+        /// <param name="isHold"></param>
+        private void SalesPerformance(DataRow row, Receivables recType, double rate, bool isHold = false)
+        {
+            string sql = string.Empty;
+            string salesID = string.Empty;
+            string salesName = string.Empty;
+            string deptID = string.Empty;
+
+            deptID = GetDeptID(row["SalesID"].ToString(), row["ReceiptDate"].ToString()); //调岗时认购业务员也默认此部门，目前此字段无用
+
+            if (isHold)
+            {
+                salesID = row["SubscribeSalesID"].ToString();
+                salesName = row["SubscribeSalesName"].ToString();
+            }
+            else
+            {
+                salesID = row["SalesID"].ToString();
+                salesName = row["SalesName"].ToString();
+            }
+
+            string performance = Math.Round(double.Parse(row["RecSettleTotal"].ToString()) * rate / 100, 0, MidpointRounding.AwayFromZero).ToString();
+
+            sql = "insert into PerformanceDetail (SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate, "
+                + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType) "
+                + " values ( "
+                + row["ID"].ToString()
+                + "," + row["SettleID"].ToString()
+                + "," + salesID
+                + ",'" + salesName + "'"
+                + "," + deptID
+                + ",'" + row["ReceiptDate"].ToString() + "'"
+                + "," + (int)recType
+                + ",'" + recType + "'"
+                + "," + row["ItemTypeCode"].ToString()
+                + ",'" + row["ItemTypeName"].ToString() + "'"
+                + "," + row["RecSettleTotal"].ToString()
+                + "," + performance
+                + ",'员工'"
+                + ")";
+
+            SqlHelper.ExecuteNonQuery(sql);
+        }
+
+
+        private void MngPerformance(DataRow row, Receivables recType, string deptID)
+        {
+            string sql = string.Empty;
+            string salesID = string.Empty;
+            string salesName = string.Empty;
+            double rate = 100;
+
+            string recDate = row["ReceiptDate"].ToString();
+
+            //主管ID
+            sql = string.Format("select SalesID, SalesName from JobTrack where JobType = '主管' and DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null))", deptID, recDate);
+            DataTable dtMng = SqlHelper.ExecuteDataTable(sql);
+
+            foreach (DataRow dr in dtMng.Rows)
+            {
+                salesID = dr["SalesID"].ToString();
+                salesName = dr["SalesName"].ToString();
+
+                sql = string.Format("select SalesID from JobTrack where DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null)) and SalesID = {2}", deptID, row["SubscribeDate"].ToString(), dr["SalesID"].ToString());
+
+                object objResult = SqlHelper.ExecuteScalar(sql);
+
+                if (objResult == null) //认购时间与任职期间不匹配，为分配业绩
+                {
+                    drRate = dtRate.Select("Code = 1"); //allot
+                    rate = double.Parse(drRate[0]["Rate"].ToString());
+                }
+
+
+                string performance = Math.Round(double.Parse(row["RecSettleTotal"].ToString()) * rate / 100, 0, MidpointRounding.AwayFromZero).ToString();
+
+                sql = "insert into PerformanceDetail (SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate, "
+                    + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType) "
+                    + " values ( "
+                    + row["ID"].ToString()
+                    + "," + row["SettleID"].ToString()
+                    + "," + salesID
+                    + ",'" + salesName + "'"
+                    + "," + deptID
+                    + ",'" + row["ReceiptDate"].ToString() + "'"
+                    + "," + (int)recType
+                    + ",'" + recType + "'"
+                    + "," + row["ItemTypeCode"].ToString()
+                    + ",'" + row["ItemTypeName"].ToString() + "'"
+                    + "," + row["RecSettleTotal"].ToString()
+                    + "," + performance
+                    + ",'主管'"
+                    + ")";
+
+                SqlHelper.ExecuteNonQuery(sql);
+
+                string parentDeptID = GetParentDeptID(deptID);
+
+                if ((parentDeptID != "") && (parentDeptID != "0"))
+                {
+                    MngPerformance(row, recType, parentDeptID);
+                }
+
+            }
+
+        }
+
+        private string GetParentDeptID(string deptID)
+        {
+            string sql = "select ParentID from department where DeptID = " + deptID;
+
+            return SqlHelper.ExecuteScalar(sql).ToString();
+        }
+
+
+        private string GetDeptID(string salesID, string recDate)
+        {
+            string deptID = string.Empty;
+
+            string sql = string.Format("select deptID from JobTrack where SalesID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}' ) or  (BeginDate <= '{1}'  or EndDate is null))", salesID, recDate);
+            return deptID = SqlHelper.ExecuteScalar(sql).ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="subscribeSalesID"></param>
+        /// <param name="salesID"></param>
+        /// <returns></returns>
+        private int GetSalesPerformanceType(string subscribeSalesID, string salesID)
+        {
+            int result = 0; //默认为同一人
+
+            if (!subscribeSalesID.Equals(salesID))
+            {
+                string sql = "select SalesID from sales where SalesID = " + subscribeSalesID + " and OutDate is null";
+
+                if (SqlHelper.ExecuteScalar(sql) == null)
+                {
+                    result = 1;  //认购离职，分配
+                }
+                else
+                {
+                    result = 2;  //认购在职，调岗
+                }
+
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="salesID"></param>
+        /// <param name="recDate"></param>
+        /// <param name="subscribeDate"></param>
+        /// <returns>0：无主管，1：分配 2：个人</returns>
+        private int GetMngPerformanceType(string salesID, string recDate, string subscribeDate)
+        {
+            int result = 0;
+
+            string deptID = GetDeptID(salesID, recDate);
+
+            //主管ID
+            string sql = string.Format("select SalesID from JobTrack where JobType = '主管' and DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null))", deptID, recDate);
+            DataTable dtMng = SqlHelper.ExecuteDataTable(sql);
+
+            foreach (DataRow dr in dtMng.Rows)
+            {
+                sql = string.Format("select SalesID from JobTrack where DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null)) and SalesID = {2}", deptID, subscribeDate, dr["SalesID"].ToString());
+                object objResult = SqlHelper.ExecuteScalar(sql);
+
+                if (objResult == null) //认购时间与任职期间不匹配，为分配业绩
+                {
+                    result = 1;
+                }
+                else
+                {
+                    result = 2;
+                }
+            }
+
+
+
+            return result;
+        }
+
+        //SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate,ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType
+
+
+
+
+
+
+        public DataRow[] drRate { get; set; }
     }
 }

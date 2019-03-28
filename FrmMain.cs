@@ -470,21 +470,21 @@ namespace Commission
         private void ToolStripMenuItem_SalesOwn_Click(object sender, EventArgs e)
         {
             AchSalesDetail salesOwn = new AchSalesDetail();
-            salesOwn.AchieveType = AchievementType.own;
+            salesOwn.AchieveType = PerformanceType.own;
             FormShow(salesOwn, sender);
         }
 
         private void ToolStripMenuItem_SalesAllot_Click(object sender, EventArgs e)
         {
             AchSalesDetail salesAllot = new AchSalesDetail();
-            salesAllot.AchieveType = AchievementType.allot;
+            salesAllot.AchieveType = PerformanceType.allot;
             FormShow(salesAllot, sender);
         }
 
         private void ToolStripMenuItem_SalesHold_Click(object sender, EventArgs e)
         {
             AchSalesDetail salesHold = new AchSalesDetail();
-            salesHold.AchieveType = AchievementType.hold;
+            salesHold.AchieveType = PerformanceType.hold;
             FormShow(salesHold, sender);
         }
 
@@ -570,6 +570,16 @@ namespace Commission
         {
             FrmOrganization organiz = new FrmOrganization();
             organiz.ShowDialog();
+        }
+
+        private void ToolStripMenuItem_DircetorOwn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ToolStripMenuItem_DircetorAllot_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -272,7 +272,7 @@ namespace Commission.Forms
                     string sql = string.Empty;
 
                     //签约主表
-                    cmd.CommandText = string.Format("update ContractMain set ContractNum = '{0}',TotalAmount = {1},DownPayAmount = {2}, Loan = {3}  where  ContractID = '{4}'", newContractNum, textBox_NewTotalAmount.Text, textBox_NewDownPay.Text, textBox_NewLoan.Text, ContractID);
+                    cmd.CommandText = string.Format("update ContractMain set ContractNum = '{0}',TotalAmount = {1},DownPayAmount = {2}, Loan = {3}  where  ContractID = {4}", newContractNum, textBox_NewTotalAmount.Text, textBox_NewDownPay.Text, textBox_NewLoan.Text, ContractID);
                     cmd.ExecuteNonQuery();
 
                     //面积变更主表
@@ -282,7 +282,7 @@ namespace Commission.Forms
 
                     cmd.CommandText = string.Format("insert into AreaChangeMain "
                         + "(ContractID, OrigDownPay, OrigLoan, OrigTotalAmount,NewDownPay, NewLoan, NewTotalAmount, ChangeDate, Memo, MakeUserName, MakeDate) "
-                        + "output inserted.ID values ({0},{1},{2},{3},{4},{5},{6},'{7}','{8}','{9}','{10}',{11})",
+                        + "output inserted.ID values ({0},{1},{2},{3},{4},{5},{6},'{7}','{8}','{9}',{10})",
                         ContractID, textBox_DownPay.Text, textBox_Loan.Text, textBox_TotalAmount.Text, textBox_NewDownPay.Text, textBox_NewLoan.Text, textBox_NewTotalAmount.Text, changeDate, memo, Login.User.UserName, "GETDATE()");
                     string changeId = cmd.ExecuteScalar().ToString();
 

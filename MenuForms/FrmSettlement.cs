@@ -81,7 +81,7 @@ namespace Commission.MenuForms
             string condition = string.Format(" select Distinct ContractID from Receipt where SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{0}' and ProjectID = {1} ", closingDate, Login.User.ProjectID);
 
             //收款日期小于截止日期且未结算
-            sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeName, SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate, PaymentName,  "
+            sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate, PaymentName,  "
                 + " b.ItemID, b.Building, b.Unit, b.ItemNum, b.Area, b.Price, b.Amount, "
                 + " DownPayRate, DownPayAmount, Loan, TotalAmount, a.SalesID, a.SalesName, "
                 + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate "
@@ -538,8 +538,8 @@ namespace Commission.MenuForms
                     //添加结算从表
                     DataTable dt_settle = (DataTable)dataGridView_Settlement.DataSource;
 
-                    string fields = "insert into SettleDetail (SettleID,ContractID, ContractNum, CustomerName,ItemTypeName, " 
-                        + " SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate,PaymentName,SalesID, SalesName,"
+                    string fields = "insert into SettleDetail (SettleID,ContractID, ContractNum, CustomerName,ItemTypeCode, ItemTypeName, "
+                        + " SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate,PaymentName,ReceiptDate, SalesID, SalesName,"
                         + " ItemID, Building, Unit,ItemNum, Area, Price,Amount,DownPayRate, DownPayAmount, Loan, TotalAmount, "
                         + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate, "
                         + " RecLoan,RecDownPay,RecDiffer,RecDeliver,RecLimit,RecSettleTotal,PremiumAll,CommAll,SettleAll,NoSettleAll,Premium,Commission,CommTotal,FirstSettle) values ";
@@ -552,12 +552,14 @@ namespace Commission.MenuForms
                         values = settleId + "," + contractId
                             + ",'" + dt_settle.Rows[i]["ContractNum"].ToString() + "'"
                             + ",'" + dt_settle.Rows[i]["CustomerName"].ToString() + "'"
+                            + "," + dt_settle.Rows[i]["ItemTypeCode"].ToString()
                             + ",'" + dt_settle.Rows[i]["ItemTypeName"].ToString() + "'"
-                            + ",'" + dt_settle.Rows[i]["SubscribeDate"].ToString() + "'"  //SubscribeSalesID
+                            + ",'" + dt_settle.Rows[i]["SubscribeDate"].ToString() + "'"  
                             + "," + dt_settle.Rows[i]["SubscribeSalesID"].ToString()
                             + ",'" + dt_settle.Rows[i]["SubscribeSalesName"].ToString() + "'"
                             + ",'" + dt_settle.Rows[i]["ContractDate"].ToString() + "'"
                             + ",'" + dt_settle.Rows[i]["PaymentName"].ToString() + "'"
+                            + ",'" + dt_settle.Rows[i]["ReceiptDate"].ToString() + "'"
                             + "," + dt_settle.Rows[i]["SalesID"].ToString()
                             + ",'" + dt_settle.Rows[i]["SalesName"].ToString() + "'"
                             + "," + dt_settle.Rows[i]["ItemID"].ToString()
