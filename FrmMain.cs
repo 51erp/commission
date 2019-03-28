@@ -574,12 +574,18 @@ namespace Commission
 
         private void ToolStripMenuItem_DircetorOwn_Click(object sender, EventArgs e)
         {
-
+            AchSalesDetail performance = new AchSalesDetail();
+            performance.AchieveType = PerformanceType.own;
+            performance.SalesType = "主管";
+            FormShow(performance, sender);
         }
 
         private void ToolStripMenuItem_DircetorAllot_Click(object sender, EventArgs e)
         {
-
+            AchSalesDetail performance = new AchSalesDetail();
+            performance.AchieveType = PerformanceType.allot;
+            performance.SalesType = "主管";
+            FormShow(performance, sender);
         }
     }
 }

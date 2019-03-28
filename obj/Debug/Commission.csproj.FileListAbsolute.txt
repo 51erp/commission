@@ -178,3 +178,4 @@ D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganization.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmOrganizationAdd.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmEmploye.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmEmployeAdd.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmSettleList.resources

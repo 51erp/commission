@@ -1,4 +1,5 @@
-﻿using Commission.Utility;
+﻿using Commission.Forms;
+using Commission.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace Commission.Report
     public partial class AchSalesDetail : Form
     {
         public PerformanceType AchieveType;
+        public string SalesType = "员工";
         public AchSalesDetail()
         {
             InitializeComponent();
@@ -20,27 +22,41 @@ namespace Commission.Report
 
         private void AchSalesOwn_Load(object sender, EventArgs e)
         {
-            Common.SetFirstOfMonth(dateTimePicker_Begin);
-            Common.SetEndOfMonth(dateTimePicker_End);
             SetReceiptType();
 
-            switch (AchieveType)
+            if (SalesType.Equals("员工"))
             {
-                case PerformanceType.own:
-                    this.Text = "置业顾问个人业绩统计";
-                    break;
+                switch (AchieveType)
+                {
+                    case PerformanceType.own:
+                        this.Text = "置业顾问个人业绩统计";
+                        break;
 
-                case PerformanceType.allot:
-                    this.Text = "置业顾问分配业绩统计";
-                    break;
+                    case PerformanceType.allot:
+                        this.Text = "置业顾问分配业绩统计";
+                        break;
 
-                case PerformanceType.hold:
-                    this.Text = "置业顾问调岗业绩统计";
-                    break;
-
-                default:
-                    break;
+                    case PerformanceType.hold:
+                        this.Text = "置业顾问调岗业绩统计";
+                        break;
+                }
             }
+            else
+            {
+                switch (AchieveType)
+                {
+                    case PerformanceType.own:
+                        this.Text = "主管个人业绩统计";
+                        break;
+
+                    case PerformanceType.allot:
+                        this.Text = "主管分配业绩统计";
+                        break;
+                }
+            }
+
+
+
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
@@ -72,8 +88,46 @@ namespace Commission.Report
 
         private void button_Search_Click(object sender, EventArgs e)
         {
-            ShowAchievement();
+            if (textBox_SettleName.Text.Trim().Equals(""))
+            {
+                Prompt.Warning("未选择业绩报表！");
+                return;
+            }
+
+            ShowPerformance();
         }
+
+        private void ShowPerformance()
+        {
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColArea"], ColType.area);
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColPrice"], ColType.price);
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColAmount"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColTotalAmount"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColReceiptAmount"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColPerformance"], ColType.amount);
+
+            dataGridView_Achievement.AutoGenerateColumns = false;
+
+            dataGridView_Achievement.DataSource = GetPerformanceData(AchieveType);
+
+            if (dataGridView_Achievement.Rows.Count == 0)
+                Prompt.Warning("没有符合条件的记录！");
+        }
+
+        private DataTable GetPerformanceData(PerformanceType type)
+        {
+            string sql = string.Format("select a.ContractID, b.SalesID, CustomerName, Building,Unit,ItemNum, SubscribeDate, ContractDate, b.ReceiptDate, "
+                + "Area, Price, Amount, TotalAmount, b.salesName, ReceiptAmount, sum(Performance) Performance  from SettleDetail a " 
+                + "inner join PerformanceDetail b on a.SettleID = b.SettleID and a.ID = b.SettleDID "
+                + "where ReceiptTypeCode = {0} and SalesType = '{1}' and PerformanceType = {2}  and a.SettleID = {3} "
+                + "group by a.ContractID, b.SalesID, CustomerName, Building,Unit,ItemNum, SubscribeDate, ContractDate,b.ReceiptDate,Area, Price, Amount, TotalAmount,ReceiptAmount,b.salesName " 
+                + "order by b.salesID",
+                comboBox_RecType.SelectedValue, SalesType, (int)type, textBox_SettleName.Tag);
+
+            return SqlHelper.ExecuteDataTable(sql);
+        }
+
+
 
         private void ShowAchievement()
         {
@@ -109,14 +163,14 @@ namespace Commission.Report
                 receiptType = string.Format("TypeCode = {0}", comboBox_RecType.SelectedValue);
             }
 
-            string beginDate = dateTimePicker_Begin.Value.ToString("yyyy-MM-dd");
-            string endDate = dateTimePicker_End.Value.ToString("yyyy-MM-dd");
+            //string beginDate = dateTimePicker_Begin.Value.ToString("yyyy-MM-dd");
+            //string endDate = dateTimePicker_End.Value.ToString("yyyy-MM-dd");
 
             //结算收款为业绩, 是否需要审核？
             //condition = string.Format("ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and SettleState > 0 ",Login.User.ProjectID, beginDate, endDate);
 
             //未审核，测试用
-            condition = string.Format("a.ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and {3}", Login.User.ProjectID, beginDate, endDate, receiptType);
+            //condition = string.Format("a.ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and {3}", Login.User.ProjectID, beginDate, endDate, receiptType);
 
             switch (type)
             {
@@ -172,7 +226,7 @@ namespace Commission.Report
                 }
 
                 //截止当期累计回款及占比
-                sql = string.Format("select SUM(Amount) as ReceiptAmount from Receipt where ContractID = {0} and TypeCode ! = 6  and RecDate <= '{1}'", contractId, endDate);
+               // sql = string.Format("select SUM(Amount) as ReceiptAmount from Receipt where ContractID = {0} and TypeCode ! = 6  and RecDate <= '{1}'", contractId, endDate);
                 double tmp = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
                 dtContract.Rows[0]["PayPercent"] = Math.Round(double.Parse(SqlHelper.ExecuteScalar(sql).ToString()) / double.Parse(dtContract.Rows[0]["TotalAmount"].ToString()) * 100, 2);
 
@@ -188,6 +242,22 @@ namespace Commission.Report
             //dtAchievement.Columns.Add(colPayPercent);
 
             return dtAchievement;
+        }
+
+        private void button_OpenSettle_Click(object sender, EventArgs e)
+        {
+            FrmSettleList settleList = new FrmSettleList();
+            if (settleList.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBox_SettleName.Text = settleList.SettleTableName;
+                textBox_SettleName.Tag = settleList.SettleID;
+            }
+            else
+            {
+                textBox_SettleName.Text = "";
+                textBox_SettleName.Tag = "";
+            }
+
         }
 
 

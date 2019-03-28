@@ -82,7 +82,7 @@ namespace Commission.MenuForms
                 condition += " and Checker is not null";
             }
 
-            string sql = string.Format("select SettleID, TableName, ProjectID, ProjectName,SettlePeriod,SettleDate,TableMaker,Checker,CheckDate  from SettleMain where ProjectID = {0}  and {1} order by ProjectID", Login.User.ProjectID, condition);
+            string sql = string.Format("select SettleID, TableName, ProjectID, ProjectName,SettlePeriod,SettleDate,TableMaker,Checker,CheckDate, case Performance when 0 then '无' else '有' end Performance from SettleMain where ProjectID = {0}  and {1} order by ProjectID", Login.User.ProjectID, condition);
 
             dataGridView_SettleMain.DataSource = SqlHelper.ExecuteDataTable(sql);
 
@@ -93,6 +93,8 @@ namespace Commission.MenuForms
 
         private void toolStripButton_Del_Click(object sender, EventArgs e)
         {
+            //业绩报表是否要删除
+
             if ((dataGridView_SettleMain.Rows.Count == 0) || (dataGridView_SettleMain.CurrentRow == null))
             {
                 Prompt.Warning("没有选择记录！");
@@ -202,7 +204,19 @@ namespace Commission.MenuForms
                 return;
             }
 
+            if (dataGridView_SettleMain.CurrentRow.Cells["ColPerformance"].Value.ToString().Equals("有"))
+            {
+                Prompt.Warning("业绩报表已存在，无法再次生成！");
+                return;
+            }
+
+
             Performance();
+
+            dataGridView_SettleMain.CurrentRow.Cells["ColPerformance"].Value = "有";
+
+            SqlHelper.ExecuteNonQuery(string.Format("update SettleMain set Performance = 1 where SettleID = {0}", dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString()));
+
 
             Prompt.Information("操作完成，业绩报表已生成！");
 
@@ -218,38 +232,37 @@ namespace Commission.MenuForms
             foreach (DataRow drSettle in dtSettleDetail.Rows)
             {
                 double rate = 0;
-                int performanceType = 0;
 
                 if (drSettle["FirstSettle"].ToString().Equals("1")) //成销
                 {
-                    performanceType = GetSalesPerformanceType(drSettle["SubscribeSalesID"].ToString(), drSettle["SalesID"].ToString());
+                    PerformanceType performanceType = GetSalesPerformanceType(drSettle["SubscribeSalesID"].ToString(), drSettle["SalesID"].ToString());
 
                     switch (performanceType)
                     {
-                        case 0:  //个人
-                            SalesPerformance(drSettle, Receivables.成销, 100);
+                        case PerformanceType.own:  //个人
+                            SalesPerformance(drSettle, Receivables.成销, 100, performanceType);
                             break;
 
-                        case 1: //分配
+                        case PerformanceType.allot: //分配
                             drRate = dtRate.Select("Code = 1"); //allot
                             rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                            SalesPerformance(drSettle, Receivables.成销, rate);
+                            SalesPerformance(drSettle, Receivables.成销, rate, performanceType);
 
                             break;
-                        case 2: //调岗
+                        case PerformanceType.hold: //调岗
                             drRate = dtRate.Select("Code = 2"); //hold
 
                             rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                            SalesPerformance(drSettle, Receivables.成销, rate, true);
+                            SalesPerformance(drSettle, Receivables.成销, rate,performanceType, true);
 
 
                             drRate = dtRate.Select("Code = 3"); //takeover
 
                             rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                            SalesPerformance(drSettle, Receivables.成销, rate);
+                            SalesPerformance(drSettle, Receivables.成销, rate, performanceType);
 
                             break;
                     }
@@ -270,36 +283,36 @@ namespace Commission.MenuForms
 
                     foreach (DataRow drReceipt in dtReceipt.Rows)
                     {
-                        performanceType = GetSalesPerformanceType(drReceipt["SubscribeSalesID"].ToString(), drReceipt["SalesID"].ToString());
+                        PerformanceType performanceType = GetSalesPerformanceType(drReceipt["SubscribeSalesID"].ToString(), drReceipt["SalesID"].ToString());
 
                         Receivables recType = (Receivables)int.Parse(drReceipt["TypeCode"].ToString());
 
                         switch (performanceType)
                         {
-                            case 0:  //个人
-                                SalesPerformance(drReceipt, recType, 100);
+                            case PerformanceType.own:  //个人
+                                SalesPerformance(drReceipt, recType, 100, performanceType);
                                 break;
 
-                            case 1: //分配
+                            case PerformanceType.allot: //分配
                                 drRate = dtRate.Select("Code = 1"); //allot
                                 rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                                SalesPerformance(drReceipt, recType, rate);
+                                SalesPerformance(drReceipt, recType, rate, performanceType);
 
                                 break;
-                            case 2: //调岗
+                            case PerformanceType.hold: //调岗
                                 drRate = dtRate.Select("Code = 2"); //hold
 
                                 rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                                SalesPerformance(drReceipt, recType, rate, true);
+                                SalesPerformance(drReceipt, recType, rate, performanceType,true);
 
 
                                 drRate = dtRate.Select("Code = 3"); //takeover
 
                                 rate = double.Parse(drRate[0]["Rate"].ToString());
 
-                                SalesPerformance(drReceipt, recType, rate);
+                                SalesPerformance(drReceipt, recType, rate, performanceType);
 
                                 break;
                         }
@@ -321,7 +334,7 @@ namespace Commission.MenuForms
         /// <param name="recType"></param>
         /// <param name="rate"></param>
         /// <param name="isHold"></param>
-        private void SalesPerformance(DataRow row, Receivables recType, double rate, bool isHold = false)
+        private void SalesPerformance(DataRow row, Receivables recType, double rate, PerformanceType type, bool isHold = false)
         {
             string sql = string.Empty;
             string salesID = string.Empty;
@@ -344,7 +357,7 @@ namespace Commission.MenuForms
             string performance = Math.Round(double.Parse(row["RecSettleTotal"].ToString()) * rate / 100, 0, MidpointRounding.AwayFromZero).ToString();
 
             sql = "insert into PerformanceDetail (SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate, "
-                + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType) "
+                + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,PerformanceType,SalesType) "
                 + " values ( "
                 + row["ID"].ToString()
                 + "," + row["SettleID"].ToString()
@@ -358,6 +371,7 @@ namespace Commission.MenuForms
                 + ",'" + row["ItemTypeName"].ToString() + "'"
                 + "," + row["RecSettleTotal"].ToString()
                 + "," + performance
+                + "," + (int)type
                 + ",'员工'"
                 + ")";
 
@@ -372,6 +386,7 @@ namespace Commission.MenuForms
             string salesName = string.Empty;
             double rate = 100;
 
+            
             string recDate = row["ReceiptDate"].ToString();
 
             //主管ID
@@ -383,21 +398,23 @@ namespace Commission.MenuForms
                 salesID = dr["SalesID"].ToString();
                 salesName = dr["SalesName"].ToString();
 
+                PerformanceType performanceType = PerformanceType.own;
+
                 sql = string.Format("select SalesID from JobTrack where DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null)) and SalesID = {2}", deptID, row["SubscribeDate"].ToString(), dr["SalesID"].ToString());
 
                 object objResult = SqlHelper.ExecuteScalar(sql);
-
                 if (objResult == null) //认购时间与任职期间不匹配，为分配业绩
                 {
                     drRate = dtRate.Select("Code = 1"); //allot
                     rate = double.Parse(drRate[0]["Rate"].ToString());
+                    performanceType = PerformanceType.allot;
                 }
 
 
                 string performance = Math.Round(double.Parse(row["RecSettleTotal"].ToString()) * rate / 100, 0, MidpointRounding.AwayFromZero).ToString();
 
                 sql = "insert into PerformanceDetail (SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate, "
-                    + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType) "
+                    + "ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,PerformanceType, SalesType) "
                     + " values ( "
                     + row["ID"].ToString()
                     + "," + row["SettleID"].ToString()
@@ -411,6 +428,7 @@ namespace Commission.MenuForms
                     + ",'" + row["ItemTypeName"].ToString() + "'"
                     + "," + row["RecSettleTotal"].ToString()
                     + "," + performance
+                    + "," + (int)performanceType
                     + ",'主管'"
                     + ")";
 
@@ -449,9 +467,9 @@ namespace Commission.MenuForms
         /// <param name="subscribeSalesID"></param>
         /// <param name="salesID"></param>
         /// <returns></returns>
-        private int GetSalesPerformanceType(string subscribeSalesID, string salesID)
+        private PerformanceType GetSalesPerformanceType(string subscribeSalesID, string salesID)
         {
-            int result = 0; //默认为同一人
+            PerformanceType result = PerformanceType.own; //默认为同一人
 
             if (!subscribeSalesID.Equals(salesID))
             {
@@ -459,11 +477,11 @@ namespace Commission.MenuForms
 
                 if (SqlHelper.ExecuteScalar(sql) == null)
                 {
-                    result = 1;  //认购离职，分配
+                    result = PerformanceType.allot;  //认购离职，分配
                 }
                 else
                 {
-                    result = 2;  //认购在职，调岗
+                    result = PerformanceType.hold;  //认购在职，调岗
                 }
 
             }

@@ -425,6 +425,7 @@
             this.ToolStripMenuItem_ImpSubscribe.Name = "ToolStripMenuItem_ImpSubscribe";
             this.ToolStripMenuItem_ImpSubscribe.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ImpSubscribe.Text = "认购导入";
+            this.ToolStripMenuItem_ImpSubscribe.Visible = false;
             this.ToolStripMenuItem_ImpSubscribe.Click += new System.EventHandler(this.ToolStripMenuItem_ImpSubscribe_Click);
             // 
             // ToolStripMenuItem_ImpContract
@@ -432,6 +433,7 @@
             this.ToolStripMenuItem_ImpContract.Name = "ToolStripMenuItem_ImpContract";
             this.ToolStripMenuItem_ImpContract.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_ImpContract.Text = "签约导入";
+            this.ToolStripMenuItem_ImpContract.Visible = false;
             this.ToolStripMenuItem_ImpContract.Click += new System.EventHandler(this.ToolStripMenuItem_ImpContract_Click);
             // 
             // ToolStripMenuItem_Business
