@@ -32,10 +32,10 @@
             this.toolStripButton_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker_DelayDate = new System.Windows.Forms.DateTimePicker();
             this.textBox_LastContractDate = new System.Windows.Forms.TextBox();
+            this.dateTimePicker_DelayDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -85,14 +85,12 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "设置日期";
             // 
-            // label1
+            // textBox_LastContractDate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "原定日期";
+            this.textBox_LastContractDate.Location = new System.Drawing.Point(92, 38);
+            this.textBox_LastContractDate.Name = "textBox_LastContractDate";
+            this.textBox_LastContractDate.Size = new System.Drawing.Size(106, 21);
+            this.textBox_LastContractDate.TabIndex = 2;
             // 
             // dateTimePicker_DelayDate
             // 
@@ -101,13 +99,6 @@
             this.dateTimePicker_DelayDate.Size = new System.Drawing.Size(106, 21);
             this.dateTimePicker_DelayDate.TabIndex = 1;
             // 
-            // textBox_LastContractDate
-            // 
-            this.textBox_LastContractDate.Location = new System.Drawing.Point(92, 38);
-            this.textBox_LastContractDate.Name = "textBox_LastContractDate";
-            this.textBox_LastContractDate.Size = new System.Drawing.Size(106, 21);
-            this.textBox_LastContractDate.TabIndex = 2;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -115,7 +106,16 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
-            this.label2.Text = "原定日期";
+            this.label2.Text = "延期日期";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "原定日期";
             // 
             // FrmDelay
             // 

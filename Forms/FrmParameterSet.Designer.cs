@@ -33,9 +33,10 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton_EndMonth = new System.Windows.Forms.RadioButton();
-            this.radioButton_ClosingDate = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBox_ClosingDate = new System.Windows.Forms.TextBox();
+            this.radioButton_ClosingDate = new System.Windows.Forms.RadioButton();
+            this.radioButton_EndMonth = new System.Windows.Forms.RadioButton();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBox_ClosingDate);
             this.groupBox1.Controls.Add(this.radioButton_ClosingDate);
             this.groupBox1.Controls.Add(this.radioButton_EndMonth);
@@ -90,17 +92,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "结算截止日期";
             // 
-            // radioButton_EndMonth
+            // label1
             // 
-            this.radioButton_EndMonth.AutoSize = true;
-            this.radioButton_EndMonth.Checked = true;
-            this.radioButton_EndMonth.Location = new System.Drawing.Point(24, 34);
-            this.radioButton_EndMonth.Name = "radioButton_EndMonth";
-            this.radioButton_EndMonth.Size = new System.Drawing.Size(47, 16);
-            this.radioButton_EndMonth.TabIndex = 0;
-            this.radioButton_EndMonth.TabStop = true;
-            this.radioButton_EndMonth.Text = "月底";
-            this.radioButton_EndMonth.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(215, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "日";
+            // 
+            // textBox_ClosingDate
+            // 
+            this.textBox_ClosingDate.Enabled = false;
+            this.textBox_ClosingDate.Location = new System.Drawing.Point(144, 32);
+            this.textBox_ClosingDate.Name = "textBox_ClosingDate";
+            this.textBox_ClosingDate.Size = new System.Drawing.Size(68, 21);
+            this.textBox_ClosingDate.TabIndex = 2;
+            this.textBox_ClosingDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_ClosingDate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_ClosingDate_KeyPress);
             // 
             // radioButton_ClosingDate
             // 
@@ -113,15 +122,17 @@
             this.radioButton_ClosingDate.UseVisualStyleBackColor = true;
             this.radioButton_ClosingDate.CheckedChanged += new System.EventHandler(this.radioButton_ClosingDate_CheckedChanged);
             // 
-            // textBox_ClosingDate
+            // radioButton_EndMonth
             // 
-            this.textBox_ClosingDate.Enabled = false;
-            this.textBox_ClosingDate.Location = new System.Drawing.Point(144, 32);
-            this.textBox_ClosingDate.Name = "textBox_ClosingDate";
-            this.textBox_ClosingDate.Size = new System.Drawing.Size(68, 21);
-            this.textBox_ClosingDate.TabIndex = 2;
-            this.textBox_ClosingDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_ClosingDate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_ClosingDate_KeyPress);
+            this.radioButton_EndMonth.AutoSize = true;
+            this.radioButton_EndMonth.Checked = true;
+            this.radioButton_EndMonth.Location = new System.Drawing.Point(24, 34);
+            this.radioButton_EndMonth.Name = "radioButton_EndMonth";
+            this.radioButton_EndMonth.Size = new System.Drawing.Size(47, 16);
+            this.radioButton_EndMonth.TabIndex = 0;
+            this.radioButton_EndMonth.TabStop = true;
+            this.radioButton_EndMonth.Text = "月底";
+            this.radioButton_EndMonth.UseVisualStyleBackColor = true;
             // 
             // FrmParameterSet
             // 
@@ -155,5 +166,6 @@
         private System.Windows.Forms.RadioButton radioButton_ClosingDate;
         private System.Windows.Forms.RadioButton radioButton_EndMonth;
         private System.Windows.Forms.TextBox textBox_ClosingDate;
+        private System.Windows.Forms.Label label1;
     }
 }

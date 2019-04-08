@@ -91,6 +91,7 @@
             this.ColCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCommTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -113,6 +114,7 @@
             this.groupBox1.Controls.Add(this.dateTimePicker_SettlePeriod);
             this.groupBox1.Controls.Add(this.button_Exit);
             this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.button_Settle);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -626,6 +628,15 @@
             this.ColSalesName.ReadOnly = true;
             this.ColSalesName.Width = 78;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(262, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "日";
+            // 
             // FrmSettlement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -700,6 +711,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
+        private System.Windows.Forms.Label label1;
 
     }
 }

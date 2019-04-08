@@ -29,17 +29,20 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label_State = new System.Windows.Forms.Label();
             this.button_OpneExcel = new System.Windows.Forms.Button();
             this.button_ExportDict = new System.Windows.Forms.Button();
             this.button_Import = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
+            this.label_State = new System.Windows.Forms.Label();
             this.dataGridView_data = new System.Windows.Forms.DataGridView();
             this.openFileDialog_Excel = new System.Windows.Forms.OpenFileDialog();
             this.Col0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_data)).BeginInit();
             this.SuspendLayout();
@@ -54,17 +57,8 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(469, 39);
+            this.panel1.Size = new System.Drawing.Size(765, 39);
             this.panel1.TabIndex = 2;
-            // 
-            // label_State
-            // 
-            this.label_State.AutoSize = true;
-            this.label_State.Location = new System.Drawing.Point(183, 13);
-            this.label_State.Name = "label_State";
-            this.label_State.Size = new System.Drawing.Size(65, 12);
-            this.label_State.TabIndex = 38;
-            this.label_State.Text = "状态：准备";
             // 
             // button_OpneExcel
             // 
@@ -118,6 +112,15 @@
             this.button_Exit.UseVisualStyleBackColor = true;
             this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
             // 
+            // label_State
+            // 
+            this.label_State.AutoSize = true;
+            this.label_State.Location = new System.Drawing.Point(183, 13);
+            this.label_State.Name = "label_State";
+            this.label_State.Size = new System.Drawing.Size(65, 12);
+            this.label_State.TabIndex = 38;
+            this.label_State.Text = "状态：准备";
+            // 
             // dataGridView_data
             // 
             this.dataGridView_data.AllowUserToAddRows = false;
@@ -127,7 +130,10 @@
             this.Col0,
             this.Col1,
             this.Col2,
-            this.Col3});
+            this.Col3,
+            this.Col4,
+            this.Col5,
+            this.Col6});
             this.dataGridView_data.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_data.Location = new System.Drawing.Point(0, 39);
             this.dataGridView_data.Name = "dataGridView_data";
@@ -135,7 +141,7 @@
             this.dataGridView_data.RowHeadersWidth = 21;
             this.dataGridView_data.RowTemplate.Height = 23;
             this.dataGridView_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_data.Size = new System.Drawing.Size(469, 430);
+            this.dataGridView_data.Size = new System.Drawing.Size(765, 462);
             this.dataGridView_data.TabIndex = 3;
             // 
             // openFileDialog_Excel
@@ -171,11 +177,32 @@
             this.Col3.Name = "Col3";
             this.Col3.ReadOnly = true;
             // 
+            // Col4
+            // 
+            this.Col4.DataPropertyName = "Col4";
+            this.Col4.HeaderText = "部门ID";
+            this.Col4.Name = "Col4";
+            this.Col4.ReadOnly = true;
+            // 
+            // Col5
+            // 
+            this.Col5.DataPropertyName = "Col5";
+            this.Col5.HeaderText = "部门名称";
+            this.Col5.Name = "Col5";
+            this.Col5.ReadOnly = true;
+            // 
+            // Col6
+            // 
+            this.Col6.DataPropertyName = "Col6";
+            this.Col6.HeaderText = "岗位类型";
+            this.Col6.Name = "Col6";
+            this.Col6.ReadOnly = true;
+            // 
             // FrmImpSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 469);
+            this.ClientSize = new System.Drawing.Size(765, 501);
             this.Controls.Add(this.dataGridView_data);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -205,5 +232,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Col1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col6;
     }
 }

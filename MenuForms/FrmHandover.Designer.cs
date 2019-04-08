@@ -31,19 +31,23 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBox_NewSalesName = new System.Windows.Forms.ComboBox();
+            this.comboBox_type = new System.Windows.Forms.ComboBox();
             this.comboBox_Sales = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.button_Handover = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Search = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
-            this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSubscribeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSaleItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColCustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +63,7 @@
             this.ColLoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColContractDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSubscribeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,8 +80,8 @@
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).BeginInit();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,8 +97,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.comboBox_NewSalesName);
+            this.groupBox1.Controls.Add(this.comboBox_type);
             this.groupBox1.Controls.Add(this.comboBox_Sales);
             this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.button_Handover);
             this.groupBox1.Controls.Add(this.button_Exit);
@@ -110,16 +117,28 @@
             // 
             this.comboBox_NewSalesName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_NewSalesName.FormattingEnabled = true;
-            this.comboBox_NewSalesName.Location = new System.Drawing.Point(368, 23);
+            this.comboBox_NewSalesName.Location = new System.Drawing.Point(567, 23);
             this.comboBox_NewSalesName.Name = "comboBox_NewSalesName";
             this.comboBox_NewSalesName.Size = new System.Drawing.Size(115, 20);
             this.comboBox_NewSalesName.TabIndex = 62;
+            // 
+            // comboBox_type
+            // 
+            this.comboBox_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_type.FormattingEnabled = true;
+            this.comboBox_type.Items.AddRange(new object[] {
+            "认购",
+            "签约"});
+            this.comboBox_type.Location = new System.Drawing.Point(78, 23);
+            this.comboBox_type.Name = "comboBox_type";
+            this.comboBox_type.Size = new System.Drawing.Size(96, 20);
+            this.comboBox_type.TabIndex = 62;
             // 
             // comboBox_Sales
             // 
             this.comboBox_Sales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Sales.FormattingEnabled = true;
-            this.comboBox_Sales.Location = new System.Drawing.Point(79, 23);
+            this.comboBox_Sales.Location = new System.Drawing.Point(266, 23);
             this.comboBox_Sales.Name = "comboBox_Sales";
             this.comboBox_Sales.Size = new System.Drawing.Size(115, 20);
             this.comboBox_Sales.TabIndex = 62;
@@ -127,16 +146,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(297, 27);
+            this.label2.Location = new System.Drawing.Point(484, 27);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 54;
-            this.label2.Text = "新置业顾问";
+            this.label2.Text = "接收置业顾问";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "业务类型";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(8, 27);
+            this.label7.Location = new System.Drawing.Point(195, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 54;
@@ -145,7 +173,7 @@
             // button_Handover
             // 
             this.button_Handover.Image = global::Commission.Properties.Resources.copy_161;
-            this.button_Handover.Location = new System.Drawing.Point(489, 21);
+            this.button_Handover.Location = new System.Drawing.Point(688, 21);
             this.button_Handover.Name = "button_Handover";
             this.button_Handover.Size = new System.Drawing.Size(75, 24);
             this.button_Handover.TabIndex = 45;
@@ -158,7 +186,7 @@
             // button_Exit
             // 
             this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(613, 20);
+            this.button_Exit.Location = new System.Drawing.Point(820, 21);
             this.button_Exit.Name = "button_Exit";
             this.button_Exit.Size = new System.Drawing.Size(75, 24);
             this.button_Exit.TabIndex = 45;
@@ -171,7 +199,7 @@
             // button_Search
             // 
             this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(200, 21);
+            this.button_Search.Location = new System.Drawing.Point(387, 21);
             this.button_Search.Name = "button_Search";
             this.button_Search.Size = new System.Drawing.Size(75, 24);
             this.button_Search.TabIndex = 44;
@@ -201,6 +229,53 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "购房信息";
+            // 
+            // dataGridView_Contract
+            // 
+            this.dataGridView_Contract.AllowUserToAddRows = false;
+            this.dataGridView_Contract.AllowUserToDeleteRows = false;
+            this.dataGridView_Contract.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView_Contract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Contract.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColContractID,
+            this.ColSubscribeID,
+            this.ColSaleItem,
+            this.ColCheck,
+            this.ColCustomerID,
+            this.ColCustomerName,
+            this.ColCustomerPhone,
+            this.ColItemTypeName,
+            this.ColBuilding,
+            this.ColUnit,
+            this.ColItemNum,
+            this.ColArea,
+            this.ColPrice,
+            this.ColAmount,
+            this.ColDownPayAmount,
+            this.ColLoan,
+            this.ColTotalAmount,
+            this.ColContractDate,
+            this.ColSubscribeDate,
+            this.ColSalesID,
+            this.ColSalesName,
+            this.ColExtField0,
+            this.ColExtField1,
+            this.ColExtField2,
+            this.ColExtField3,
+            this.ColExtField4,
+            this.ColExtField5,
+            this.ColExtField6,
+            this.ColExtField7,
+            this.ColExtField8,
+            this.ColExtField9});
+            this.dataGridView_Contract.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Contract.Location = new System.Drawing.Point(3, 48);
+            this.dataGridView_Contract.Name = "dataGridView_Contract";
+            this.dataGridView_Contract.RowHeadersWidth = 21;
+            this.dataGridView_Contract.RowTemplate.Height = 23;
+            this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Contract.Size = new System.Drawing.Size(983, 331);
+            this.dataGridView_Contract.TabIndex = 12;
             // 
             // toolStrip2
             // 
@@ -233,50 +308,6 @@
             this.toolStripButton_None.Text = "全清";
             this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
             // 
-            // dataGridView_Contract
-            // 
-            this.dataGridView_Contract.AllowUserToAddRows = false;
-            this.dataGridView_Contract.AllowUserToDeleteRows = false;
-            this.dataGridView_Contract.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dataGridView_Contract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Contract.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColContractID,
-            this.ColCheck,
-            this.ColCustomerID,
-            this.ColCustomerName,
-            this.ColCustomerPhone,
-            this.ColItemTypeName,
-            this.ColBuilding,
-            this.ColUnit,
-            this.ColItemNum,
-            this.ColArea,
-            this.ColPrice,
-            this.ColAmount,
-            this.ColDownPayAmount,
-            this.ColLoan,
-            this.ColTotalAmount,
-            this.ColContractDate,
-            this.ColSalesID,
-            this.ColSalesName,
-            this.ColExtField0,
-            this.ColExtField1,
-            this.ColExtField2,
-            this.ColExtField3,
-            this.ColExtField4,
-            this.ColExtField5,
-            this.ColExtField6,
-            this.ColExtField7,
-            this.ColExtField8,
-            this.ColExtField9});
-            this.dataGridView_Contract.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Contract.Location = new System.Drawing.Point(3, 48);
-            this.dataGridView_Contract.Name = "dataGridView_Contract";
-            this.dataGridView_Contract.RowHeadersWidth = 21;
-            this.dataGridView_Contract.RowTemplate.Height = 23;
-            this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Contract.Size = new System.Drawing.Size(983, 331);
-            this.dataGridView_Contract.TabIndex = 12;
-            // 
             // ColContractID
             // 
             this.ColContractID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -285,6 +316,21 @@
             this.ColContractID.Name = "ColContractID";
             this.ColContractID.Visible = false;
             this.ColContractID.Width = 60;
+            // 
+            // ColSubscribeID
+            // 
+            this.ColSubscribeID.DataPropertyName = "SubscribeID";
+            this.ColSubscribeID.HeaderText = "SubscribeID";
+            this.ColSubscribeID.Name = "ColSubscribeID";
+            this.ColSubscribeID.Visible = false;
+            this.ColSubscribeID.Width = 96;
+            // 
+            // ColSaleItem
+            // 
+            this.ColSaleItem.HeaderText = "SaleItemID";
+            this.ColSaleItem.Name = "ColSaleItem";
+            this.ColSaleItem.Visible = false;
+            this.ColSaleItem.Width = 90;
             // 
             // ColCheck
             // 
@@ -398,6 +444,13 @@
             this.ColContractDate.Name = "ColContractDate";
             this.ColContractDate.Width = 78;
             // 
+            // ColSubscribeDate
+            // 
+            this.ColSubscribeDate.DataPropertyName = "SubscribeDate";
+            this.ColSubscribeDate.HeaderText = "认购日期";
+            this.ColSubscribeDate.Name = "ColSubscribeDate";
+            this.ColSubscribeDate.Width = 78;
+            // 
             // ColSalesID
             // 
             this.ColSalesID.DataPropertyName = "SalesID";
@@ -492,15 +545,16 @@
             this.Controls.Add(this.panel1);
             this.Name = "FrmHandover";
             this.Text = "业务交接";
+            this.Load += new System.EventHandler(this.FrmHandover_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).EndInit();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -522,7 +576,11 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_All;
         private System.Windows.Forms.ToolStripButton toolStripButton_None;
         private System.Windows.Forms.DataGridView dataGridView_Contract;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColSubscribeID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColSaleItem;
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerName;
@@ -538,6 +596,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColLoan;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColSubscribeDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField0;

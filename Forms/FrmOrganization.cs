@@ -62,6 +62,7 @@ namespace Commission.Forms
 
             if (Prompt.Question("确定要删除部门：" + selNode.Text) == System.Windows.Forms.DialogResult.Yes)
             {
+                SqlHelper.ExecuteNonQuery("delete Department where deptID = " + selNode.Name);
                 selNode.Remove();
             }
 

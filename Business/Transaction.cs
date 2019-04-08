@@ -527,6 +527,80 @@ namespace Commission.Business
         }
 
 
+        //认购
+        public static DataTable GetSubscribeData(string condition, out int iBindQuantity)
+        {
+            iBindQuantity = 0;
+            string formatAmount = "{0:F" + Login.Parameters.PrecisionAmount + "}";
+            string sql = string.Empty;
+
+            sql = "select  'false' as Choose, SubscribeMain.SubscribeID, CustomerID, CustomerName, CustomerPhone, ItemTypeName, "
+                + " Building, Unit, ItemNum, Area, Price, Amount, TotalAmount, SubscribeDate, SalesID, SalesName, "
+                + " ExtField0, ExtField1, ExtField2, ExtField3, ExtField4, ExtField5, ExtField6, ExtField7, ExtField8, ExtField9 "
+                + " from SubscribeMain "
+                + " inner join  SubscribeDetail on SubscribeMain.SubscribeID = SubscribeDetail.SubscribeID "
+                + " where ContractID is null and ReturnDate is null and ProjectID = " + Login.User.ProjectID + " and  IsBind = 0 " + condition
+                + " order by SubscribeMain.ContractID ";
+
+            DataTable dtSubscribe = SqlHelper.ExecuteDataTable(sql); //主体表
+
+            dtSubscribe.PrimaryKey = new DataColumn[] { dtSubscribe.Columns["ContractID"] };
+
+
+            //获取绑定（附属）物业相关信息
+            for (int i = 0; i < dtSubscribe.Rows.Count; i++)
+            {
+                string subId = dtSubscribe.Rows[i]["SubscribeID"].ToString();
+
+                sql = "select ItemNum, Area, Price, Amount from SubscribeDetail where IsBind = 1 and SubscribeID = " + subId;
+
+                SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+
+                if (dr.HasRows)
+                {
+                    DataTable dt = new DataTable();
+
+                    dt.Columns.Add("SubscribeID", typeof(int));
+                    dt.PrimaryKey = new DataColumn[] { dt.Columns["SubscribeID"] };
+
+                    string fieldValue = subId;
+
+
+                    int itemIdx = 0;     //一个房源相同尾号
+                    while (dr.Read())
+                    {
+                        for (int j = 0; j < dr.FieldCount; j++)
+                        {
+                            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
+                            dt.Columns.Add(fieldName, typeof(string));
+
+                            if (dr.GetName(j).Equals("Amount"))
+                            {
+                                fieldValue += "," + string.Format(formatAmount, dr.GetValue(j));
+                            }
+                            else
+                            {
+                                fieldValue += "," + dr.GetValue(j).ToString();
+                            }
+                        }
+
+                        itemIdx++;
+
+                        if (itemIdx > iBindQuantity)
+                            iBindQuantity = itemIdx;
+                    }
+
+                    string[] strArray = fieldValue.Split(',');
+
+                    dt.Rows.Add(strArray);
+
+                    dtSubscribe.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+                }
+            }
+
+            return dtSubscribe;
+        }
+
 
         public static DataTable GetContractDataEx(string condition, out int iBindQuantity, bool isChooce = false)
         {
@@ -617,19 +691,7 @@ namespace Commission.Business
             Common.SetColumnStyle(dgv.Columns["ColAmount"], ColType.amount);
             Common.SetColumnStyle(dgv.Columns["ColDownPayAmount"], ColType.amount);
             Common.SetColumnStyle(dgv.Columns["ColLoan"], ColType.amount);
-            Common.SetColumnStyle(dgv.Columns["ColTotalAmount"], ColType.amount); 
-
-            if (iColQuantity <= 0)
-                return;
-
-
-            if (dgv.DataSource != null)
-            {
-                DataTable dt = (DataTable)dgv.DataSource;
-                dt.Rows.Clear();
-                dgv.DataSource = dt; 
-            }
-
+            Common.SetColumnStyle(dgv.Columns["ColTotalAmount"], ColType.amount);
 
             //删除BIND列
             for (int i = 0; i < dgv.ColumnCount; i++)
@@ -640,6 +702,18 @@ namespace Commission.Business
                     i--; //列减少，索引不变
                 }
             }
+
+
+            if (iColQuantity <= 0)
+                return;
+
+            if (dgv.DataSource != null)
+            {
+                DataTable dt = (DataTable)dgv.DataSource;
+                dt.Rows.Clear();
+                dgv.DataSource = dt; 
+            }
+
 
             //增加BIND字段
             for (int i = 0; i < iColQuantity; i++)

@@ -89,7 +89,7 @@ namespace Commission.MenuForms
 
             DataTable dtSubscribe = GetSubscribeData(condition, out colQuantity);
 
-            Transaction.InsertBindCol(dataGridView_Subscribe, 12, colQuantity);
+            Transaction.InsertBindCol(dataGridView_Subscribe, 13, colQuantity);
 
             dataGridView_Subscribe.DataSource = dtSubscribe;
 

@@ -43,10 +43,17 @@ namespace Commission.Report
                 condition += string.Format(" and ExchangeDate <= '{0}'", dateTimePicker_End.Value.ToString("yyyy-MM-dd"));
             }
 
-            sql = string.Format("select a.ContractID, ItemID,Building,Unit,ItemNum,ItemTypeName,SubscribeDate,"
+            string sql1 = string.Format("select a.ContractID, ItemID,Building,Unit,ItemNum,ItemTypeName,SubscribeDate,"
                 + " OrigID,OrigName,[NewID],[NewName],ExchangeDate,c.Memo from ContractMain a "
                 + " inner join ContractDetail b on b.ContractID = a.ContractID and b.IsBind = 0 "
-                + " inner join HandOver c on c.ContractID = a.ContractID where ExchangeType = 2 and {0} order by ExchangeDate ", condition);
+                + " inner join HandOver c on c.ContractID = a.ContractID where ExchangeType = 2 and {0} ", condition);
+
+            string sql2 = string.Format("select a.SubscribeID, ItemID,Building,Unit,ItemNum,ItemTypeName,SubscribeDate,"
+                + " OrigID,OrigName,[NewID],[NewName],ExchangeDate,c.Memo from SubscribeMain a "
+                + " inner join SubscribeDetail b on b.SubscribeID = a.SubscribeID and b.IsBind = 0 "
+                + " inner join HandOver c on c.SubscribeID = a.SubscribeID where ExchangeType = 2 and {0} ", condition);
+
+            sql = sql1 + " union all " + sql2 + " order by ExchangeDate ";
 
             dataGridView_RepNameChange.DataSource = SqlHelper.ExecuteDataTable(sql);
 

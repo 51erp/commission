@@ -58,7 +58,7 @@ namespace Commission.Forms
             MasterData.setPayment(comboBox_PayMode, ComboBoxType.input);
             this.comboBox_PayMode.SelectedIndexChanged += new System.EventHandler(this.comboBox_PayMode_SelectedIndexChanged);
 
-            MasterData.setSales(comboBox_Sales, ComboBoxType.input);
+            MasterData.SetSales(comboBox_Sales, ComboBoxType.input, true);
         }
 
         private void toolStripButton_Close_Click(object sender, EventArgs e)

@@ -94,13 +94,13 @@ namespace Commission.MenuForms
             {
                 string id = dataGridView_item.Rows[i].Cells[0].Value.ToString();
 
-                string price = dataGridView_item.Rows[i].Cells[7].Value.ToString();
+                string price = dataGridView_item.Rows[i].Cells[4].Value.ToString();
                 if (price == "") price = "0";
 
-                string rate = dataGridView_item.Rows[i].Cells[8].Value.ToString();
+                string rate = dataGridView_item.Rows[i].Cells[5].Value.ToString();
                 if (rate == "") rate = "0";
 
-                string limit = dataGridView_item.Rows[i].Cells[9].Value.ToString();
+                string limit = dataGridView_item.Rows[i].Cells[6].Value.ToString();
                 if (limit == "") limit = "0";
 
                 string sql = string.Format("update  SaleItem set BottomPrice = {0} ,BottomPriceRate = {1},BottomPriceLimit = {2} where itemID = {3}",  price,rate,limit,id);

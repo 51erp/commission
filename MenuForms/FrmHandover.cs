@@ -13,11 +13,14 @@ namespace Commission.MenuForms
 {
     public partial class FrmHandover : Form
     {
+        private int AgreementType;
+       
         public FrmHandover()
         {
             InitializeComponent();
-            MasterData.setSales(comboBox_Sales);
-            MasterData.setSales(comboBox_NewSalesName);
+            MasterData.SetSales(comboBox_Sales);
+            MasterData.SetSales(comboBox_NewSalesName);
+            comboBox_type.SelectedIndex = 0;
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
@@ -34,15 +37,40 @@ namespace Commission.MenuForms
 
             int bindQty = 0;
 
-            DataTable dtContract = Transaction.GetContractDataEx(condition, out bindQty, true);
+            DataTable dtContract;
 
-            Transaction.InsertBindCol(dataGridView_Contract, 11, bindQty);
+            AgreementType = comboBox_type.SelectedIndex;
+
+            if (AgreementType == 0)
+            {
+                dtContract = Transaction.GetSubscribeData(condition, out bindQty);
+                dataGridView_Contract.Columns["ColArea"].HeaderText = "认购面积";
+                dataGridView_Contract.Columns["ColPrice"].HeaderText = "认购单价";
+                dataGridView_Contract.Columns["ColAmount"].HeaderText = "认购金额";
+                dataGridView_Contract.Columns["ColTotalAmount"].HeaderText = "认购总款";
+            }
+            else
+            {
+                dtContract = Transaction.GetContractDataEx(condition, out bindQty, true);
+                dataGridView_Contract.Columns["ColArea"].HeaderText = "签约面积";
+                dataGridView_Contract.Columns["ColPrice"].HeaderText = "签约单价";
+                dataGridView_Contract.Columns["ColAmount"].HeaderText = "签约金额";
+                dataGridView_Contract.Columns["ColTotalAmount"].HeaderText = "签约总款";
+            }
+
+            dataGridView_Contract.AutoGenerateColumns = false;
+
+            Transaction.InsertBindCol(dataGridView_Contract, 13, bindQty);
 
             dataGridView_Contract.DataSource = dtContract;
 
             if (dtContract.Rows.Count == 0)
             {
                 Prompt.Information("没有符合条件的查询结果 ");
+            }
+            else
+            {
+                button_Handover.Enabled = true;
             }
         }
 
@@ -52,7 +80,7 @@ namespace Commission.MenuForms
             {
                 if (comboBox_Sales.Text == comboBox_NewSalesName.Text)
                 {
-                    Prompt.Information("新置业顾问与原置业顾问不能为同一人！");
+                    Prompt.Information("接收置业顾问与原置业顾问不能为同一人！");
                 }
                 else
                 {
@@ -65,9 +93,27 @@ namespace Commission.MenuForms
             }
         }
 
+        private bool IsChecked()
+        {
+            for (int i = 0; i < dataGridView_Contract.Rows.Count; i++)
+            {
+                if ((bool)dataGridView_Contract.Rows[i].Cells["ColCheck"].EditedFormattedValue)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private void handover()
         {
-            bool isChecked = false;
+            
+            if (!IsChecked())
+            {
+                Prompt.Information("没有选择要交接的记录!");
+                return;
+            }
 
 
             using (SqlConnection connection = SqlHelper.OpenConnection())
@@ -82,26 +128,47 @@ namespace Commission.MenuForms
                     {
                         if ((bool)dataGridView_Contract.Rows[i].Cells["ColCheck"].EditedFormattedValue)
                         {
-                            isChecked = true;
-
-                            string contractId = dataGridView_Contract.Rows[i].Cells["ColContractID"].Value.ToString();
+                            
                             string newSalesID = comboBox_NewSalesName.SelectedValue.ToString();
                             string newSalesName = comboBox_NewSalesName.Text;
 
 
-                            cmd.CommandText = string.Format("update ContractMain set SalesID = {0}, SalesName = '{1}' where ContractID = {2}", newSalesID, newSalesName, contractId);
-                            cmd.ExecuteNonQuery();
+                            if (AgreementType == 0) //认购
+                            {
+                                string subscribeId = dataGridView_Contract.Rows[i].Cells["ColSubscribeID"].Value.ToString();
 
-                            cmd.CommandText = string.Format("insert into HandOver (ContractID, ExchangeType, OrigID, OrigName, NewID, NewName, ExchangeDate, MakeUserName, MakeDate) values ({0},{1},{2},'{3}',{4},'{5}',{6},'{7}',{8})",
-                                contractId,"2",
-                                comboBox_Sales.SelectedValue.ToString(),
-                                comboBox_Sales.Text,
-                                newSalesID,
-                                newSalesName,
-                                "GETDATE()",
-                                Login.User.UserName,
-                                "GETDATE()");
-                            cmd.ExecuteNonQuery();
+                                cmd.CommandText = string.Format("update SubscribeMain set SalesID = {0}, SalesName = '{1}' where SubscribeID = {2}", newSalesID, newSalesName, subscribeId);
+                                cmd.ExecuteNonQuery();
+
+                                cmd.CommandText = string.Format("insert into HandOver (SubscribeID, ExchangeType, OrigID, OrigName, NewID, NewName, ExchangeDate, MakeUserName, MakeDate) values ({0},{1},{2},'{3}',{4},'{5}',{6},'{7}',{8})",
+                                    subscribeId, "2",
+                                    comboBox_Sales.SelectedValue.ToString(),
+                                    comboBox_Sales.Text,
+                                    newSalesID,
+                                    newSalesName,
+                                    "GETDATE()",
+                                    Login.User.UserName,
+                                    "GETDATE()");
+                                cmd.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                string contractId = dataGridView_Contract.Rows[i].Cells["ColContractID"].Value.ToString();
+
+                                cmd.CommandText = string.Format("update ContractMain set SalesID = {0}, SalesName = '{1}' where ContractID = {2}", newSalesID, newSalesName, contractId);
+                                cmd.ExecuteNonQuery();
+
+                                cmd.CommandText = string.Format("insert into HandOver (ContractID, ExchangeType, OrigID, OrigName, NewID, NewName, ExchangeDate, MakeUserName, MakeDate) values ({0},{1},{2},'{3}',{4},'{5}',{6},'{7}',{8})",
+                                    contractId, "2",
+                                    comboBox_Sales.SelectedValue.ToString(),
+                                    comboBox_Sales.Text,
+                                    newSalesID,
+                                    newSalesName,
+                                    "GETDATE()",
+                                    Login.User.UserName,
+                                    "GETDATE()");
+                                cmd.ExecuteNonQuery();
+                            }
 
                             dataGridView_Contract.Rows[i].Cells["ColSalesName"].Value = newSalesName;
                         }
@@ -109,14 +176,9 @@ namespace Commission.MenuForms
 
                     sqlTran.Commit();
 
-                    if (isChecked)
-                    {
-                        Prompt.Information("操作成功，数据已更新!");
-                    }
-                    else
-                    {
-                        Prompt.Information("没有选择要交接的记录!");
-                    }
+                    button_Handover.Enabled = false;
+
+                    Prompt.Information("操作成功，数据已更新!");
                 }
                 catch (Exception ex)
                 {
@@ -124,8 +186,6 @@ namespace Commission.MenuForms
                     Prompt.Error("操作失败！\n\r错误信息：" + ex.Message);
                 }
             }
-
-            
         }
 
         private void toolStripButton_All_Click(object sender, EventArgs e)
@@ -145,6 +205,11 @@ namespace Commission.MenuForms
             {
                 dataGridView_Contract.Rows[i].Cells["ColCheck"].Value = state;
             }
+        }
+
+        private void FrmHandover_Load(object sender, EventArgs e)
+        {
+
         }
 
 

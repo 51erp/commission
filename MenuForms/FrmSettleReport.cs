@@ -18,6 +18,7 @@ namespace Commission.MenuForms
         private string ProjectID = string.Empty;
         private string Period = string.Empty;
         DataTable dtRate;
+        public DataRow[] drRate;
 
         public FrmSettleReport()
         {
@@ -217,7 +218,6 @@ namespace Commission.MenuForms
 
             SqlHelper.ExecuteNonQuery(string.Format("update SettleMain set Performance = 1 where SettleID = {0}", dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString()));
 
-
             Prompt.Information("操作完成，业绩报表已生成！");
 
         }
@@ -269,7 +269,7 @@ namespace Commission.MenuForms
 
                     string deptID = GetDeptID(drSettle["SalesID"].ToString(),drSettle["ReceiptDate"].ToString());
 
-                    MngPerformance(drSettle, Receivables.成销, deptID);
+                    MngPerformance(drSettle, Receivables.成销, deptID, drSettle["SalesID"].ToString());
 
                 }
                 else
@@ -319,7 +319,7 @@ namespace Commission.MenuForms
 
                         string deptID = GetDeptID(drReceipt["SalesID"].ToString(), drSettle["ReceiptDate"].ToString());
 
-                        MngPerformance(drReceipt, recType, deptID);
+                        MngPerformance(drReceipt, recType, deptID, drReceipt["SalesID"].ToString());
 
                     }
                 }
@@ -379,12 +379,12 @@ namespace Commission.MenuForms
         }
 
 
-        private void MngPerformance(DataRow row, Receivables recType, string deptID)
+        private void MngPerformance(DataRow row, Receivables recType, string deptID, string recSalesID)
         {
             string sql = string.Empty;
             string salesID = string.Empty;
             string salesName = string.Empty;
-            double rate = 100;
+            
 
             
             string recDate = row["ReceiptDate"].ToString();
@@ -395,10 +395,17 @@ namespace Commission.MenuForms
 
             foreach (DataRow dr in dtMng.Rows)
             {
+
                 salesID = dr["SalesID"].ToString();
                 salesName = dr["SalesName"].ToString();
 
+                if (salesID == recSalesID)
+                {
+                    continue; //主管与员工为同一人时，不计算主管业务
+                }
+
                 PerformanceType performanceType = PerformanceType.own;
+                double rate = 100;
 
                 sql = string.Format("select SalesID from JobTrack where DeptID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}') or (BeginDate <= '{1}' and EndDate is null)) and SalesID = {2}", deptID, row["SubscribeDate"].ToString(), dr["SalesID"].ToString());
 
@@ -438,7 +445,7 @@ namespace Commission.MenuForms
 
                 if ((parentDeptID != "") && (parentDeptID != "0"))
                 {
-                    MngPerformance(row, recType, parentDeptID);
+                    MngPerformance(row, recType, parentDeptID, recSalesID);
                 }
 
             }
@@ -455,10 +462,18 @@ namespace Commission.MenuForms
 
         private string GetDeptID(string salesID, string recDate)
         {
-            string deptID = string.Empty;
+            string deptID = "0";
 
             string sql = string.Format("select deptID from JobTrack where SalesID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}' ) or  (BeginDate <= '{1}'  or EndDate is null))", salesID, recDate);
-            return deptID = SqlHelper.ExecuteScalar(sql).ToString();
+
+            object objResult = SqlHelper.ExecuteScalar(sql);
+
+            if (objResult != null)
+            {
+                deptID = objResult.ToString();
+            }
+
+            return deptID;
         }
 
         /// <summary>
@@ -527,13 +542,7 @@ namespace Commission.MenuForms
             return result;
         }
 
-        //SettleDID,SettleID,SalesID,SalesName,DeptID,ReceiptDate,ReceiptTypeCode,ReceiptTypeName,ItemTypeCode,ItemTypeName,ReceiptAmount,Performance,SalesType
-
-
-
-
-
-
-        public DataRow[] drRate { get; set; }
+        
+        
     }
 }

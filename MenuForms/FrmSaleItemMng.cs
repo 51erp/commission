@@ -79,6 +79,7 @@ namespace Commission.MenuForms
 
         /// <summary>
         /// 按条件查询销售项目
+        /// 面积和单价为房源的数据，与认购或签约的数据有所不同。考虑是否更新房源基础数据
         /// </summary>
         private void SearchSaleItem()
         {
@@ -119,7 +120,8 @@ namespace Commission.MenuForms
 
             sql += " order by ProjectName,ItemTypeCode asc, Building,Unit,ItemNum ";
 
-            dataGridView_Item.DataSource = SqlHelper.ExecuteDataTable(sql);
+
+            dataGridView_Item.DataSource = SqlHelper.ExecuteDataTable(sql);;
 
             if (dataGridView_Item.Rows.Count == 0)
                 Prompt.Information("没有符合条件的记录！");

@@ -230,6 +230,18 @@
     <Compile Include="Forms\FrmItemTypeMng.Designer.cs">
       <DependentUpon>FrmItemTypeMng.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmJobChangeDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmJobChangeDate.Designer.cs">
+      <DependentUpon>FrmJobChangeDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmJobChangeRep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmJobChangeRep.Designer.cs">
+      <DependentUpon>FrmJobChangeRep.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmOrganization.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +259,12 @@
     </Compile>
     <Compile Include="Forms\FrmParameterSet.Designer.cs">
       <DependentUpon>FrmParameterSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmPerformanceRate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmPerformanceRate.Designer.cs">
+      <DependentUpon>FrmPerformanceRate.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmProjectAdd.cs">
       <SubType>Form</SubType>
@@ -694,6 +712,12 @@
     <EmbeddedResource Include="Forms\FrmItemTypeMng.resx">
       <DependentUpon>FrmItemTypeMng.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmJobChangeDate.resx">
+      <DependentUpon>FrmJobChangeDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmJobChangeRep.resx">
+      <DependentUpon>FrmJobChangeRep.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOrganization.resx">
       <DependentUpon>FrmOrganization.cs</DependentUpon>
     </EmbeddedResource>
@@ -702,6 +726,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmParameterSet.resx">
       <DependentUpon>FrmParameterSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmPerformanceRate.resx">
+      <DependentUpon>FrmPerformanceRate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmProjectAdd.resx">
       <DependentUpon>FrmProjectAdd.cs</DependentUpon>
@@ -1039,6 +1066,14 @@
     <None Include="Resources\viwer_24.png" />
     <None Include="Resources\document_file_paper_text_24px_1718_easyicon.net.png" />
     <None Include="Resources\Coins_242.png" />
+    <None Include="Resources\JobChange_24.png" />
+    <None Include="Resources\JobType.png" />
+    <None Include="Resources\JobType24.png" />
+    <None Include="Resources\JobChange24.png" />
+    <None Include="Resources\JobLeave24.png" />
+    <None Include="Resources\JobType_16.png" />
+    <None Include="Resources\JobChange_16.png" />
+    <None Include="Resources\JobLeave_16.png" />
     <Content Include="summary.txt" />
     <None Include="Resources\remove2_16.png" />
     <None Include="Resources\outline_remove_16px_21331_easyicon.net.png" />

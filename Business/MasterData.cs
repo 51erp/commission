@@ -176,9 +176,21 @@ namespace Commission.Business
         }
 
         //置业顾问
-        public static void setSales(ComboBox cbx, ComboBoxType type = ComboBoxType.input)
+        public static void SetSales(ComboBox cbx, ComboBoxType type = ComboBoxType.input, bool isOnlySales = false)
         {
-            string sql = "select SalesID, SalesName from Sales where ProjectID = " + Login.User.ProjectID;
+            string sql = string.Empty;
+
+            if (isOnlySales)
+            {
+                sql = "select a.SalesID, a.SalesName from sales a "
+                    + " inner join JobTrack b on a.SalesID = b.SalesID "
+                    + " where b.EndDate is null and JobType = '员工' and ProjectID = " + Login.User.ProjectID;
+            }
+            else
+            {
+                sql = "select SalesID, SalesName from Sales where OutDate is null and ProjectID = " + Login.User.ProjectID;
+            }
+
 
             if (type == ComboBoxType.search)
             {

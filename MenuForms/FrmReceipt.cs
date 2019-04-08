@@ -386,6 +386,7 @@ namespace Commission.MenuForms
                 {
                     sql = string.Format("select isnull(sum(Amount),0) as Amount from receipt where SubscribeID = {0}", row.Cells["ColSubscribeID"].Value.ToString());
                 }
+
                 label_ReceiptTotal.Text = string.Format("{0:F2}",SqlHelper.ExecuteScalar(sql)); //全部收款金额，含贷款
 
                 label_TotalAmount.Text = string.Format("{0:F2}", row.Cells["ColTotalAmount"].Value);
@@ -447,6 +448,10 @@ namespace Commission.MenuForms
                 getReceiptRecord(subscribeId, false);
 
                 SetReceiptInfo(dataGridView_Agreement.CurrentRow, false);
+
+                DataTable dt = (DataTable)dataGridView_Installment.DataSource;
+                dt.Clear();
+                dataGridView_Installment.DataSource = dt;
             }
 
             

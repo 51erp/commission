@@ -387,13 +387,18 @@ namespace Commission.MenuForms
 
             //底价差额 (有限价且底价差额超出限价的，按限价计算)
             double bottomDiffer = price - bottomPrice; //底价差额(实差）
-            if ((bottomPriceLimit > 0) && bottomDiffer > bottomPriceLimit)
+
+            if (bottomDiffer > 0) //销售单价小于底价的不计算溢价，否则为负数
             {
-                bottomDiffer = bottomPriceLimit; //（限差）
+                if ((bottomPriceLimit > 0) && bottomDiffer > bottomPriceLimit)
+                {
+                    bottomDiffer = bottomPriceLimit; //（限差）
+                }
+
+                //溢价总额 = 面积 * 底价差额 * 溢价提成比例
+                premiumAll = Math.Round(area * bottomDiffer * bottomPriceRate, 0, MidpointRounding.AwayFromZero);
             }
 
-            //溢价总额 = 面积 * 底价差额 * 溢价提成比例
-            premiumAll = Math.Round(area * bottomDiffer * bottomPriceRate, 0, MidpointRounding.AwayFromZero);
 
             //佣金总额:  无底价 = 合同总额 * 提点 ； 有底价 = (合同总额 - 实溢总额) * 提点，即： (合同总额 - (单价 - 底价) * 面积) * 提点
             if (baseCode == SettleBase.Single)
@@ -402,7 +407,7 @@ namespace Commission.MenuForms
             }
             else
             {
-                if (bottomPrice > 0)
+                if ((bottomPrice > 0) && (bottomDiffer > 0)) //修改溢价为负数问题
                 {
                     //没有单独取附属房源信息，所以合同金额减去溢价差额（实差）获取佣金计算基数（差额 = (price - bottomPrice) * area）
                     commAll = Math.Round((totalAmount - (price - bottomPrice) * area) * settleRate, 0, MidpointRounding.AwayFromZero);
@@ -688,6 +693,10 @@ namespace Commission.MenuForms
             if (IsEndMonth)
             {
                 dateTimePicker_CloseDate.Value = Convert.ToDateTime(dateTimePicker_SettlePeriod.Value.AddMonths(1).ToString("yyyy-MM-01")).AddDays(-1);
+            }
+            else
+            {
+                dateTimePicker_CloseDate.Value = Convert.ToDateTime(dateTimePicker_SettlePeriod.Value.ToString("yyyy-MM-") + dateTimePicker_CloseDate.Value.ToString("dd"));
             }
         }
 

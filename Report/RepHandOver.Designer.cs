@@ -39,6 +39,7 @@
             this.button_Search = new System.Windows.Forms.Button();
             this.dataGridView_RepNameChange = new System.Windows.Forms.DataGridView();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColSubscribeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -168,6 +169,7 @@
             this.dataGridView_RepNameChange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridView_RepNameChange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColContractID,
+            this.ColSubscribeID,
             this.ColItemID,
             this.ColBuilding,
             this.ColUnit,
@@ -199,6 +201,15 @@
             this.ColContractID.ReadOnly = true;
             this.ColContractID.Visible = false;
             this.ColContractID.Width = 60;
+            // 
+            // ColSubscribeID
+            // 
+            this.ColSubscribeID.DataPropertyName = "SubscribeID";
+            this.ColSubscribeID.HeaderText = "SubscribeID";
+            this.ColSubscribeID.Name = "ColSubscribeID";
+            this.ColSubscribeID.ReadOnly = true;
+            this.ColSubscribeID.Visible = false;
+            this.ColSubscribeID.Width = 96;
             // 
             // ColItemID
             // 
@@ -270,7 +281,7 @@
             // ColNewName
             // 
             this.ColNewName.DataPropertyName = "NewName";
-            this.ColNewName.HeaderText = "接手置业顾问";
+            this.ColNewName.HeaderText = "接收置业顾问";
             this.ColNewName.Name = "ColNewName";
             this.ColNewName.ReadOnly = true;
             this.ColNewName.Width = 102;
@@ -332,6 +343,7 @@
         private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.DataGridView dataGridView_RepNameChange;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColSubscribeID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColItemID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBuilding;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnit;

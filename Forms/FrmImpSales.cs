@@ -44,7 +44,7 @@ namespace Commission.Forms
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[1];//选定 指定页
 
                     //int maxColumnNum = worksheet.Dimension.End.Column;//最大列
-                    int maxColumnNum = 4;//最大列
+                    int maxColumnNum = 7;//最大列
                     int minColumnNum = worksheet.Dimension.Start.Column;//最小列
 
                     int maxRowNum = worksheet.Dimension.End.Row;//最大行
@@ -88,23 +88,36 @@ namespace Commission.Forms
 
             label_State.Text = "状态：导入中...";
             this.Refresh();
-            string values = string.Empty;
             for (int i = 0; i < dataGridView_data.Rows.Count; i++)
             {
                 string indate = dataGridView_data.Rows[i].Cells[2].Value.ToString().Equals("") ? "NULL" : "'" + dataGridView_data.Rows[i].Cells[2].Value.ToString() + "'";
                 string outdate = dataGridView_data.Rows[i].Cells[3].Value.ToString().Equals("") ? "NULL" : "'" + dataGridView_data.Rows[i].Cells[3].Value.ToString() + "'";
 
-                values = Login.User.ProjectID + ",'" + Login.User.ProjectName + "','"
+                string valSales = Login.User.ProjectID + ",'" + Login.User.ProjectName + "','"
                     + dataGridView_data.Rows[i].Cells[0].Value.ToString() + "','"
                     + dataGridView_data.Rows[i].Cells[1].Value.ToString() + "',"
                     + indate + ","
                     + outdate;
 
-                string sql = string.Format("insert into Sales (ProjectID, ProjectName, SalesName, Phone, InDate, OutDate) values ({0})", values);
+
+
+
+
+
+                string sql = string.Format("insert into Sales (ProjectID, ProjectName, SalesName, Phone, InDate, OutDate) output inserted.SalesID values ({0})", valSales);
 
                 try
                 {
-                    SqlHelper.ExecuteNonQuery(sql);
+                    string salesId = SqlHelper.ExecuteScalar(sql).ToString();
+
+                    string sqlJobTrack = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate)  values "
+                        + "({0},{1},'{2}','{3}', {4})",
+                        salesId, dataGridView_data.Rows[i].Cells[4].Value.ToString(), 
+                        dataGridView_data.Rows[i].Cells[5].Value.ToString(), 
+                        dataGridView_data.Rows[i].Cells[6].Value.ToString(),
+                        indate);
+
+                    SqlHelper.ExecuteNonQuery(sqlJobTrack);
                     Close();
                 }
                 catch (Exception ex)

@@ -587,5 +587,17 @@ namespace Commission
             performance.SalesType = "主管";
             FormShow(performance, sender);
         }
+
+        private void ToolStripMenuItem_JobChangeRep_Click(object sender, EventArgs e)
+        {
+            FrmJobChangeRep frmJCRep = new FrmJobChangeRep();
+            FormShow(frmJCRep, sender);
+        }
+
+        private void ToolStripMenuItem_PerformanceRate_Click(object sender, EventArgs e)
+        {
+            FrmPerformanceRate frmPR = new FrmPerformanceRate();
+            frmPR.ShowDialog();
+        }
     }
 }

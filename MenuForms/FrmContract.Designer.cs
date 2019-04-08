@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox_Phone = new System.Windows.Forms.TextBox();
@@ -48,9 +48,9 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Edit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_View = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Edit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Append = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Exchange = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Rename = new System.Windows.Forms.ToolStripButton();
@@ -108,7 +108,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(980, 92);
+            this.panel1.Size = new System.Drawing.Size(1020, 92);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -128,7 +128,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(974, 76);
+            this.groupBox1.Size = new System.Drawing.Size(1014, 76);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -255,7 +255,7 @@
             this.toolStripButton_Export});
             this.toolStrip2.Location = new System.Drawing.Point(0, 92);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(980, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1020, 31);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -281,17 +281,6 @@
             this.toolStripButton_Del.ToolTipText = "删除当前选定记录";
             this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
             // 
-            // toolStripButton_Edit
-            // 
-            this.toolStripButton_Edit.Image = global::Commission.Properties.Resources.edit_OK_16;
-            this.toolStripButton_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Edit.Name = "toolStripButton_Edit";
-            this.toolStripButton_Edit.Size = new System.Drawing.Size(52, 28);
-            this.toolStripButton_Edit.Text = "变更";
-            this.toolStripButton_Edit.ToolTipText = "修改合同内容";
-            this.toolStripButton_Edit.Click += new System.EventHandler(this.toolStripButton_Edit_Click);
-            // 
             // toolStripButton_View
             // 
             this.toolStripButton_View.Image = global::Commission.Properties.Resources.view;
@@ -307,6 +296,17 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton_Edit
+            // 
+            this.toolStripButton_Edit.Image = global::Commission.Properties.Resources.edit_OK_16;
+            this.toolStripButton_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Edit.Name = "toolStripButton_Edit";
+            this.toolStripButton_Edit.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton_Edit.Text = "变更";
+            this.toolStripButton_Edit.ToolTipText = "修改合同内容";
+            this.toolStripButton_Edit.Click += new System.EventHandler(this.toolStripButton_Edit_Click);
             // 
             // toolStripButton_Append
             // 
@@ -374,7 +374,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 123);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(980, 332);
+            this.panel2.Size = new System.Drawing.Size(1020, 397);
             this.panel2.TabIndex = 3;
             // 
             // dataGridView_Contract
@@ -418,7 +418,7 @@
             this.dataGridView_Contract.RowHeadersWidth = 21;
             this.dataGridView_Contract.RowTemplate.Height = 23;
             this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Contract.Size = new System.Drawing.Size(980, 308);
+            this.dataGridView_Contract.Size = new System.Drawing.Size(1020, 373);
             this.dataGridView_Contract.TabIndex = 4;
             this.dataGridView_Contract.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Contract_CellDoubleClick);
             // 
@@ -500,8 +500,8 @@
             // ColArea
             // 
             this.ColArea.DataPropertyName = "Area";
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle19;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColArea.HeaderText = "签约面积";
             this.ColArea.Name = "ColArea";
             this.ColArea.ReadOnly = true;
@@ -510,9 +510,9 @@
             // ColPrice
             // 
             this.ColPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Format = "F4";
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle20;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "F4";
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColPrice.HeaderText = "签约单价";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -521,10 +521,10 @@
             // ColAmount
             // 
             this.ColAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle21.Format = "F0";
-            dataGridViewCellStyle21.NullValue = "0";
-            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "F0";
+            dataGridViewCellStyle3.NullValue = "0";
+            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColAmount.HeaderText = "签约金额";
             this.ColAmount.Name = "ColAmount";
             this.ColAmount.ReadOnly = true;
@@ -660,9 +660,9 @@
             this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.label10);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 308);
+            this.panel6.Location = new System.Drawing.Point(0, 373);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(980, 24);
+            this.panel6.Size = new System.Drawing.Size(1020, 24);
             this.panel6.TabIndex = 46;
             // 
             // textBox_countItem
@@ -735,7 +735,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 455);
+            this.ClientSize = new System.Drawing.Size(1020, 520);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel1);

@@ -28,7 +28,7 @@ namespace Commission.Forms
 
         private void InitDefComponent()
         {
-            MasterData.setSales(comboBox_Sales, ComboBoxType.input);
+            MasterData.SetSales(comboBox_Sales, ComboBoxType.input, true);
         }
 
         private void initInput()

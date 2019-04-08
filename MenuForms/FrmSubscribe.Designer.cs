@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_Exit = new System.Windows.Forms.Button();
             this.textBox_Phone = new System.Windows.Forms.TextBox();
             this.textBox_CusName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -46,28 +47,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox_ReferState = new System.Windows.Forms.ComboBox();
+            this.button_Search = new System.Windows.Forms.Button();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView_Subscribe = new System.Windows.Forms.DataGridView();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox_countItem = new System.Windows.Forms.TextBox();
-            this.textBox_sumArea = new System.Windows.Forms.TextBox();
-            this.textBox_sumAmount = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Modify = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_View = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Delay = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Rename = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Back = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
-            this.button_Exit = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.dataGridView_Subscribe = new System.Windows.Forms.DataGridView();
             this.ColSubscribeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +88,13 @@
             this.ColExtField7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox_countItem = new System.Windows.Forms.TextBox();
+            this.textBox_sumArea = new System.Windows.Forms.TextBox();
+            this.textBox_sumAmount = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -110,7 +110,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(1055, 92);
+            this.panel1.Size = new System.Drawing.Size(1020, 92);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -132,10 +132,23 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1049, 76);
+            this.groupBox1.Size = new System.Drawing.Size(1014, 76);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
+            this.button_Exit.Location = new System.Drawing.Point(741, 45);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(75, 23);
+            this.button_Exit.TabIndex = 17;
+            this.button_Exit.Text = " 关闭";
+            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
             // 
             // textBox_Phone
             // 
@@ -238,6 +251,19 @@
             this.comboBox_ReferState.Size = new System.Drawing.Size(121, 20);
             this.comboBox_ReferState.TabIndex = 2;
             // 
+            // button_Search
+            // 
+            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
+            this.button_Search.Location = new System.Drawing.Point(660, 45);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.TabIndex = 1;
+            this.button_Search.Text = " 查询";
+            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            // 
             // toolStrip2
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -253,153 +279,9 @@
             this.toolStripButton_Export});
             this.toolStrip2.Location = new System.Drawing.Point(0, 92);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1055, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1020, 31);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.dataGridView_Subscribe);
-            this.panel2.Controls.Add(this.panel6);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 123);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1055, 364);
-            this.panel2.TabIndex = 3;
-            // 
-            // dataGridView_Subscribe
-            // 
-            this.dataGridView_Subscribe.AllowUserToAddRows = false;
-            this.dataGridView_Subscribe.AllowUserToDeleteRows = false;
-            this.dataGridView_Subscribe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_Subscribe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColSubscribeID,
-            this.ColContractID,
-            this.ColCustomerID,
-            this.ColCustomerName,
-            this.ColCustomerPhone,
-            this.ColItemTypeName,
-            this.ColBuilding,
-            this.ColUnit,
-            this.ColItemNum,
-            this.ColContractDate,
-            this.ColArea,
-            this.ColPrice,
-            this.ColAmount,
-            this.ColTotalAmount,
-            this.ColLastContractDate,
-            this.ColSalesID,
-            this.ColSalesName,
-            this.ColExtField0,
-            this.ColExtField1,
-            this.ColExtField2,
-            this.ColExtField3,
-            this.ColExtField4,
-            this.ColExtField5,
-            this.ColExtField6,
-            this.ColExtField7,
-            this.ColExtField8,
-            this.ColExtField9});
-            this.dataGridView_Subscribe.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Subscribe.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView_Subscribe.Name = "dataGridView_Subscribe";
-            this.dataGridView_Subscribe.ReadOnly = true;
-            this.dataGridView_Subscribe.RowHeadersWidth = 21;
-            this.dataGridView_Subscribe.RowTemplate.Height = 23;
-            this.dataGridView_Subscribe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Subscribe.Size = new System.Drawing.Size(1055, 340);
-            this.dataGridView_Subscribe.TabIndex = 3;
-            this.dataGridView_Subscribe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Subscribe_CellDoubleClick);
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.textBox_countItem);
-            this.panel6.Controls.Add(this.textBox_sumArea);
-            this.panel6.Controls.Add(this.textBox_sumAmount);
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.label15);
-            this.panel6.Controls.Add(this.label10);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 340);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1055, 24);
-            this.panel6.TabIndex = 45;
-            // 
-            // textBox_countItem
-            // 
-            this.textBox_countItem.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_countItem.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_countItem.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_countItem.Location = new System.Drawing.Point(71, 6);
-            this.textBox_countItem.Name = "textBox_countItem";
-            this.textBox_countItem.ReadOnly = true;
-            this.textBox_countItem.Size = new System.Drawing.Size(108, 14);
-            this.textBox_countItem.TabIndex = 55;
-            this.textBox_countItem.TabStop = false;
-            this.textBox_countItem.Text = "0";
-            // 
-            // textBox_sumArea
-            // 
-            this.textBox_sumArea.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_sumArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_sumArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumArea.Location = new System.Drawing.Point(266, 5);
-            this.textBox_sumArea.Name = "textBox_sumArea";
-            this.textBox_sumArea.ReadOnly = true;
-            this.textBox_sumArea.Size = new System.Drawing.Size(138, 14);
-            this.textBox_sumArea.TabIndex = 55;
-            this.textBox_sumArea.TabStop = false;
-            this.textBox_sumArea.Text = "0.00";
-            // 
-            // textBox_sumAmount
-            // 
-            this.textBox_sumAmount.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_sumAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_sumAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumAmount.Location = new System.Drawing.Point(493, 5);
-            this.textBox_sumAmount.Name = "textBox_sumAmount";
-            this.textBox_sumAmount.ReadOnly = true;
-            this.textBox_sumAmount.Size = new System.Drawing.Size(122, 14);
-            this.textBox_sumAmount.TabIndex = 55;
-            this.textBox_sumAmount.TabStop = false;
-            this.textBox_sumAmount.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
-            this.label8.TabIndex = 54;
-            this.label8.Text = "金额合计：";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(195, 6);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
-            this.label15.TabIndex = 54;
-            this.label15.Text = "面积合计：";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(0, 6);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 12);
-            this.label10.TabIndex = 54;
-            this.label10.Text = "套数合计：";
             // 
             // toolStripButton_Add
             // 
@@ -445,6 +327,11 @@
             this.toolStripButton_View.ToolTipText = "仅修改当前选定的记录";
             this.toolStripButton_View.Click += new System.EventHandler(this.toolStripButton_View_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
             // toolStripButton_Delay
             // 
             this.toolStripButton_Delay.Image = global::Commission.Properties.Resources.calendar_16;
@@ -478,6 +365,11 @@
             this.toolStripButton_Back.ToolTipText = "对选定信息执行退房操作";
             this.toolStripButton_Back.Click += new System.EventHandler(this.toolStripButton_Back_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
             // toolStripButton_Export
             // 
             this.toolStripButton_Export.Image = global::Commission.Properties.Resources.import_16;
@@ -487,31 +379,59 @@
             this.toolStripButton_Export.Text = "导出";
             this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
             // 
-            // button_Exit
+            // panel2
             // 
-            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(741, 45);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 23);
-            this.button_Exit.TabIndex = 17;
-            this.button_Exit.Text = " 关闭";
-            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
+            this.panel2.Controls.Add(this.dataGridView_Subscribe);
+            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 123);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1020, 364);
+            this.panel2.TabIndex = 3;
             // 
-            // button_Search
+            // dataGridView_Subscribe
             // 
-            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(660, 45);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
-            this.button_Search.TabIndex = 1;
-            this.button_Search.Text = " 查询";
-            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Search.UseVisualStyleBackColor = true;
-            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            this.dataGridView_Subscribe.AllowUserToAddRows = false;
+            this.dataGridView_Subscribe.AllowUserToDeleteRows = false;
+            this.dataGridView_Subscribe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Subscribe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColSubscribeID,
+            this.ColContractID,
+            this.ColCustomerID,
+            this.ColCustomerName,
+            this.ColCustomerPhone,
+            this.ColItemTypeName,
+            this.ColBuilding,
+            this.ColUnit,
+            this.ColItemNum,
+            this.ColContractDate,
+            this.ColArea,
+            this.ColPrice,
+            this.ColAmount,
+            this.ColTotalAmount,
+            this.ColLastContractDate,
+            this.ColSalesID,
+            this.ColSalesName,
+            this.ColExtField0,
+            this.ColExtField1,
+            this.ColExtField2,
+            this.ColExtField3,
+            this.ColExtField4,
+            this.ColExtField5,
+            this.ColExtField6,
+            this.ColExtField7,
+            this.ColExtField8,
+            this.ColExtField9});
+            this.dataGridView_Subscribe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Subscribe.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView_Subscribe.Name = "dataGridView_Subscribe";
+            this.dataGridView_Subscribe.ReadOnly = true;
+            this.dataGridView_Subscribe.RowHeadersWidth = 21;
+            this.dataGridView_Subscribe.RowTemplate.Height = 23;
+            this.dataGridView_Subscribe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView_Subscribe.Size = new System.Drawing.Size(1020, 340);
+            this.dataGridView_Subscribe.TabIndex = 3;
+            this.dataGridView_Subscribe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Subscribe_CellDoubleClick);
             // 
             // ColSubscribeID
             // 
@@ -744,11 +664,91 @@
             this.ColExtField9.ReadOnly = true;
             this.ColExtField9.Width = 80;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox_countItem);
+            this.panel6.Controls.Add(this.textBox_sumArea);
+            this.panel6.Controls.Add(this.textBox_sumAmount);
+            this.panel6.Controls.Add(this.label8);
+            this.panel6.Controls.Add(this.label15);
+            this.panel6.Controls.Add(this.label10);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 340);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1020, 24);
+            this.panel6.TabIndex = 45;
+            // 
+            // textBox_countItem
+            // 
+            this.textBox_countItem.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_countItem.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_countItem.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_countItem.Location = new System.Drawing.Point(71, 6);
+            this.textBox_countItem.Name = "textBox_countItem";
+            this.textBox_countItem.ReadOnly = true;
+            this.textBox_countItem.Size = new System.Drawing.Size(108, 14);
+            this.textBox_countItem.TabIndex = 55;
+            this.textBox_countItem.TabStop = false;
+            this.textBox_countItem.Text = "0";
+            // 
+            // textBox_sumArea
+            // 
+            this.textBox_sumArea.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_sumArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_sumArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_sumArea.Location = new System.Drawing.Point(266, 5);
+            this.textBox_sumArea.Name = "textBox_sumArea";
+            this.textBox_sumArea.ReadOnly = true;
+            this.textBox_sumArea.Size = new System.Drawing.Size(138, 14);
+            this.textBox_sumArea.TabIndex = 55;
+            this.textBox_sumArea.TabStop = false;
+            this.textBox_sumArea.Text = "0.00";
+            // 
+            // textBox_sumAmount
+            // 
+            this.textBox_sumAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_sumAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_sumAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_sumAmount.Location = new System.Drawing.Point(493, 5);
+            this.textBox_sumAmount.Name = "textBox_sumAmount";
+            this.textBox_sumAmount.ReadOnly = true;
+            this.textBox_sumAmount.Size = new System.Drawing.Size(122, 14);
+            this.textBox_sumAmount.TabIndex = 55;
+            this.textBox_sumAmount.TabStop = false;
+            this.textBox_sumAmount.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(422, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 54;
+            this.label8.Text = "金额合计：";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(195, 6);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.TabIndex = 54;
+            this.label15.Text = "面积合计：";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(0, 6);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 12);
+            this.label10.TabIndex = 54;
+            this.label10.Text = "套数合计：";
+            // 
             // FrmSubscribe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 487);
+            this.ClientSize = new System.Drawing.Size(1020, 487);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel1);

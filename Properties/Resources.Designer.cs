@@ -793,9 +793,29 @@ namespace Commission.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap leave {
+        internal static System.Drawing.Bitmap JobChange_16 {
             get {
-                object obj = ResourceManager.GetObject("leave", resourceCulture);
+                object obj = ResourceManager.GetObject("JobChange_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap JobLeave_16 {
+            get {
+                object obj = ResourceManager.GetObject("JobLeave_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap JobType_16 {
+            get {
+                object obj = ResourceManager.GetObject("JobType_16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
