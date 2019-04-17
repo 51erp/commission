@@ -70,10 +70,9 @@ namespace Commission.Report
 
             dtListData.Merge(dtSubscribe, false, MissingSchemaAction.Add);
 
-            //dataGridView1.DataSource = dtSubscribe;
             dataGridView_List.DataSource = dtListData;
 
-            getRowsTotalAmount();
+            GetRowsTotalAmount();
 
             if (dataGridView_List.Rows.Count == 0)
                 Prompt.Information("没有符合条件的记录！");
@@ -95,8 +94,6 @@ namespace Commission.Report
                 + "签约编号,签约时间,签约面积,签约单价,签约总价,签约总额,"
                 + "付款方式,首付比例(%),最后收款日期,已收总额,未收总额,应付首付,已收首付,未收首付,贷款金额,放贷日期,"
                 + "备注0,备注1,备注2,备注3,备注4,备注5,备注6,备注7,备注8,备注9";
-
-
 
 
             string[] arrFieldName = fieldsName.Split(',');
@@ -134,6 +131,7 @@ namespace Commission.Report
             Common.SetColumnStyle(dataGridView_List.Columns["DownPayTotal"], ColType.amount);
             Common.SetColumnStyle(dataGridView_List.Columns["NoDownPay"], ColType.amount);
             Common.SetColumnStyle(dataGridView_List.Columns["Loan"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_List.Columns["ReceiptTotalAmt"], ColType.amount);
             Common.SetColumnStyle(dataGridView_List.Columns["NoReceiptTotalAmt"], ColType.amount);
         }
 
@@ -314,7 +312,7 @@ namespace Commission.Report
 
             dtBase.Merge(dtRecTotal, false, MissingSchemaAction.Add);
 
-            //已收汇总，未收汇总
+            //已收汇总，未收汇总（仅签约）
             sql = string.Format("select a.ContractID, ISNULL(SUM(Amount),0) as ReceiptTotalAmt, (a.TotalAmount - ISNULL(SUM(Amount),0)) as NoReceiptTotalAmt from ContractMain a " 
                 + " left join Receipt b on b.ContractID = a.ContractID where a.ProjectID = {0} group by a.ContractID, a.TotalAmount ", Login.User.ProjectID);
 
@@ -594,13 +592,20 @@ namespace Commission.Report
         private DataTable GetSubscribeData(string condition)
         {
             string sql = string.Format("select cast('' as int) as ContractID, a.SubscribeID, Building,Unit,ItemNum,ItemTypeName, '认购' as SaleState,CustomerName,CustomerPhone,SalesName, "
-                + " SubscribeNum, SubscribeDate, Area as SubArea, Price as SubPrice, Amount as SubAmount, TotalAmount as SubTotalAmount, "
+                + " SubscribeNum, SubscribeDate, Area as SubArea, Price as SubPrice, Amount as SubAmount, TotalAmount as SubTotalAmount, cast('' as money) as ReceiptTotalAmt, "
                 + " ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9 "
                 + " from SubscribeMain a "
                 + " inner join SubscribeDetail b on b.SubscribeID = a.SubscribeID "
                 + " where a.ContractID is null and IsBind = 0 and {0}", condition);
 
             DataTable dtSubscribe = SqlHelper.ExecuteDataTable(sql);
+
+            foreach (DataRow row in dtSubscribe.Rows)
+            {
+                sql = string.Format("select ISNULL(SUM(Amount),0) as ReceiptTotalAmt from Receipt where ContractID is null and SubscribeID = {0}", row["SubscribeID"].ToString());
+
+                row["ReceiptTotalAmt"] = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
+            }
 
             return dtSubscribe;
         }
@@ -668,36 +673,79 @@ namespace Commission.Report
         }
 
 
-        private void getRowsTotalAmount()
+        private void GetRowsTotalAmount()
         {
             int countItem = 0;
+
             double sumSubArea = 0;
             double sumSubAmount = 0;
             double sumConArea = 0;
             double sumConAmount = 0;
+            double sumConTotalAmount = 0;
+            double sumBindArea = 0;
+            double sumBindAmount = 0;
 
+            double sumRecTotalAmount = 0;
 
             foreach (DataGridViewRow row in dataGridView_List.Rows)
             {
                 countItem++;
-                if (row.Cells["SaleState"].Value.ToString().Equals("认购"))
-                { 
-                sumSubArea += double.Parse(row.Cells["SubArea"].Value.ToString());
-                sumSubAmount += double.Parse(row.Cells["SubTotalAmount"].Value.ToString());
+
+                if (row.Cells["ReceiptTotalAmt"].Value != null)
+                {
+                    sumRecTotalAmount += double.Parse(row.Cells["ReceiptTotalAmt"].Value.ToString()); //含认购收款
+                }
+
+                if (row.Cells["SaleState"].Value.ToString().Equals("签约"))
+                {
+                    string contractID = row.Cells["ContractID"].Value.ToString();
+
+                    double bindArea = 0;
+                    double bindAmount = 0;
+
+                    GetSumConBind(contractID, out bindArea, out bindAmount);
+
+                    sumBindArea += bindArea;
+                    sumBindAmount += bindAmount;
+
+                    sumConArea += double.Parse(row.Cells["Area"].Value.ToString());
+                    sumConAmount += double.Parse(row.Cells["Amount"].Value.ToString());
+
+                    sumConTotalAmount += double.Parse(row.Cells["TotalAmount"].Value.ToString());
+
+                    
                 }
                 else
                 {
-                    sumConArea += double.Parse(row.Cells["Area"].Value.ToString());
-                    sumConAmount += double.Parse(row.Cells["TotalAmount"].Value.ToString());
+                    sumSubArea += double.Parse(row.Cells["SubArea"].Value.ToString());
+                    sumSubAmount += double.Parse(row.Cells["SubTotalAmount"].Value.ToString());
                 }
             }
 
             textBox_countItem.Text = countItem.ToString();
-            textBox_subArea.Text = sumSubArea.ToString("F2");
-            textBox_subTotalAmount.Text = sumSubAmount.ToString("F0");
             textBox_sumArea.Text = sumConArea.ToString("F2");
             textBox_sumAmount.Text = sumConAmount.ToString("F0");
+            textBox_SumBindAmount.Text = sumBindAmount.ToString("F2");
+            textBox_SumConTotalAmount.Text = sumConTotalAmount.ToString("F0");
+            textBox_sumRecTotalAmount.Text = sumRecTotalAmount.ToString("F0");
+        }
 
+        /// <summary>
+        /// 签约地下面积、总价
+        /// </summary>
+        /// <param name="subscribeID"></param>
+        /// <param name="area"></param>
+        /// <param name="amount"></param>
+        private void GetSumConBind(string contractID, out double area, out double amount)
+        {
+            area = 0;
+            amount = 0;
+            string sql = string.Format("select ISNULL(SUM(Area),0) area, ISNULL(SUM(amount),0) amount from  ContractDetail where IsBind = 1 and ContractID = {0}", contractID);
+
+            DataTable dt = SqlHelper.ExecuteDataTable(sql);
+
+            area = Convert.ToDouble(dt.Rows[0]["area"]);
+            amount = Convert.ToDouble(dt.Rows[0]["amount"]);
         }
 
         private void button_Export_Click(object sender, EventArgs e)

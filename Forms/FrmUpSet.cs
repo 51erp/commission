@@ -375,14 +375,17 @@ namespace Commission.Forms
 
         private void comboBox_UpBase_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox_UpBase.SelectedIndex == 1)
-            {
-                checkBox_Subscribe.Enabled = true;
-            }
-            else
+            int iValue = 0;
+            int.TryParse(comboBox_UpBase.SelectedValue.ToString(), out iValue);
+
+            if ((iValue == 0) || (iValue == 1) || (iValue == 3))
             {
                 checkBox_Subscribe.Checked = false;
                 checkBox_Subscribe.Enabled = false;
+            }
+            else
+            {
+                checkBox_Subscribe.Enabled = true;
             }
         }
 

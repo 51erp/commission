@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBox_Subscribe = new System.Windows.Forms.CheckBox();
+            this.textBox_BaseRate = new System.Windows.Forms.TextBox();
             this.textBox_UpName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dateTimePicker_Begin = new System.Windows.Forms.DateTimePicker();
@@ -41,6 +42,8 @@
             this.comboBox_UpBase = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView_UpValues = new System.Windows.Forms.DataGridView();
@@ -54,9 +57,6 @@
             this.toolStripButton_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox_BaseRate = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -100,13 +100,22 @@
             // checkBox_Subscribe
             // 
             this.checkBox_Subscribe.AutoSize = true;
-            this.checkBox_Subscribe.Enabled = false;
             this.checkBox_Subscribe.Location = new System.Drawing.Point(181, 75);
             this.checkBox_Subscribe.Name = "checkBox_Subscribe";
-            this.checkBox_Subscribe.Size = new System.Drawing.Size(120, 16);
+            this.checkBox_Subscribe.Size = new System.Drawing.Size(108, 16);
             this.checkBox_Subscribe.TabIndex = 7;
-            this.checkBox_Subscribe.Text = "未签约计认购金额";
+            this.checkBox_Subscribe.Text = "含未签约计认购";
             this.checkBox_Subscribe.UseVisualStyleBackColor = true;
+            // 
+            // textBox_BaseRate
+            // 
+            this.textBox_BaseRate.Location = new System.Drawing.Point(73, 46);
+            this.textBox_BaseRate.Name = "textBox_BaseRate";
+            this.textBox_BaseRate.Size = new System.Drawing.Size(101, 21);
+            this.textBox_BaseRate.TabIndex = 6;
+            this.textBox_BaseRate.Text = "0";
+            this.textBox_BaseRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_BaseRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_BaseRate_KeyPress);
             // 
             // textBox_UpName
             // 
@@ -168,6 +177,24 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "开始时间";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(179, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(11, 12);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "%";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "基础提点";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -212,24 +239,24 @@
             // ColBeginValue
             // 
             this.ColBeginValue.DataPropertyName = "BeginValue";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColBeginValue.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColBeginValue.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColBeginValue.HeaderText = "起始数值";
             this.ColBeginValue.Name = "ColBeginValue";
             // 
             // ColEndValue
             // 
             this.ColEndValue.DataPropertyName = "EndValue";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColEndValue.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColEndValue.DefaultCellStyle = dataGridViewCellStyle8;
             this.ColEndValue.HeaderText = "终止数值";
             this.ColEndValue.Name = "ColEndValue";
             // 
             // ColUpRate
             // 
             this.ColUpRate.DataPropertyName = "UpRate";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColUpRate.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColUpRate.DefaultCellStyle = dataGridViewCellStyle9;
             this.ColUpRate.HeaderText = "跳点比例(%)";
             this.ColUpRate.Name = "ColUpRate";
             // 
@@ -298,34 +325,6 @@
             this.toolStripButton_Close.Size = new System.Drawing.Size(60, 28);
             this.toolStripButton_Close.Text = "关闭";
             this.toolStripButton_Close.Click += new System.EventHandler(this.toolStripButton_Close_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "基础提点";
-            // 
-            // textBox_BaseRate
-            // 
-            this.textBox_BaseRate.Location = new System.Drawing.Point(73, 46);
-            this.textBox_BaseRate.Name = "textBox_BaseRate";
-            this.textBox_BaseRate.Size = new System.Drawing.Size(101, 21);
-            this.textBox_BaseRate.TabIndex = 6;
-            this.textBox_BaseRate.Text = "0";
-            this.textBox_BaseRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_BaseRate.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_BaseRate_KeyPress);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(179, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 12);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "%";
             // 
             // FrmUpSet
             // 

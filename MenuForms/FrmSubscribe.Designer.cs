@@ -95,6 +95,12 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_TotalAmount = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox_BindAmount = new System.Windows.Forms.TextBox();
+            this.textBox_BindArea = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -110,7 +116,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(1020, 92);
+            this.panel1.Size = new System.Drawing.Size(1178, 92);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -132,7 +138,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1014, 76);
+            this.groupBox1.Size = new System.Drawing.Size(1172, 76);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -279,7 +285,7 @@
             this.toolStripButton_Export});
             this.toolStrip2.Location = new System.Drawing.Point(0, 92);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1020, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1178, 31);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -386,7 +392,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 123);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1020, 364);
+            this.panel2.Size = new System.Drawing.Size(1178, 392);
             this.panel2.TabIndex = 3;
             // 
             // dataGridView_Subscribe
@@ -429,7 +435,7 @@
             this.dataGridView_Subscribe.RowHeadersWidth = 21;
             this.dataGridView_Subscribe.RowTemplate.Height = 23;
             this.dataGridView_Subscribe.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Subscribe.Size = new System.Drawing.Size(1020, 340);
+            this.dataGridView_Subscribe.Size = new System.Drawing.Size(1178, 368);
             this.dataGridView_Subscribe.TabIndex = 3;
             this.dataGridView_Subscribe.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Subscribe_CellDoubleClick);
             // 
@@ -667,15 +673,21 @@
             // panel6
             // 
             this.panel6.Controls.Add(this.textBox_countItem);
+            this.panel6.Controls.Add(this.textBox_TotalAmount);
+            this.panel6.Controls.Add(this.textBox_BindArea);
             this.panel6.Controls.Add(this.textBox_sumArea);
+            this.panel6.Controls.Add(this.textBox_BindAmount);
+            this.panel6.Controls.Add(this.label11);
             this.panel6.Controls.Add(this.textBox_sumAmount);
             this.panel6.Controls.Add(this.label8);
+            this.panel6.Controls.Add(this.label9);
+            this.panel6.Controls.Add(this.label1);
             this.panel6.Controls.Add(this.label15);
             this.panel6.Controls.Add(this.label10);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 340);
+            this.panel6.Location = new System.Drawing.Point(0, 368);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1020, 24);
+            this.panel6.Size = new System.Drawing.Size(1178, 24);
             this.panel6.TabIndex = 45;
             // 
             // textBox_countItem
@@ -683,10 +695,10 @@
             this.textBox_countItem.BackColor = System.Drawing.SystemColors.Control;
             this.textBox_countItem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_countItem.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_countItem.Location = new System.Drawing.Point(71, 6);
+            this.textBox_countItem.Location = new System.Drawing.Point(71, 5);
             this.textBox_countItem.Name = "textBox_countItem";
             this.textBox_countItem.ReadOnly = true;
-            this.textBox_countItem.Size = new System.Drawing.Size(108, 14);
+            this.textBox_countItem.Size = new System.Drawing.Size(60, 14);
             this.textBox_countItem.TabIndex = 55;
             this.textBox_countItem.TabStop = false;
             this.textBox_countItem.Text = "0";
@@ -696,10 +708,10 @@
             this.textBox_sumArea.BackColor = System.Drawing.SystemColors.Control;
             this.textBox_sumArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_sumArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumArea.Location = new System.Drawing.Point(266, 5);
+            this.textBox_sumArea.Location = new System.Drawing.Point(429, 5);
             this.textBox_sumArea.Name = "textBox_sumArea";
             this.textBox_sumArea.ReadOnly = true;
-            this.textBox_sumArea.Size = new System.Drawing.Size(138, 14);
+            this.textBox_sumArea.Size = new System.Drawing.Size(100, 14);
             this.textBox_sumArea.TabIndex = 55;
             this.textBox_sumArea.TabStop = false;
             this.textBox_sumArea.Text = "0.00";
@@ -709,10 +721,10 @@
             this.textBox_sumAmount.BackColor = System.Drawing.SystemColors.Control;
             this.textBox_sumAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_sumAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumAmount.Location = new System.Drawing.Point(493, 5);
+            this.textBox_sumAmount.Location = new System.Drawing.Point(630, 5);
             this.textBox_sumAmount.Name = "textBox_sumAmount";
             this.textBox_sumAmount.ReadOnly = true;
-            this.textBox_sumAmount.Size = new System.Drawing.Size(122, 14);
+            this.textBox_sumAmount.Size = new System.Drawing.Size(100, 14);
             this.textBox_sumAmount.TabIndex = 55;
             this.textBox_sumAmount.TabStop = false;
             this.textBox_sumAmount.Text = "0";
@@ -720,20 +732,20 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 6);
+            this.label8.Location = new System.Drawing.Point(535, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.Size = new System.Drawing.Size(89, 12);
             this.label8.TabIndex = 54;
-            this.label8.Text = "金额合计：";
+            this.label8.Text = "地上金额合计：";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(195, 6);
+            this.label15.Location = new System.Drawing.Point(334, 6);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(65, 12);
+            this.label15.Size = new System.Drawing.Size(89, 12);
             this.label15.TabIndex = 54;
-            this.label15.Text = "面积合计：";
+            this.label15.Text = "地上面积合计：";
             // 
             // label10
             // 
@@ -744,11 +756,77 @@
             this.label10.TabIndex = 54;
             this.label10.Text = "套数合计：";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(137, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 54;
+            this.label1.Text = "总款合计：";
+            // 
+            // textBox_TotalAmount
+            // 
+            this.textBox_TotalAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_TotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_TotalAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_TotalAmount.Location = new System.Drawing.Point(208, 5);
+            this.textBox_TotalAmount.Name = "textBox_TotalAmount";
+            this.textBox_TotalAmount.ReadOnly = true;
+            this.textBox_TotalAmount.Size = new System.Drawing.Size(120, 14);
+            this.textBox_TotalAmount.TabIndex = 55;
+            this.textBox_TotalAmount.TabStop = false;
+            this.textBox_TotalAmount.Text = "0.00";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(736, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 12);
+            this.label9.TabIndex = 54;
+            this.label9.Text = "地上面积合计：";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(937, 6);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(89, 12);
+            this.label11.TabIndex = 54;
+            this.label11.Text = "地上金额合计：";
+            // 
+            // textBox_BindAmount
+            // 
+            this.textBox_BindAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_BindAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_BindAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_BindAmount.Location = new System.Drawing.Point(1032, 5);
+            this.textBox_BindAmount.Name = "textBox_BindAmount";
+            this.textBox_BindAmount.ReadOnly = true;
+            this.textBox_BindAmount.Size = new System.Drawing.Size(100, 14);
+            this.textBox_BindAmount.TabIndex = 55;
+            this.textBox_BindAmount.TabStop = false;
+            this.textBox_BindAmount.Text = "0";
+            // 
+            // textBox_BindArea
+            // 
+            this.textBox_BindArea.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_BindArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_BindArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_BindArea.Location = new System.Drawing.Point(831, 5);
+            this.textBox_BindArea.Name = "textBox_BindArea";
+            this.textBox_BindArea.ReadOnly = true;
+            this.textBox_BindArea.Size = new System.Drawing.Size(100, 14);
+            this.textBox_BindArea.TabIndex = 55;
+            this.textBox_BindArea.TabStop = false;
+            this.textBox_BindArea.Text = "0.00";
+            // 
             // FrmSubscribe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 487);
+            this.ClientSize = new System.Drawing.Size(1178, 515);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.panel1);
@@ -834,6 +912,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField8;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField9;
+        private System.Windows.Forms.TextBox textBox_TotalAmount;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox_BindArea;
+        private System.Windows.Forms.TextBox textBox_BindAmount;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label9;
 
     }
 }

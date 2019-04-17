@@ -64,15 +64,17 @@
             this.dataGridView_List = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.textBox_countItem = new System.Windows.Forms.TextBox();
-            this.textBox_subArea = new System.Windows.Forms.TextBox();
+            this.textBox_SumBindAmount = new System.Windows.Forms.TextBox();
             this.textBox_sumArea = new System.Windows.Forms.TextBox();
-            this.textBox_subTotalAmount = new System.Windows.Forms.TextBox();
+            this.textBox_SumConTotalAmount = new System.Windows.Forms.TextBox();
             this.textBox_sumAmount = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox_sumRecTotalAmount = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_List)).BeginInit();
@@ -115,7 +117,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1136, 99);
+            this.groupBox1.Size = new System.Drawing.Size(1317, 99);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -414,7 +416,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(1142, 107);
+            this.panel1.Size = new System.Drawing.Size(1323, 107);
             this.panel1.TabIndex = 6;
             // 
             // dataGridView_List
@@ -431,15 +433,17 @@
             this.dataGridView_List.RowHeadersWidth = 21;
             this.dataGridView_List.RowTemplate.Height = 23;
             this.dataGridView_List.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_List.Size = new System.Drawing.Size(1142, 334);
+            this.dataGridView_List.Size = new System.Drawing.Size(1323, 373);
             this.dataGridView_List.TabIndex = 8;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.textBox_countItem);
-            this.panel2.Controls.Add(this.textBox_subArea);
+            this.panel2.Controls.Add(this.textBox_SumBindAmount);
             this.panel2.Controls.Add(this.textBox_sumArea);
-            this.panel2.Controls.Add(this.textBox_subTotalAmount);
+            this.panel2.Controls.Add(this.textBox_sumRecTotalAmount);
+            this.panel2.Controls.Add(this.textBox_SumConTotalAmount);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.textBox_sumAmount);
             this.panel2.Controls.Add(this.label20);
             this.panel2.Controls.Add(this.label16);
@@ -447,9 +451,9 @@
             this.panel2.Controls.Add(this.label17);
             this.panel2.Controls.Add(this.label18);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 441);
+            this.panel2.Location = new System.Drawing.Point(0, 480);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1142, 25);
+            this.panel2.Size = new System.Drawing.Size(1323, 25);
             this.panel2.TabIndex = 9;
             // 
             // textBox_countItem
@@ -460,30 +464,30 @@
             this.textBox_countItem.Location = new System.Drawing.Point(83, 6);
             this.textBox_countItem.Name = "textBox_countItem";
             this.textBox_countItem.ReadOnly = true;
-            this.textBox_countItem.Size = new System.Drawing.Size(93, 14);
+            this.textBox_countItem.Size = new System.Drawing.Size(69, 14);
             this.textBox_countItem.TabIndex = 59;
             this.textBox_countItem.TabStop = false;
             this.textBox_countItem.Text = "0";
             // 
-            // textBox_subArea
+            // textBox_SumBindAmount
             // 
-            this.textBox_subArea.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_subArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_subArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_subArea.Location = new System.Drawing.Point(277, 6);
-            this.textBox_subArea.Name = "textBox_subArea";
-            this.textBox_subArea.ReadOnly = true;
-            this.textBox_subArea.Size = new System.Drawing.Size(116, 14);
-            this.textBox_subArea.TabIndex = 60;
-            this.textBox_subArea.TabStop = false;
-            this.textBox_subArea.Text = "0.00";
+            this.textBox_SumBindAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_SumBindAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_SumBindAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_SumBindAmount.Location = new System.Drawing.Point(699, 6);
+            this.textBox_SumBindAmount.Name = "textBox_SumBindAmount";
+            this.textBox_SumBindAmount.ReadOnly = true;
+            this.textBox_SumBindAmount.Size = new System.Drawing.Size(120, 14);
+            this.textBox_SumBindAmount.TabIndex = 60;
+            this.textBox_SumBindAmount.TabStop = false;
+            this.textBox_SumBindAmount.Text = "0.00";
             // 
             // textBox_sumArea
             // 
             this.textBox_sumArea.BackColor = System.Drawing.SystemColors.Control;
             this.textBox_sumArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_sumArea.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumArea.Location = new System.Drawing.Point(731, 6);
+            this.textBox_sumArea.Location = new System.Drawing.Point(253, 6);
             this.textBox_sumArea.Name = "textBox_sumArea";
             this.textBox_sumArea.ReadOnly = true;
             this.textBox_sumArea.Size = new System.Drawing.Size(124, 14);
@@ -491,28 +495,28 @@
             this.textBox_sumArea.TabStop = false;
             this.textBox_sumArea.Text = "0.00";
             // 
-            // textBox_subTotalAmount
+            // textBox_SumConTotalAmount
             // 
-            this.textBox_subTotalAmount.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox_subTotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox_subTotalAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_subTotalAmount.Location = new System.Drawing.Point(494, 6);
-            this.textBox_subTotalAmount.Name = "textBox_subTotalAmount";
-            this.textBox_subTotalAmount.ReadOnly = true;
-            this.textBox_subTotalAmount.Size = new System.Drawing.Size(129, 14);
-            this.textBox_subTotalAmount.TabIndex = 61;
-            this.textBox_subTotalAmount.TabStop = false;
-            this.textBox_subTotalAmount.Text = "0";
+            this.textBox_SumConTotalAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_SumConTotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_SumConTotalAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_SumConTotalAmount.Location = new System.Drawing.Point(896, 6);
+            this.textBox_SumConTotalAmount.Name = "textBox_SumConTotalAmount";
+            this.textBox_SumConTotalAmount.ReadOnly = true;
+            this.textBox_SumConTotalAmount.Size = new System.Drawing.Size(120, 14);
+            this.textBox_SumConTotalAmount.TabIndex = 61;
+            this.textBox_SumConTotalAmount.TabStop = false;
+            this.textBox_SumConTotalAmount.Text = "0";
             // 
             // textBox_sumAmount
             // 
             this.textBox_sumAmount.BackColor = System.Drawing.SystemColors.Control;
             this.textBox_sumAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox_sumAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_sumAmount.Location = new System.Drawing.Point(956, 6);
+            this.textBox_sumAmount.Location = new System.Drawing.Point(478, 6);
             this.textBox_sumAmount.Name = "textBox_sumAmount";
             this.textBox_sumAmount.ReadOnly = true;
-            this.textBox_sumAmount.Size = new System.Drawing.Size(129, 14);
+            this.textBox_sumAmount.Size = new System.Drawing.Size(120, 14);
             this.textBox_sumAmount.TabIndex = 61;
             this.textBox_sumAmount.TabStop = false;
             this.textBox_sumAmount.Text = "0";
@@ -520,38 +524,38 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(399, 7);
+            this.label20.Location = new System.Drawing.Point(825, 7);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(89, 12);
+            this.label20.Size = new System.Drawing.Size(65, 12);
             this.label20.TabIndex = 56;
-            this.label20.Text = "认购金额合计：";
+            this.label20.Text = "签约总款：";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(861, 7);
+            this.label16.Location = new System.Drawing.Point(383, 7);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 12);
             this.label16.TabIndex = 56;
-            this.label16.Text = "签约金额合计：";
+            this.label16.Text = "地上签约总价：";
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(182, 7);
+            this.label19.Location = new System.Drawing.Point(604, 7);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(89, 12);
             this.label19.TabIndex = 57;
-            this.label19.Text = "认购面积合计：";
+            this.label19.Text = "地下签约总价：";
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(636, 7);
+            this.label17.Location = new System.Drawing.Point(158, 7);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(89, 12);
             this.label17.TabIndex = 57;
-            this.label17.Text = "签约面积合计：";
+            this.label17.Text = "地上签约面积：";
             // 
             // label18
             // 
@@ -562,11 +566,33 @@
             this.label18.TabIndex = 58;
             this.label18.Text = "套数合计：";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1022, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 56;
+            this.label1.Text = "已收合计：";
+            // 
+            // textBox_sumRecTotalAmount
+            // 
+            this.textBox_sumRecTotalAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_sumRecTotalAmount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_sumRecTotalAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_sumRecTotalAmount.Location = new System.Drawing.Point(1093, 7);
+            this.textBox_sumRecTotalAmount.Name = "textBox_sumRecTotalAmount";
+            this.textBox_sumRecTotalAmount.ReadOnly = true;
+            this.textBox_sumRecTotalAmount.Size = new System.Drawing.Size(120, 14);
+            this.textBox_sumRecTotalAmount.TabIndex = 61;
+            this.textBox_sumRecTotalAmount.TabStop = false;
+            this.textBox_sumRecTotalAmount.Text = "0";
+            // 
             // RepList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1142, 466);
+            this.ClientSize = new System.Drawing.Size(1323, 505);
             this.Controls.Add(this.dataGridView_List);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -626,9 +652,11 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox_subArea;
-        private System.Windows.Forms.TextBox textBox_subTotalAmount;
+        private System.Windows.Forms.TextBox textBox_SumBindAmount;
+        private System.Windows.Forms.TextBox textBox_SumConTotalAmount;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox textBox_sumRecTotalAmount;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -138,7 +138,6 @@ namespace Commission.MenuForms
 
                 case UpBase.Receipt:
                     sql = string.Format("select IsNull(SUM(Amount),0) from Receipt a " 
-                        + " inner join ContractDetail b on a.ContractID = b.ContractID "
                         + " inner join SaleItem c on c.ItemID = b.ItemID "
                         + " where a.ProjectID = {0} and  UpID = {1} and RecDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
                     standardValue = Convert.ToDouble(SqlHelper.ExecuteScalar(sql));
@@ -150,6 +149,16 @@ namespace Commission.MenuForms
                         + " inner join SaleItem c on c.ItemID = b.ItemID "
                         + " where a.ProjectID = {0} and  UpID = {1} and ContractDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
                     standardValue = Convert.ToDouble(SqlHelper.ExecuteScalar(sql));
+
+                    if (isSubscribe)
+                    {
+                        sql = string.Format("select IsNull(SUM(Area),0) from SubscribeMain a "
+                            + " inner join SubscribeDetail b on a.SubscribeID = b.SubscribeID "
+                            + " inner join SaleItem c on c.ItemID = b.ItemID "
+                            + " where a.ContractID is null and a.ProjectID = {0} and  UpID = {1} and  SubscribeDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
+                        standardValue += Convert.ToDouble(SqlHelper.ExecuteScalar(sql));
+                    }
+
                     break;
 
                 case UpBase.Quantity:
@@ -158,6 +167,16 @@ namespace Commission.MenuForms
                         + " inner join SaleItem c on c.ItemID = b.ItemID "
                         + " where a.ProjectID = {0} and  UpID = {1} and ContractDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
                     standardValue = Convert.ToDouble(SqlHelper.ExecuteScalar(sql));
+
+                    if (isSubscribe)
+                    {
+                        sql = string.Format("select IsNull(count(SubscribeID),0) from SubscribeMain a "
+                            + " inner join SubscribeDetail b on a.SubscribeID = b.SubscribeID "
+                            + " inner join SaleItem c on c.ItemID = b.ItemID "
+                            + " where a.ContractID is null and a.ProjectID = {0} and  UpID = {1} and  SubscribeDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
+                        standardValue += Convert.ToDouble(SqlHelper.ExecuteScalar(sql));
+                    }
+
                     break;
 
                 default:

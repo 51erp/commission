@@ -188,7 +188,6 @@ namespace Commission
         {
             FrmSubscribe subscribe = new FrmSubscribe();
             FormShow(subscribe, sender);
-            
         }
 
         private void ToolStripMenuItem_Parameter_Click(object sender, EventArgs e)
@@ -512,17 +511,11 @@ namespace Commission
             FormShow(salesOwn, sender);
         }
 
-        private void ToolStripMenuItem_ImpSubscribe_Click(object sender, EventArgs e)
-        {
-            FrmImportSubscribe subscribe = new FrmImportSubscribe();
-            subscribe.ShowDialog();
-        }
-
         private void ToolStripMenuItem_ImpContract_Click(object sender, EventArgs e)
         {
             FrmImpContract impSubscribe = new FrmImpContract();
-            //FormShow(impSubscribe, sender);
-            impSubscribe.ShowDialog();
+            FormShow(impSubscribe, sender);
+            //impSubscribe.ShowDialog();
         }
 
         private void toolStripButton_CreateMenuList_Click(object sender, EventArgs e)

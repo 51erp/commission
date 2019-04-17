@@ -442,22 +442,52 @@ namespace Commission.MenuForms
 
         private void getRowsTotalAmount()
         {
-            int countItem = 0;
-            double sumArea = 0;
-            double sumAmount = 0;
+            int countItem = 0;         //套数
+            double sumTotalAmount = 0; //总款
+            double sumArea = 0;        //地上面积
+            double sumAmount = 0;      //地上金额
+
+            double sumBindArea = 0;    //附属面积
+            double sumBindAmount = 0;  //附属金额
+            
 
 
             foreach (DataGridViewRow row in dataGridView_Subscribe.Rows)
             {
+                double bindArea = 0;
+                double bindAmount = 0;
+                 
                 countItem++;
                 sumArea += double.Parse(row.Cells["ColArea"].Value.ToString());
                 sumAmount += double.Parse(row.Cells["ColAmount"].Value.ToString());
+                sumTotalAmount += double.Parse(row.Cells["ColTotalAmount"].Value.ToString());
+
+                GetSumBind(row.Cells["ColSubscribeID"].Value.ToString(), out bindArea, out bindAmount);
+
+                sumBindArea += bindArea;
+                sumBindAmount += bindAmount;
             }
 
             textBox_countItem.Text = countItem.ToString();
+            textBox_TotalAmount.Text = sumTotalAmount.ToString("F0");
             textBox_sumArea.Text = sumArea.ToString("F2");
             textBox_sumAmount.Text = sumAmount.ToString("F0");
+            textBox_BindArea.Text = sumBindArea.ToString("F2");
+            textBox_BindAmount.Text = sumBindAmount.ToString("F0");
         }
+
+        private void  GetSumBind(string subscribeID, out double area, out double amount)
+        {
+            area = 0;
+            amount = 0;
+            string sql = string.Format("select ISNULL(SUM(Area),0) area, ISNULL(SUM(amount),0) amount from  SubscribeDetail where IsBind = 1 and SubscribeID = {0}", subscribeID);
+
+            DataTable dt = SqlHelper.ExecuteDataTable(sql);
+
+            area = Convert.ToDouble(dt.Rows[0]["area"]);
+            amount = Convert.ToDouble(dt.Rows[0]["amount"]);
+        }
+
 
         private void toolStripButton_Rename_Click(object sender, EventArgs e)
         {
