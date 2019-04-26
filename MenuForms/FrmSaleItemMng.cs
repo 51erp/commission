@@ -641,10 +641,6 @@ namespace Commission.MenuForms
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-        }
-
         private void toolStripButton_Rate_Click(object sender, EventArgs e)
         {
             if (!hasItemChecked())

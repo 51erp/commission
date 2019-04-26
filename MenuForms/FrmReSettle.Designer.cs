@@ -28,21 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Settle = new System.Windows.Forms.Button();
             this.dataGridView_Settlement = new System.Windows.Forms.DataGridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_Save = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +61,10 @@
             this.ColUpSettleAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSettleALL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSettleDifference = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_Save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Settlement)).BeginInit();
@@ -113,7 +113,7 @@
             this.button_Settle.Name = "button_Settle";
             this.button_Settle.Size = new System.Drawing.Size(75, 27);
             this.button_Settle.TabIndex = 1;
-            this.button_Settle.Text = " 结算";
+            this.button_Settle.Text = " 清算";
             this.button_Settle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_Settle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_Settle.UseVisualStyleBackColor = true;
@@ -156,43 +156,6 @@
             this.dataGridView_Settlement.RowTemplate.Height = 23;
             this.dataGridView_Settlement.Size = new System.Drawing.Size(1206, 331);
             this.dataGridView_Settlement.TabIndex = 5;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_Save,
-            this.toolStripSeparator1,
-            this.toolStripButton_Export});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 62);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1206, 31);
-            this.toolStrip2.TabIndex = 4;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton_Save
-            // 
-            this.toolStripButton_Save.Image = global::Commission.Properties.Resources.save_24;
-            this.toolStripButton_Save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Save.Name = "toolStripButton_Save";
-            this.toolStripButton_Save.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Save.Text = "保存";
-            this.toolStripButton_Save.Click += new System.EventHandler(this.toolStripButton_Save_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripButton_Export
-            // 
-            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.excel;
-            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Export.Name = "toolStripButton_Export";
-            this.toolStripButton_Export.Size = new System.Drawing.Size(52, 28);
-            this.toolStripButton_Export.Text = "导出";
-            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
             // 
             // ColContractID
             // 
@@ -267,9 +230,9 @@
             // ColArea
             // 
             this.ColArea.DataPropertyName = "Area";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "F2";
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "F2";
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColArea.HeaderText = "签约面积";
             this.ColArea.Name = "ColArea";
             this.ColArea.ReadOnly = true;
@@ -278,9 +241,9 @@
             // ColPrice
             // 
             this.ColPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "F0";
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "F0";
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle8;
             this.ColPrice.HeaderText = "签约单价";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -289,9 +252,9 @@
             // ColAmount
             // 
             this.ColAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "F0";
-            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "F0";
+            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle9;
             this.ColAmount.HeaderText = "签约金额";
             this.ColAmount.Name = "ColAmount";
             this.ColAmount.ReadOnly = true;
@@ -300,9 +263,9 @@
             // ColTotalAmount
             // 
             this.ColTotalAmount.DataPropertyName = "TotalAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "F0";
-            this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "F0";
+            this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle10;
             this.ColTotalAmount.HeaderText = "签约总额";
             this.ColTotalAmount.Name = "ColTotalAmount";
             this.ColTotalAmount.ReadOnly = true;
@@ -311,9 +274,9 @@
             // ColBottomPrice
             // 
             this.ColBottomPrice.DataPropertyName = "BottomPrice";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "F0";
-            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "F0";
+            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle11;
             this.ColBottomPrice.HeaderText = "销售底价";
             this.ColBottomPrice.Name = "ColBottomPrice";
             this.ColBottomPrice.ReadOnly = true;
@@ -322,9 +285,9 @@
             // ColReceiptAll
             // 
             this.ColReceiptAll.DataPropertyName = "ReceiptAll";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "F0";
-            this.ColReceiptAll.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "F0";
+            this.ColReceiptAll.DefaultCellStyle = dataGridViewCellStyle12;
             this.ColReceiptAll.HeaderText = "累计收款";
             this.ColReceiptAll.Name = "ColReceiptAll";
             this.ColReceiptAll.ReadOnly = true;
@@ -393,6 +356,43 @@
             this.ColSettleDifference.Name = "ColSettleDifference";
             this.ColSettleDifference.ReadOnly = true;
             this.ColSettleDifference.Width = 78;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_Save,
+            this.toolStripSeparator1,
+            this.toolStripButton_Export});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 62);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(1206, 31);
+            this.toolStrip2.TabIndex = 4;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton_Save
+            // 
+            this.toolStripButton_Save.Image = global::Commission.Properties.Resources.save_24;
+            this.toolStripButton_Save.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Save.Name = "toolStripButton_Save";
+            this.toolStripButton_Save.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Save.Text = "保存";
+            this.toolStripButton_Save.Click += new System.EventHandler(this.toolStripButton_Save_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton_Export
+            // 
+            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.excel;
+            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Export.Name = "toolStripButton_Export";
+            this.toolStripButton_Export.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton_Export.Text = "导出";
+            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
             // 
             // FrmReSettle
             // 

@@ -32,10 +32,10 @@
             this.toolStripButton_OK = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker_ChangeDate = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.comboBox_JobType = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker_ChangeDate = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -86,31 +86,6 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
-            // dateTimePicker_ChangeDate
-            // 
-            this.dateTimePicker_ChangeDate.Location = new System.Drawing.Point(71, 25);
-            this.dateTimePicker_ChangeDate.Name = "dateTimePicker_ChangeDate";
-            this.dateTimePicker_ChangeDate.Size = new System.Drawing.Size(101, 21);
-            this.dateTimePicker_ChangeDate.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "调岗时间";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 55);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "岗位类型";
-            // 
             // comboBox_JobType
             // 
             this.comboBox_JobType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -122,6 +97,31 @@
             this.comboBox_JobType.Name = "comboBox_JobType";
             this.comboBox_JobType.Size = new System.Drawing.Size(101, 20);
             this.comboBox_JobType.TabIndex = 67;
+            // 
+            // dateTimePicker_ChangeDate
+            // 
+            this.dateTimePicker_ChangeDate.Location = new System.Drawing.Point(71, 25);
+            this.dateTimePicker_ChangeDate.Name = "dateTimePicker_ChangeDate";
+            this.dateTimePicker_ChangeDate.Size = new System.Drawing.Size(101, 21);
+            this.dateTimePicker_ChangeDate.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "岗位类型";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "变更时间";
             // 
             // FrmJobChangeDate
             // 
@@ -135,7 +135,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "调岗时间";
+            this.Text = "岗位类型变更";
             this.Load += new System.EventHandler(this.FrmJobChangeDate_Load);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();

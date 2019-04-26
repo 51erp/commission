@@ -32,18 +32,11 @@
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Modify = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton_OK = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView_Sales = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox_Phone = new System.Windows.Forms.TextBox();
-            this.textBox_Name = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button_Search = new System.Windows.Forms.Button();
             this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +44,13 @@
             this.ColOutDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_Phone = new System.Windows.Forms.TextBox();
+            this.textBox_Name = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button_Search = new System.Windows.Forms.Button();
+            this.checkBox_Out = new System.Windows.Forms.CheckBox();
             this.toolStrip2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -65,7 +65,6 @@
             this.toolStripButton_Add,
             this.toolStripButton_Del,
             this.toolStripButton_Modify,
-            this.toolStripSeparator1,
             this.toolStripButton_OK,
             this.toolStripButton_Close});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
@@ -83,6 +82,7 @@
             this.toolStripButton_Add.Name = "toolStripButton_Add";
             this.toolStripButton_Add.Size = new System.Drawing.Size(52, 28);
             this.toolStripButton_Add.Text = "新增";
+            this.toolStripButton_Add.Visible = false;
             this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
             // 
             // toolStripButton_Del
@@ -94,6 +94,7 @@
             this.toolStripButton_Del.Name = "toolStripButton_Del";
             this.toolStripButton_Del.Size = new System.Drawing.Size(52, 28);
             this.toolStripButton_Del.Text = "删除";
+            this.toolStripButton_Del.Visible = false;
             this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
             // 
             // toolStripButton_Modify
@@ -105,12 +106,8 @@
             this.toolStripButton_Modify.Name = "toolStripButton_Modify";
             this.toolStripButton_Modify.Size = new System.Drawing.Size(52, 28);
             this.toolStripButton_Modify.Text = "修改";
+            this.toolStripButton_Modify.Visible = false;
             this.toolStripButton_Modify.Click += new System.EventHandler(this.toolStripButton_Modify_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripButton_OK
             // 
@@ -178,65 +175,6 @@
             this.dataGridView_Sales.Size = new System.Drawing.Size(647, 296);
             this.dataGridView_Sales.TabIndex = 2;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.textBox_Phone);
-            this.groupBox1.Controls.Add(this.textBox_Name);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.button_Search);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(647, 43);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            // 
-            // textBox_Phone
-            // 
-            this.textBox_Phone.Location = new System.Drawing.Point(182, 14);
-            this.textBox_Phone.Name = "textBox_Phone";
-            this.textBox_Phone.Size = new System.Drawing.Size(98, 21);
-            this.textBox_Phone.TabIndex = 13;
-            // 
-            // textBox_Name
-            // 
-            this.textBox_Name.Location = new System.Drawing.Point(41, 14);
-            this.textBox_Name.Name = "textBox_Name";
-            this.textBox_Name.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Name.TabIndex = 12;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(147, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "电话";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "姓名";
-            // 
-            // button_Search
-            // 
-            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(296, 13);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
-            this.button_Search.TabIndex = 2;
-            this.button_Search.Text = " 查询";
-            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Search.UseVisualStyleBackColor = true;
-            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
-            // 
             // ColID
             // 
             this.ColID.DataPropertyName = "SalesID";
@@ -288,6 +226,76 @@
             this.ColProjectName.Name = "ColProjectName";
             this.ColProjectName.ReadOnly = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox_Out);
+            this.groupBox1.Controls.Add(this.textBox_Phone);
+            this.groupBox1.Controls.Add(this.textBox_Name);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.button_Search);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(647, 43);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            // 
+            // textBox_Phone
+            // 
+            this.textBox_Phone.Location = new System.Drawing.Point(182, 14);
+            this.textBox_Phone.Name = "textBox_Phone";
+            this.textBox_Phone.Size = new System.Drawing.Size(98, 21);
+            this.textBox_Phone.TabIndex = 13;
+            // 
+            // textBox_Name
+            // 
+            this.textBox_Name.Location = new System.Drawing.Point(41, 14);
+            this.textBox_Name.Name = "textBox_Name";
+            this.textBox_Name.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Name.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(147, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "电话";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "姓名";
+            // 
+            // button_Search
+            // 
+            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
+            this.button_Search.Location = new System.Drawing.Point(393, 13);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.TabIndex = 2;
+            this.button_Search.Text = " 查询";
+            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            // 
+            // checkBox_Out
+            // 
+            this.checkBox_Out.AutoSize = true;
+            this.checkBox_Out.Location = new System.Drawing.Point(306, 18);
+            this.checkBox_Out.Name = "checkBox_Out";
+            this.checkBox_Out.Size = new System.Drawing.Size(60, 16);
+            this.checkBox_Out.TabIndex = 14;
+            this.checkBox_Out.Text = "含离职";
+            this.checkBox_Out.UseVisualStyleBackColor = true;
+            // 
             // FrmSales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -329,7 +337,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton_Add;
         private System.Windows.Forms.ToolStripButton toolStripButton_Del;
         private System.Windows.Forms.ToolStripButton toolStripButton_Modify;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColPhone;
@@ -337,5 +344,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColOutDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProjectName;
+        private System.Windows.Forms.CheckBox checkBox_Out;
     }
 }

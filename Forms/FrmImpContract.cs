@@ -173,6 +173,17 @@ namespace Commission.Forms
                                 cmd.ExecuteNonQuery();
                             }
                         }
+
+                        //收款记录 首付
+                        cmd.CommandText = GenSqlReceipt(row, contractID, false); 
+                        if (cmd.CommandText != "")
+                            cmd.ExecuteNonQuery();
+
+                        //收款记录 贷款
+                        cmd.CommandText = GenSqlReceipt(row, contractID, true); 
+                        if (cmd.CommandText != "")
+                            cmd.ExecuteNonQuery();
+
                     }
 
                     sqlTran.Commit();
@@ -382,10 +393,51 @@ namespace Commission.Forms
             return sql;
         }
 
-        private void UpdateItemSaleState(DataRow row)
-        {
-            string sql = string.Format("update SaleItem Set SaleStateCode = 3, SaleStateName = '' where ItemID = {0}");
 
+        private string GenSqlReceipt(DataRow row, string contractID, bool isLoan)
+        {
+            string sql = string.Empty;
+            double amount = 0;
+            string typeCode = string.Empty;
+            string typeName = string.Empty;
+
+            string loan = isLoan ? "1" : "0";
+
+            string date= "CONVERT(varchar(10), getdate(), 120)";
+
+            string fields = "ContractID, ProjectID, Amount, RecDate, TypeCode, TypeName, IsLoan, SalesID, SalesName, MakeDate, Maker";
+
+            if (isLoan)
+            {
+                double.TryParse(row["RecLoan"].ToString(), out amount);
+                typeCode = "0";
+                typeName = "贷款";
+            }
+            else
+            {
+                double.TryParse(row["RecDownPay"].ToString(), out amount);
+                typeCode = "2";
+                typeName = "首付";
+            }
+
+            //金额为0不新增记录
+            if (amount == 0)
+                return "";
+
+            string values = contractID + ","
+                + Login.User.ProjectID + ","
+                + amount + ","
+                + date + ","
+                + typeCode + ",'"
+                + typeName + "',"
+                + loan + ","
+                + row["ConSalesID"] + ",'"
+                + row["ConSalesName"] + "',"
+                + date + ",'"
+                + Login.User.UserName + "'"; 
+
+
+            return sql = string.Format("insert into Receipt ({0}) values ({1})", fields, values);
         }
 
 

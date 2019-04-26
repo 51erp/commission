@@ -54,6 +54,7 @@ namespace Commission.MenuForms
 
             Transaction.InsertBindCol(dataGridView_Contract, 11, bindQty);
 
+            dataGridView_Contract.AutoGenerateColumns = false;
             dataGridView_Contract.DataSource = dtContract;
 
             if (dtContract.Rows.Count == 0)

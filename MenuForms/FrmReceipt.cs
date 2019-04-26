@@ -81,6 +81,7 @@ namespace Commission.MenuForms
 
             Transaction.InsertBindCol(dataGridView_Agreement, 14, Qty);
 
+            dataGridView_Agreement.AutoGenerateColumns = false;
             dataGridView_Agreement.DataSource = dtContract;
 
             button_Search.Enabled = true;

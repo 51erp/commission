@@ -38,6 +38,7 @@ namespace Commission.MenuForms
         {
             if (FrmMode == FormMode.view)
             {
+                this.Text = "跳点设置";
                 toolStripButton_Add.Visible = false;
                 toolStripButton_Del.Visible = false;
                 toolStripButton_Modify.Visible = false;

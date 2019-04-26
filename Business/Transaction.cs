@@ -609,7 +609,7 @@ namespace Commission.Business
             string choose = isChooce ? " 'false' as Choose, " : "";
             string sql = string.Empty;
 
-            sql = "select " + choose + "ContractMain.ContractID, CustomerID, CustomerName, CustomerPhone, ItemTypeName, "
+            sql = "select " + choose + "ContractMain.ContractID, CustomerID, CustomerName, CustomerPhone, ItemTypeName, PaymentType, LoanDate, "
                 + " Building, Unit, ItemNum, Area, Price, Amount, DownPayAmount, Loan, TotalAmount, ContractDate, SalesID, SalesName, "
                 + " ExtField0, ExtField1, ExtField2, ExtField3, ExtField4, ExtField5, ExtField6, ExtField7, ExtField8, ExtField9 "
                 + " from ContractMain "

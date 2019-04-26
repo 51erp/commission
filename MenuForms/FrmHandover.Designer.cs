@@ -42,9 +42,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSubscribeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSaleItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +73,11 @@
             this.ColExtField7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
+            this.button_SalesMore = new System.Windows.Forms.Button();
+            this.textBox_Sales = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -91,11 +93,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(989, 64);
+            this.panel1.Size = new System.Drawing.Size(1162, 64);
             this.panel1.TabIndex = 7;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBox_Sales);
+            this.groupBox1.Controls.Add(this.button_SalesMore);
             this.groupBox1.Controls.Add(this.comboBox_NewSalesName);
             this.groupBox1.Controls.Add(this.comboBox_type);
             this.groupBox1.Controls.Add(this.comboBox_Sales);
@@ -108,7 +112,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(983, 51);
+            this.groupBox1.Size = new System.Drawing.Size(1156, 51);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
@@ -117,7 +121,7 @@
             // 
             this.comboBox_NewSalesName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_NewSalesName.FormattingEnabled = true;
-            this.comboBox_NewSalesName.Location = new System.Drawing.Point(567, 23);
+            this.comboBox_NewSalesName.Location = new System.Drawing.Point(614, 23);
             this.comboBox_NewSalesName.Name = "comboBox_NewSalesName";
             this.comboBox_NewSalesName.Size = new System.Drawing.Size(115, 20);
             this.comboBox_NewSalesName.TabIndex = 62;
@@ -138,15 +142,16 @@
             // 
             this.comboBox_Sales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Sales.FormattingEnabled = true;
-            this.comboBox_Sales.Location = new System.Drawing.Point(266, 23);
+            this.comboBox_Sales.Location = new System.Drawing.Point(1005, 23);
             this.comboBox_Sales.Name = "comboBox_Sales";
             this.comboBox_Sales.Size = new System.Drawing.Size(115, 20);
             this.comboBox_Sales.TabIndex = 62;
+            this.comboBox_Sales.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(484, 27);
+            this.label2.Location = new System.Drawing.Point(531, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 54;
@@ -155,7 +160,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 26);
+            this.label1.Location = new System.Drawing.Point(19, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 54;
@@ -173,7 +178,7 @@
             // button_Handover
             // 
             this.button_Handover.Image = global::Commission.Properties.Resources.copy_161;
-            this.button_Handover.Location = new System.Drawing.Point(688, 21);
+            this.button_Handover.Location = new System.Drawing.Point(735, 21);
             this.button_Handover.Name = "button_Handover";
             this.button_Handover.Size = new System.Drawing.Size(75, 24);
             this.button_Handover.TabIndex = 45;
@@ -186,7 +191,7 @@
             // button_Exit
             // 
             this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(820, 21);
+            this.button_Exit.Location = new System.Drawing.Point(867, 21);
             this.button_Exit.Name = "button_Exit";
             this.button_Exit.Size = new System.Drawing.Size(75, 24);
             this.button_Exit.TabIndex = 45;
@@ -199,7 +204,7 @@
             // button_Search
             // 
             this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(387, 21);
+            this.button_Search.Location = new System.Drawing.Point(431, 21);
             this.button_Search.Name = "button_Search";
             this.button_Search.Size = new System.Drawing.Size(75, 24);
             this.button_Search.TabIndex = 44;
@@ -215,7 +220,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 64);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(989, 382);
+            this.panel2.Size = new System.Drawing.Size(1162, 440);
             this.panel2.TabIndex = 8;
             // 
             // groupBox2
@@ -225,7 +230,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(989, 382);
+            this.groupBox2.Size = new System.Drawing.Size(1162, 440);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "购房信息";
@@ -274,39 +279,8 @@
             this.dataGridView_Contract.RowHeadersWidth = 21;
             this.dataGridView_Contract.RowTemplate.Height = 23;
             this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Contract.Size = new System.Drawing.Size(983, 331);
+            this.dataGridView_Contract.Size = new System.Drawing.Size(1156, 389);
             this.dataGridView_Contract.TabIndex = 12;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_All,
-            this.toolStripButton_None});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 17);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(983, 31);
-            this.toolStrip2.TabIndex = 11;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton_All
-            // 
-            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
-            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_All.Name = "toolStripButton_All";
-            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_All.Text = "全选";
-            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
-            // 
-            // toolStripButton_None
-            // 
-            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
-            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_None.Name = "toolStripButton_None";
-            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_None.Text = "全清";
-            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
             // 
             // ColContractID
             // 
@@ -536,11 +510,60 @@
             this.ColExtField9.Name = "ColExtField9";
             this.ColExtField9.Width = 60;
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_All,
+            this.toolStripButton_None});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 17);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(1156, 31);
+            this.toolStrip2.TabIndex = 11;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton_All
+            // 
+            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
+            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_All.Name = "toolStripButton_All";
+            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_All.Text = "全选";
+            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
+            // 
+            // toolStripButton_None
+            // 
+            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
+            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_None.Name = "toolStripButton_None";
+            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_None.Text = "全清";
+            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
+            // 
+            // button_SalesMore
+            // 
+            this.button_SalesMore.Image = global::Commission.Properties.Resources.more;
+            this.button_SalesMore.Location = new System.Drawing.Point(372, 22);
+            this.button_SalesMore.Name = "button_SalesMore";
+            this.button_SalesMore.Size = new System.Drawing.Size(26, 23);
+            this.button_SalesMore.TabIndex = 63;
+            this.button_SalesMore.UseVisualStyleBackColor = true;
+            this.button_SalesMore.Click += new System.EventHandler(this.button_SalesMore_Click);
+            // 
+            // textBox_Sales
+            // 
+            this.textBox_Sales.Location = new System.Drawing.Point(266, 23);
+            this.textBox_Sales.Name = "textBox_Sales";
+            this.textBox_Sales.ReadOnly = true;
+            this.textBox_Sales.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Sales.TabIndex = 64;
+            // 
             // FrmHandover
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 446);
+            this.ClientSize = new System.Drawing.Size(1162, 504);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FrmHandover";
@@ -609,5 +632,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField7;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField8;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField9;
+        private System.Windows.Forms.TextBox textBox_Sales;
+        private System.Windows.Forms.Button button_SalesMore;
     }
 }

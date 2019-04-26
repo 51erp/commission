@@ -35,8 +35,8 @@
             this.textBox_Amount = new System.Windows.Forms.TextBox();
             this.textBox_Rate = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +59,7 @@
             this.toolStripButton_Save.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_Save.Name = "toolStripButton_Save";
             this.toolStripButton_Save.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Save.Text = "确定";
+            this.toolStripButton_Save.Text = "保存";
             this.toolStripButton_Save.Click += new System.EventHandler(this.toolStripButton_Save_Click);
             // 
             // toolStripButton_Close
@@ -114,15 +114,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "单套金额";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "结算比例";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -131,6 +122,15 @@
             this.label3.Size = new System.Drawing.Size(11, 12);
             this.label3.TabIndex = 0;
             this.label3.Text = "%";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "结算比例";
             // 
             // FrmRateSet
             // 

@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_OpneExcel = new System.Windows.Forms.Button();
+            this.button_ExportDict = new System.Windows.Forms.Button();
             this.button_Import = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
             this.label_State = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel_Count = new System.Windows.Forms.ToolStripStatusLabel();
-            this.button_ExportDict = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_SaleItem)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -79,6 +79,19 @@
             this.button_OpneExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_OpneExcel.UseVisualStyleBackColor = true;
             this.button_OpneExcel.Click += new System.EventHandler(this.button_OpneExcel_Click);
+            // 
+            // button_ExportDict
+            // 
+            this.button_ExportDict.Image = global::Commission.Properties.Resources.import_16;
+            this.button_ExportDict.Location = new System.Drawing.Point(12, 7);
+            this.button_ExportDict.Name = "button_ExportDict";
+            this.button_ExportDict.Size = new System.Drawing.Size(133, 25);
+            this.button_ExportDict.TabIndex = 41;
+            this.button_ExportDict.Text = " 导出房源类型字典";
+            this.button_ExportDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_ExportDict.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_ExportDict.UseVisualStyleBackColor = true;
+            this.button_ExportDict.Click += new System.EventHandler(this.button_ExportDict_Click);
             // 
             // button_Import
             // 
@@ -165,11 +178,11 @@
             // ColArea
             // 
             this.ColArea.DataPropertyName = "Area";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "F2";
-            dataGridViewCellStyle7.NullValue = "0";
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "F2";
+            dataGridViewCellStyle4.NullValue = "0";
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColArea.HeaderText = "面积";
             this.ColArea.Name = "ColArea";
             this.ColArea.ReadOnly = true;
@@ -178,11 +191,11 @@
             // ColPrice
             // 
             this.ColPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "F4";
-            dataGridViewCellStyle8.NullValue = "0";
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "F4";
+            dataGridViewCellStyle5.NullValue = "0";
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColPrice.HeaderText = "单价";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -191,11 +204,11 @@
             // ColAmount
             // 
             this.ColAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "F0";
-            dataGridViewCellStyle9.NullValue = "0";
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "F0";
+            dataGridViewCellStyle6.NullValue = "0";
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColAmount.HeaderText = "总价";
             this.ColAmount.Name = "ColAmount";
             this.ColAmount.ReadOnly = true;
@@ -233,19 +246,6 @@
             this.toolStripStatusLabel_Count.Name = "toolStripStatusLabel_Count";
             this.toolStripStatusLabel_Count.Size = new System.Drawing.Size(15, 17);
             this.toolStripStatusLabel_Count.Text = "0";
-            // 
-            // button_ExportDict
-            // 
-            this.button_ExportDict.Image = global::Commission.Properties.Resources.import_16;
-            this.button_ExportDict.Location = new System.Drawing.Point(12, 7);
-            this.button_ExportDict.Name = "button_ExportDict";
-            this.button_ExportDict.Size = new System.Drawing.Size(90, 25);
-            this.button_ExportDict.TabIndex = 41;
-            this.button_ExportDict.Text = " 导出字典";
-            this.button_ExportDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_ExportDict.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_ExportDict.UseVisualStyleBackColor = true;
-            this.button_ExportDict.Click += new System.EventHandler(this.button_ExportDict_Click);
             // 
             // FrmItemImport
             // 

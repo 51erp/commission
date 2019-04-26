@@ -128,6 +128,12 @@
     <Compile Include="Forms\FrmConfig.Designer.cs">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmConfirmDate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmConfirmDate.Designer.cs">
+      <DependentUpon>FrmConfirmDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmContractDateAdd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -331,6 +337,12 @@
     </Compile>
     <Compile Include="Forms\FrmContractAdd.Designer.cs">
       <DependentUpon>FrmContractAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmSalesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSalesList.Designer.cs">
+      <DependentUpon>FrmSalesList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmSettleDetail.cs">
       <SubType>Form</SubType>
@@ -661,6 +673,9 @@
     <EmbeddedResource Include="Forms\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmConfirmDate.resx">
+      <DependentUpon>FrmConfirmDate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmContractDateAdd.resx">
       <DependentUpon>FrmContractDateAdd.cs</DependentUpon>
     </EmbeddedResource>
@@ -763,6 +778,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmContractAdd.resx">
       <DependentUpon>FrmContractAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSalesList.resx">
+      <DependentUpon>FrmSalesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmSettleDetail.resx">
       <DependentUpon>FrmSettleDetail.cs</DependentUpon>
@@ -1074,6 +1092,10 @@
     <None Include="Resources\JobType_16.png" />
     <None Include="Resources\JobChange_16.png" />
     <None Include="Resources\JobLeave_16.png" />
+    <None Include="Resources\confirm_24.png" />
+    <None Include="Resources\check_24.png" />
+    <None Include="Resources\check_16.png" />
+    <None Include="Resources\JobReturn.png" />
     <Content Include="summary.txt" />
     <None Include="Resources\remove2_16.png" />
     <None Include="Resources\outline_remove_16px_21331_easyicon.net.png" />

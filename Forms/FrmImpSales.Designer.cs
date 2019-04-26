@@ -35,7 +35,6 @@
             this.button_Exit = new System.Windows.Forms.Button();
             this.label_State = new System.Windows.Forms.Label();
             this.dataGridView_data = new System.Windows.Forms.DataGridView();
-            this.openFileDialog_Excel = new System.Windows.Forms.OpenFileDialog();
             this.Col0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +42,7 @@
             this.Col4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Col6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.openFileDialog_Excel = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_data)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +63,7 @@
             // button_OpneExcel
             // 
             this.button_OpneExcel.Image = global::Commission.Properties.Resources.excel_16;
-            this.button_OpneExcel.Location = new System.Drawing.Point(12, 7);
+            this.button_OpneExcel.Location = new System.Drawing.Point(132, 8);
             this.button_OpneExcel.Name = "button_OpneExcel";
             this.button_OpneExcel.Size = new System.Drawing.Size(75, 25);
             this.button_OpneExcel.TabIndex = 41;
@@ -76,20 +76,20 @@
             // button_ExportDict
             // 
             this.button_ExportDict.Image = global::Commission.Properties.Resources.import_16;
-            this.button_ExportDict.Location = new System.Drawing.Point(267, 7);
+            this.button_ExportDict.Location = new System.Drawing.Point(12, 8);
             this.button_ExportDict.Name = "button_ExportDict";
-            this.button_ExportDict.Size = new System.Drawing.Size(90, 25);
+            this.button_ExportDict.Size = new System.Drawing.Size(114, 25);
             this.button_ExportDict.TabIndex = 41;
-            this.button_ExportDict.Text = " 导出字典";
+            this.button_ExportDict.Text = " 导出部门字典";
             this.button_ExportDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_ExportDict.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button_ExportDict.UseVisualStyleBackColor = true;
-            this.button_ExportDict.Visible = false;
+            this.button_ExportDict.Click += new System.EventHandler(this.button_ExportDict_Click);
             // 
             // button_Import
             // 
             this.button_Import.Image = global::Commission.Properties.Resources.import_16;
-            this.button_Import.Location = new System.Drawing.Point(93, 7);
+            this.button_Import.Location = new System.Drawing.Point(213, 8);
             this.button_Import.Name = "button_Import";
             this.button_Import.Size = new System.Drawing.Size(75, 25);
             this.button_Import.TabIndex = 41;
@@ -102,7 +102,7 @@
             // button_Exit
             // 
             this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(363, 7);
+            this.button_Exit.Location = new System.Drawing.Point(475, 8);
             this.button_Exit.Name = "button_Exit";
             this.button_Exit.Size = new System.Drawing.Size(75, 25);
             this.button_Exit.TabIndex = 41;
@@ -115,7 +115,7 @@
             // label_State
             // 
             this.label_State.AutoSize = true;
-            this.label_State.Location = new System.Drawing.Point(183, 13);
+            this.label_State.Location = new System.Drawing.Point(303, 14);
             this.label_State.Name = "label_State";
             this.label_State.Size = new System.Drawing.Size(65, 12);
             this.label_State.TabIndex = 38;
@@ -143,10 +143,6 @@
             this.dataGridView_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_data.Size = new System.Drawing.Size(765, 462);
             this.dataGridView_data.TabIndex = 3;
-            // 
-            // openFileDialog_Excel
-            // 
-            this.openFileDialog_Excel.Filter = "Excel文件|*.xls;*.xlsx";
             // 
             // Col0
             // 
@@ -197,6 +193,10 @@
             this.Col6.HeaderText = "岗位类型";
             this.Col6.Name = "Col6";
             this.Col6.ReadOnly = true;
+            // 
+            // openFileDialog_Excel
+            // 
+            this.openFileDialog_Excel.Filter = "Excel文件|*.xls;*.xlsx";
             // 
             // FrmImpSales
             // 

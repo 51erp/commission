@@ -165,11 +165,6 @@ namespace Commission
         {
             FrmEmploye employe = new FrmEmploye();
             FormShow(employe, sender);
-
-
-            //FrmSales sales = new FrmSales();
-            //sales.ShowDialog();
-
         }
 
         private void Confirm_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -562,6 +557,7 @@ namespace Commission
         private void ToolStripMenuItem_organiz_Click(object sender, EventArgs e)
         {
             FrmOrganization organiz = new FrmOrganization();
+            organiz.FrmMode = FormMode.modify;
             organiz.ShowDialog();
         }
 

@@ -225,12 +225,19 @@ namespace Commission.MenuForms
             bool result = false;
             string sql = string.Empty;
 
+            if (string.IsNullOrEmpty(row["SettleStandardCode"].ToString()))
+            {
+                return false;
+            }
+
             string contractId = row["ContractID"].ToString();
 
             //检测条件
             int receipt = Convert.ToInt32(row["RecSettleTotal"]); //可结算收款合计
             int receiptAll = Convert.ToInt32(row["ReceiptAll"]);  //累计收款合计
+
             SettleStandard standardCode = (SettleStandard)row["SettleStandardCode"];  
+
             switch (standardCode)
             {
                 case SettleStandard.ContractAmount:

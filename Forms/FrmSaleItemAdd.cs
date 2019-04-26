@@ -140,7 +140,7 @@ namespace Commission.Forms
 
         private void loadData(string itemID)
         {
-            string sql = "select Building,Unit,ItemNum,Area,Price,ItemTypeCode,IsBind from SaleItem where itemID = " + itemID;
+            string sql = "select Building,Unit,ItemNum,Area,Price,ItemTypeName,IsBind from SaleItem where itemID = " + itemID;
             SqlDataReader sdr = SqlHelper.ExecuteReader(sql);
 
             sdr.Read();
@@ -154,7 +154,7 @@ namespace Commission.Forms
             textBox_ItemNum.Text = sdr["ItemNum"].ToString();
             textBox_Area.Text = sdr["Area"].ToString();
             textBox_Price.Text = sdr["Price"].ToString();
-            comboBox_ItemType.SelectedValue = sdr["ItemTypeCode"].ToString();
+            comboBox_ItemType.Text = sdr["ItemTypeName"].ToString();
             checkBox_SaleType.Checked = bool.Parse(sdr["IsBind"].ToString());
         }
 

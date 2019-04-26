@@ -84,6 +84,11 @@ namespace Commission.Forms
 
         private void button_Import_Click(object sender, EventArgs e)
         {
+            if (!DataValidate())
+            {
+                return;
+            }
+
             button_Import.Enabled = false;
 
             label_State.Text = "状态：导入中...";
@@ -98,11 +103,6 @@ namespace Commission.Forms
                     + dataGridView_data.Rows[i].Cells[1].Value.ToString() + "',"
                     + indate + ","
                     + outdate;
-
-
-
-
-
 
                 string sql = string.Format("insert into Sales (ProjectID, ProjectName, SalesName, Phone, InDate, OutDate) output inserted.SalesID values ({0})", valSales);
 
@@ -134,6 +134,38 @@ namespace Commission.Forms
             Prompt.Information("操作成功，数据已导入！");
 
             button_Import.Enabled = true;
+        }
+
+        private bool DataValidate()
+        {
+            bool result = true;
+
+            for (int i = 0; i < dataGridView_data.Rows.Count; i++)
+            {
+                if (dataGridView_data.Rows[i].Cells[4].Value.ToString() == "")
+                {
+                    dataGridView_data.CurrentCell = dataGridView_data.Rows[i].Cells[4];
+                    Prompt.Warning("置业顾问部门不能为空");
+                    return false;
+                }
+
+                if (dataGridView_data.Rows[i].Cells[6].Value.ToString() == "")
+                {
+                    dataGridView_data.CurrentCell = dataGridView_data.Rows[i].Cells[6];
+                    Prompt.Warning("置业顾问岗位类型不能为空");
+                    return false;
+                }
+            }
+
+            return result;
+
+        }
+
+        private void button_ExportDict_Click(object sender, EventArgs e)
+        {
+            string sql = string.Format("select DeptID '部门ID', DeptName '部门名称'  from Department where ProjectID = {0}", Login.User.ProjectID);
+
+            Common.Exp2XLS(SqlHelper.ExecuteDataTable(sql));
         }
     }
 }

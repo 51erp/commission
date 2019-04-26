@@ -162,7 +162,7 @@ namespace Commission.MenuForms
                     break;
 
                 case UpBase.Quantity:
-                    sql = string.Format("select IsNull(count(ContractID),0) from ContractMain a "
+                    sql = string.Format("select IsNull(count(a.ContractID),0) from ContractMain a "
                         + " inner join ContractDetail b on a.ContractID = b.ContractID "
                         + " inner join SaleItem c on c.ItemID = b.ItemID "
                         + " where a.ProjectID = {0} and  UpID = {1} and ContractDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);
@@ -170,7 +170,7 @@ namespace Commission.MenuForms
 
                     if (isSubscribe)
                     {
-                        sql = string.Format("select IsNull(count(SubscribeID),0) from SubscribeMain a "
+                        sql = string.Format("select IsNull(count(a.SubscribeID),0) from SubscribeMain a "
                             + " inner join SubscribeDetail b on a.SubscribeID = b.SubscribeID "
                             + " inner join SaleItem c on c.ItemID = b.ItemID "
                             + " where a.ContractID is null and a.ProjectID = {0} and  UpID = {1} and  SubscribeDate <= '{2}'", Login.User.ProjectID, upId, SettleClosingDate);

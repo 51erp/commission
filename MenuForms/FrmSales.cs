@@ -13,7 +13,11 @@ namespace Commission.MenuForms
 {
     public partial class FrmSales : Form
     {
+        public string salesType = string.Empty;
+
         public string SalesID = string.Empty;
+        public string SalesName = string.Empty;
+
         public FrmSales()
         {
             InitializeComponent();
@@ -33,6 +37,7 @@ namespace Commission.MenuForms
             else
             {
                 SalesID = dataGridView_Sales.CurrentRow.Cells["ColID"].Value.ToString();
+                SalesName = dataGridView_Sales.CurrentRow.Cells["ColSalesName"].Value.ToString();
                 this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
             
@@ -40,9 +45,7 @@ namespace Commission.MenuForms
 
         private void toolStripButton_Add_Click(object sender, EventArgs e)
         {
-            FrmSalesAdd salesAdd = new FrmSalesAdd();
-            salesAdd.Owner = this;
-            salesAdd.ShowDialog();
+
         }
 
         private void button_Search_Click(object sender, EventArgs e)
@@ -59,14 +62,34 @@ namespace Commission.MenuForms
         {
             string condition = string.Empty;
 
-            condition += " and ProjectID = " + Login.User.ProjectID;
+            condition += " ProjectID = " + Login.User.ProjectID;
 
             if (!textBox_Name.Text.Trim().Equals(""))
                 condition += " and SalesName like '%" + textBox_Name.Text.Trim() + "%' ";
             if (!textBox_Phone.Text.Trim().Equals(""))
                 condition += " and Phone like '%" + textBox_Phone.Text.Trim() + "%'";
 
-            string sql = "select SalesID,SalesName,Phone,InDate,OutDate,Position,ProjectName from Sales where (OutDate is null or OutDate = '') " + condition + " order by SalesName";
+
+
+            if (salesType == "IsFree")
+            {
+                condition += " and IsFree = 1 ";
+            }
+
+            if (salesType == "IsOut")
+            {
+                condition += " and OutDate is not null ";
+            }
+
+            if (salesType == "normal")
+            {
+                if (!checkBox_Out.Checked)
+                {
+                    condition += " and (OutDate is null or OutDate = '')";
+                }
+            }
+
+            string sql = "select SalesID,SalesName,Phone,InDate,OutDate,Position,ProjectName from Sales where  " + condition + " order by SalesName";
 
             dataGridView_Sales.DataSource = SqlHelper.ExecuteDataTable(sql);
         }
@@ -127,6 +150,15 @@ namespace Commission.MenuForms
 
         private void FrmSales_Load(object sender, EventArgs e)
         {
+            if (salesType == "normal")
+            {
+                checkBox_Out.Visible = true;
+            }
+            else
+            {
+                checkBox_Out.Visible = false;
+            }
+
             searchSalesInfo();
         }
 

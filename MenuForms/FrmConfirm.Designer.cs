@@ -45,9 +45,16 @@
             this.button_Exit = new System.Windows.Forms.Button();
             this.button_Search = new System.Windows.Forms.Button();
             this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Cancel = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColCustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPaymentType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColItemTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +68,7 @@
             this.ColLoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColContractDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColLoanDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField0 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -73,12 +81,6 @@
             this.ColExtField7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColExtField9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Cancel = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).BeginInit();
@@ -256,8 +258,9 @@
             this.dataGridView_Contract.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Contract.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColContractID,
-            this.ColCheck,
             this.ColCustomerID,
+            this.ColPaymentType,
+            this.ColCheck,
             this.ColCustomerName,
             this.ColCustomerPhone,
             this.ColItemTypeName,
@@ -271,6 +274,7 @@
             this.ColLoan,
             this.ColTotalAmount,
             this.ColContractDate,
+            this.ColLoanDate,
             this.ColSalesID,
             this.ColSalesName,
             this.ColExtField0,
@@ -285,12 +289,72 @@
             this.ColExtField9});
             this.dataGridView_Contract.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Contract.Location = new System.Drawing.Point(0, 123);
+            this.dataGridView_Contract.MultiSelect = false;
             this.dataGridView_Contract.Name = "dataGridView_Contract";
             this.dataGridView_Contract.RowHeadersWidth = 21;
             this.dataGridView_Contract.RowTemplate.Height = 23;
             this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Contract.Size = new System.Drawing.Size(895, 464);
             this.dataGridView_Contract.TabIndex = 7;
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_Add,
+            this.toolStripButton_Cancel,
+            this.toolStripSeparator1,
+            this.toolStripButton_All,
+            this.toolStripButton_None});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 92);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(895, 31);
+            this.toolStrip2.TabIndex = 10;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton_Add
+            // 
+            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.file_new;
+            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Add.Name = "toolStripButton_Add";
+            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Add.Text = "确权";
+            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
+            // 
+            // toolStripButton_Cancel
+            // 
+            this.toolStripButton_Cancel.Image = global::Commission.Properties.Resources.file_del;
+            this.toolStripButton_Cancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Cancel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Cancel.Name = "toolStripButton_Cancel";
+            this.toolStripButton_Cancel.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Cancel.Text = "反确";
+            this.toolStripButton_Cancel.Click += new System.EventHandler(this.toolStripButton_Cancel_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton_All
+            // 
+            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
+            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_All.Name = "toolStripButton_All";
+            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_All.Text = "全选";
+            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
+            // 
+            // toolStripButton_None
+            // 
+            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
+            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_None.Name = "toolStripButton_None";
+            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_None.Text = "全清";
+            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
             // 
             // ColContractID
             // 
@@ -300,6 +364,22 @@
             this.ColContractID.Name = "ColContractID";
             this.ColContractID.Visible = false;
             this.ColContractID.Width = 60;
+            // 
+            // ColCustomerID
+            // 
+            this.ColCustomerID.DataPropertyName = "CustomerID";
+            this.ColCustomerID.HeaderText = "CustomerID";
+            this.ColCustomerID.Name = "ColCustomerID";
+            this.ColCustomerID.Visible = false;
+            this.ColCustomerID.Width = 90;
+            // 
+            // ColPaymentType
+            // 
+            this.ColPaymentType.DataPropertyName = "PaymentType";
+            this.ColPaymentType.HeaderText = "PaymentType";
+            this.ColPaymentType.Name = "ColPaymentType";
+            this.ColPaymentType.Visible = false;
+            this.ColPaymentType.Width = 96;
             // 
             // ColCheck
             // 
@@ -311,14 +391,6 @@
             this.ColCheck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColCheck.TrueValue = "true";
             this.ColCheck.Width = 54;
-            // 
-            // ColCustomerID
-            // 
-            this.ColCustomerID.DataPropertyName = "CustomerID";
-            this.ColCustomerID.HeaderText = "CustomerID";
-            this.ColCustomerID.Name = "ColCustomerID";
-            this.ColCustomerID.Visible = false;
-            this.ColCustomerID.Width = 90;
             // 
             // ColCustomerName
             // 
@@ -413,6 +485,13 @@
             this.ColContractDate.Name = "ColContractDate";
             this.ColContractDate.Width = 78;
             // 
+            // ColLoanDate
+            // 
+            this.ColLoanDate.DataPropertyName = "LoanDate";
+            this.ColLoanDate.HeaderText = "放贷日期";
+            this.ColLoanDate.Name = "ColLoanDate";
+            this.ColLoanDate.Width = 78;
+            // 
             // ColSalesID
             // 
             this.ColSalesID.DataPropertyName = "SalesID";
@@ -498,65 +577,6 @@
             this.ColExtField9.Name = "ColExtField9";
             this.ColExtField9.Width = 60;
             // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_Add,
-            this.toolStripButton_Cancel,
-            this.toolStripSeparator1,
-            this.toolStripButton_All,
-            this.toolStripButton_None});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 92);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(895, 31);
-            this.toolStrip2.TabIndex = 10;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton_Add
-            // 
-            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.file_new;
-            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Add.Name = "toolStripButton_Add";
-            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Add.Text = "确权";
-            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
-            // 
-            // toolStripButton_Cancel
-            // 
-            this.toolStripButton_Cancel.Image = global::Commission.Properties.Resources.file_del;
-            this.toolStripButton_Cancel.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Cancel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Cancel.Name = "toolStripButton_Cancel";
-            this.toolStripButton_Cancel.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Cancel.Text = "取消";
-            this.toolStripButton_Cancel.Click += new System.EventHandler(this.toolStripButton_Cancel_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripButton_All
-            // 
-            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
-            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_All.Name = "toolStripButton_All";
-            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_All.Text = "全选";
-            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
-            // 
-            // toolStripButton_None
-            // 
-            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
-            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_None.Name = "toolStripButton_None";
-            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_None.Text = "全清";
-            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
-            // 
             // FrmConfirm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -605,8 +625,9 @@
         private System.Windows.Forms.ComboBox comboBox_ConfirmState;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractID;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn ColCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColPaymentType;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCustomerPhone;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColItemTypeName;
@@ -620,6 +641,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColLoan;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColLoanDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField0;

@@ -12,8 +12,15 @@ namespace Commission.Forms
 {
     public partial class FrmOrganization : Form
     {
+        public FormMode FrmMode = FormMode.modify;
+        
+        public string SalesID = string.Empty;
+
+        public string ChangeDate = string.Empty;
+        public string JobType = string.Empty;
         public string DeptID = string.Empty;
         public string DeptName = string.Empty;
+
 
         public FrmOrganization()
         {
@@ -27,7 +34,18 @@ namespace Commission.Forms
 
         private void FrmOrganization_Load(object sender, EventArgs e)
         {
-            //InitDeptNode_Test();
+            if (FrmMode == FormMode.modify)
+            {
+                panel_Date.Visible = false;
+                toolStripButton_OK.Visible = false;
+            }
+            else
+            {
+                panel_Date.Visible = true;
+                toolStripButton_OK.Visible = true;
+                comboBox_JobType.SelectedIndex = 0;
+            }
+
             InitDeptNode();
         }
 
@@ -65,8 +83,6 @@ namespace Commission.Forms
                 SqlHelper.ExecuteNonQuery("delete Department where deptID = " + selNode.Name);
                 selNode.Remove();
             }
-
-
 
         }
 
@@ -139,54 +155,23 @@ namespace Commission.Forms
 
         }
 
-        #region    treeView 加载测试
-        private void InitDeptNode_Test()
-        {
-            TreeNode node1 = new TreeNode();
-            node1.Name = "0";
-            node1.Text = Login.User.ProjectName;
-            node1.Tag = "root";
 
-            treeView_Dept.Nodes.Add(node1);
-
-            TreeNode subNode1 = new TreeNode();
-            subNode1.Name = "a";
-            subNode1.Text = "销售一部";
-
-            node1.Nodes.Add(subNode1);
-
-            TreeNode subNode2 = new TreeNode();
-            subNode2.Name = "b";
-            subNode2.Text = "销售二部";
-
-            node1.Nodes.Add(subNode2);
-
-
-            TreeNode childNode1 = new TreeNode();
-            childNode1.Name = "zz";
-            childNode1.Text = "住宅";
-
-            subNode1.Nodes.Add(childNode1);
-
-
-            TreeNode childNode2 = new TreeNode();
-            childNode2.Name = "sy";
-            childNode2.Text = "商业";
-
-            subNode1.Nodes.Add(childNode2);
-
-            TreeNode childNode3 = new TreeNode();
-            childNode3.Name = "cw";
-            childNode3.Text = "车位";
-
-            subNode1.Nodes.Add(childNode3);
-
-            treeView_Dept.ExpandAll();
-        }
-        #endregion
 
         private void toolStripButton_OK_Click(object sender, EventArgs e)
         {
+            ChangeDate = dateTimePicker_ChangeDate.Value.ToString("yyyy-MM-dd");
+
+            string sql = string.Format("select Convert(varchar(10), BeginDate, 120) from JobTrack where SalesID = {0} and EndDate is null", SalesID);
+            object objResult = SqlHelper.ExecuteScalar(sql);
+            if (objResult != null && objResult != System.DBNull.Value)
+            {
+                if (DateTime.Parse(ChangeDate) < DateTime.Parse(objResult.ToString()))
+                {
+                    Prompt.Warning("调岗日期不能小于当前部门的调入日期!");
+                    return;
+                }
+            }
+
             if (treeView_Dept.SelectedNode == null)
             {
                 Prompt.Error("未选择调岗的调入部门！");
@@ -199,8 +184,17 @@ namespace Commission.Forms
                 return;
             }
 
+            if (DeptID == treeView_Dept.SelectedNode.Name)
+            {
+                Prompt.Error("所选择的部门与原部门一致！");
+                return;
+            }
+
             DeptID = treeView_Dept.SelectedNode.Name;
             DeptName = treeView_Dept.SelectedNode.Text;
+
+            JobType = comboBox_JobType.Text;
+
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }

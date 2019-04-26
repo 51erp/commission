@@ -33,23 +33,23 @@
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox_RoleName = new System.Windows.Forms.TextBox();
+            this.button_Delete = new System.Windows.Forms.Button();
+            this.button_Add = new System.Windows.Forms.Button();
             this.listBox_Role = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button_Clear = new System.Windows.Forms.Button();
             this.button_SelAll = new System.Windows.Forms.Button();
             this.treeView_MenuList = new System.Windows.Forms.TreeView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox_RoleName = new System.Windows.Forms.TextBox();
-            this.button_Delete = new System.Windows.Forms.Button();
-            this.button_Add = new System.Windows.Forms.Button();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip2
@@ -113,6 +113,51 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "角色列表";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox_RoleName);
+            this.groupBox3.Controls.Add(this.button_Delete);
+            this.groupBox3.Controls.Add(this.button_Add);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(5, 431);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(249, 44);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            // 
+            // textBox_RoleName
+            // 
+            this.textBox_RoleName.Location = new System.Drawing.Point(7, 15);
+            this.textBox_RoleName.Name = "textBox_RoleName";
+            this.textBox_RoleName.Size = new System.Drawing.Size(100, 21);
+            this.textBox_RoleName.TabIndex = 34;
+            // 
+            // button_Delete
+            // 
+            this.button_Delete.Image = global::Commission.Properties.Resources.Del_16px;
+            this.button_Delete.Location = new System.Drawing.Point(180, 14);
+            this.button_Delete.Name = "button_Delete";
+            this.button_Delete.Size = new System.Drawing.Size(60, 23);
+            this.button_Delete.TabIndex = 33;
+            this.button_Delete.Text = "删除";
+            this.button_Delete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Delete.UseVisualStyleBackColor = true;
+            this.button_Delete.Click += new System.EventHandler(this.button_Delete_Click);
+            // 
+            // button_Add
+            // 
+            this.button_Add.Image = global::Commission.Properties.Resources.Add_16px;
+            this.button_Add.Location = new System.Drawing.Point(113, 14);
+            this.button_Add.Name = "button_Add";
+            this.button_Add.Size = new System.Drawing.Size(60, 23);
+            this.button_Add.TabIndex = 32;
+            this.button_Add.Text = "新增";
+            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Add.UseVisualStyleBackColor = true;
+            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
+            // 
             // listBox_Role
             // 
             this.listBox_Role.Dock = System.Windows.Forms.DockStyle.Top;
@@ -174,51 +219,6 @@
             this.treeView_MenuList.TabIndex = 0;
             this.treeView_MenuList.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView_MenuList_NodeMouseClick);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox_RoleName);
-            this.groupBox3.Controls.Add(this.button_Delete);
-            this.groupBox3.Controls.Add(this.button_Add);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(5, 431);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(249, 44);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            // 
-            // textBox_RoleName
-            // 
-            this.textBox_RoleName.Location = new System.Drawing.Point(7, 15);
-            this.textBox_RoleName.Name = "textBox_RoleName";
-            this.textBox_RoleName.Size = new System.Drawing.Size(100, 21);
-            this.textBox_RoleName.TabIndex = 34;
-            // 
-            // button_Delete
-            // 
-            this.button_Delete.Image = global::Commission.Properties.Resources.Del_16px;
-            this.button_Delete.Location = new System.Drawing.Point(180, 14);
-            this.button_Delete.Name = "button_Delete";
-            this.button_Delete.Size = new System.Drawing.Size(60, 23);
-            this.button_Delete.TabIndex = 33;
-            this.button_Delete.Text = "删除";
-            this.button_Delete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Delete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Delete.UseVisualStyleBackColor = true;
-            this.button_Delete.Click += new System.EventHandler(this.button_Delete_Click);
-            // 
-            // button_Add
-            // 
-            this.button_Add.Image = global::Commission.Properties.Resources.Add_16px;
-            this.button_Add.Location = new System.Drawing.Point(113, 14);
-            this.button_Add.Name = "button_Add";
-            this.button_Add.Size = new System.Drawing.Size(60, 23);
-            this.button_Add.TabIndex = 32;
-            this.button_Add.Text = "新增";
-            this.button_Add.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Add.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Add.UseVisualStyleBackColor = true;
-            this.button_Add.Click += new System.EventHandler(this.button_Add_Click);
-            // 
             // FrmRole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -228,6 +228,8 @@
             this.Controls.Add(this.toolStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FrmRole";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "角色及权限管理";
             this.Load += new System.EventHandler(this.FrmRole_Load);
@@ -238,9 +240,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

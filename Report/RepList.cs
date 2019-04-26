@@ -133,6 +133,8 @@ namespace Commission.Report
             Common.SetColumnStyle(dataGridView_List.Columns["Loan"], ColType.amount);
             Common.SetColumnStyle(dataGridView_List.Columns["ReceiptTotalAmt"], ColType.amount);
             Common.SetColumnStyle(dataGridView_List.Columns["NoReceiptTotalAmt"], ColType.amount);
+
+            dataGridView_List.Columns["ItemNum"].Frozen = true;
         }
 
         private string GetSubscribeCondition()
@@ -596,7 +598,7 @@ namespace Commission.Report
                 + " ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9 "
                 + " from SubscribeMain a "
                 + " inner join SubscribeDetail b on b.SubscribeID = a.SubscribeID "
-                + " where a.ContractID is null and IsBind = 0 and {0}", condition);
+                + " where a.ContractID is null and IsBind = 0 and ReturnDate is null and {0}", condition);
 
             DataTable dtSubscribe = SqlHelper.ExecuteDataTable(sql);
 

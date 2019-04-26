@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_Close = new System.Windows.Forms.Button();
             this.button_OpneExcel = new System.Windows.Forms.Button();
+            this.button_ExportDict = new System.Windows.Forms.Button();
             this.button_Import = new System.Windows.Forms.Button();
             this.label_State = new System.Windows.Forms.Label();
             this.dataGridView_SaleItem = new System.Windows.Forms.DataGridView();
@@ -47,7 +48,6 @@
             this.ColType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialog_Excel = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView_item = new System.Windows.Forms.DataGridView();
-            this.button_ExportDict = new System.Windows.Forms.Button();
             this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,7 +89,7 @@
             // button_OpneExcel
             // 
             this.button_OpneExcel.Image = global::Commission.Properties.Resources.excel_16;
-            this.button_OpneExcel.Location = new System.Drawing.Point(150, 8);
+            this.button_OpneExcel.Location = new System.Drawing.Point(126, 8);
             this.button_OpneExcel.Name = "button_OpneExcel";
             this.button_OpneExcel.Size = new System.Drawing.Size(75, 25);
             this.button_OpneExcel.TabIndex = 41;
@@ -99,10 +99,23 @@
             this.button_OpneExcel.UseVisualStyleBackColor = true;
             this.button_OpneExcel.Click += new System.EventHandler(this.button_OpneExcel_Click);
             // 
+            // button_ExportDict
+            // 
+            this.button_ExportDict.Image = global::Commission.Properties.Resources.import_16;
+            this.button_ExportDict.Location = new System.Drawing.Point(12, 8);
+            this.button_ExportDict.Name = "button_ExportDict";
+            this.button_ExportDict.Size = new System.Drawing.Size(108, 25);
+            this.button_ExportDict.TabIndex = 41;
+            this.button_ExportDict.Text = " 导出房源模板";
+            this.button_ExportDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_ExportDict.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_ExportDict.UseVisualStyleBackColor = true;
+            this.button_ExportDict.Click += new System.EventHandler(this.button_ExportDict_Click);
+            // 
             // button_Import
             // 
             this.button_Import.Image = global::Commission.Properties.Resources.import_16;
-            this.button_Import.Location = new System.Drawing.Point(231, 8);
+            this.button_Import.Location = new System.Drawing.Point(207, 8);
             this.button_Import.Name = "button_Import";
             this.button_Import.Size = new System.Drawing.Size(75, 25);
             this.button_Import.TabIndex = 41;
@@ -115,7 +128,7 @@
             // label_State
             // 
             this.label_State.AutoSize = true;
-            this.label_State.Location = new System.Drawing.Point(321, 14);
+            this.label_State.Location = new System.Drawing.Point(302, 14);
             this.label_State.Name = "label_State";
             this.label_State.Size = new System.Drawing.Size(65, 12);
             this.label_State.TabIndex = 38;
@@ -166,9 +179,9 @@
             // ColArea
             // 
             this.ColArea.DataPropertyName = "Col3";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.NullValue = "0";
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.NullValue = "0";
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle11;
             this.ColArea.HeaderText = "面积";
             this.ColArea.Name = "ColArea";
             this.ColArea.ReadOnly = true;
@@ -176,9 +189,9 @@
             // ColPrice
             // 
             this.ColPrice.DataPropertyName = "Col4";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.NullValue = "0";
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.NullValue = "0";
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle12;
             this.ColPrice.HeaderText = "单价";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -216,19 +229,6 @@
             this.dataGridView_item.Size = new System.Drawing.Size(724, 495);
             this.dataGridView_item.TabIndex = 4;
             // 
-            // button_ExportDict
-            // 
-            this.button_ExportDict.Image = global::Commission.Properties.Resources.import_16;
-            this.button_ExportDict.Location = new System.Drawing.Point(12, 8);
-            this.button_ExportDict.Name = "button_ExportDict";
-            this.button_ExportDict.Size = new System.Drawing.Size(90, 25);
-            this.button_ExportDict.TabIndex = 41;
-            this.button_ExportDict.Text = " 导出模板";
-            this.button_ExportDict.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_ExportDict.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_ExportDict.UseVisualStyleBackColor = true;
-            this.button_ExportDict.Click += new System.EventHandler(this.button_ExportDict_Click);
-            // 
             // ColID
             // 
             this.ColID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -262,8 +262,8 @@
             // ColBottomPrice
             // 
             this.ColBottomPrice.DataPropertyName = "Col4";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle13;
             this.ColBottomPrice.HeaderText = "底价";
             this.ColBottomPrice.Name = "ColBottomPrice";
             this.ColBottomPrice.ReadOnly = true;
@@ -271,8 +271,8 @@
             // ColBottomPriceRate
             // 
             this.ColBottomPriceRate.DataPropertyName = "Col5";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColBottomPriceRate.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColBottomPriceRate.DefaultCellStyle = dataGridViewCellStyle14;
             this.ColBottomPriceRate.HeaderText = "溢价分成(%)";
             this.ColBottomPriceRate.Name = "ColBottomPriceRate";
             this.ColBottomPriceRate.ReadOnly = true;
@@ -280,8 +280,8 @@
             // ColBottomPriceLimit
             // 
             this.ColBottomPriceLimit.DataPropertyName = "Col6";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColBottomPriceLimit.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColBottomPriceLimit.DefaultCellStyle = dataGridViewCellStyle15;
             this.ColBottomPriceLimit.HeaderText = "溢价限价";
             this.ColBottomPriceLimit.Name = "ColBottomPriceLimit";
             this.ColBottomPriceLimit.ReadOnly = true;

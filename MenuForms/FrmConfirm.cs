@@ -65,6 +65,7 @@ namespace Commission.MenuForms
 
             Transaction.InsertBindCol(dataGridView_Contract, 11, bindQty);
 
+            dataGridView_Contract.AutoGenerateColumns = false;
             dataGridView_Contract.DataSource = dtContract;
 
             if (dtContract.Rows.Count == 0)
@@ -134,28 +135,27 @@ namespace Commission.MenuForms
 
                     string objResult = SqlHelper.ExecuteScalar(sql).ToString();
 
-                    if (string.IsNullOrEmpty(objResult))
+                    PayType type = (PayType)dataGridView_Contract.Rows[i].Cells["ColPaymentType"].Value;
+
+                    if (type == PayType.Loan || type == PayType.DownPayInstalment)
                     {
-                        if (MessageBox.Show("此记录未放贷，不允许确权，是否继续其它记录",Common.MsgCaption,  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                        if (string.IsNullOrEmpty(dataGridView_Contract.Rows[i].Cells["ColLoanDate"].Value.ToString()))
                         {
-                            continue;
-                        }
-                        else
-                        {
-                            return;
+                            dataGridView_Contract.Rows[i].Selected = true;
+                            if (MessageBox.Show("此记录未放贷，不允许确权，是否继续其它记录", Common.MsgCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                                continue;
+                            else
+                                return;
                         }
                     }
-
+                    
                     if (!IsPayOff(contractId))
                     {
+                        dataGridView_Contract.Rows[i].Selected = true;
                         if (MessageBox.Show("已收款合计与合同金额不符，不允许确权，是否继续其它记录", Common.MsgCaption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
-                        {
                             continue;
-                        }
                         else
-                        {
                             return;
-                        }
                     }
 
                     try
@@ -173,7 +173,7 @@ namespace Commission.MenuForms
                 }
             }
 
-            Prompt.Information("操作成功!");
+            Prompt.Information("操作完毕!");
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace Commission.MenuForms
             sql = string.Format("select SUM(Amount) from Receipt where ContractID = {0}", contractId);
             double recDownPay = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
 
-            if (totalAmount == recDownPay)
+            if (totalAmount <= recDownPay)
             {
                 result = true;
             }

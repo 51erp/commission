@@ -1,4 +1,5 @@
-﻿using Commission.Utility;
+﻿using Commission.MenuForms;
+using Commission.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -160,19 +161,19 @@ namespace Commission.Forms
 
         }
 
-        private void toolStripButton_Edit_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void toolStripButton_ChangeJob_Click(object sender, EventArgs e)
         {
-            JobChange(false);
+            JobDeptChange();
         }
 
         private void toolStripButton_JobIn_Click(object sender, EventArgs e)
         {
-            JobTrack(1);
+            FrmSalesList frmSales = new FrmSalesList();
+            frmSales.OperationType = "调入";
+            if (frmSales.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                JobOperation(frmSales);
+            }
         }
 
         private void toolStripButton_JobOut_Click(object sender, EventArgs e)
@@ -183,29 +184,14 @@ namespace Commission.Forms
                 return;
             }
 
-            if (Prompt.Question("确定将员工 [ " + dataGridView_Employe.CurrentRow.Cells["ColSalesName"].Value.ToString() + " ] 调出该部门？") == System.Windows.Forms.DialogResult.Yes)
+            FrmConfirmDate frmDate = new FrmConfirmDate();
+
+            frmDate.SalesID = dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString();
+            frmDate.FormText = "调出";
+
+            if (frmDate.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string sql = string.Format("update JobTrack set EndDate = {0} where SalesID = {1} and DeptID = {2} and EndDate is null",
-                                    "Convert(varchar(10),GETDATE(),120)", dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), dataGridView_Employe.CurrentRow.Cells["ColDeptID"].Value.ToString());
-                SqlHelper.ExecuteNonQuery(sql);
-
-                dataGridView_Employe.Rows.RemoveAt(dataGridView_Employe.CurrentRow.Index);
-
-                Prompt.Information("操作成功！员工已调出。");
-            }
-            
-        }
-
-        private void toolStripButton_Dimission_Click(object sender, EventArgs e)
-        {
-            if (dataGridView_Employe.CurrentRow == null)
-            {
-                Prompt.Warning("未选择员工记录!");
-                return;
-            }
-
-            if (Prompt.Question("确定将员工 [ " + dataGridView_Employe.CurrentRow.Cells["ColSalesName"].Value.ToString() + " ] 进行离职操作？") == System.Windows.Forms.DialogResult.Yes)
-            {
+                string OutDate = frmDate.ConfirmDate;
 
                 using (SqlConnection connection = SqlHelper.OpenConnection())
                 {
@@ -215,10 +201,64 @@ namespace Commission.Forms
 
                     try
                     {
-                        cmd.CommandText = string.Format("update JobTrack set EndDate = Convert(varchar(10),GETDATE(),120) where SalesID = {0} and EndDate is null",dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString());
+                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OperationType = '调出' where SalesID = {1} and DeptID = {2} and EndDate is null",
+                                    OutDate, dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), dataGridView_Employe.CurrentRow.Cells["ColDeptID"].Value.ToString());
                         cmd.ExecuteNonQuery();
 
-                        cmd.CommandText = string.Format("update Sales Set OutDate = Convert(varchar(10),GETDATE(),120) where SalesID = {0}", dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString());
+                        cmd.CommandText = string.Format("update Sales Set IsFree = 1 where SalesID = {0}", dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString());
+                        cmd.ExecuteNonQuery();
+
+                        sqlTran.Commit();
+
+                        dataGridView_Employe.Rows.RemoveAt(dataGridView_Employe.CurrentRow.Index);
+
+                        Prompt.Information("操作成功！员工已调出。");
+                    }
+                    catch (Exception ex)
+                    {
+                        sqlTran.Rollback();
+                        Prompt.Error("操作失败， 错误：" + ex.Message);
+                    }
+
+                }
+            }
+            
+        }
+
+        private void toolStripButton_Dimission_Click(object sender, EventArgs e)
+        {
+            string OutDate = string.Empty;
+
+            if (dataGridView_Employe.CurrentRow == null)
+            {
+                Prompt.Warning("未选择员工记录!");
+                return;
+            }
+
+            string salesID = dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString();
+
+            FrmConfirmDate frmDate = new FrmConfirmDate();
+
+            frmDate.SalesID = salesID;
+            frmDate.FormText = "离职";
+
+
+            if (frmDate.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                OutDate = frmDate.ConfirmDate;
+
+                using (SqlConnection connection = SqlHelper.OpenConnection())
+                {
+                    SqlTransaction sqlTran = connection.BeginTransaction();
+                    SqlCommand cmd = connection.CreateCommand();
+                    cmd.Transaction = sqlTran;
+
+                    try
+                    {
+                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OperationType = '离职' where SalesID = {1} and EndDate is null", OutDate, salesID);
+                        cmd.ExecuteNonQuery();
+
+                        cmd.CommandText = string.Format("update Sales Set OutDate ='{0}' where SalesID = {1}", OutDate, salesID);
                         cmd.ExecuteNonQuery();
 
                         sqlTran.Commit();
@@ -252,7 +292,7 @@ namespace Commission.Forms
         }
 
 
-        private void JobChange(bool isOnlyTitle)
+        private void JobDeptChange()
         {
             if (dataGridView_Employe.CurrentRow == null)
             {
@@ -262,63 +302,35 @@ namespace Commission.Forms
 
             string salesID = string.Empty;
             string salesName = string.Empty;
+            string deptID = string.Empty;
+            string deptName = string.Empty;
             string changeDate = string.Empty;
             string jobType = string.Empty;
 
             salesID = dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString();
             salesName = dataGridView_Employe.CurrentRow.Cells["ColSalesName"].Value.ToString();
 
-            FrmJobChangeDate frmDate = new FrmJobChangeDate();
+            FrmOrganization destDept = new FrmOrganization();
 
-            frmDate.JobType = dataGridView_Employe.CurrentRow.Cells["ColJobType"].Value.ToString();
+            destDept.Text = "请选择调入部门";
+            destDept.FrmMode = FormMode.view;
 
-            if (frmDate.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            destDept.SalesID = salesID;
+            destDept.DeptID = treeView_Dept.SelectedNode.Name;
+
+            if (destDept.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string sql = string.Format("select Convert(varchar(10), BeginDate, 120) from JobTrack where SalesID = {0} and EndDate is null", salesID);
-                object objResult = SqlHelper.ExecuteScalar(sql);
-                if (objResult != null && objResult != System.DBNull.Value)
-                {
-                    if (DateTime.Parse(frmDate.ChangeDate) < DateTime.Parse(objResult.ToString()))
-                    {
-                        Prompt.Warning("调岗日期不能小于当前部门的调入日期!");
-                        return;
-                    }
-                    else
-                    {
-                        changeDate = frmDate.ChangeDate;
-                        jobType = frmDate.JobType;
-                    }
-                }
+                deptID = destDept.DeptID;
+                deptName = destDept.DeptName;
+                changeDate = destDept.ChangeDate;
+                jobType = destDept.JobType;
             }
             else
             {
                 return;
             }
 
-            string deptID = string.Empty;
-            string deptName = string.Empty;
-
-            if (isOnlyTitle)
-            {
-                deptID = treeView_Dept.SelectedNode.Name;
-                deptName = treeView_Dept.SelectedNode.Text;
-            }
-            else
-            {
-                FrmOrganization destDept = new FrmOrganization();
-                destDept.Text = "请选择调入部门";
-                if (destDept.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    deptID = destDept.DeptID;
-                    deptName = destDept.DeptName;
-                }
-                else
-                {
-                    return;
-                }
-            }
-
-            ExecChange(isOnlyTitle, salesID, salesName, changeDate, deptID, deptName, jobType);
+            ExecChange(false, salesID, salesName, changeDate, deptID, deptName, jobType);
 
         }
 
@@ -330,6 +342,8 @@ namespace Commission.Forms
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.Transaction = sqlTran;
 
+                string operType = isOnlyTitle ? "职位" : "调岗";
+
                 try
                 {
                     cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}' where SalesID = {1} and DeptID = {2} and EndDate is null",
@@ -337,8 +351,8 @@ namespace Commission.Forms
 
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, SalesName, DeptID, DeptName, JobType, BeginDate) values ({0},'{1}',{2},'{3}','{4}','{5}')",
-                        salesID, salesName, destDeptID, destDeptName,jobType, changeDate);
+                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, SalesName, DeptID, DeptName, JobType, BeginDate, OperationType) values ({0},'{1}',{2},'{3}','{4}','{5}','{6}')",
+                        salesID, salesName, destDeptID, destDeptName,jobType, changeDate, operType);
 
                     cmd.ExecuteNonQuery();
 
@@ -362,8 +376,6 @@ namespace Commission.Forms
                 }
             }
         }
-
-
 
         private void JobTrack(int type = 0)
         {
@@ -499,8 +511,101 @@ namespace Commission.Forms
 
         private void toolStripButton_JobType_Click(object sender, EventArgs e)
         {
-            JobChange(true);
+            JobTypeChange();
         }
+
+        private void JobTypeChange()
+        {
+            string salesID = string.Empty;
+            string salesName = string.Empty;
+
+            if (dataGridView_Employe.CurrentRow == null)
+            {
+                Prompt.Warning("未选择员工记录!");
+                return;
+            }
+
+            salesID = dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString();
+            salesName = dataGridView_Employe.CurrentRow.Cells["ColSalesName"].Value.ToString();
+
+            FrmJobChangeDate frmDate = new FrmJobChangeDate();
+
+            frmDate.SalesID = salesID;
+
+            frmDate.JobType = dataGridView_Employe.CurrentRow.Cells["ColJobType"].Value.ToString();
+
+            if (frmDate.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                ExecChange(true, salesID, salesName, frmDate.ChangeDate, treeView_Dept.SelectedNode.Name, treeView_Dept.SelectedNode.Text, frmDate.JobType);
+            }
+        }
+
+        private void toolStripButton_JobReturn_Click(object sender, EventArgs e)
+        {
+            FrmSalesList frmSales = new FrmSalesList();
+            frmSales.OperationType = "复职";
+            if (frmSales.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                JobOperation(frmSales);
+            }
+        }
+
+        private void JobOperation(FrmSalesList frmSales)
+        {
+            using (SqlConnection connection = SqlHelper.OpenConnection())
+            {
+                SqlTransaction sqlTran = connection.BeginTransaction();
+                SqlCommand cmd = connection.CreateCommand();
+                cmd.Transaction = sqlTran;
+
+                try
+                {
+                    if (frmSales.OperationType == "复职")
+                    {
+                        cmd.CommandText = string.Format("update Sales Set OutDate = null, ProjectID = {0}, ProjectName = '{1}' where SalesID = {2}", Login.User.ProjectID,Login.User.ProjectName, frmSales.SalesID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    if (frmSales.OperationType == "调入")
+                    {
+                        cmd.CommandText = string.Format("update Sales Set ProjectID = {0}, ProjectName = '{1}' where SalesID = {2}", Login.User.ProjectID, Login.User.ProjectName, frmSales.SalesID);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, SalesName, DeptID, DeptName, JobType, BeginDate, OperationType) values ({0},'{1}',{2},'{3}','{4}','{5}','{6}')",
+                        frmSales.SalesID, frmSales.SalesName, treeView_Dept.SelectedNode.Name, treeView_Dept.SelectedNode.Text, frmSales.JobType, frmSales.OperationDate, frmSales.OperationType);
+
+                    cmd.ExecuteNonQuery();
+
+                    DataTable dt = (DataTable)dataGridView_Employe.DataSource;
+
+                    DataRow dr = dt.NewRow();
+
+                    dr["SalesID"] = frmSales.SalesID;
+                    dr["DeptID"] = treeView_Dept.SelectedNode.Name;
+                    dr["SalesName"] =  frmSales.SalesName;
+                    dr["DeptName"] = treeView_Dept.SelectedNode.Text;
+                    dr["BeginDate"] = frmSales.OperationDate;
+                    dr["JobType"] = frmSales.JobType;
+                    dr["Phone"] = frmSales.Phone;
+                    dr["InDate"] = frmSales.InDate;
+                    dr["Position"] = frmSales.Position;
+
+                    dt.Rows.Add(dr);
+
+                    sqlTran.Commit();
+
+                    Prompt.Information("操作成功!");
+                }
+                catch (Exception ex)
+                {
+                    sqlTran.Rollback();
+                    Prompt.Error("操作失败， 错误：" + ex.Message);
+                }
+            }
+        }
+
+
 
 
 

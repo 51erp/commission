@@ -182,3 +182,5 @@ D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmSettleList.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmJobChangeDate.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmPerformanceRate.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmJobChangeRep.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmConfirmDate.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmSalesList.resources

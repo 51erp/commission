@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSaleItemMng));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,41 +37,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSaleItemMng));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView_Item = new System.Windows.Forms.DataGridView();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox_SaleState = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBox_PayType = new System.Windows.Forms.ComboBox();
-            this.comboBox_ItemType = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox_ItemNum = new System.Windows.Forms.TextBox();
-            this.textBox_Unit = new System.Windows.Forms.TextBox();
-            this.textBox_Building = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Edit = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Settle = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Bottom = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Up = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Rate = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Locking = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Unlock = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_CloseCase = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_Recovery = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
-            this.button_Exit = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
             this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,6 +64,38 @@
             this.ColBottomPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBottomPriceRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBottomPriceLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Edit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_Settle = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Bottom = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Up = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Rate = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Locking = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Unlock = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_CloseCase = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_Recovery = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_SaleState = new System.Windows.Forms.ComboBox();
+            this.button_Exit = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBox_PayType = new System.Windows.Forms.ComboBox();
+            this.comboBox_ItemType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox_ItemNum = new System.Windows.Forms.TextBox();
+            this.textBox_Unit = new System.Windows.Forms.TextBox();
+            this.textBox_Building = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button_Search = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Item)).BeginInit();
             this.toolStrip2.SuspendLayout();
@@ -153,341 +152,6 @@
             this.dataGridView_Item.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Item.Size = new System.Drawing.Size(1010, 396);
             this.dataGridView_Item.TabIndex = 2;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton_Add,
-            this.toolStripButton_Del,
-            this.toolStripButton_Edit,
-            this.toolStripButton_Export,
-            this.toolStripSeparator1,
-            this.toolStripButton_Settle,
-            this.toolStripButton_Bottom,
-            this.toolStripButton_Up,
-            this.toolStripSeparator3,
-            this.toolStripButton_Rate,
-            this.toolStripButton_Locking,
-            this.toolStripButton_Unlock,
-            this.toolStripButton_CloseCase,
-            this.toolStripButton_Recovery,
-            this.toolStripSeparator2,
-            this.toolStripButton_All,
-            this.toolStripButton_None});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 62);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1010, 31);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.comboBox_SaleState);
-            this.groupBox1.Controls.Add(this.button_Exit);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.comboBox_PayType);
-            this.groupBox1.Controls.Add(this.comboBox_ItemType);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.textBox_ItemNum);
-            this.groupBox1.Controls.Add(this.textBox_Unit);
-            this.groupBox1.Controls.Add(this.textBox_Building);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.button_Search);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(3, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1010, 57);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "销售项目查询";
-            // 
-            // comboBox_SaleState
-            // 
-            this.comboBox_SaleState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_SaleState.FormattingEnabled = true;
-            this.comboBox_SaleState.Location = new System.Drawing.Point(684, 23);
-            this.comboBox_SaleState.Name = "comboBox_SaleState";
-            this.comboBox_SaleState.Size = new System.Drawing.Size(100, 20);
-            this.comboBox_SaleState.TabIndex = 18;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(625, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "销售状态";
-            // 
-            // comboBox_PayType
-            // 
-            this.comboBox_PayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_PayType.FormattingEnabled = true;
-            this.comboBox_PayType.Location = new System.Drawing.Point(519, 23);
-            this.comboBox_PayType.Name = "comboBox_PayType";
-            this.comboBox_PayType.Size = new System.Drawing.Size(100, 20);
-            this.comboBox_PayType.TabIndex = 10;
-            // 
-            // comboBox_ItemType
-            // 
-            this.comboBox_ItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_ItemType.FormattingEnabled = true;
-            this.comboBox_ItemType.Location = new System.Drawing.Point(354, 23);
-            this.comboBox_ItemType.Name = "comboBox_ItemType";
-            this.comboBox_ItemType.Size = new System.Drawing.Size(100, 20);
-            this.comboBox_ItemType.TabIndex = 10;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(460, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "付款类型";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(295, 27);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "房源类型";
-            // 
-            // textBox_ItemNum
-            // 
-            this.textBox_ItemNum.Location = new System.Drawing.Point(226, 23);
-            this.textBox_ItemNum.Name = "textBox_ItemNum";
-            this.textBox_ItemNum.Size = new System.Drawing.Size(63, 21);
-            this.textBox_ItemNum.TabIndex = 8;
-            // 
-            // textBox_Unit
-            // 
-            this.textBox_Unit.Location = new System.Drawing.Point(135, 23);
-            this.textBox_Unit.Name = "textBox_Unit";
-            this.textBox_Unit.Size = new System.Drawing.Size(50, 21);
-            this.textBox_Unit.TabIndex = 7;
-            // 
-            // textBox_Building
-            // 
-            this.textBox_Building.Location = new System.Drawing.Point(44, 23);
-            this.textBox_Building.Name = "textBox_Building";
-            this.textBox_Building.Size = new System.Drawing.Size(50, 21);
-            this.textBox_Building.TabIndex = 6;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(191, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "编号";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(100, 27);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "单元";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "楼号";
-            // 
-            // toolStripButton_Add
-            // 
-            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.file_new;
-            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Add.Name = "toolStripButton_Add";
-            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Add.Text = "新增";
-            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
-            // 
-            // toolStripButton_Del
-            // 
-            this.toolStripButton_Del.Image = global::Commission.Properties.Resources.file_del;
-            this.toolStripButton_Del.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Del.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Del.Name = "toolStripButton_Del";
-            this.toolStripButton_Del.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Del.Text = "删除";
-            this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
-            // 
-            // toolStripButton_Edit
-            // 
-            this.toolStripButton_Edit.Image = global::Commission.Properties.Resources.file_edit;
-            this.toolStripButton_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Edit.Name = "toolStripButton_Edit";
-            this.toolStripButton_Edit.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Edit.Text = "修改";
-            this.toolStripButton_Edit.Click += new System.EventHandler(this.toolStripButton_Edit_Click);
-            // 
-            // toolStripButton_Export
-            // 
-            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.export_24;
-            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Export.Name = "toolStripButton_Export";
-            this.toolStripButton_Export.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Export.Text = "导出";
-            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
-            // 
-            // toolStripButton_Settle
-            // 
-            this.toolStripButton_Settle.Image = global::Commission.Properties.Resources.calculator;
-            this.toolStripButton_Settle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Settle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Settle.Name = "toolStripButton_Settle";
-            this.toolStripButton_Settle.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Settle.Text = "结算";
-            this.toolStripButton_Settle.Click += new System.EventHandler(this.toolStripButton_Settle_Click);
-            // 
-            // toolStripButton_Bottom
-            // 
-            this.toolStripButton_Bottom.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Bottom.Image")));
-            this.toolStripButton_Bottom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Bottom.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Bottom.Name = "toolStripButton_Bottom";
-            this.toolStripButton_Bottom.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Bottom.Text = "底价";
-            this.toolStripButton_Bottom.Click += new System.EventHandler(this.toolStripButton_Bottom_Click);
-            // 
-            // toolStripButton_Up
-            // 
-            this.toolStripButton_Up.Image = global::Commission.Properties.Resources.chart_up1_24;
-            this.toolStripButton_Up.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Up.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Up.Name = "toolStripButton_Up";
-            this.toolStripButton_Up.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Up.Text = "跳点";
-            this.toolStripButton_Up.Click += new System.EventHandler(this.toolStripButton_Up_Click);
-            // 
-            // toolStripButton_Rate
-            // 
-            this.toolStripButton_Rate.Image = global::Commission.Properties.Resources.checkmark_24;
-            this.toolStripButton_Rate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Rate.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Rate.Name = "toolStripButton_Rate";
-            this.toolStripButton_Rate.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Rate.Text = "提点";
-            this.toolStripButton_Rate.Click += new System.EventHandler(this.toolStripButton_Rate_Click);
-            // 
-            // toolStripButton_Locking
-            // 
-            this.toolStripButton_Locking.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Locking.Image")));
-            this.toolStripButton_Locking.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Locking.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Locking.Name = "toolStripButton_Locking";
-            this.toolStripButton_Locking.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Locking.Text = "锁定";
-            this.toolStripButton_Locking.Click += new System.EventHandler(this.toolStripButton_Locking_Click);
-            // 
-            // toolStripButton_Unlock
-            // 
-            this.toolStripButton_Unlock.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Unlock.Image")));
-            this.toolStripButton_Unlock.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Unlock.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Unlock.Name = "toolStripButton_Unlock";
-            this.toolStripButton_Unlock.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Unlock.Text = "解锁";
-            this.toolStripButton_Unlock.Click += new System.EventHandler(this.toolStripButton_Unlock_Click);
-            // 
-            // toolStripButton_CloseCase
-            // 
-            this.toolStripButton_CloseCase.Image = global::Commission.Properties.Resources.checkmark_24;
-            this.toolStripButton_CloseCase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_CloseCase.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_CloseCase.Name = "toolStripButton_CloseCase";
-            this.toolStripButton_CloseCase.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_CloseCase.Text = "结案";
-            this.toolStripButton_CloseCase.Visible = false;
-            this.toolStripButton_CloseCase.Click += new System.EventHandler(this.toolStripButton_CloseCase_Click);
-            // 
-            // toolStripButton_Recovery
-            // 
-            this.toolStripButton_Recovery.Image = global::Commission.Properties.Resources.recycle_24;
-            this.toolStripButton_Recovery.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_Recovery.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_Recovery.Name = "toolStripButton_Recovery";
-            this.toolStripButton_Recovery.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_Recovery.Text = "恢复";
-            this.toolStripButton_Recovery.Visible = false;
-            this.toolStripButton_Recovery.Click += new System.EventHandler(this.toolStripButton_Recovery_Click);
-            // 
-            // toolStripButton_All
-            // 
-            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
-            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_All.Name = "toolStripButton_All";
-            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_All.Text = "全选";
-            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
-            // 
-            // toolStripButton_None
-            // 
-            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
-            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton_None.Name = "toolStripButton_None";
-            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton_None.Text = "全清";
-            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
-            // 
-            // button_Exit
-            // 
-            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(871, 21);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 23);
-            this.button_Exit.TabIndex = 17;
-            this.button_Exit.Text = " 关闭";
-            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
-            // 
-            // button_Search
-            // 
-            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(790, 22);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
-            this.button_Search.TabIndex = 1;
-            this.button_Search.Text = " 查询";
-            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Search.UseVisualStyleBackColor = true;
-            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
             // ColID
             // 
@@ -703,6 +367,335 @@
             this.ColBottomPriceLimit.ReadOnly = true;
             this.ColBottomPriceLimit.Width = 80;
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_Add,
+            this.toolStripButton_Del,
+            this.toolStripButton_Edit,
+            this.toolStripButton_Export,
+            this.toolStripSeparator1,
+            this.toolStripButton_Bottom,
+            this.toolStripButton_Settle,
+            this.toolStripButton_Rate,
+            this.toolStripButton_Up,
+            this.toolStripButton_Locking,
+            this.toolStripButton_Unlock,
+            this.toolStripButton_CloseCase,
+            this.toolStripButton_Recovery,
+            this.toolStripSeparator2,
+            this.toolStripButton_All,
+            this.toolStripButton_None});
+            this.toolStrip2.Location = new System.Drawing.Point(3, 62);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(1010, 31);
+            this.toolStrip2.TabIndex = 1;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButton_Add
+            // 
+            this.toolStripButton_Add.Image = global::Commission.Properties.Resources.file_new;
+            this.toolStripButton_Add.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Add.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Add.Name = "toolStripButton_Add";
+            this.toolStripButton_Add.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Add.Text = "新增";
+            this.toolStripButton_Add.Click += new System.EventHandler(this.toolStripButton_Add_Click);
+            // 
+            // toolStripButton_Del
+            // 
+            this.toolStripButton_Del.Image = global::Commission.Properties.Resources.file_del;
+            this.toolStripButton_Del.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Del.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Del.Name = "toolStripButton_Del";
+            this.toolStripButton_Del.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Del.Text = "删除";
+            this.toolStripButton_Del.Click += new System.EventHandler(this.toolStripButton_Del_Click);
+            // 
+            // toolStripButton_Edit
+            // 
+            this.toolStripButton_Edit.Image = global::Commission.Properties.Resources.file_edit;
+            this.toolStripButton_Edit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Edit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Edit.Name = "toolStripButton_Edit";
+            this.toolStripButton_Edit.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Edit.Text = "修改";
+            this.toolStripButton_Edit.Click += new System.EventHandler(this.toolStripButton_Edit_Click);
+            // 
+            // toolStripButton_Export
+            // 
+            this.toolStripButton_Export.Image = global::Commission.Properties.Resources.export_24;
+            this.toolStripButton_Export.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Export.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Export.Name = "toolStripButton_Export";
+            this.toolStripButton_Export.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Export.Text = "导出";
+            this.toolStripButton_Export.Click += new System.EventHandler(this.toolStripButton_Export_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton_Settle
+            // 
+            this.toolStripButton_Settle.Image = global::Commission.Properties.Resources.calculator;
+            this.toolStripButton_Settle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Settle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Settle.Name = "toolStripButton_Settle";
+            this.toolStripButton_Settle.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Settle.Text = "结算";
+            this.toolStripButton_Settle.Click += new System.EventHandler(this.toolStripButton_Settle_Click);
+            // 
+            // toolStripButton_Bottom
+            // 
+            this.toolStripButton_Bottom.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Bottom.Image")));
+            this.toolStripButton_Bottom.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Bottom.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Bottom.Name = "toolStripButton_Bottom";
+            this.toolStripButton_Bottom.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Bottom.Text = "底价";
+            this.toolStripButton_Bottom.Click += new System.EventHandler(this.toolStripButton_Bottom_Click);
+            // 
+            // toolStripButton_Up
+            // 
+            this.toolStripButton_Up.Image = global::Commission.Properties.Resources.chart_up1_24;
+            this.toolStripButton_Up.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Up.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Up.Name = "toolStripButton_Up";
+            this.toolStripButton_Up.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Up.Text = "跳点";
+            this.toolStripButton_Up.Click += new System.EventHandler(this.toolStripButton_Up_Click);
+            // 
+            // toolStripButton_Rate
+            // 
+            this.toolStripButton_Rate.Image = global::Commission.Properties.Resources.checkmark_24;
+            this.toolStripButton_Rate.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Rate.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Rate.Name = "toolStripButton_Rate";
+            this.toolStripButton_Rate.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Rate.Text = "提点";
+            this.toolStripButton_Rate.Click += new System.EventHandler(this.toolStripButton_Rate_Click);
+            // 
+            // toolStripButton_Locking
+            // 
+            this.toolStripButton_Locking.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Locking.Image")));
+            this.toolStripButton_Locking.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Locking.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Locking.Name = "toolStripButton_Locking";
+            this.toolStripButton_Locking.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Locking.Text = "锁定";
+            this.toolStripButton_Locking.Click += new System.EventHandler(this.toolStripButton_Locking_Click);
+            // 
+            // toolStripButton_Unlock
+            // 
+            this.toolStripButton_Unlock.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_Unlock.Image")));
+            this.toolStripButton_Unlock.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Unlock.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Unlock.Name = "toolStripButton_Unlock";
+            this.toolStripButton_Unlock.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Unlock.Text = "解锁";
+            this.toolStripButton_Unlock.Click += new System.EventHandler(this.toolStripButton_Unlock_Click);
+            // 
+            // toolStripButton_CloseCase
+            // 
+            this.toolStripButton_CloseCase.Image = global::Commission.Properties.Resources.checkmark_24;
+            this.toolStripButton_CloseCase.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_CloseCase.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_CloseCase.Name = "toolStripButton_CloseCase";
+            this.toolStripButton_CloseCase.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_CloseCase.Text = "结案";
+            this.toolStripButton_CloseCase.Visible = false;
+            this.toolStripButton_CloseCase.Click += new System.EventHandler(this.toolStripButton_CloseCase_Click);
+            // 
+            // toolStripButton_Recovery
+            // 
+            this.toolStripButton_Recovery.Image = global::Commission.Properties.Resources.recycle_24;
+            this.toolStripButton_Recovery.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_Recovery.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_Recovery.Name = "toolStripButton_Recovery";
+            this.toolStripButton_Recovery.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_Recovery.Text = "恢复";
+            this.toolStripButton_Recovery.Visible = false;
+            this.toolStripButton_Recovery.Click += new System.EventHandler(this.toolStripButton_Recovery_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            // 
+            // toolStripButton_All
+            // 
+            this.toolStripButton_All.Image = global::Commission.Properties.Resources.list;
+            this.toolStripButton_All.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_All.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_All.Name = "toolStripButton_All";
+            this.toolStripButton_All.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_All.Text = "全选";
+            this.toolStripButton_All.Click += new System.EventHandler(this.toolStripButton_All_Click);
+            // 
+            // toolStripButton_None
+            // 
+            this.toolStripButton_None.Image = global::Commission.Properties.Resources.Nolist;
+            this.toolStripButton_None.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripButton_None.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_None.Name = "toolStripButton_None";
+            this.toolStripButton_None.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton_None.Text = "全清";
+            this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.comboBox_SaleState);
+            this.groupBox1.Controls.Add(this.button_Exit);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.comboBox_PayType);
+            this.groupBox1.Controls.Add(this.comboBox_ItemType);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.textBox_ItemNum);
+            this.groupBox1.Controls.Add(this.textBox_Unit);
+            this.groupBox1.Controls.Add(this.textBox_Building);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.button_Search);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox1.Location = new System.Drawing.Point(3, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1010, 57);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "销售项目查询";
+            // 
+            // comboBox_SaleState
+            // 
+            this.comboBox_SaleState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_SaleState.FormattingEnabled = true;
+            this.comboBox_SaleState.Location = new System.Drawing.Point(684, 23);
+            this.comboBox_SaleState.Name = "comboBox_SaleState";
+            this.comboBox_SaleState.Size = new System.Drawing.Size(100, 20);
+            this.comboBox_SaleState.TabIndex = 18;
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
+            this.button_Exit.Location = new System.Drawing.Point(871, 21);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(75, 23);
+            this.button_Exit.TabIndex = 17;
+            this.button_Exit.Text = " 关闭";
+            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(625, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "销售状态";
+            // 
+            // comboBox_PayType
+            // 
+            this.comboBox_PayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_PayType.FormattingEnabled = true;
+            this.comboBox_PayType.Location = new System.Drawing.Point(519, 23);
+            this.comboBox_PayType.Name = "comboBox_PayType";
+            this.comboBox_PayType.Size = new System.Drawing.Size(100, 20);
+            this.comboBox_PayType.TabIndex = 10;
+            // 
+            // comboBox_ItemType
+            // 
+            this.comboBox_ItemType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_ItemType.FormattingEnabled = true;
+            this.comboBox_ItemType.Location = new System.Drawing.Point(354, 23);
+            this.comboBox_ItemType.Name = "comboBox_ItemType";
+            this.comboBox_ItemType.Size = new System.Drawing.Size(100, 20);
+            this.comboBox_ItemType.TabIndex = 10;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(460, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "付款类型";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(295, 27);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 12);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "房源类型";
+            // 
+            // textBox_ItemNum
+            // 
+            this.textBox_ItemNum.Location = new System.Drawing.Point(226, 23);
+            this.textBox_ItemNum.Name = "textBox_ItemNum";
+            this.textBox_ItemNum.Size = new System.Drawing.Size(63, 21);
+            this.textBox_ItemNum.TabIndex = 8;
+            // 
+            // textBox_Unit
+            // 
+            this.textBox_Unit.Location = new System.Drawing.Point(135, 23);
+            this.textBox_Unit.Name = "textBox_Unit";
+            this.textBox_Unit.Size = new System.Drawing.Size(50, 21);
+            this.textBox_Unit.TabIndex = 7;
+            // 
+            // textBox_Building
+            // 
+            this.textBox_Building.Location = new System.Drawing.Point(44, 23);
+            this.textBox_Building.Name = "textBox_Building";
+            this.textBox_Building.Size = new System.Drawing.Size(50, 21);
+            this.textBox_Building.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(191, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "编号";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(100, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 12);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "单元";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "楼号";
+            // 
+            // button_Search
+            // 
+            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
+            this.button_Search.Location = new System.Drawing.Point(790, 22);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.TabIndex = 1;
+            this.button_Search.Text = " 查询";
+            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            // 
             // FrmSaleItemMng
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -750,7 +743,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton toolStripButton_All;
         private System.Windows.Forms.ComboBox comboBox_SaleState;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton_CloseCase;
         private System.Windows.Forms.ToolStripButton toolStripButton_Recovery;
         private System.Windows.Forms.ToolStripButton toolStripButton_Up;

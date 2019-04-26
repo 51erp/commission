@@ -33,7 +33,7 @@ namespace Commission.MenuForms
             string condition = " and ProjectID = " + Login.User.ProjectID;
 
             if (!comboBox_Sales.Text.Equals(""))
-                condition += " and  SalesName like '%" + comboBox_Sales.Text + "%'";
+                condition += " and  SalesID = " + textBox_Sales.Tag.ToString();
 
             int bindQty = 0;
 
@@ -78,7 +78,7 @@ namespace Commission.MenuForms
         {
             if (dataGridView_Contract.RowCount > 0)
             {
-                if (comboBox_Sales.Text == comboBox_NewSalesName.Text)
+                if (textBox_Sales.Text == comboBox_NewSalesName.Text)
                 {
                     Prompt.Information("接收置业顾问与原置业顾问不能为同一人！");
                 }
@@ -210,6 +210,21 @@ namespace Commission.MenuForms
         private void FrmHandover_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_SalesMore_Click(object sender, EventArgs e)
+        {
+            FrmSales frmSales = new FrmSales();
+            if (frmSales.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                textBox_Sales.Tag = frmSales.SalesID;
+                textBox_Sales.Text = frmSales.SalesName;
+            }
+            else
+            {
+                textBox_Sales.Tag = "";
+                textBox_Sales.Text = "";
+            }
         }
 
 

@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Open = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Imp = new System.Windows.Forms.ToolStripButton();
@@ -45,6 +45,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel_Status = new System.Windows.Forms.ToolStripLabel();
             this.dataGridView_Contract = new System.Windows.Forms.DataGridView();
+            this.openFileDialog_Source = new System.Windows.Forms.OpenFileDialog();
             this.CustomerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerPhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,9 +106,10 @@
             this.DownPayRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DownPayAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Loan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecDownPay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RecLoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.openFileDialog_Source = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).BeginInit();
             this.SuspendLayout();
@@ -140,7 +142,7 @@
             this.toolStripButton_Open.Name = "toolStripButton_Open";
             this.toolStripButton_Open.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_Open.Text = "打开";
-            this.toolStripButton_Open.ToolTipText = "新增一个认购协议";
+            this.toolStripButton_Open.ToolTipText = "打开一个XLS数据文件";
             this.toolStripButton_Open.Click += new System.EventHandler(this.toolStripButton_Open_Click);
             // 
             // toolStripButton_Imp
@@ -151,7 +153,7 @@
             this.toolStripButton_Imp.Name = "toolStripButton_Imp";
             this.toolStripButton_Imp.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_Imp.Text = "导入";
-            this.toolStripButton_Imp.ToolTipText = "删除当前选定记录";
+            this.toolStripButton_Imp.ToolTipText = "开始导入指定数据";
             this.toolStripButton_Imp.Click += new System.EventHandler(this.toolStripButton_Imp_Click);
             // 
             // toolStripSeparator1
@@ -166,6 +168,7 @@
             this.toolStripButton_DictCustomer.Name = "toolStripButton_DictCustomer";
             this.toolStripButton_DictCustomer.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_DictCustomer.Text = "客户";
+            this.toolStripButton_DictCustomer.ToolTipText = "导出客户数据字典";
             this.toolStripButton_DictCustomer.Click += new System.EventHandler(this.toolStripButton_DictCustomer_Click);
             // 
             // toolStripButton_DictSales
@@ -175,6 +178,7 @@
             this.toolStripButton_DictSales.Name = "toolStripButton_DictSales";
             this.toolStripButton_DictSales.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_DictSales.Text = "顾问";
+            this.toolStripButton_DictSales.ToolTipText = "导出顾问数据字典";
             this.toolStripButton_DictSales.Click += new System.EventHandler(this.toolStripButton_DictSales_Click);
             // 
             // toolStripButton_SaleItem
@@ -185,7 +189,7 @@
             this.toolStripButton_SaleItem.Name = "toolStripButton_SaleItem";
             this.toolStripButton_SaleItem.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_SaleItem.Text = "房源";
-            this.toolStripButton_SaleItem.ToolTipText = "仅修改当前选定的记录";
+            this.toolStripButton_SaleItem.ToolTipText = "导出房源数据字典";
             this.toolStripButton_SaleItem.Click += new System.EventHandler(this.toolStripButton_SaleItem_Click);
             // 
             // toolStripButton_Payment
@@ -196,7 +200,7 @@
             this.toolStripButton_Payment.Name = "toolStripButton_Payment";
             this.toolStripButton_Payment.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton_Payment.Text = "付款";
-            this.toolStripButton_Payment.ToolTipText = "仅修改当前选定的记录";
+            this.toolStripButton_Payment.ToolTipText = "导出付款方式数据字典";
             this.toolStripButton_Payment.Click += new System.EventHandler(this.toolStripButton_Payment_Click);
             // 
             // toolStripSeparator2
@@ -294,6 +298,8 @@
             this.DownPayRate,
             this.DownPayAmount,
             this.Loan,
+            this.RecDownPay,
+            this.RecLoan,
             this.ConSalesID,
             this.ConSalesName});
             this.dataGridView_Contract.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -306,6 +312,10 @@
             this.dataGridView_Contract.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Contract.Size = new System.Drawing.Size(799, 486);
             this.dataGridView_Contract.TabIndex = 4;
+            // 
+            // openFileDialog_Source
+            // 
+            this.openFileDialog_Source.Filter = "Excel文件(*.xlsx)|*.xlsx";
             // 
             // CustomerID
             // 
@@ -382,9 +392,9 @@
             // SubArea
             // 
             this.SubArea.DataPropertyName = "SubArea";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "F2";
-            this.SubArea.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "F2";
+            this.SubArea.DefaultCellStyle = dataGridViewCellStyle13;
             this.SubArea.HeaderText = "认购面积";
             this.SubArea.Name = "SubArea";
             this.SubArea.ReadOnly = true;
@@ -393,9 +403,9 @@
             // SubPrice
             // 
             this.SubPrice.DataPropertyName = "SubPrice";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "F4";
-            this.SubPrice.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "F4";
+            this.SubPrice.DefaultCellStyle = dataGridViewCellStyle14;
             this.SubPrice.HeaderText = "认购单价";
             this.SubPrice.Name = "SubPrice";
             this.SubPrice.ReadOnly = true;
@@ -404,9 +414,9 @@
             // SubAmount
             // 
             this.SubAmount.DataPropertyName = "SubAmount";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "F0";
-            this.SubAmount.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "F0";
+            this.SubAmount.DefaultCellStyle = dataGridViewCellStyle15;
             this.SubAmount.HeaderText = "认购总价";
             this.SubAmount.Name = "SubAmount";
             this.SubAmount.ReadOnly = true;
@@ -535,9 +545,9 @@
             // SubTotalAmount
             // 
             this.SubTotalAmount.DataPropertyName = "SubTotalAmount";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "F0";
-            this.SubTotalAmount.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "F0";
+            this.SubTotalAmount.DefaultCellStyle = dataGridViewCellStyle16;
             this.SubTotalAmount.HeaderText = "认购总款";
             this.SubTotalAmount.Name = "SubTotalAmount";
             this.SubTotalAmount.ReadOnly = true;
@@ -790,6 +800,20 @@
             this.Loan.Name = "Loan";
             this.Loan.ReadOnly = true;
             // 
+            // RecDownPay
+            // 
+            this.RecDownPay.DataPropertyName = "RecDownPay";
+            this.RecDownPay.HeaderText = "已收首付";
+            this.RecDownPay.Name = "RecDownPay";
+            this.RecDownPay.ReadOnly = true;
+            // 
+            // RecLoan
+            // 
+            this.RecLoan.DataPropertyName = "RecLoan";
+            this.RecLoan.HeaderText = "已收贷款";
+            this.RecLoan.Name = "RecLoan";
+            this.RecLoan.ReadOnly = true;
+            // 
             // ConSalesID
             // 
             this.ConSalesID.DataPropertyName = "ConSalesID";
@@ -803,10 +827,6 @@
             this.ConSalesName.HeaderText = "签约顾问名称";
             this.ConSalesName.Name = "ConSalesName";
             this.ConSalesName.ReadOnly = true;
-            // 
-            // openFileDialog_Source
-            // 
-            this.openFileDialog_Source.Filter = "Excel文件(*.xlsx)|*.xlsx";
             // 
             // FrmImpContract
             // 
@@ -905,6 +925,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DownPayRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn DownPayAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Loan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecDownPay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RecLoan;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConSalesID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConSalesName;
     }
