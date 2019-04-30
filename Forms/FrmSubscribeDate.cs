@@ -12,6 +12,7 @@ namespace Commission.Forms
 {
     public partial class FrmSubscribeDate : Form
     {
+        private bool IsHavPara = false;
         public FrmSubscribeDate()
         {
             InitializeComponent();
@@ -32,12 +33,16 @@ namespace Commission.Forms
             }
 
             value = Math.Round(value, 0);
+            string sql = string.Empty;
 
-            string sql = string.Format("insert into ParaProject (ProjectID, ProjectName, ParaTypeID, ParaTypeName, ParaValue) values ({0},'{1}',1,'认购日期限定',{2})", Login.User.ProjectID,Login.User.ProjectName, value);
-            if (SqlHelper.ExecuteNonQuery(sql) > 0 )
+            if (IsHavPara)
+                sql = string.Format("update ParaProject set ParaValue = {0} where ParaTypeID = 1 and ProjectID = {1}", value, Login.User.ProjectID);
+            else
+                sql = string.Format("insert into ParaProject (ProjectID, ProjectName, ParaTypeID, ParaTypeName, ParaValue) values ({0},'{1}',1,'认购日期限定',{2})", Login.User.ProjectID, Login.User.ProjectName, value);
+
+            if (SqlHelper.ExecuteNonQuery(sql) > 0)
             {
-                Prompt.Information("操作成功!");
-                Close();
+                this.DialogResult = System.Windows.Forms.DialogResult.OK;
             }
         
         }
@@ -45,6 +50,26 @@ namespace Commission.Forms
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             Common.OnlyNumeric(sender, e);
+        }
+
+        private void FrmSubscribeDate_Load(object sender, EventArgs e)
+        {
+            int paraValue = 0;
+            string sql = string.Format("select ParaValue from ParaProject where ParaTypeID = 1 and ProjectID = {0}", Login.User.ProjectID);
+            object objResult = SqlHelper.ExecuteScalar(sql);
+
+            if (objResult != null)
+            {
+                IsHavPara = true;
+                int.TryParse(objResult.ToString(), out paraValue);
+            }
+            else
+            {
+                IsHavPara = false;
+            }
+
+            textBox_Days.Text = paraValue.ToString();
+
         }
     }
 }

@@ -510,7 +510,6 @@ namespace Commission
         {
             FrmImpContract impSubscribe = new FrmImpContract();
             FormShow(impSubscribe, sender);
-            //impSubscribe.ShowDialog();
         }
 
         private void toolStripButton_CreateMenuList_Click(object sender, EventArgs e)
@@ -544,7 +543,10 @@ namespace Commission
         private void ToolStripMenuItem_SubscribeDate_Click(object sender, EventArgs e)
         {
             FrmSubscribeDate subDate = new FrmSubscribeDate();
-            subDate.ShowDialog();
+            if (subDate.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Prompt.Information("操作成功!");
+            }
         }
 
         private void ToolStripMenuItem_NoConfirm_Click(object sender, EventArgs e)

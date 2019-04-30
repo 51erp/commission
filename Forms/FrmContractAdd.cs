@@ -680,7 +680,7 @@ namespace Commission.Forms
             }
 
             //匹配房源类型  
-            sql = string.Format("select CommissionType, Rate, Amount  from SchemeRate a inner join SaleItem b on a.ItemTypeCode = b.ItemTypeCode where ItemID = {0} and ('{1}' >= BeginDate and '{1}' <= EndDate) ", itemId, subscribeDate);
+            sql = string.Format("select CommissionType, Rate, Amount  from SchemeRate a inner join SaleItem b on a.ItemTypeCode = b.ItemTypeCode where ItemID = {0} and ('{1}' >= BeginDate and '{1}' <= EndDate) and a.ProjectID = {2}", itemId, subscribeDate, Login.User.ProjectID);
             SqlDataReader sdr = SqlHelper.ExecuteReader(sql);
             if (sdr.Read())
             {
@@ -697,7 +697,7 @@ namespace Commission.Forms
             else
             {
                 //项目默认
-                sql = string.Format("select CommissionType, Rate, Amount from SchemeRate where ItemTypeCode = 0 and ('{1}' >= BeginDate and '{1}' <= EndDate)",itemId, subscribeDate);
+                sql = string.Format("select CommissionType, Rate, Amount from SchemeRate where ItemTypeCode = 0 and ('{1}' >= BeginDate and '{1}' <= EndDate) and ProjectID = {2}",itemId, subscribeDate, Login.User.ProjectID);
                 sdr = SqlHelper.ExecuteReader(sql);
                 if (sdr.Read())
                 {

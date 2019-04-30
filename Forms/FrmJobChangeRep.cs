@@ -29,7 +29,7 @@ namespace Commission.Forms
                 condition = string.Format(" and SalesName like '%{0}%' ",textBox_SalesName.Text.Trim() );
             }
 
-            string sql = string.Format("select SalesID, SalesName,DeptID, DeptName, JobType, BeginDate, EndDate from JobTrack where 1=1 {0} order by SalesName, BeginDate ", condition);
+            string sql = string.Format("select SalesID, SalesName,DeptID, DeptName, JobType, BeginDate, EndDate, OperationType from JobTrack where 1=1 {0} order by SalesName, BeginDate ", condition);
 
             dataGridView_Employee.DataSource = SqlHelper.ExecuteDataTable(sql);
         }

@@ -78,6 +78,14 @@ namespace Commission.Forms
             }
 
 
+            string sql = string.Format("select COUNT(*) from JobTrack where EndDate is null and DeptID = {0} ", selNode.Name);
+            if (Convert.ToInt32(SqlHelper.ExecuteScalar(sql).ToString()) > 0)
+            {
+                Prompt.Warning("指定部门节点存在员工，无法删除！");
+                return;
+            }
+
+
             if (Prompt.Question("确定要删除部门：" + selNode.Text) == System.Windows.Forms.DialogResult.Yes)
             {
                 SqlHelper.ExecuteNonQuery("delete Department where deptID = " + selNode.Name);
@@ -85,6 +93,8 @@ namespace Commission.Forms
             }
 
         }
+
+
 
         private void InitDeptNode()
         {

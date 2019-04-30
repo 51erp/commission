@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox_CusPID = new System.Windows.Forms.TextBox();
             this.textBox_CusPhone = new System.Windows.Forms.TextBox();
@@ -45,6 +45,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridView_SaleItem = new System.Windows.Forms.DataGridView();
+            this.ColItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColItemTypeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColItemTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColItemNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColAmout = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColIsBind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip_Item = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Exchange = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Add = new System.Windows.Forms.ToolStripButton();
@@ -101,16 +111,6 @@
             this.toolStripButton_ReferSubscribe = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.toolStrip_Main = new System.Windows.Forms.ToolStrip();
-            this.ColItemID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColItemTypeCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColItemTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColBuilding = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColItemNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColArea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColAmout = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColIsBind = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -293,6 +293,85 @@
             this.dataGridView_SaleItem.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView_SaleItem_CellValidating);
             this.dataGridView_SaleItem.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_SaleItem_RowsRemoved);
             // 
+            // ColItemID
+            // 
+            this.ColItemID.Frozen = true;
+            this.ColItemID.HeaderText = "ItemID";
+            this.ColItemID.Name = "ColItemID";
+            this.ColItemID.Visible = false;
+            // 
+            // ColItemTypeCode
+            // 
+            this.ColItemTypeCode.DataPropertyName = "ItemTypeCode";
+            this.ColItemTypeCode.Frozen = true;
+            this.ColItemTypeCode.HeaderText = "ItemTypeCode";
+            this.ColItemTypeCode.Name = "ColItemTypeCode";
+            this.ColItemTypeCode.Visible = false;
+            // 
+            // ColItemTypeName
+            // 
+            this.ColItemTypeName.DataPropertyName = "ItemTypeName";
+            this.ColItemTypeName.Frozen = true;
+            this.ColItemTypeName.HeaderText = "类型";
+            this.ColItemTypeName.Name = "ColItemTypeName";
+            this.ColItemTypeName.Width = 80;
+            // 
+            // ColBuilding
+            // 
+            this.ColBuilding.Frozen = true;
+            this.ColBuilding.HeaderText = "楼号";
+            this.ColBuilding.Name = "ColBuilding";
+            this.ColBuilding.Width = 60;
+            // 
+            // ColUnit
+            // 
+            this.ColUnit.HeaderText = "单元";
+            this.ColUnit.Name = "ColUnit";
+            this.ColUnit.Width = 60;
+            // 
+            // ColItemNum
+            // 
+            this.ColItemNum.HeaderText = "号码";
+            this.ColItemNum.Name = "ColItemNum";
+            this.ColItemNum.Width = 60;
+            // 
+            // ColArea
+            // 
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = "0";
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle10;
+            this.ColArea.HeaderText = "签约面积";
+            this.ColArea.Name = "ColArea";
+            // 
+            // ColPrice
+            // 
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "F4";
+            dataGridViewCellStyle11.NullValue = "0";
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle11;
+            this.ColPrice.HeaderText = "签约单价";
+            this.ColPrice.Name = "ColPrice";
+            // 
+            // ColAmout
+            // 
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "F0";
+            dataGridViewCellStyle12.NullValue = "0";
+            this.ColAmout.DefaultCellStyle = dataGridViewCellStyle12;
+            this.ColAmout.HeaderText = "签约金额";
+            this.ColAmout.Name = "ColAmout";
+            this.ColAmout.Width = 120;
+            // 
+            // ColIsBind
+            // 
+            this.ColIsBind.DataPropertyName = "IsBind";
+            this.ColIsBind.HeaderText = "IsBind";
+            this.ColIsBind.Name = "ColIsBind";
+            this.ColIsBind.Visible = false;
+            // 
             // toolStrip_Item
             // 
             this.toolStrip_Item.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -349,6 +428,8 @@
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label24);
             this.panel4.Controls.Add(this.textBox_ExtField4);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.comboBox_Sales);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Controls.Add(this.textBox_ExtField0);
@@ -372,7 +453,6 @@
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.textBox_FormalDate);
             this.panel4.Controls.Add(this.textBox_ExtField1);
-            this.panel4.Controls.Add(this.comboBox_Sales);
             this.panel4.Controls.Add(this.comboBox_PayMode);
             this.panel4.Controls.Add(this.label16);
             this.panel4.Controls.Add(this.label31);
@@ -380,7 +460,6 @@
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.textBox_TotalAmount);
             this.panel4.Controls.Add(this.textBox_Loan);
-            this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.textBox_DownPay);
             this.panel4.Controls.Add(this.label17);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -393,10 +472,10 @@
             // 
             this.textBox_DownPayRate.BackColor = System.Drawing.SystemColors.Window;
             this.textBox_DownPayRate.Enabled = false;
-            this.textBox_DownPayRate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox_DownPayRate.Location = new System.Drawing.Point(280, 8);
+            this.textBox_DownPayRate.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox_DownPayRate.Location = new System.Drawing.Point(69, 33);
             this.textBox_DownPayRate.Name = "textBox_DownPayRate";
-            this.textBox_DownPayRate.Size = new System.Drawing.Size(98, 21);
+            this.textBox_DownPayRate.Size = new System.Drawing.Size(65, 21);
             this.textBox_DownPayRate.TabIndex = 98;
             this.textBox_DownPayRate.TabStop = false;
             this.textBox_DownPayRate.Text = "0";
@@ -454,7 +533,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(382, 12);
+            this.label24.Location = new System.Drawing.Point(137, 37);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(11, 12);
             this.label24.TabIndex = 32;
@@ -512,7 +591,7 @@
             // 
             this.button_Installment.Enabled = false;
             this.button_Installment.Image = global::Commission.Properties.Resources.more;
-            this.button_Installment.Location = new System.Drawing.Point(184, 5);
+            this.button_Installment.Location = new System.Drawing.Point(444, 6);
             this.button_Installment.Name = "button_Installment";
             this.button_Installment.Size = new System.Drawing.Size(26, 23);
             this.button_Installment.TabIndex = 89;
@@ -696,9 +775,9 @@
             // 
             this.comboBox_Sales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_Sales.FormattingEnabled = true;
-            this.comboBox_Sales.Location = new System.Drawing.Point(467, 7);
+            this.comboBox_Sales.Location = new System.Drawing.Point(535, 7);
             this.comboBox_Sales.Name = "comboBox_Sales";
-            this.comboBox_Sales.Size = new System.Drawing.Size(150, 20);
+            this.comboBox_Sales.Size = new System.Drawing.Size(81, 20);
             this.comboBox_Sales.TabIndex = 61;
             // 
             // comboBox_PayMode
@@ -708,13 +787,13 @@
             this.comboBox_PayMode.ItemHeight = 12;
             this.comboBox_PayMode.Location = new System.Drawing.Point(68, 7);
             this.comboBox_PayMode.Name = "comboBox_PayMode";
-            this.comboBox_PayMode.Size = new System.Drawing.Size(110, 20);
+            this.comboBox_PayMode.Size = new System.Drawing.Size(370, 20);
             this.comboBox_PayMode.TabIndex = 50;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(408, 36);
+            this.label16.Location = new System.Drawing.Point(444, 37);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 12);
             this.label16.TabIndex = 54;
@@ -723,7 +802,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(221, 37);
+            this.label31.Location = new System.Drawing.Point(299, 37);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(53, 12);
             this.label31.TabIndex = 55;
@@ -732,7 +811,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(9, 37);
+            this.label29.Location = new System.Drawing.Point(154, 37);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(53, 12);
             this.label29.TabIndex = 56;
@@ -741,7 +820,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(221, 11);
+            this.label18.Location = new System.Drawing.Point(10, 37);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(53, 12);
             this.label18.TabIndex = 57;
@@ -752,11 +831,11 @@
             this.textBox_TotalAmount.BackColor = System.Drawing.SystemColors.Window;
             this.textBox_TotalAmount.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox_TotalAmount.ForeColor = System.Drawing.Color.Red;
-            this.textBox_TotalAmount.Location = new System.Drawing.Point(467, 32);
+            this.textBox_TotalAmount.Location = new System.Drawing.Point(503, 34);
             this.textBox_TotalAmount.Margin = new System.Windows.Forms.Padding(3, 3, 20, 3);
             this.textBox_TotalAmount.Name = "textBox_TotalAmount";
             this.textBox_TotalAmount.ReadOnly = true;
-            this.textBox_TotalAmount.Size = new System.Drawing.Size(150, 21);
+            this.textBox_TotalAmount.Size = new System.Drawing.Size(113, 21);
             this.textBox_TotalAmount.TabIndex = 60;
             this.textBox_TotalAmount.Text = "0";
             this.textBox_TotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -764,9 +843,9 @@
             // 
             // textBox_Loan
             // 
-            this.textBox_Loan.Location = new System.Drawing.Point(280, 33);
+            this.textBox_Loan.Location = new System.Drawing.Point(358, 34);
             this.textBox_Loan.Name = "textBox_Loan";
-            this.textBox_Loan.Size = new System.Drawing.Size(98, 21);
+            this.textBox_Loan.Size = new System.Drawing.Size(80, 21);
             this.textBox_Loan.TabIndex = 52;
             this.textBox_Loan.Text = "0";
             this.textBox_Loan.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -777,7 +856,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(408, 11);
+            this.label19.Location = new System.Drawing.Point(476, 11);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(53, 12);
             this.label19.TabIndex = 58;
@@ -785,9 +864,9 @@
             // 
             // textBox_DownPay
             // 
-            this.textBox_DownPay.Location = new System.Drawing.Point(68, 33);
+            this.textBox_DownPay.Location = new System.Drawing.Point(213, 34);
             this.textBox_DownPay.Name = "textBox_DownPay";
-            this.textBox_DownPay.Size = new System.Drawing.Size(112, 21);
+            this.textBox_DownPay.Size = new System.Drawing.Size(80, 21);
             this.textBox_DownPay.TabIndex = 53;
             this.textBox_DownPay.Text = "0";
             this.textBox_DownPay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -891,85 +970,6 @@
             this.toolStrip_Main.Size = new System.Drawing.Size(639, 31);
             this.toolStrip_Main.TabIndex = 21;
             this.toolStrip_Main.Text = "toolStrip2";
-            // 
-            // ColItemID
-            // 
-            this.ColItemID.Frozen = true;
-            this.ColItemID.HeaderText = "ItemID";
-            this.ColItemID.Name = "ColItemID";
-            this.ColItemID.Visible = false;
-            // 
-            // ColItemTypeCode
-            // 
-            this.ColItemTypeCode.DataPropertyName = "ItemTypeCode";
-            this.ColItemTypeCode.Frozen = true;
-            this.ColItemTypeCode.HeaderText = "ItemTypeCode";
-            this.ColItemTypeCode.Name = "ColItemTypeCode";
-            this.ColItemTypeCode.Visible = false;
-            // 
-            // ColItemTypeName
-            // 
-            this.ColItemTypeName.DataPropertyName = "ItemTypeName";
-            this.ColItemTypeName.Frozen = true;
-            this.ColItemTypeName.HeaderText = "类型";
-            this.ColItemTypeName.Name = "ColItemTypeName";
-            this.ColItemTypeName.Width = 80;
-            // 
-            // ColBuilding
-            // 
-            this.ColBuilding.Frozen = true;
-            this.ColBuilding.HeaderText = "楼号";
-            this.ColBuilding.Name = "ColBuilding";
-            this.ColBuilding.Width = 60;
-            // 
-            // ColUnit
-            // 
-            this.ColUnit.HeaderText = "单元";
-            this.ColUnit.Name = "ColUnit";
-            this.ColUnit.Width = 60;
-            // 
-            // ColItemNum
-            // 
-            this.ColItemNum.HeaderText = "号码";
-            this.ColItemNum.Name = "ColItemNum";
-            this.ColItemNum.Width = 60;
-            // 
-            // ColArea
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = "0";
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle1;
-            this.ColArea.HeaderText = "签约面积";
-            this.ColArea.Name = "ColArea";
-            // 
-            // ColPrice
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "F4";
-            dataGridViewCellStyle2.NullValue = "0";
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColPrice.HeaderText = "签约单价";
-            this.ColPrice.Name = "ColPrice";
-            // 
-            // ColAmout
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "F0";
-            dataGridViewCellStyle3.NullValue = "0";
-            this.ColAmout.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColAmout.HeaderText = "签约金额";
-            this.ColAmout.Name = "ColAmout";
-            this.ColAmout.Width = 120;
-            // 
-            // ColIsBind
-            // 
-            this.ColIsBind.DataPropertyName = "IsBind";
-            this.ColIsBind.HeaderText = "IsBind";
-            this.ColIsBind.Name = "ColIsBind";
-            this.ColIsBind.Visible = false;
             // 
             // FrmContractAdd
             // 

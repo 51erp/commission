@@ -146,9 +146,11 @@ namespace Commission.Forms
                         string contractID = cmd.ExecuteScalar().ToString();
 
                         //签约从表
+                        //主售房源
                         cmd.CommandText = GenSqlConDetail(row, contractID, -1);
                         cmd.ExecuteNonQuery();
 
+                        //附属房源，固定3个
                         for (int i = 0; i < 3; i++)
                         {
                             cmd.CommandText = GenSqlConDetail(row, contractID, i);
@@ -156,14 +158,11 @@ namespace Commission.Forms
                                 cmd.ExecuteNonQuery();
                         }
 
-                        //更新认购主表的ContractID
-                        cmd.CommandText = string.Format("update SubscribeMain set ContractID = {0} where SubscribeID = {1}", contractID, subscribeID);
+                        //更新签约主售房源的结算设置、提点、主售房源销售状态（签约）
+                        cmd.CommandText = GetSqlSettleMng(row["ConItemID"].ToString(), row["PaymentID"].ToString(), row["SubscribeDate"].ToString());
                         cmd.ExecuteNonQuery();
 
-                        //房源状态
-                        cmd.CommandText = string.Format("update SaleItem Set SaleStateCode = 3, SaleStateName = '签约' where ItemID = {0}", row["ConItemID"].ToString());
-                        cmd.ExecuteNonQuery();
-
+                        //房源销售状态（附属）
                         for (int i = 0; i < 3; i++)
                         {
                             string itemID = row["ConItemID" + i].ToString();
@@ -174,6 +173,13 @@ namespace Commission.Forms
                             }
                         }
 
+
+                        //更新认购主表的ContractID
+                        cmd.CommandText = string.Format("update SubscribeMain set ContractID = {0} where SubscribeID = {1}", contractID, subscribeID);
+                        cmd.ExecuteNonQuery();
+
+       
+
                         //收款记录 首付
                         cmd.CommandText = GenSqlReceipt(row, contractID, false); 
                         if (cmd.CommandText != "")
@@ -183,6 +189,15 @@ namespace Commission.Forms
                         cmd.CommandText = GenSqlReceipt(row, contractID, true); 
                         if (cmd.CommandText != "")
                             cmd.ExecuteNonQuery();
+
+                        double loanAmount = 0;
+                        double.TryParse(row["RecLoan"].ToString(), out loanAmount);
+
+                        if (loanAmount > 0)
+                        {
+                            cmd.CommandText = string.Format("update ContractMain set LoanDate = CONVERT(varchar(10), getdate(), 120) where ContractID = {0}", contractID);
+                            cmd.ExecuteNonQuery();
+                        }
 
                     }
 
@@ -314,7 +329,7 @@ namespace Commission.Forms
 
             //+ "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9";
 
-            string rate = row["DownPayRate"].ToString() == "" ? "0" : row["DownPayRate"].ToString();
+            string downpayRate = row["DownPayRate"].ToString() == "" ? "0" : row["DownPayRate"].ToString();
             string downPay = row["DownPayAmount"].ToString() == "" ? "0" : row["DownPayAmount"].ToString();
             string loan = row["Loan"].ToString() == "" ? "0" : row["Loan"].ToString();
 
@@ -332,7 +347,7 @@ namespace Commission.Forms
                 + "," + row["PaymentID"]
                 + ",'" + row["PaymentName"] + "'"
                 + "," + payType
-                + "," + rate
+                + "," + downpayRate
                 + "," + downPay
                 + "," + loan
                 + ",'" + row["ConTotalAmount"] + "'"
@@ -347,7 +362,13 @@ namespace Commission.Forms
             return sql;
         }
 
-        
+        /// <summary>
+        /// 签约明细
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="contractID"></param>
+        /// <param name="index">index小于0，为主售房源 </param>
+        /// <returns></returns>
         private string GenSqlConDetail(DataRow row, string contractID, int index)
         {
             string sql = string.Empty;
@@ -393,7 +414,75 @@ namespace Commission.Forms
             return sql;
         }
 
+        
+        /// <summary>
+        /// 生成SQL － 更新签约主售房源的结算设置、提点、主售房源销售状态（签约）
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
+        private string GetSqlSettleMng(string itemID, string paymentID, string subscribeDate)
+        {
+            string sql = string.Empty;
 
+            double rate = 0;
+            double amount = 0;
+
+            GetSettleRate(itemID, subscribeDate, out rate, out amount);
+
+
+            sql = string.Format("select ID, PayName, PayType, PayTypeName, StandardCode, StandardName, BaseCode, BaseName from PaymentMode where ID = {0}", paymentID);
+
+            DataTable dt = SqlHelper.ExecuteDataTable(sql);
+
+            sql = string.Format("update SaleItem Set PayModeID = {0}, PayModeName = '{1}', PayTypeCode = {2},PayTypeName = '{3}', "
+                + " SettleStandardCode = {4}, SettleStandardName = '{5}', SettleBaseCode = {6}, SettleBaseName = '{7}', "
+                + " SettleRate = {8}, SettleAmount = {9}, SaleStateCode = 3, SaleStateName = '签约' where ItemID = {10}",
+                paymentID, dt.Rows[0]["PayName"].ToString(), dt.Rows[0]["PayType"].ToString(), dt.Rows[0]["PayTypeName"].ToString(),
+                dt.Rows[0]["StandardCode"].ToString(), dt.Rows[0]["StandardName"].ToString(), dt.Rows[0]["BaseCode"].ToString(), dt.Rows[0]["BaseName"].ToString(), 
+                rate, amount, itemID);
+
+            return sql;
+            
+        }
+
+        private void  GetSettleRate(string itemID , string subscribeDate, out double rate, out double amount)
+        {
+            rate = 0;
+            amount = 0;
+
+            string sql = string.Empty;
+
+            //匹配房源类型  
+            sql = string.Format("select CommissionType, Rate, Amount  from SchemeRate a inner join SaleItem b on a.ItemTypeCode = b.ItemTypeCode where ItemID = {0} and ('{1}' >= BeginDate and '{1}' <= EndDate) and a.ProjectID = {2}", itemID, subscribeDate, Login.User.ProjectID);
+            SqlDataReader sdr = SqlHelper.ExecuteReader(sql);
+            if (sdr.Read())
+            {
+                rate = double.Parse(sdr["Rate"].ToString());
+                amount = double.Parse(sdr["Amount"].ToString());
+            }
+            else
+            {
+                //项目默认
+                sql = string.Format("select CommissionType, Rate, Amount from SchemeRate where ItemTypeCode = 0 and ('{1}' >= BeginDate and '{1}' <= EndDate) and ProjectID = {2}", itemID, subscribeDate, Login.User.ProjectID);
+                sdr = SqlHelper.ExecuteReader(sql);
+                if (sdr.Read())
+                {
+                    rate = double.Parse(sdr["Rate"].ToString());
+                    amount = double.Parse(sdr["Amount"].ToString());
+                }
+            }
+
+            sdr.Close();
+        }
+
+
+        /// <summary>
+        /// 收款信息
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="contractID"></param>
+        /// <param name="isLoan"></param>
+        /// <returns></returns>
         private string GenSqlReceipt(DataRow row, string contractID, bool isLoan)
         {
             string sql = string.Empty;
@@ -480,12 +569,24 @@ namespace Commission.Forms
                 }
                 else
                 {
-                    string sql = string.Format("select Count(ItemID) from SaleItem where ProjectID = {0} and  ItemID = {1}", Login.User.ProjectID, dtImpData.Rows[i]["ConItemID"].ToString());
-                    if (!Convert.ToBoolean(SqlHelper.ExecuteScalar(sql)))
+                    string sql = string.Format("select SaleStateCode from SaleItem where ProjectID = {0} and  ItemID = {1}", Login.User.ProjectID, dtImpData.Rows[i]["ConItemID"].ToString());
+
+                    object objResult = SqlHelper.ExecuteScalar(sql);
+
+                    if (objResult == null)
                     {
                         dataGridView_Contract.CurrentCell = dataGridView_Contract.Rows[i].Cells["ConItemID"];
                         Prompt.Error("不存在此房源ID，请确认后再导入！");
                         return false;
+                    }
+                    else
+                    {
+                        if (objResult.ToString() != "1")
+                        {
+                            dataGridView_Contract.CurrentCell = dataGridView_Contract.Rows[i].Cells["ConItemID"];
+                            Prompt.Error("此房源ID非待售状态，请确认后再导入！");
+                            return false;
+                        }
                     }
                 }
 
@@ -528,12 +629,7 @@ namespace Commission.Forms
             return result;
         }
 
-        private bool IsExistCustomer(string id)
-        {
-            string sql = string.Format("select Count(CustomerID) from Customer where CustomerID = {0}", id);
-            return Convert.ToBoolean(SqlHelper.ExecuteScalar(sql));
-           
-        }
+
 
         private void toolStripButton_DictCustomer_Click(object sender, EventArgs e)
         {

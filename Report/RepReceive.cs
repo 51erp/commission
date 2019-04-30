@@ -33,7 +33,9 @@ namespace Commission.Report
         private void button_Search_Click(object sender, EventArgs e)
         {
             string beginDate = dateTimePicker_Period.Value.ToString("yyyy-MM-01");
-            string endDate = DateTime.Parse(beginDate).AddMonths(1).AddDays(-1).ToShortDateString();
+            string endDate = DateTime.Parse(beginDate).AddMonths(1).AddDays(-1).ToString("yyy-MM-dd");
+
+            //MessageBox.Show("BeginDate: " + beginDate + "\n\r" + "EndDate   : " + endDate);
 
             GenDataGridViewBaseStru();
 
@@ -61,7 +63,7 @@ namespace Commission.Report
             dataGridView_Report.AutoGenerateColumns = false;
             dataGridView_Report.DataSource = null;
 
-            string fieldsName = "ContractID,Building,Unit,ItemNum,ItemTypeName,CustomerName,CustomerPhone,SubscribeSalesName,SalesName,"
+            string fieldsName = "ContractID, Building, Unit, ItemNum,ItemTypeName,CustomerName,CustomerPhone,SubscribeSalesName,SalesName,"
                + "SubscribeNum,SubscribeDate,SubArea,SubPrice,SubAmount,SubTotalAmount,"
                + "ContractNum,ContractDate,Area,Price,Amount,TotalAmount,DownPayAmount,Loan,"
                + "PreRecTotalAmt,PeriodRecLoan,PeriodRecDownPay,PeriodRecDiffer,PeriodRecDeliver,PeriodRecLimit,PeriodRecTotal,"
@@ -118,6 +120,7 @@ namespace Commission.Report
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecLimit"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecTotal"], ColType.amount);
 
+            //dataGridView_Report.Columns["CustomerPhone"].Frozen = true;
             
         }
 
@@ -129,7 +132,7 @@ namespace Commission.Report
             
             sql = string.Format("select a.ContractID, c.SubscribeNum, a.ContractNum,a.SubscribeDate, a.ContractDate,a.CustomerName, a.CustomerPhone,a.SubscribeSalesName,a.SalesName, "
                 + " a.PaymentName,a.DownPayRate, a.DownPayAmount,a.Loan,a.TotalAmount, '' as RecDate, "
-                + " b.ItemTypeName, b.Building,b.Unit,b.ItemNum, b.Area, b.Price,b.Amount, "
+                + " b.ItemTypeName, b.Building, b.Unit,b.ItemNum, b.Area, b.Price,b.Amount, "
                 + " d.Area as SubArea, d.Price as SubPrice, d.Amount as SubAmount, c.TotalAmount as SubTotalAmount, "
                 + " a.ExtField0,a.ExtField1,a.ExtField2,a.ExtField3,a.ExtField4,a.ExtField5,a.ExtField6,a.ExtField7,a.ExtField8,a.ExtField9 "
                 + " from ContractMain a "

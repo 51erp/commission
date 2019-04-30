@@ -181,11 +181,11 @@ namespace Commission.Forms
             if (FrmMode == FormMode.modify)
             {
                 //修改模式不与原记录对比有效期
-                sql = string.Format("select BeginDate, EndDate from SchemeRate where ItemTypeCode = {0} and ID != {1}", comboBox_ItemType.SelectedValue.ToString(), ID);
+                sql = string.Format("select BeginDate, EndDate from SchemeRate where ItemTypeCode = {0} and ID != {1} and ProjectID = {2}", comboBox_ItemType.SelectedValue.ToString(), ID, Login.User.ProjectID);
             }
             else
             {
-                sql = string.Format("select BeginDate, EndDate from SchemeRate where ItemTypeCode = {0}", comboBox_ItemType.SelectedValue.ToString());
+                sql = string.Format("select BeginDate, EndDate from SchemeRate where ItemTypeCode = {0} and ProjectID = {1}", comboBox_ItemType.SelectedValue.ToString(),Login.User.ProjectID);
             }
             
             SqlDataReader sdr = SqlHelper.ExecuteReader(sql);

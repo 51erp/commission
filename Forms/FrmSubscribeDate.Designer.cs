@@ -32,8 +32,8 @@
             this.toolStripButton_Save = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.textBox_Days = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -80,6 +80,15 @@
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             // 
+            // textBox_Days
+            // 
+            this.textBox_Days.Location = new System.Drawing.Point(96, 28);
+            this.textBox_Days.Name = "textBox_Days";
+            this.textBox_Days.Size = new System.Drawing.Size(100, 21);
+            this.textBox_Days.TabIndex = 1;
+            this.textBox_Days.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_Days.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -88,14 +97,6 @@
             this.label1.Size = new System.Drawing.Size(77, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "最大前置天数";
-            // 
-            // textBox_Days
-            // 
-            this.textBox_Days.Location = new System.Drawing.Point(96, 28);
-            this.textBox_Days.Name = "textBox_Days";
-            this.textBox_Days.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Days.TabIndex = 1;
-            this.textBox_Days.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // FrmSubscribeDate
             // 
@@ -109,6 +110,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "认购日期限定";
+            this.Load += new System.EventHandler(this.FrmSubscribeDate_Load);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

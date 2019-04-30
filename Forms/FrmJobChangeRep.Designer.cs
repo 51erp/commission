@@ -41,6 +41,7 @@
             this.ColJobType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBeginDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEndDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColOperationType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Employee)).BeginInit();
             this.SuspendLayout();
@@ -113,7 +114,8 @@
             this.ColDeptName,
             this.ColJobType,
             this.ColBeginDate,
-            this.ColEndDate});
+            this.ColEndDate,
+            this.ColOperationType});
             this.dataGridView_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Employee.Location = new System.Drawing.Point(0, 50);
             this.dataGridView_Employee.Name = "dataGridView_Employee";
@@ -174,6 +176,13 @@
             this.ColEndDate.Name = "ColEndDate";
             this.ColEndDate.ReadOnly = true;
             // 
+            // ColOperationType
+            // 
+            this.ColOperationType.DataPropertyName = "OperationType";
+            this.ColOperationType.HeaderText = "变更类型";
+            this.ColOperationType.Name = "ColOperationType";
+            this.ColOperationType.ReadOnly = true;
+            // 
             // FrmJobChangeRep
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -205,5 +214,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColJobType;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBeginDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEndDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColOperationType;
     }
 }

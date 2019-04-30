@@ -106,13 +106,21 @@ namespace Commission.Forms
 
                     //更名记录
                     string strValue = AgreementID + ",'" + OperType.ToString() + "'," + CustomerID + ",'" + textBox_OrigCusName.Text + "','" + textBox_OrigCusPhone.Text + "'," + textBox_CusName.Tag.ToString() + ",'" + textBox_CusName.Text + "',"
-                        + "'" + dateTimePicker_ChangeNameDate.Text + "','" + textBox_Memo.Text+ "','" + textBox_Relation.Text.Trim() + "','" + Login.User.UserName + "',GETDATE()";
+                        + "'" + dateTimePicker_ChangeNameDate.Value.ToString("yyyy-MM-dd") + "','" + textBox_Memo.Text+ "','" + textBox_Relation.Text.Trim() + "','" + Login.User.UserName + "',GETDATE()";
                     cmd.CommandText = string.Format("insert into NameExchange " 
                         + "(AgreementID,ExchangeType,OrigID,OrigName,OrigPhone,NewID,NewName,ExchangeDate,Memo,Relation, MakeUserName,MakeDate) values ({0})", strValue);
                     cmd.ExecuteNonQuery();
 
+
+
                     sqlTran.Commit();  //事务提交
                     connection.Close();
+
+                    NewCustomer.CustomerID = textBox_CusName.Tag.ToString();
+                    NewCustomer.CustomerName = textBox_CusName.Text;
+                    NewCustomer.Phone = textBox_CusPhone.Text;
+
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
                 }
                 catch (Exception ex)
@@ -121,11 +129,6 @@ namespace Commission.Forms
                     Prompt.Error("操作失败， 错误：" + ex.Message);
                 }
             }
-            NewCustomer.CustomerID = textBox_CusName.Tag.ToString();
-            NewCustomer.CustomerName = textBox_CusName.Text;
-            NewCustomer.Phone = textBox_CusPhone.Text;
-
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
     }
 }
