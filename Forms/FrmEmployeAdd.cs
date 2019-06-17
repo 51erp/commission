@@ -64,6 +64,16 @@ namespace Commission.Forms
                 return false;
             }
 
+            string sql = string.Format("select count(Salesid) from sales where ProjectID = {0} and SalesName = '{1}'", Login.User.ProjectID,textBox_Name.Text.Trim());
+
+            if (int.Parse(SqlHelper.ExecuteScalar(sql).ToString()) > 0 )
+            {
+                Prompt.Warning("姓名已存在，不允许重名！");
+                textBox_Name.Focus();
+
+                return false;
+            }
+
             return result;
         }
 
@@ -102,8 +112,8 @@ namespace Commission.Forms
                     cmd.CommandText = sqlSales;
                     string salesid = cmd.ExecuteScalar().ToString();
 
-                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate, SalesName) values ({0},{1},'{2}','{3}','{4}', '{5}')",
-                        salesid, DeptId, DeptName, comboBox_JobType.Text, dateTimePicker_JobBeginDate.Value.ToString("yyyy-MM-dd"),textBox_Name.Text.Trim());
+                    cmd.CommandText = string.Format("insert into JobTrack (SalesID, DeptID, DeptName, JobType, BeginDate, SalesName, OperationType) values ({0},{1},'{2}','{3}','{4}', '{5}','{6}')",
+                        salesid, DeptId, DeptName, comboBox_JobType.Text, dateTimePicker_JobBeginDate.Value.ToString("yyyy-MM-dd"),textBox_Name.Text.Trim(), "入职");
                     cmd.ExecuteNonQuery();
 
                     sqlTran.Commit();

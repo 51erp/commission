@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dateTimePicker_Period = new System.Windows.Forms.DateTimePicker();
-            this.button_Exit = new System.Windows.Forms.Button();
-            this.button_Export = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView_Report = new System.Windows.Forms.DataGridView();
+            this.button_Exit = new System.Windows.Forms.Button();
+            this.button_Export = new System.Windows.Forms.Button();
+            this.button_Search = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Report)).BeginInit();
@@ -50,6 +50,55 @@
             this.dateTimePicker_Period.ShowUpDown = true;
             this.dateTimePicker_Period.Size = new System.Drawing.Size(67, 21);
             this.dateTimePicker_Period.TabIndex = 27;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dateTimePicker_Period);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.button_Exit);
+            this.groupBox1.Controls.Add(this.button_Export);
+            this.groupBox1.Controls.Add(this.button_Search);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 5);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(997, 59);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "查询条件";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(31, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(53, 12);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "收款期间";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.panel1.Size = new System.Drawing.Size(1003, 67);
+            this.panel1.TabIndex = 6;
+            // 
+            // dataGridView_Report
+            // 
+            this.dataGridView_Report.AllowUserToAddRows = false;
+            this.dataGridView_Report.AllowUserToDeleteRows = false;
+            this.dataGridView_Report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView_Report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridView_Report.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView_Report.Location = new System.Drawing.Point(0, 67);
+            this.dataGridView_Report.Name = "dataGridView_Report";
+            this.dataGridView_Report.ReadOnly = true;
+            this.dataGridView_Report.RowHeadersWidth = 20;
+            this.dataGridView_Report.RowTemplate.Height = 23;
+            this.dataGridView_Report.Size = new System.Drawing.Size(1003, 355);
+            this.dataGridView_Report.TabIndex = 8;
             // 
             // button_Exit
             // 
@@ -90,64 +139,15 @@
             this.button_Search.UseVisualStyleBackColor = true;
             this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dateTimePicker_Period);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.button_Exit);
-            this.groupBox1.Controls.Add(this.button_Export);
-            this.groupBox1.Controls.Add(this.button_Search);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1166, 59);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "查询条件";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "收款期间";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 3);
-            this.panel1.Size = new System.Drawing.Size(1172, 67);
-            this.panel1.TabIndex = 6;
-            // 
-            // dataGridView_Report
-            // 
-            this.dataGridView_Report.AllowUserToAddRows = false;
-            this.dataGridView_Report.AllowUserToDeleteRows = false;
-            this.dataGridView_Report.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridView_Report.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView_Report.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Report.Location = new System.Drawing.Point(0, 67);
-            this.dataGridView_Report.Name = "dataGridView_Report";
-            this.dataGridView_Report.ReadOnly = true;
-            this.dataGridView_Report.RowHeadersWidth = 20;
-            this.dataGridView_Report.RowTemplate.Height = 23;
-            this.dataGridView_Report.Size = new System.Drawing.Size(1172, 355);
-            this.dataGridView_Report.TabIndex = 8;
-            // 
             // RepReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 422);
+            this.ClientSize = new System.Drawing.Size(1003, 422);
             this.Controls.Add(this.dataGridView_Report);
             this.Controls.Add(this.panel1);
             this.Name = "RepReceive";
-            this.Text = "收款明细";
+            this.Text = "签约回款";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);

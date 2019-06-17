@@ -193,6 +193,8 @@ namespace Commission.Forms
         {
             bool result = true;
 
+            this.Focus();
+
             dataGridView_SaleItem.EndEdit();
 
 
@@ -230,7 +232,7 @@ namespace Commission.Forms
             if (objResult != null)
             {
                 int paraValue = int.Parse(objResult.ToString());
-                sql = string.Format("select DATEDIFF(DAY,'{0}', GETDATE()) diff", dateTimePicker_SubscribeDate.Value.ToString("yyyy-MM-dd"));
+                sql = string.Format("select DATEDIFF(DAY,'{0}', CONVERT(VARCHAR(10),GETDATE(),120)) diff", dateTimePicker_SubscribeDate.Value.ToString("yyyy-MM-dd"));
                 int diff = int.Parse(SqlHelper.ExecuteScalar(sql).ToString());
                 if (diff > paraValue)
                 {

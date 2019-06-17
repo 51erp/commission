@@ -198,7 +198,7 @@ namespace Commission.Forms
                 return;
             }
 
-            string sql = string.Format("update FullSettleMain set Checker = '{0}', CheckDate = GETDATE() where FullSettleID = {1}", Login.User.UserName, FullSettleID);
+            string sql = string.Format("update FullSettleMain set Checker = '{0}', CheckDate = CONVERT(VARCHAR(10),GETDATE(),120) where FullSettleID = {1}", Login.User.UserName, FullSettleID);
             if (SqlHelper.ExecuteNonQuery(sql) > 0)
                 label_Checker.Text = Login.User.UserName;
  

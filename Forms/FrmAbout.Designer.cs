@@ -40,7 +40,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(148, 15);
             this.label1.TabIndex = 0;
-            this.label1.Text = "版本：1.0.0.190408";
+            this.label1.Text = "版本：1.0.0.190525";
             // 
             // FrmAbout
             // 

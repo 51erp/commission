@@ -81,7 +81,7 @@ namespace Commission.MenuForms
             string condition = string.Format(" select Distinct ContractID from Receipt where SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{0}' and ProjectID = {1} ", closingDate, Login.User.ProjectID);
 
             //收款日期小于截止日期且未结算
-            sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate, PaymentName,  "
+            sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, CONVERT(varchar(10),SubscribeDate,120) SubscribeDate, SubscribeSalesID, SubscribeSalesName,  CONVERT(varchar(10),ContractDate,120) ContractDate, PaymentName,  "
                 + " b.ItemID, b.Building, b.Unit, b.ItemNum, b.Area, b.Price, b.Amount, "
                 + " DownPayRate, DownPayAmount, Loan, TotalAmount, a.SalesID, a.SalesName, "
                 + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate "
@@ -136,7 +136,7 @@ namespace Commission.MenuForms
             for (int i = 0; i < dtContract.Rows.Count; i++)
             {
                 firstSettle = 0;
-                if (IsSetted(dtContract.Rows[i]["ContractID"].ToString()) == false)
+                if (IsSetted(dtContract.Rows[i]["ContractID"].ToString()) == false)  //是否已有结算记录，有：直接结算，无：检测达标条件
                 {
                     if (IsStandard(dtContract.Rows[i]) == false)
                     {
@@ -167,9 +167,9 @@ namespace Commission.MenuForms
 
                 sql = "select ItemNum, Area, Price, Amount from ContractDetail where IsBind = 1 and ContractID = " + subId;
 
-                SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+                DataTable dtBind = SqlHelper.ExecuteDataTable(sql);
 
-                if (dr.HasRows)
+                if (dtBind.Rows.Count > 0)
                 {
                     DataTable dt = new DataTable();
 
@@ -178,22 +178,22 @@ namespace Commission.MenuForms
 
                     string fieldValue = subId;
 
-
                     int itemIdx = 0;     //一个房源相同尾号
-                    while (dr.Read())
+
+                    for (int iRow = 0; iRow < dtBind.Rows.Count; iRow++)
                     {
-                        for (int j = 0; j < dr.FieldCount; j++) //????考虑：不在重新创建表和字段，主表一次合并，提高效率??
+                        for (int iCol = 0; iCol < dtBind.Columns.Count; iCol++) //????考虑：不在重新创建表和字段，主表一次合并，提高效率??
                         {
-                            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
+                            string fieldName = "BIND_" + dtBind.Columns[iCol].ColumnName + itemIdx;
                             dt.Columns.Add(fieldName, typeof(string));
 
-                            if (dr.GetName(j).Equals("Amount"))
+                            if (dtBind.Columns[iCol].ColumnName.Equals("Amount"))
                             {
-                                fieldValue += "," + string.Format(formatAmount, dr.GetValue(j));
+                                fieldValue += "," + string.Format(formatAmount, dtBind.Rows[iRow][iCol]);
                             }
                             else
                             {
-                                fieldValue += "," + dr.GetValue(j).ToString();
+                                fieldValue += "," + dtBind.Rows[iRow][iCol].ToString();
                             }
                         }
 
@@ -208,7 +208,55 @@ namespace Commission.MenuForms
                     dt.Rows.Add(strArray);
 
                     dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+
                 }
+
+                
+                
+                
+                
+                //SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+
+                //if (dr.HasRows)
+                //{
+                //    DataTable dt = new DataTable();
+
+                //    dt.Columns.Add("ContractID", typeof(int));
+                //    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
+
+                //    string fieldValue = subId;
+
+
+                //    int itemIdx = 0;     //一个房源相同尾号
+                //    while (dr.Read())
+                //    {
+                //        for (int j = 0; j < dr.FieldCount; j++) //????考虑：不在重新创建表和字段，主表一次合并，提高效率??
+                //        {
+                //            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
+                //            dt.Columns.Add(fieldName, typeof(string));
+
+                //            if (dr.GetName(j).Equals("Amount"))
+                //            {
+                //                fieldValue += "," + string.Format(formatAmount, dr.GetValue(j));
+                //            }
+                //            else
+                //            {
+                //                fieldValue += "," + dr.GetValue(j).ToString();
+                //            }
+                //        }
+
+                //        itemIdx++;
+
+                //        if (itemIdx > iBindQuantity)
+                //            iBindQuantity = itemIdx;
+                //    }
+
+                //    string[] strArray = fieldValue.Split(',');
+
+                //    dt.Rows.Add(strArray);
+
+                //    dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+                //}
             }
 
             return dtContract;
@@ -468,8 +516,8 @@ namespace Commission.MenuForms
                     commission = Math.Round(commAll * recRate, 0, MidpointRounding.AwayFromZero);
                     break;
 
-                case SettleBase.InstallmentStage:
-                    commission = Math.Round(commAll * recRate, 0, MidpointRounding.AwayFromZero);
+                case SettleBase.InstallmentStage:  //?????????????????????????????????????
+                    commission = Math.Round(GetInstallmentCommission(contractId, recSettleTotal, commAll, totalAmount), 0, MidpointRounding.AwayFromZero);
                     break;
 
                 case SettleBase.Single:
@@ -489,6 +537,74 @@ namespace Commission.MenuForms
             return new object[] { int.Parse(contractId), (int)premiumAll, (int)commAll, (int)settleAll, (int)noSettleAll, (int)premium, (int)commission, (int)commTotal, firstSettle };
         }
 
+
+        /// <summary>
+        /// 分期可结佣金
+        /// </summary>
+        /// <param name="contractID"></param>
+        /// <param name="recSettleTotal">可结回款</param>
+        /// <param name="commAll">佣金总额</param>
+        /// <param name="totalAmount">合同总额</param>
+        /// <returns></returns>
+        private double GetInstallmentCommission(string contractID, double recSettleTotal, double commAll, double totalAmount)
+        {
+            double result = 0;
+
+            string sql = string.Empty;
+
+            sql = string.Format("select Sequence,Amount, (select SUM(Amount) from Installment b where b.Sequence < a.Sequence and settled = 0 and  ContractID = {0}) as AmountSum "
+                + " from Installment a where settled = 0 and  ContractID = {0} order by Sequence ", contractID);
+
+            DataTable dtInstallment = SqlHelper.ExecuteDataTable(sql);
+
+
+            if (dtInstallment.Rows.Count > 0) //有未结阶段，即存在未达标值
+            {
+                //分期总额
+                sql = string.Format("select ISNULL(SUM(Amount),0)  from Installment where ContractID = {0}", contractID);
+                double installmentSum = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
+
+                //已结分期总额
+                sql = string.Format("select ISNULL(SUM(Amount),0)  from Installment where settled != 0 and ContractID = {0}", contractID);
+                double installmentSettled = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
+
+
+                //累计回款
+                sql = string.Format("select ISNULL(SUM(Amount),0) from receipt where ContractID = {0}", contractID);
+                double recSum = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
+
+                if (recSum >= installmentSum)
+                {
+                    //佣金总额 *（(累计回款-已结分期总额)/合同金额）
+                    result = commAll * ((recSum - installmentSettled) / totalAmount);
+                }
+                else
+                {
+                    double stageSum = 0; //阶段汇总
+                    for (int i = 0; i < dtInstallment.Rows.Count; i++)
+                    {
+                        if (recSum > double.Parse(dtInstallment.Rows[i]["AmountSum"].ToString()))
+                        {
+                            stageSum += double.Parse(dtInstallment.Rows[i]["Amount"].ToString());
+                        }
+                    }
+
+                    //佣金总额 * (阶段汇总/合同金额）
+                    result = commAll * (stageSum / totalAmount);
+
+                }
+            }
+            else
+            {
+                //佣金总额*（未结回款/合同金额）
+                result = commAll * (recSettleTotal / totalAmount);
+            }
+
+
+
+
+            return result;
+        }
 
 
         //////////////////////////////////////////////////////////////////////////////////
@@ -532,6 +648,9 @@ namespace Commission.MenuForms
         {
             bool result = false;
 
+            int errCode = 0;
+            string errMsg = string.Empty;
+
             using (SqlConnection connection = SqlHelper.OpenConnection())  //创建连接对象 
             {
                 SqlTransaction sqlTran = connection.BeginTransaction();    //开始事务 
@@ -540,13 +659,14 @@ namespace Commission.MenuForms
 
                 try
                 {
+                    errCode = 1;
                     //添加结算主表
                     string settleId = string.Empty;
                     string values = "'" + tabName + "'," + Login.User.ProjectID + ",'" + Login.User.ProjectName + "','" + SettlePeriod +"','" + SettleClosingDate +"','" + tabDate + "','" + tabMaker + "',GETDATE(),'" + Login.User.UserName + "'";
                     cmd.CommandText = string.Format("insert into SettleMain (TableName, ProjectID, ProjectName, SettlePeriod, ClosingDate, SettleDate, TableMaker, MakeDate, UserName) output inserted.SettleID values ({0})", values);
                     settleId = cmd.ExecuteScalar().ToString();
 
-
+                    errCode = 2;
                     //添加结算从表
                     DataTable dt_settle = (DataTable)dataGridView_Settlement.DataSource;
 
@@ -609,9 +729,10 @@ namespace Commission.MenuForms
 
 
                         cmd.CommandText = fields + "(" + values + ")";
+                        errMsg = cmd.CommandText;
                         cmd.ExecuteNonQuery();
 
-
+                        errCode = 3;
                         //分期结算：设置分期指标的结算状态,更新为sid
                         if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentStage)
                         {
@@ -625,7 +746,7 @@ namespace Commission.MenuForms
                         }
 
 
-
+                        errCode = 4;
                         //更新收款状态
                         cmd.CommandText = string.Format("update Receipt set SettleState = {0} where  SettleState = 0 and ContractID = {1} and  Convert(Varchar(10),RecDate,120)  <= '{2}'", settleId, contractId, SettleClosingDate);
                         cmd.ExecuteNonQuery();
@@ -640,6 +761,7 @@ namespace Commission.MenuForms
                 {
                     sqlTran.Rollback();  //异常事务回滚
                     Prompt.Error("操作失败， 错误：" + ex.Message);
+                    Prompt.Error("Error Code = " + errCode.ToString() + "\r\n" + errMsg);
                 }
             }
             return result;

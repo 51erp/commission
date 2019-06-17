@@ -184,3 +184,7 @@ D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmPerformanceRate.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmJobChangeRep.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmConfirmDate.resources
 D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmSalesList.resources
+D:\VSProjects\Commission\obj\Debug\Commission.MenuForms.FrmSubReceipt.resources
+D:\VSProjects\Commission\obj\Debug\Commission.MenuForms.FrmNoJob.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmJobOperation.resources
+D:\VSProjects\Commission\obj\Debug\Commission.Forms.FrmDept.resources

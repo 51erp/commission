@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Open = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Imp = new System.Windows.Forms.ToolStripButton();
@@ -107,7 +107,10 @@
             this.DownPayAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Loan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecDownPay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DownPayDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RecLoan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoanDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Settled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ConSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip2.SuspendLayout();
@@ -299,7 +302,10 @@
             this.DownPayAmount,
             this.Loan,
             this.RecDownPay,
+            this.DownPayDate,
             this.RecLoan,
+            this.LoanDate,
+            this.Settled,
             this.ConSalesID,
             this.ConSalesName});
             this.dataGridView_Contract.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -392,9 +398,9 @@
             // SubArea
             // 
             this.SubArea.DataPropertyName = "SubArea";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle13.Format = "F2";
-            this.SubArea.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "F2";
+            this.SubArea.DefaultCellStyle = dataGridViewCellStyle1;
             this.SubArea.HeaderText = "认购面积";
             this.SubArea.Name = "SubArea";
             this.SubArea.ReadOnly = true;
@@ -403,9 +409,9 @@
             // SubPrice
             // 
             this.SubPrice.DataPropertyName = "SubPrice";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "F4";
-            this.SubPrice.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "F4";
+            this.SubPrice.DefaultCellStyle = dataGridViewCellStyle2;
             this.SubPrice.HeaderText = "认购单价";
             this.SubPrice.Name = "SubPrice";
             this.SubPrice.ReadOnly = true;
@@ -414,9 +420,9 @@
             // SubAmount
             // 
             this.SubAmount.DataPropertyName = "SubAmount";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "F0";
-            this.SubAmount.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "F0";
+            this.SubAmount.DefaultCellStyle = dataGridViewCellStyle3;
             this.SubAmount.HeaderText = "认购总价";
             this.SubAmount.Name = "SubAmount";
             this.SubAmount.ReadOnly = true;
@@ -545,9 +551,9 @@
             // SubTotalAmount
             // 
             this.SubTotalAmount.DataPropertyName = "SubTotalAmount";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "F0";
-            this.SubTotalAmount.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "F0";
+            this.SubTotalAmount.DefaultCellStyle = dataGridViewCellStyle4;
             this.SubTotalAmount.HeaderText = "认购总款";
             this.SubTotalAmount.Name = "SubTotalAmount";
             this.SubTotalAmount.ReadOnly = true;
@@ -807,12 +813,33 @@
             this.RecDownPay.Name = "RecDownPay";
             this.RecDownPay.ReadOnly = true;
             // 
+            // DownPayDate
+            // 
+            this.DownPayDate.DataPropertyName = "DownPayDate";
+            this.DownPayDate.HeaderText = "收款日期";
+            this.DownPayDate.Name = "DownPayDate";
+            this.DownPayDate.ReadOnly = true;
+            // 
             // RecLoan
             // 
             this.RecLoan.DataPropertyName = "RecLoan";
             this.RecLoan.HeaderText = "已收贷款";
             this.RecLoan.Name = "RecLoan";
             this.RecLoan.ReadOnly = true;
+            // 
+            // LoanDate
+            // 
+            this.LoanDate.DataPropertyName = "LoanDate";
+            this.LoanDate.HeaderText = "放贷日期";
+            this.LoanDate.Name = "LoanDate";
+            this.LoanDate.ReadOnly = true;
+            // 
+            // Settled
+            // 
+            this.Settled.DataPropertyName = "Settled";
+            this.Settled.HeaderText = "是否结算";
+            this.Settled.Name = "Settled";
+            this.Settled.ReadOnly = true;
             // 
             // ConSalesID
             // 
@@ -841,6 +868,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "签约导入";
             this.Load += new System.EventHandler(this.FrmImpSubscribe_Load);
+            this.Shown += new System.EventHandler(this.FrmImpContract_Shown);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Contract)).EndInit();
@@ -926,7 +954,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DownPayAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn Loan;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecDownPay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DownPayDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn RecLoan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoanDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Settled;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConSalesID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ConSalesName;
     }

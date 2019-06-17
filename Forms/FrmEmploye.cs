@@ -43,19 +43,40 @@ namespace Commission.Forms
             this.treeView_Dept.DrawNode += new DrawTreeNodeEventHandler(treeViewDrawNode);
         }
 
-
+        //无项目名称根节点
         private void InitDeptNode()
         {
-            TreeNode root = new TreeNode();
-            root.Name = "0";
-            root.Text = Login.User.ProjectName;
+            string sql = string.Format("select DeptID, DeptName from Department where ParentID = 0 and ProjectID = {0}", Login.User.ProjectID);
+            DataTable dtDept = SqlHelper.ExecuteDataTable(sql);
 
-            treeView_Dept.Nodes.Add(root);
+            foreach (DataRow dr in dtDept.Rows)
+            {
+                TreeNode root = new TreeNode();
+                root.Name = dr["DeptID"].ToString();
+                root.Text = dr["DeptName"].ToString();
 
-            LoadDeptSubNode(root);
+                treeView_Dept.Nodes.Add(root);
+
+                LoadDeptSubNode(root);
+            }
 
             treeView_Dept.ExpandAll();
         }
+
+
+        //以项目名称为根节点
+        //private void InitDeptNode()
+        //{
+        //    TreeNode root = new TreeNode();
+        //    root.Name = "0";
+        //    root.Text = Login.User.ProjectName;
+
+        //    treeView_Dept.Nodes.Add(root);
+
+        //    LoadDeptSubNode(root);
+
+        //    treeView_Dept.ExpandAll();
+        //}
 
         private void LoadDeptSubNode(TreeNode node)
         {
@@ -80,7 +101,7 @@ namespace Commission.Forms
 
             sql = string.Format("select DeptID, DeptName,a.SalesID, a.SalesName, Phone, InDate, BeginDate, Position, JobType, Memo from Sales a "
                 + "inner join JobTrack b on a.SalesID = b.SalesID "
-                + "where EndDate is null and DeptId = {0} order by JobType desc, a.SalesID ", deptId);
+                + "where EndDate is null and DeptId = {0} and a.ProjectID = {1} order by JobType desc, a.SalesID ", deptId, Login.User.ProjectID);
             dataGridView_Employe.DataSource = SqlHelper.ExecuteDataTable(sql);
         }
 
@@ -92,11 +113,11 @@ namespace Commission.Forms
                 return;
             }
 
-            if (treeView_Dept.SelectedNode.Parent == null)
-            {
-                Prompt.Warning("无法在项目下直接新增员工，请选择部门！");
-                return;
-            }
+            //if (treeView_Dept.SelectedNode.Parent == null)
+            //{
+            //    Prompt.Warning("无法在项目下直接新增员工，请选择部门！");
+            //    return;
+            //}
 
             FrmEmployeAdd add = new FrmEmployeAdd();
             add.DeptId = treeView_Dept.SelectedNode.Name;
@@ -201,7 +222,7 @@ namespace Commission.Forms
 
                     try
                     {
-                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OperationType = '调出' where SalesID = {1} and DeptID = {2} and EndDate is null",
+                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OrigOperationType = OperationType, OperationType = '调出' where SalesID = {1} and DeptID = {2} and EndDate is null",
                                     OutDate, dataGridView_Employe.CurrentRow.Cells["ColID"].Value.ToString(), dataGridView_Employe.CurrentRow.Cells["ColDeptID"].Value.ToString());
                         cmd.ExecuteNonQuery();
 
@@ -255,7 +276,7 @@ namespace Commission.Forms
 
                     try
                     {
-                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OperationType = '离职' where SalesID = {1} and EndDate is null", OutDate, salesID);
+                        cmd.CommandText = string.Format("update JobTrack set EndDate = '{0}', OrigOperationType = OperationType, OperationType = '离职' where SalesID = {1} and EndDate is null", OutDate, salesID);
                         cmd.ExecuteNonQuery();
 
                         cmd.CommandText = string.Format("update Sales Set OutDate ='{0}' where SalesID = {1}", OutDate, salesID);
@@ -312,26 +333,24 @@ namespace Commission.Forms
 
             FrmOrganization destDept = new FrmOrganization();
 
-            destDept.Text = "请选择调入部门";
+            destDept.Text = "请选择调岗信息";
             destDept.FrmMode = FormMode.view;
 
             destDept.SalesID = salesID;
             destDept.DeptID = treeView_Dept.SelectedNode.Name;
+            destDept.JobType = dataGridView_Employe.CurrentRow.Cells["ColJobType"].Value.ToString();
 
             if (destDept.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                bool isOnlyTitle = destDept.DeptID == treeView_Dept.SelectedNode.Name;
+
                 deptID = destDept.DeptID;
                 deptName = destDept.DeptName;
                 changeDate = destDept.ChangeDate;
                 jobType = destDept.JobType;
-            }
-            else
-            {
-                return;
-            }
 
-            ExecChange(false, salesID, salesName, changeDate, deptID, deptName, jobType);
-
+                ExecChange(isOnlyTitle, salesID, salesName, changeDate, deptID, deptName, jobType);
+            }
         }
 
         private void ExecChange(bool isOnlyTitle, string salesID, string salesName, string changeDate, string destDeptID, string destDeptName, string jobType)
@@ -476,7 +495,7 @@ namespace Commission.Forms
         {
             //and SalesName like '%{0}%' and Phone like '%{1}%'
 
-            string condition = string.Empty;
+            string condition = " and a.ProjectID = " + Login.User.ProjectID;
 
             if (!textBox_Name.Text.Trim().Equals(""))
             {
@@ -542,6 +561,12 @@ namespace Commission.Forms
 
         private void toolStripButton_JobReturn_Click(object sender, EventArgs e)
         {
+            //if (treeView_Dept.SelectedNode.Parent == null)
+            //{
+            //    Prompt.Warning("无法在项目根节点下操作，请选择部门节点！");
+            //    return;
+            //}
+
             FrmSalesList frmSales = new FrmSalesList();
             frmSales.OperationType = "复职";
             if (frmSales.ShowDialog() == System.Windows.Forms.DialogResult.OK)

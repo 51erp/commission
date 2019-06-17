@@ -54,6 +54,7 @@
             // 
             // dateTimePicker_Receipt
             // 
+            this.dateTimePicker_Receipt.CustomFormat = "";
             this.dateTimePicker_Receipt.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker_Receipt.Location = new System.Drawing.Point(280, 51);
             this.dateTimePicker_Receipt.Name = "dateTimePicker_Receipt";

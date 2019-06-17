@@ -184,7 +184,7 @@ namespace Commission.Business
             {
                 sql = "select a.SalesID, a.SalesName from sales a "
                     + " inner join JobTrack b on a.SalesID = b.SalesID "
-                    + " where b.EndDate is null and JobType = '员工' and ProjectID = " + Login.User.ProjectID;
+                    + " where b.EndDate is null and a.ProjectID = " + Login.User.ProjectID;
             }
             else
             {

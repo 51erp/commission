@@ -35,12 +35,9 @@ namespace Commission.Report
             string beginDate = dateTimePicker_Period.Value.ToString("yyyy-MM-01");
             string endDate = DateTime.Parse(beginDate).AddMonths(1).AddDays(-1).ToString("yyy-MM-dd");
 
-            //MessageBox.Show("BeginDate: " + beginDate + "\n\r" + "EndDate   : " + endDate);
-
             GenDataGridViewBaseStru();
 
             DataTable dtBase = GetBaseData(beginDate, endDate);
-
 
             int iQuantity = 0;
 
@@ -63,17 +60,17 @@ namespace Commission.Report
             dataGridView_Report.AutoGenerateColumns = false;
             dataGridView_Report.DataSource = null;
 
-            string fieldsName = "ContractID, Building, Unit, ItemNum,ItemTypeName,CustomerName,CustomerPhone,SubscribeSalesName,SalesName,"
+            string fieldsName = "ContractID,Building,Unit,ItemNum,ItemTypeName,CustomerName,CustomerPhone,SubscribeSalesName,SalesName,"
                + "SubscribeNum,SubscribeDate,SubArea,SubPrice,SubAmount,SubTotalAmount,"
                + "ContractNum,ContractDate,Area,Price,Amount,TotalAmount,DownPayAmount,Loan,"
-               + "PreRecTotalAmt,PeriodRecLoan,PeriodRecDownPay,PeriodRecDiffer,PeriodRecDeliver,PeriodRecLimit,PeriodRecTotal,"
+               + "PreRecTotalAmt,PeriodRecLoan,PeriodRecDownPay,PeriodRecDiffer,PeriodRecDeliver,PeriodRecLimit,PeriodReturn,PeriodRecTotal,"
                + "PaymentName,DownPayRate,LastRecDate,ReceiptTotalAmt,NoReceiptTotalAmt,"
                + "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9";
 
             string headerText = "ContractID,楼号,单元,房号,房产类型,客户名称,客户电话,认购置业顾问,现置业顾问,"
                 + "认购编号,认购日期,认购面积,认购单价,认购总价,认购总额,"
                 + "签约编号,签约日期,签约面积,签约单价,签约总价,签约总额,应付首付,贷款金额,"
-                + "当期之前回款,当期放贷,当期首付,当期补差,当期交房,当期限价,当期合计,"
+                + "当期之前回款,当期放贷,当期首付,当期补差,当期交房,当期限价,当期退房,当期合计,"
                 + "付款方式,首付比例(%),回款日期,截止当期已收,截止当期未收,"
                 + "备注0,备注1,备注2,备注3,备注4,备注5,备注6,备注7,备注8,备注9";
 
@@ -118,9 +115,10 @@ namespace Commission.Report
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecDiffer"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecDeliver"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecLimit"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_Report.Columns["PeriodReturn"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Report.Columns["PeriodRecTotal"], ColType.amount);
 
-            //dataGridView_Report.Columns["CustomerPhone"].Frozen = true;
+            dataGridView_Report.Columns["CustomerPhone"].Frozen = true;
             
         }
 
@@ -151,27 +149,27 @@ namespace Commission.Report
               + " (SUM(case TypeCode when '1' then amount else 0 end) + SUM(case TypeCode when '2' then amount else 0 end)) PeriodRecDownPay,"
               + " SUM(case TypeCode when '3' then amount else 0 end) PeriodRecDiffer, "
               + " SUM(case TypeCode when '4' then amount else 0 end) PeriodRecDeliver, "
-              + " SUM(case TypeCode when '5' then amount else 0 end) PeriodRecLimit,"
+              + " SUM(case TypeCode when '5' then amount else 0 end) PeriodRecLimit,"  
+              + " SUM(case TypeCode when '6' then amount else 0 end) PeriodReturn,"  
               + " SUM(amount) PeriodRecTotal"
               + " from Receipt  where contractid is not null and  Convert(Varchar(10),RecDate,120) >= '{0}'and Convert(Varchar(10),RecDate,120) <= '{1}' and ProjectID = {2} "
               + " group by ContractID ", beginDate, endDate, Login.User.ProjectID);
 
             DataTable dtReceipt = SqlHelper.ExecuteDataTable(sql);
 
-            Console.WriteLine("Start:" + dtBase.Rows.Count);
             for (int i = 0; i < dtBase.Rows.Count; i++)
             {
                 DataRow[] dr = dtReceipt.Select("ContractID = " + dtBase.Rows[i]["ContractID"].ToString());
                 if (dr.Length == 0)
                 {
                     dtBase.Rows[i].Delete();
-                    Console.WriteLine("Count-" + dtBase.Rows.Count);
                 }
             }
 
             dtBase.AcceptChanges();
 
             dtBase.Merge(dtReceipt, false, MissingSchemaAction.Add);
+
 
             //当期之前回款
             sql = string.Format("select ContractID, ISNULL(SUM(Amount),0) as PreRecTotalAmt from Receipt where ContractID is not null and RecDate < '{0}' and ProjectID = {1} group by ContractID ", beginDate, Login.User.ProjectID);
@@ -188,6 +186,7 @@ namespace Commission.Report
             dtPreRec.AcceptChanges();
 
             dtBase.Merge(dtPreRec, false, MissingSchemaAction.Add);
+
             
             //累计已回，累计未回
             sql = string.Format("select a.ContractID , ISNULL(SUM(Amount),0) as ReceiptTotalAmt, TotalAmount - ISNULL(SUM(Amount),0) as NoReceiptTotalAmt from ContractMain a"
@@ -207,6 +206,7 @@ namespace Commission.Report
             dtRecTotal.AcceptChanges();
 
             dtBase.Merge(dtRecTotal, false, MissingSchemaAction.Add);
+
 
             //最后收款日期
             sql = string.Format("select ContractID, MAX(RecDate) as LastRecDate from Receipt  where ContractID is not null and RecDate <= '{0}' and ProjectID = {1} group by ContractID", endDate, Login.User.ProjectID);

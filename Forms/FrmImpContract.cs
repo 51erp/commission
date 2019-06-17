@@ -29,11 +29,6 @@ namespace Commission.Forms
 
         private void FrmImpSubscribe_Load(object sender, EventArgs e)
         {
-            DataGridViewCellStyle dgvcs = new DataGridViewCellStyle();
-            dgvcs.BackColor = Color.Red;
-            dataGridView_Contract.Columns["ColCustomerID"].DefaultCellStyle = dgvcs;
-            dataGridView_Contract.Columns["ColItemID"].DefaultCellStyle = dgvcs;
-            dataGridView_Contract.Columns["ColSalesID"].DefaultCellStyle = dgvcs;
         }
 
 
@@ -66,7 +61,7 @@ namespace Commission.Forms
 
                     foreach (DataGridViewColumn dgvCol in dataGridView_Contract.Columns)
                     {
-                        //Console.WriteLine(dgvCol.Name);
+                        Console.WriteLine(dgvCol.Name);
                         DataColumn col = new DataColumn(dgvCol.Name);
                         dtImpData.Columns.Add(col);
                     }
@@ -105,15 +100,28 @@ namespace Commission.Forms
 
         private void toolStripButton_Imp_Click(object sender, EventArgs e)
         {
+            toolStripButton_Imp.Enabled = false;
+
+
+            toolStripLabel_Status.Text = "状态：数据导入中...";
+
+
+            this.Refresh();
+
+
             if (!DataValidate())
             {
+                toolStripButton_Imp.Enabled = true;
+
+
+                toolStripLabel_Status.Text = "状态：准备";
+
                 return;
             }
 
             string sql = string.Empty;
 
-            toolStripLabel_Status.Text = "状态：数据导入中...";
-            toolStripButton_Imp.Enabled = false;
+
 
 
             using (SqlConnection connection = SqlHelper.OpenConnection())
@@ -122,12 +130,15 @@ namespace Commission.Forms
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.Transaction = sqlTran;
 
+
+                string timestamp = DateTime.Parse(SqlHelper.ExecuteScalar("select GetDate()").ToString()).ToString("yyMMddHHmmss");
+
                 try
                 {
                     foreach (DataRow row in dtImpData.Rows)
                     {
                         //认购主表
-                        cmd.CommandText = GenSqlSubMain(row);
+                        cmd.CommandText = GenSqlSubMain(row, timestamp);
                         string subscribeID = cmd.ExecuteScalar().ToString();
 
                         //认购从表
@@ -142,7 +153,7 @@ namespace Commission.Forms
                         }
 
                         //签约主表
-                        cmd.CommandText = GenSqlConMain(row, subscribeID);
+                        cmd.CommandText = GenSqlConMain(row, subscribeID, timestamp);
                         string contractID = cmd.ExecuteScalar().ToString();
 
                         //签约从表
@@ -228,12 +239,12 @@ namespace Commission.Forms
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private string GenSqlSubMain(DataRow row)
+        private string GenSqlSubMain(DataRow row, string timestamp)
         {
             string sql = string.Empty;
 
             string fields = "SubscribeNum, ProjectID, ProjectName, CustomerID, CustomerName, CustomerPhone, SubscribeDate, "
-                + "TotalAmount, SalesID, SalesName, MakeDate, UserID, UserName ";
+                + "TotalAmount, SalesID, SalesName, MakeDate, UserID, UserName, Import ";
                 
                 //+ "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9";
 
@@ -251,7 +262,8 @@ namespace Commission.Forms
                 + ",'" + row["SubSalesName"] + "'"
                 + ",getDate()"
                 + "," + Login.User.UserID
-                + ",'" + Login.User.UserName + "'";  
+                + ",'" + Login.User.UserName + "'"
+                + ",'" + timestamp + "'";  
 
             sql = "insert into [SubscribeMain] (" + fields + ") output inserted.SubscribeID values (" + values + ")";
 
@@ -316,7 +328,7 @@ namespace Commission.Forms
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>
-        private string GenSqlConMain(DataRow row, string subscribeID)
+        private string GenSqlConMain(DataRow row, string subscribeID, string timestamp)
         {
             string sql = string.Empty;
 
@@ -325,7 +337,7 @@ namespace Commission.Forms
 
             string fields = "SubscribeID, SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractNum, ProjectID, ProjectName, " 
                 + "CustomerID, CustomerName, CustomerPhone, ContractDate, "
-                + "PaymentID, PaymentName, PaymentType, DownPayRate, DownPayAmount, Loan, TotalAmount, SalesID, SalesName, MakeDate, UserID, UserName ";
+                + "PaymentID, PaymentName, PaymentType, DownPayRate, DownPayAmount, Loan, TotalAmount, SalesID, SalesName, MakeDate, UserID, UserName, Import ";
 
             //+ "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9";
 
@@ -355,7 +367,8 @@ namespace Commission.Forms
                 + ",'" + row["ConSalesName"] + "'"
                 + ",getDate()"
                 + "," + Login.User.UserID
-                + ",'" + Login.User.UserName + "'";
+                + ",'" + Login.User.UserName + "'"
+                + ",'" + timestamp + "'";
 
             sql = "insert into [ContractMain] (" + fields + ") output inserted.ContractID values (" + values + ")";
 
@@ -492,18 +505,28 @@ namespace Commission.Forms
 
             string loan = isLoan ? "1" : "0";
 
-            string date= "CONVERT(varchar(10), getdate(), 120)";
+            string settled = "0";
 
-            string fields = "ContractID, ProjectID, Amount, RecDate, TypeCode, TypeName, IsLoan, SalesID, SalesName, MakeDate, Maker";
+            if (row["Settled"].ToString().Equals("1"))
+            {
+                settled = "-1";
+            }
+
+            string date = string.Empty; ;
+
+            string fields = "ContractID, ProjectID, Amount, RecDate, TypeCode, TypeName, IsLoan, SettleState, SalesID, SalesName, MakeDate, Maker";
 
             if (isLoan)
             {
+                date = row["LoanDate"].ToString();
                 double.TryParse(row["RecLoan"].ToString(), out amount);
                 typeCode = "0";
                 typeName = "贷款";
+
             }
             else
             {
+                date = row["DownPayDate"].ToString();
                 double.TryParse(row["RecDownPay"].ToString(), out amount);
                 typeCode = "2";
                 typeName = "首付";
@@ -513,6 +536,11 @@ namespace Commission.Forms
             if (amount == 0)
                 return "";
 
+            if (date.Equals(""))
+                date = "null";
+            else
+                date = "'" + date + "'";
+
             string values = contractID + ","
                 + Login.User.ProjectID + ","
                 + amount + ","
@@ -520,9 +548,10 @@ namespace Commission.Forms
                 + typeCode + ",'"
                 + typeName + "',"
                 + loan + ","
+                + settled + ","
                 + row["ConSalesID"] + ",'"
                 + row["ConSalesName"] + "',"
-                + date + ",'"
+                + "GETDATE(),'"
                 + Login.User.UserName + "'"; 
 
 
@@ -657,6 +686,33 @@ namespace Commission.Forms
             string sql = string.Format("select ID '付款方式ID', PayName '付款方式名称', PayTypeName '付款类型', DownPayRate '首付比例', StandardName '结算条件', BaseName '结算基础' from PaymentMode  where ProjectID = {0}", Login.User.ProjectID);
 
             Common.Exp2XLS(SqlHelper.ExecuteDataTable(sql));
+        }
+
+        private void FrmImpContract_Shown(object sender, EventArgs e)
+        {
+            try
+            {
+                //DataGridViewCellStyle dgvcs = new DataGridViewCellStyle();
+                //dgvcs.BackColor = Color.Red;
+
+                //dataGridView_Contract.Columns["ColCustomerID"].DefaultCellStyle = dgvcs;
+                //dataGridView_Contract.Columns["ColItemID"].DefaultCellStyle = dgvcs;
+                //dataGridView_Contract.Columns["ColSalesID"].DefaultCellStyle = dgvcs;
+
+
+                //dataGridView_Contract.Columns["ColCustomerID"].DefaultCellStyle.BackColor = Color.Red;
+                //dataGridView_Contract.Columns["ColItemID"].DefaultCellStyle.BackColor = Color.Red;
+                //dataGridView_Contract.Columns["ColSalesID"].DefaultCellStyle.BackColor = Color.Red;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Message: " + ex.Message);
+            }
+            finally
+            {
+                //MessageBox.Show("装载完成！");
+            }
+
         }
 
 

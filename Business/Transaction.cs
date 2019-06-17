@@ -625,13 +625,19 @@ namespace Commission.Business
             //获取绑定（附属）物业相关信息
             for (int i = 0; i < dtContract.Rows.Count; i++)
             {
+
+                //Console.WriteLine("the dtcontract row : " + i.ToString());
                 string subId = dtContract.Rows[i]["ContractID"].ToString();
 
                 sql = "select ItemNum, Area, Price, Amount from ContractDetail where IsBind = 1 and ContractID = " + subId;
 
-                SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+                //Console.WriteLine("sql: " + sql);
 
-                if (dr.HasRows)
+                DataTable dtBind = SqlHelper.ExecuteDataTable(sql);
+
+                //string fieldValue = string.Empty;
+
+                for (int idx = 0; idx < dtBind.Rows.Count; idx++)
                 {
                     DataTable dt = new DataTable();
 
@@ -642,28 +648,26 @@ namespace Commission.Business
 
 
                     int itemIdx = 0;     //一个房源相同尾号
-                    while (dr.Read())
+
+                    for (int j = 0; j < dtBind.Columns.Count; j++)
                     {
-                        for (int j = 0; j < dr.FieldCount; j++) 
+                        string fieldName = "BIND_" + dtBind.Columns[j].ColumnName + itemIdx;
+                        dt.Columns.Add(fieldName, typeof(string));
+
+                        if (dtBind.Columns[j].ColumnName.Equals("Amount"))
                         {
-                            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
-                            dt.Columns.Add(fieldName, typeof(string));
-
-                            if (dr.GetName(j).Equals("Amount"))
-                            {
-                                fieldValue += "," + string.Format(formatAmount, dr.GetValue(j));
-                            }
-                            else
-                            {
-                                fieldValue += "," + dr.GetValue(j).ToString();
-                            }
+                            fieldValue += "," + string.Format(formatAmount, dtBind.Rows[idx][j]);
                         }
-
-                        itemIdx++;
-
-                        if (itemIdx > iBindQuantity)
-                            iBindQuantity = itemIdx;
+                        else
+                        {
+                            fieldValue += "," + dtBind.Rows[idx][j].ToString();
+                        }
                     }
+
+                    itemIdx++;
+
+                    if (itemIdx > iBindQuantity)
+                        iBindQuantity = itemIdx;
 
                     string[] strArray = fieldValue.Split(',');
 

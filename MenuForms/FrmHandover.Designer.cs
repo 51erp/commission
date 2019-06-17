@@ -30,9 +30,10 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox_Sales = new System.Windows.Forms.TextBox();
+            this.button_SalesMore = new System.Windows.Forms.Button();
             this.comboBox_NewSalesName = new System.Windows.Forms.ComboBox();
             this.comboBox_type = new System.Windows.Forms.ComboBox();
-            this.comboBox_Sales = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -76,8 +77,10 @@
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_All = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_None = new System.Windows.Forms.ToolStripButton();
-            this.button_SalesMore = new System.Windows.Forms.Button();
-            this.textBox_Sales = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_CustomerName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBox_ItemNum = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -98,13 +101,16 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.textBox_ItemNum);
+            this.groupBox1.Controls.Add(this.textBox_CustomerName);
             this.groupBox1.Controls.Add(this.textBox_Sales);
             this.groupBox1.Controls.Add(this.button_SalesMore);
             this.groupBox1.Controls.Add(this.comboBox_NewSalesName);
             this.groupBox1.Controls.Add(this.comboBox_type);
-            this.groupBox1.Controls.Add(this.comboBox_Sales);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.button_Handover);
             this.groupBox1.Controls.Add(this.button_Exit);
@@ -117,13 +123,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // textBox_Sales
+            // 
+            this.textBox_Sales.Location = new System.Drawing.Point(520, 23);
+            this.textBox_Sales.Name = "textBox_Sales";
+            this.textBox_Sales.ReadOnly = true;
+            this.textBox_Sales.Size = new System.Drawing.Size(80, 21);
+            this.textBox_Sales.TabIndex = 64;
+            // 
+            // button_SalesMore
+            // 
+            this.button_SalesMore.Image = global::Commission.Properties.Resources.more;
+            this.button_SalesMore.Location = new System.Drawing.Point(606, 22);
+            this.button_SalesMore.Name = "button_SalesMore";
+            this.button_SalesMore.Size = new System.Drawing.Size(26, 23);
+            this.button_SalesMore.TabIndex = 63;
+            this.button_SalesMore.UseVisualStyleBackColor = true;
+            this.button_SalesMore.Click += new System.EventHandler(this.button_SalesMore_Click);
+            // 
             // comboBox_NewSalesName
             // 
             this.comboBox_NewSalesName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_NewSalesName.FormattingEnabled = true;
-            this.comboBox_NewSalesName.Location = new System.Drawing.Point(614, 23);
+            this.comboBox_NewSalesName.Location = new System.Drawing.Point(863, 23);
             this.comboBox_NewSalesName.Name = "comboBox_NewSalesName";
-            this.comboBox_NewSalesName.Size = new System.Drawing.Size(115, 20);
+            this.comboBox_NewSalesName.Size = new System.Drawing.Size(80, 20);
             this.comboBox_NewSalesName.TabIndex = 62;
             // 
             // comboBox_type
@@ -138,20 +162,10 @@
             this.comboBox_type.Size = new System.Drawing.Size(96, 20);
             this.comboBox_type.TabIndex = 62;
             // 
-            // comboBox_Sales
-            // 
-            this.comboBox_Sales.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Sales.FormattingEnabled = true;
-            this.comboBox_Sales.Location = new System.Drawing.Point(1005, 23);
-            this.comboBox_Sales.Name = "comboBox_Sales";
-            this.comboBox_Sales.Size = new System.Drawing.Size(115, 20);
-            this.comboBox_Sales.TabIndex = 62;
-            this.comboBox_Sales.Visible = false;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(531, 27);
+            this.label2.Location = new System.Drawing.Point(780, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 54;
@@ -169,7 +183,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(195, 27);
+            this.label7.Location = new System.Drawing.Point(449, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 12);
             this.label7.TabIndex = 54;
@@ -178,7 +192,7 @@
             // button_Handover
             // 
             this.button_Handover.Image = global::Commission.Properties.Resources.copy_161;
-            this.button_Handover.Location = new System.Drawing.Point(735, 21);
+            this.button_Handover.Location = new System.Drawing.Point(949, 21);
             this.button_Handover.Name = "button_Handover";
             this.button_Handover.Size = new System.Drawing.Size(75, 24);
             this.button_Handover.TabIndex = 45;
@@ -191,7 +205,7 @@
             // button_Exit
             // 
             this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(867, 21);
+            this.button_Exit.Location = new System.Drawing.Point(1030, 21);
             this.button_Exit.Name = "button_Exit";
             this.button_Exit.Size = new System.Drawing.Size(75, 24);
             this.button_Exit.TabIndex = 45;
@@ -204,7 +218,7 @@
             // button_Search
             // 
             this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(431, 21);
+            this.button_Search.Location = new System.Drawing.Point(638, 21);
             this.button_Search.Name = "button_Search";
             this.button_Search.Size = new System.Drawing.Size(75, 24);
             this.button_Search.TabIndex = 44;
@@ -541,23 +555,37 @@
             this.toolStripButton_None.Text = "全清";
             this.toolStripButton_None.Click += new System.EventHandler(this.toolStripButton_None_Click);
             // 
-            // button_SalesMore
+            // label3
             // 
-            this.button_SalesMore.Image = global::Commission.Properties.Resources.more;
-            this.button_SalesMore.Location = new System.Drawing.Point(372, 22);
-            this.button_SalesMore.Name = "button_SalesMore";
-            this.button_SalesMore.Size = new System.Drawing.Size(26, 23);
-            this.button_SalesMore.TabIndex = 63;
-            this.button_SalesMore.UseVisualStyleBackColor = true;
-            this.button_SalesMore.Click += new System.EventHandler(this.button_SalesMore_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(180, 27);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 54;
+            this.label3.Text = "客户名称";
             // 
-            // textBox_Sales
+            // textBox_CustomerName
             // 
-            this.textBox_Sales.Location = new System.Drawing.Point(266, 23);
-            this.textBox_Sales.Name = "textBox_Sales";
-            this.textBox_Sales.ReadOnly = true;
-            this.textBox_Sales.Size = new System.Drawing.Size(100, 21);
-            this.textBox_Sales.TabIndex = 64;
+            this.textBox_CustomerName.Location = new System.Drawing.Point(239, 23);
+            this.textBox_CustomerName.Name = "textBox_CustomerName";
+            this.textBox_CustomerName.Size = new System.Drawing.Size(80, 21);
+            this.textBox_CustomerName.TabIndex = 65;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(328, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 12);
+            this.label4.TabIndex = 66;
+            this.label4.Text = "房号";
+            // 
+            // textBox_ItemNum
+            // 
+            this.textBox_ItemNum.Location = new System.Drawing.Point(363, 23);
+            this.textBox_ItemNum.Name = "textBox_ItemNum";
+            this.textBox_ItemNum.Size = new System.Drawing.Size(60, 21);
+            this.textBox_ItemNum.TabIndex = 65;
             // 
             // FrmHandover
             // 
@@ -591,7 +619,6 @@
         private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox_Sales;
         private System.Windows.Forms.ComboBox comboBox_NewSalesName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_Handover;
@@ -634,5 +661,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColExtField9;
         private System.Windows.Forms.TextBox textBox_Sales;
         private System.Windows.Forms.Button button_SalesMore;
+        private System.Windows.Forms.TextBox textBox_CustomerName;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox_ItemNum;
     }
 }

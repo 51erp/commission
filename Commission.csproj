@@ -176,6 +176,12 @@
     <Compile Include="Forms\FrmDelay.Designer.cs">
       <DependentUpon>FrmDelay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FrmDept.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmDept.Designer.cs">
+      <DependentUpon>FrmDept.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FrmEmploye.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,12 @@
     </Compile>
     <Compile Include="Forms\FrmJobChangeRep.Designer.cs">
       <DependentUpon>FrmJobChangeRep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmJobOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmJobOperation.Designer.cs">
+      <DependentUpon>FrmJobOperation.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmOrganization.cs">
       <SubType>Form</SubType>
@@ -454,6 +466,12 @@
     <Compile Include="MenuForms\FrmHandover.Designer.cs">
       <DependentUpon>FrmHandover.cs</DependentUpon>
     </Compile>
+    <Compile Include="MenuForms\FrmNoJob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuForms\FrmNoJob.Designer.cs">
+      <DependentUpon>FrmNoJob.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuForms\FrmPaymentMode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -495,6 +513,12 @@
     </Compile>
     <Compile Include="MenuForms\FrmSettleReport.Designer.cs">
       <DependentUpon>FrmSettleReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuForms\FrmSubReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuForms\FrmSubReceipt.Designer.cs">
+      <DependentUpon>FrmSubReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuForms\FrmSubscribe.cs">
       <SubType>Form</SubType>
@@ -697,6 +721,9 @@
     <EmbeddedResource Include="Forms\FrmDelay.resx">
       <DependentUpon>FrmDelay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmDept.resx">
+      <DependentUpon>FrmDept.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmEmploye.resx">
       <DependentUpon>FrmEmploye.cs</DependentUpon>
     </EmbeddedResource>
@@ -732,6 +759,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmJobChangeRep.resx">
       <DependentUpon>FrmJobChangeRep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmJobOperation.resx">
+      <DependentUpon>FrmJobOperation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmOrganization.resx">
       <DependentUpon>FrmOrganization.cs</DependentUpon>
@@ -836,6 +866,9 @@
     <EmbeddedResource Include="MenuForms\FrmHandover.resx">
       <DependentUpon>FrmHandover.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuForms\FrmNoJob.resx">
+      <DependentUpon>FrmNoJob.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuForms\FrmPaymentMode.resx">
       <DependentUpon>FrmPaymentMode.cs</DependentUpon>
     </EmbeddedResource>
@@ -856,6 +889,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForms\FrmSettleReport.resx">
       <DependentUpon>FrmSettleReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuForms\FrmSubReceipt.resx">
+      <DependentUpon>FrmSubReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuForms\FrmSubscribe.resx">
       <DependentUpon>FrmSubscribe.cs</DependentUpon>
@@ -1096,6 +1132,11 @@
     <None Include="Resources\check_24.png" />
     <None Include="Resources\check_16.png" />
     <None Include="Resources\JobReturn.png" />
+    <None Include="Resources\cancel_16.png" />
+    <None Include="Resources\cancel_16px.png" />
+    <None Include="Resources\delete_16.png" />
+    <None Include="Resources\arrow_document_file_import_move_32px_173_easyicon.net.png" />
+    <None Include="Resources\in_242.png" />
     <Content Include="summary.txt" />
     <None Include="Resources\remove2_16.png" />
     <None Include="Resources\outline_remove_16px_21331_easyicon.net.png" />

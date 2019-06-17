@@ -161,7 +161,7 @@ namespace Commission.Forms
 
             try
             {
-                SqlHelper.ExecuteNonQuery(string.Format("update SettleMain set Checker = '{0}', CheckDate = GETDATE() where SettleID = {1}", Login.User.UserName, SettleID));
+                SqlHelper.ExecuteNonQuery(string.Format("update SettleMain set Checker = '{0}', CheckDate = CONVERT(VARCHAR(10),GETDATE(),120) where SettleID = {1}", Login.User.UserName, SettleID));
 
                 label_Checker.Text = Login.User.UserName;
                 label_CheckDate.Text = DateTime.Now.ToString("yyyy-MM-dd");

@@ -155,6 +155,19 @@ namespace Commission.Forms
                     Prompt.Warning("置业顾问岗位类型不能为空");
                     return false;
                 }
+
+                string deptID = dataGridView_data.Rows[i].Cells[4].Value.ToString();
+
+                int QueryResult = int.Parse(SqlHelper.ExecuteScalar(string.Format("select COUNT(DeptID)  from Department where DeptID = '{0}'", deptID)).ToString());
+
+                if (QueryResult == 0)
+                {
+                    dataGridView_data.CurrentCell = dataGridView_data.Rows[i].Cells[4];
+                    dataGridView_data.Rows[i].Selected = true;
+                    Prompt.Error("没有匹配的部门信息，无法导入，请检查后，重新操作！");
+                    return false;
+                }
+
             }
 
             return result;

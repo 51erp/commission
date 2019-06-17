@@ -268,6 +268,12 @@ namespace Commission.Forms
             double price = 0;
             double amount = 0;
 
+            if (!((TextBox)sender).Focused)
+            {
+                string aaa = ((TextBox)sender).Name;
+                return;
+            }
+
             if (((TextBox)sender).Name.Equals("textBox_Area"))
             {
                 double.TryParse(textBox_Area.Text, out area);

@@ -67,15 +67,21 @@ namespace Commission.Forms
             if (OperationType == "调入")
             {
                 condition = " and IsFree = 1 ";
+                label_date.Text = "调入时间";
+                label_Job.Text = "调入岗位";
             }
 
             if (OperationType == "复职")
             {
                 condition = " and OutDate is not null ";
+                label_date.Text = "复职时间";
+                label_Job.Text = "复职岗位";
             }
 
+            this.Text += OperationType;
 
-            string sql = "select SalesID,SalesName,Phone,InDate,OutDate,Position,ProjectName from Sales where  1=1 " + condition + " order by SalesName";
+
+            string sql = "select SalesID,SalesName,Phone,InDate,OutDate,Position,ProjectName from Sales where  ProjectID = " + Login.User.ProjectID  + condition + " order by SalesName";
 
             dataGridView_Sales.DataSource = SqlHelper.ExecuteDataTable(sql);
 

@@ -32,6 +32,10 @@
             this.toolStripButton_OK = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Close = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBox_JobType = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker_OperationDate = new System.Windows.Forms.DateTimePicker();
+            this.label_Job = new System.Windows.Forms.Label();
+            this.label_date = new System.Windows.Forms.Label();
             this.dataGridView_Sales = new System.Windows.Forms.DataGridView();
             this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,10 +44,6 @@
             this.ColOutDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.comboBox_JobType = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker_OperationDate = new System.Windows.Forms.DateTimePicker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Sales)).BeginInit();
@@ -56,6 +56,7 @@
             this.toolStripButton_OK,
             this.toolStripButton_Close});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Margin = new System.Windows.Forms.Padding(10);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(645, 31);
             this.toolStrip2.TabIndex = 6;
@@ -86,14 +87,54 @@
             // 
             this.groupBox1.Controls.Add(this.comboBox_JobType);
             this.groupBox1.Controls.Add(this.dateTimePicker_OperationDate);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label_Job);
+            this.groupBox1.Controls.Add(this.label_date);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 31);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(645, 43);
+            this.groupBox1.Size = new System.Drawing.Size(645, 56);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
+            // 
+            // comboBox_JobType
+            // 
+            this.comboBox_JobType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_JobType.FormattingEnabled = true;
+            this.comboBox_JobType.Items.AddRange(new object[] {
+            "员工",
+            "主管"});
+            this.comboBox_JobType.Location = new System.Drawing.Point(240, 20);
+            this.comboBox_JobType.Name = "comboBox_JobType";
+            this.comboBox_JobType.Size = new System.Drawing.Size(101, 20);
+            this.comboBox_JobType.TabIndex = 75;
+            // 
+            // dateTimePicker_OperationDate
+            // 
+            this.dateTimePicker_OperationDate.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker_OperationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_OperationDate.Location = new System.Drawing.Point(67, 20);
+            this.dateTimePicker_OperationDate.Name = "dateTimePicker_OperationDate";
+            this.dateTimePicker_OperationDate.Size = new System.Drawing.Size(101, 21);
+            this.dateTimePicker_OperationDate.TabIndex = 74;
+            // 
+            // label_Job
+            // 
+            this.label_Job.AutoSize = true;
+            this.label_Job.Location = new System.Drawing.Point(181, 24);
+            this.label_Job.Name = "label_Job";
+            this.label_Job.Size = new System.Drawing.Size(53, 12);
+            this.label_Job.TabIndex = 72;
+            this.label_Job.Text = "调入岗位";
+            // 
+            // label_date
+            // 
+            this.label_date.AutoSize = true;
+            this.label_date.Location = new System.Drawing.Point(8, 24);
+            this.label_date.Name = "label_date";
+            this.label_date.Size = new System.Drawing.Size(53, 12);
+            this.label_date.TabIndex = 73;
+            this.label_date.Text = "调入时间";
             // 
             // dataGridView_Sales
             // 
@@ -109,14 +150,14 @@
             this.ColPosition,
             this.ColProjectName});
             this.dataGridView_Sales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView_Sales.Location = new System.Drawing.Point(0, 74);
+            this.dataGridView_Sales.Location = new System.Drawing.Point(0, 87);
             this.dataGridView_Sales.MultiSelect = false;
             this.dataGridView_Sales.Name = "dataGridView_Sales";
             this.dataGridView_Sales.ReadOnly = true;
             this.dataGridView_Sales.RowHeadersWidth = 21;
             this.dataGridView_Sales.RowTemplate.Height = 23;
             this.dataGridView_Sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView_Sales.Size = new System.Drawing.Size(645, 404);
+            this.dataGridView_Sales.Size = new System.Drawing.Size(645, 391);
             this.dataGridView_Sales.TabIndex = 8;
             // 
             // ColID
@@ -170,43 +211,6 @@
             this.ColProjectName.Name = "ColProjectName";
             this.ColProjectName.ReadOnly = true;
             // 
-            // comboBox_JobType
-            // 
-            this.comboBox_JobType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_JobType.FormattingEnabled = true;
-            this.comboBox_JobType.Items.AddRange(new object[] {
-            "员工",
-            "主管"});
-            this.comboBox_JobType.Location = new System.Drawing.Point(207, 13);
-            this.comboBox_JobType.Name = "comboBox_JobType";
-            this.comboBox_JobType.Size = new System.Drawing.Size(101, 20);
-            this.comboBox_JobType.TabIndex = 75;
-            // 
-            // dateTimePicker_OperationDate
-            // 
-            this.dateTimePicker_OperationDate.Location = new System.Drawing.Point(41, 13);
-            this.dateTimePicker_OperationDate.Name = "dateTimePicker_OperationDate";
-            this.dateTimePicker_OperationDate.Size = new System.Drawing.Size(101, 21);
-            this.dateTimePicker_OperationDate.TabIndex = 74;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(148, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 72;
-            this.label2.Text = "岗位类型";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 12);
-            this.label1.TabIndex = 73;
-            this.label1.Text = "时间";
-            // 
             // FrmSalesList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -247,7 +251,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProjectName;
         private System.Windows.Forms.ComboBox comboBox_JobType;
         private System.Windows.Forms.DateTimePicker dateTimePicker_OperationDate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label_Job;
+        private System.Windows.Forms.Label label_date;
     }
 }

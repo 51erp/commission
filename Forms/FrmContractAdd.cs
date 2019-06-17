@@ -291,7 +291,7 @@ namespace Commission.Forms
                 return false;
             }
 
-            if (comboBox_Sales.Items.Count <= 0)
+            if (comboBox_Sales.Text.Equals(""))
             {
                 Prompt.Warning("未设置置业顾问");
                 return false;
@@ -316,14 +316,21 @@ namespace Commission.Forms
                 }
             }
 
-
-            double fund = 0;
-            if (!double.TryParse(textBox_Fund.Text.Trim(), out fund))
+            if (textBox_Fund.Text.Trim().Equals(""))
             {
-                Prompt.Warning("请填写有效维修基金金额或0");
-                textBox_Fund.Focus();
-                return false;
+                textBox_Fund.Text = "0";
             }
+            else
+            {
+                double fund = 0;
+                if (!double.TryParse(textBox_Fund.Text.Trim(), out fund))
+                {
+                    Prompt.Warning("请填写有效维修基金金额");
+                    textBox_Fund.Focus();
+                    return false;
+                }
+            }
+
 
 
             double dpRate = 0;
@@ -415,6 +422,8 @@ namespace Commission.Forms
         /// </summary>
         private void InsertData()
         {
+            string errSQL = string.Empty;
+            int errCode = 0;
             using (SqlConnection connection = SqlHelper.OpenConnection())  //创建连接对象 
             {
                 SqlTransaction sqlTran = connection.BeginTransaction();    //开始事务 
@@ -424,11 +433,13 @@ namespace Commission.Forms
                 try
                 {
 
+                    errCode = 1;
                     //业务主表
                     cmd.CommandText = GenInsertSqlContractMain();
+                    errSQL = cmd.CommandText ;
                     string contractId = cmd.ExecuteScalar().ToString();
 
-
+                    errCode = 2;
                     //业务从表
                     for (int i = 0; i < dataGridView_SaleItem.Rows.Count; i++)
                     {
@@ -444,6 +455,7 @@ namespace Commission.Forms
                         cmd.ExecuteNonQuery();
                     }
 
+                    errCode = 3;
                     //保存分期付款设置
                     for (int i = 0; i < dtInstallment.Rows.Count; i++)
                     {
@@ -453,10 +465,12 @@ namespace Commission.Forms
                         cmd.ExecuteNonQuery();
                     }
 
+                    errCode = 4;
                     //更新认购引用的签约信息
                     cmd.CommandText = string.Format("update SubscribeMain set ContractID = {0} where SubscribeID = {1}", contractId, dictSubscribe["SubscribeID"]);
                     cmd.ExecuteNonQuery();
 
+                    errCode = 5;
                     //更新定金信息
                     cmd.CommandText = string.Format("update receipt set ContractID = {0} where SubscribeID = {1}", contractId, dictSubscribe["SubscribeID"]);
                     cmd.ExecuteNonQuery();
@@ -475,7 +489,8 @@ namespace Commission.Forms
                 catch (Exception ex)
                 {
                     sqlTran.Rollback();  //异常事务回滚
-                    Prompt.Error("操作失败! \r\n错误信息：" + ex.Message);
+                    Prompt.Error("操作失败! Error Code = " + errCode.ToString() + "\r\n错误信息：" + ex.Message);
+                    Prompt.Error(errSQL);
                 }
 
             }
@@ -505,7 +520,7 @@ namespace Commission.Forms
                 + "," + textBox_CusName.Tag
                 + ",'" + textBox_CusName.Text.Trim() + "'"
                 + ",'" + textBox_CusPhone.Text.Trim() + "'"
-                + ",'" + dateTimePicker_ContractDate.Value.ToShortDateString() + "'"
+                + ",'" + dateTimePicker_ContractDate.Value.ToString("yyyy-MM-dd") +"'"
                 + "," + comboBox_PayMode.SelectedValue.ToString()
                 + ",'" + comboBox_PayMode.Text + "'"
                 + "," + Transaction.GetPayType(comboBox_PayMode.SelectedValue.ToString()).ToString()
@@ -519,7 +534,7 @@ namespace Commission.Forms
                 + ",'" + textBox_FormalDate.Text.Trim() + "'"
                 + "," + comboBox_Sales.SelectedValue.ToString()
                 + ",'" + comboBox_Sales.Text + "'"
-                + ",getDate()"
+                + ",convert(varchar(10),getdate(), 120)"
                 + "," +Login.User.UserID
                 + ",'" + Login.User.UserName + "'"
                 + ",'" + textBox_ExtField0.Text.Trim() + "'"
@@ -761,7 +776,7 @@ namespace Commission.Forms
 
             if (frmSubscribe.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string sql = string.Format("select b.CustomerID, b.CustomerName, b.CustomerPhone, b.Addr, b.PID, SalesID, SalesName, SubscribeDate, ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9 "
+                string sql = string.Format("select b.CustomerID, b.CustomerName, b.CustomerPhone, b.Addr, b.PID, SalesID, SalesName, convert(varchar(10),SubscribeDate,120) SubscribeDate, ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9 "
                     + " from SubscribeMain a  "
                     + " inner join Customer b on a.CustomerID = b.CustomerID "
                     + " where a.SubscribeID = {0}", frmSubscribe.SubscribeID);
@@ -910,6 +925,10 @@ namespace Commission.Forms
             {
                 Prompt.Error("查询错误!请重试或联系管理员.\r\n错误信息(LD-01)：" + ex.Message);
             }
+            finally
+            {
+                sdr.Close();
+            }
 
 
             //从表信息
@@ -930,25 +949,6 @@ namespace Commission.Forms
                 dataGridView_SaleItem.Rows[index].Cells["ColAmout"].Value = double.Parse(row["Amount"].ToString()).ToString("F0");
                 dataGridView_SaleItem.Rows[index].Cells["ColIsBind"].Value = row["IsBind"].ToString();
             }
-
-
-
-            //while (sdr.Read())
-            //{
-            //    int index = this.dataGridView_SaleItem.Rows.Add();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColItemID"].Value = sdr["ItemID"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColItemTypeCode"].Value = sdr["ItemTypeCode"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColItemTypeName"].Value = sdr["ItemTypeName"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColBuilding"].Value = sdr["Building"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColUnit"].Value = sdr["Unit"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColItemNum"].Value = sdr["ItemNum"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColArea"].Value = sdr["Area"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColPrice"].Value = sdr["Price"].ToString();
-            //    dataGridView_SaleItem.Rows[index].Cells["ColAmout"].Value = double.Parse(sdr["Amount"].ToString()).ToString("F0");
-            //    dataGridView_SaleItem.Rows[index].Cells["ColIsBind"].Value = sdr["IsBind"].ToString();
-
-            //    lstOrigItemID.Add(sdr["ItemID"].ToString());
-            //}
         }
 
 
@@ -1041,7 +1041,7 @@ namespace Commission.Forms
                 + ",CustomerID = " + textBox_CusName.Tag
                 + ",CustomerName = '" + textBox_CusName.Text + "'"
                 + ",CustomerPhone = '" + textBox_CusPhone.Text + "'"
-                + ",ContractDate = '" + dateTimePicker_ContractDate.Value.ToShortDateString() + "'"
+                + ",ContractDate = '" + dateTimePicker_ContractDate.Value.ToString("yyyy-MM-dd") + "'"
                 + ",PaymentID = " + comboBox_PayMode.SelectedValue.ToString()
                 + ",PaymentName ='" + comboBox_PayMode.Text + "'"
                 + ",PaymentType = " + payTypeCode 
@@ -1093,7 +1093,7 @@ namespace Commission.Forms
 
 
                     //更新主表
-                    cmd.CommandText = string.Format("update ContractMain set ReturnDate = GETDATE(), RefundDate = GETDATE(), ReturnReason = '换房' where ContractID = {0}",ContractID);
+                    cmd.CommandText = string.Format("update ContractMain set ReturnDate = CONVERT(VARCHAR(10),GETDATE(),120), RefundDate = CONVERT(VARCHAR(10),GETDATE(),120), ReturnReason = '换房' where ContractID = {0}", ContractID);
                     cmd.ExecuteNonQuery();
 
                     //生成退款

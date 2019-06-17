@@ -88,6 +88,22 @@ namespace Commission.MenuForms
 
             if (dtContract.Rows.Count == 0)
             {
+                DataTable dtReceipt = (DataTable)dataGridView_Receipt.DataSource;
+                if (dtReceipt != null)
+                {
+                    dtReceipt.Clear();
+                    dataGridView_Receipt.DataSource = dtReceipt;
+                }
+
+                DataTable dtInstallment = (DataTable)dataGridView_Installment.DataSource;
+                if (dtInstallment != null)
+                {
+                    dtInstallment.Clear();
+                    dataGridView_Installment.DataSource = dtInstallment;
+                }
+
+                SetReceiptInfo(null, true);
+
                 Prompt.Information("没有符合条件的查询结果 ");
             }
 
@@ -127,8 +143,7 @@ namespace Commission.MenuForms
 
             dtSubscribe.Merge(dtRecTotal, false, MissingSchemaAction.Add);
 
-
-            // 获取绑定（附属）物业信息
+            //// 获取绑定（附属）物业信息
             for (int i = 0; i < dtSubscribe.Rows.Count; i++)
             {
                 string subscribeId = dtSubscribe.Rows[i]["SubscribeID"].ToString();
@@ -136,54 +151,105 @@ namespace Commission.MenuForms
                 //绑定房源信息
                 sql = "select ItemNum, Area, Price, Amount from SubscribeDetail where IsBind = 1 and SubscribeID = " + subscribeId;
 
-                SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+                DataTable dtBind = SqlHelper.ExecuteDataTable(sql);
 
-                if (dr.HasRows)
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("SubscribeID", typeof(int));
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["SubscribeID"] };
+                
+                string fieldValue = subscribeId;
+
+                for (int iRow = 0; iRow < dtBind.Rows.Count; iRow++)
                 {
-                    DataTable dt = new DataTable();
-
-                    dt.Columns.Add("SubscribeID", typeof(int));
-                    dt.PrimaryKey = new DataColumn[] { dt.Columns["SubscribeID"] };
-
-                    string fieldValue = subscribeId;
-
                     int itemIdx = 0;     //一个房源相同尾号
-                    while (dr.Read())
+
+                    for (int iCol = 0; iCol < dtBind.Columns.Count; iCol++)
                     {
-                        for (int j = 0; j < dr.FieldCount; j++)
+                        string fieldName = "BIND_" + dtBind.Columns[iCol].ColumnName + itemIdx;
+                        dt.Columns.Add(fieldName, typeof(string));
+                        if (dtBind.Columns[iCol].ColumnName.Equals("Amount"))
                         {
-                            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
-                            dt.Columns.Add(fieldName, typeof(string));
-                            if (dr.GetName(j).Equals("Amount"))
-                            {
-                                fieldValue += "," + string.Format("{0:F0}", dr.GetValue(j));
-                            }
-                            else
-                            {
-                                fieldValue += "," + dr.GetValue(j).ToString();
-                            }
+                            fieldValue += "," + string.Format("{0:F0}", dtBind.Rows[iRow][iCol]);
                         }
-
-                        itemIdx++;
-
-                        if (itemIdx > iBindQuantity)
-                            iBindQuantity = itemIdx;
+                        else
+                        {
+                            fieldValue += "," + dtBind.Rows[iRow][iCol].ToString();
+                        }
                     }
 
-                    dr.Close();
+                    itemIdx++;
 
-                    string[] strArray = fieldValue.Split(',');
+                    if (itemIdx > iBindQuantity)
+                        iBindQuantity = itemIdx;
 
-                    dt.Rows.Add(strArray);
-
-                    dtSubscribe.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
                 }
+
+                string[] strArray = fieldValue.Split(',');
+
+                dt.Rows.Add(strArray);
+
+                dtSubscribe.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+
             }
+
+
+
+            //// 获取绑定（附属）物业信息
+            //for (int i = 0; i < dtSubscribe.Rows.Count; i++)
+            //{
+            //    string subscribeId = dtSubscribe.Rows[i]["SubscribeID"].ToString();
+
+            //    //绑定房源信息
+            //    sql = "select ItemNum, Area, Price, Amount from SubscribeDetail where IsBind = 1 and SubscribeID = " + subscribeId;
+
+            //    SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+
+            //    if (dr.HasRows)
+            //    {
+            //        DataTable dt = new DataTable();
+
+            //        dt.Columns.Add("SubscribeID", typeof(int));
+            //        dt.PrimaryKey = new DataColumn[] { dt.Columns["SubscribeID"] };
+
+            //        string fieldValue = subscribeId;
+
+            //        int itemIdx = 0;     //一个房源相同尾号
+            //        while (dr.Read())
+            //        {
+            //            for (int j = 0; j < dr.FieldCount; j++)
+            //            {
+            //                string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
+            //                dt.Columns.Add(fieldName, typeof(string));
+            //                if (dr.GetName(j).Equals("Amount"))
+            //                {
+            //                    fieldValue += "," + string.Format("{0:F0}", dr.GetValue(j));
+            //                }
+            //                else
+            //                {
+            //                    fieldValue += "," + dr.GetValue(j).ToString();
+            //                }
+            //            }
+
+            //            itemIdx++;
+
+            //            if (itemIdx > iBindQuantity)
+            //                iBindQuantity = itemIdx;
+            //        }
+
+            //        dr.Close();
+
+            //        string[] strArray = fieldValue.Split(',');
+
+            //        dt.Rows.Add(strArray);
+
+            //        dtSubscribe.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+            //    }
+            //}
 
 
             return dtSubscribe;
         }
-
 
         private DataTable GetContractData(string condition, out int iBindQuantity)
         {
@@ -200,7 +266,7 @@ namespace Commission.MenuForms
                 + " where ReturnDate is null and ProjectID = " + Login.User.ProjectID + " and  IsBind = 0 " + condition
                 + " order by a.ContractID ";
 
-            DataTable dtContract = SqlHelper.ExecuteDataTable(sql); 
+            DataTable dtContract = SqlHelper.ExecuteDataTable(sql);
             dtContract.PrimaryKey = new DataColumn[] { dtContract.Columns["ContractID"] };
 
 
@@ -208,6 +274,7 @@ namespace Commission.MenuForms
             sql = string.Format("select a.ContractID, isnull(sum(Amount),0) as DownPayTotal,DownPayAmount-IsNull(sum(b.Amount),0) as NoDownPay from ContractMain a  "
                 + "inner join receipt b on a.ContractID = b.ContractID  "
                 + "where a.ProjectID = {0}  and b.TypeCode != 0 group by a.ContractID, DownPayAmount", Login.User.ProjectID);
+            
             DataTable dtRecTotal = SqlHelper.ExecuteDataTable(sql);
 
             for (int i = 0; i < dtRecTotal.Rows.Count; i++)
@@ -220,7 +287,7 @@ namespace Commission.MenuForms
 
             dtContract.Merge(dtRecTotal, false, MissingSchemaAction.Add);
 
-            // 获取绑定（附属）物业信息
+
             for (int i = 0; i < dtContract.Rows.Count; i++)
             {
                 string contractId = dtContract.Rows[i]["ContractID"].ToString();
@@ -228,52 +295,141 @@ namespace Commission.MenuForms
                 //绑定房源信息
                 sql = "select ItemNum, Area, Price, Amount from ContractDetail where IsBind = 1 and ContractID = " + contractId;
 
-                SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+                DataTable dtBind = SqlHelper.ExecuteDataTable(sql);
 
-                if (dr.HasRows)
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("ContractID", typeof(int));
+                dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
+
+                string fieldValue = contractId;
+
+                for (int iRow = 0; iRow < dtBind.Rows.Count; iRow++)
                 {
-                    DataTable dt = new DataTable();
-
-                    dt.Columns.Add("ContractID", typeof(int));
-                    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
-
-                    string fieldValue = contractId;
-
                     int itemIdx = 0;     //一个房源相同尾号
-                    while (dr.Read())
+
+                    for (int iCol = 0; iCol < dtBind.Columns.Count; iCol++)
                     {
-                        for (int j = 0; j < dr.FieldCount; j++)
+                        string fieldName = "BIND_" + dtBind.Columns[iCol].ColumnName + itemIdx;
+                        dt.Columns.Add(fieldName, typeof(string));
+                        if (dtBind.Columns[iCol].ColumnName.Equals("Amount"))
                         {
-                            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
-                            dt.Columns.Add(fieldName, typeof(string));
-                            if (dr.GetName(j).Equals("Amount"))
-                            {
-                                fieldValue += "," + string.Format("{0:F0}",dr.GetValue(j));
-                            }
-                            else
-                            {
-                                fieldValue += "," + dr.GetValue(j).ToString();
-                            }
+                            fieldValue += "," + string.Format("{0:F0}", dtBind.Rows[iRow][iCol]);
                         }
-
-                        itemIdx++;
-
-                        if (itemIdx > iBindQuantity)
-                            iBindQuantity = itemIdx;
+                        else
+                        {
+                            fieldValue += "," + dtBind.Rows[iRow][iCol].ToString();
+                        }
                     }
 
-                    dr.Close();
+                    itemIdx++;
 
-                    string[] strArray = fieldValue.Split(',');
-
-                    dt.Rows.Add(strArray);
-
-                    dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+                    if (itemIdx > iBindQuantity)
+                        iBindQuantity = itemIdx;
                 }
+
+                string[] strArray = fieldValue.Split(',');
+
+                dt.Rows.Add(strArray);
+
+                dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
             }
 
             return dtContract;
         }
+
+
+
+        //private DataTable GetContractData(string condition, out int iBindQuantity)
+        //{
+        //    iBindQuantity = 0;
+        //    string sql = string.Empty;
+
+        //    //主体表
+        //    sql = "select a.ContractID, a.SubscribeID, ContractNum as AgreementNum, CustomerName,CustomerPhone, '签约' as AgreementType, SubscribeDate, ContractDate,"
+        //        + " ItemTypeName, Building, Unit, ItemNum, Area, Price, Amount, "
+        //        + " TotalAmount, DownPayAmount, Loan, SalesID, SalesName,"
+        //        + " ExtField0, ExtField1, ExtField2, ExtField3, ExtField4, ExtField5, ExtField6, ExtField7, ExtField8, ExtField9 "
+        //        + " from ContractMain a"
+        //        + " inner join  ContractDetail b on a.ContractID = b.ContractID "
+        //        + " where ReturnDate is null and ProjectID = " + Login.User.ProjectID + " and  IsBind = 0 " + condition
+        //        + " order by a.ContractID ";
+
+        //    DataTable dtContract = SqlHelper.ExecuteDataTable(sql); 
+        //    dtContract.PrimaryKey = new DataColumn[] { dtContract.Columns["ContractID"] };
+
+
+        //    //已收首付(除贷款） 、 未收首付
+        //    sql = string.Format("select a.ContractID, isnull(sum(Amount),0) as DownPayTotal,DownPayAmount-IsNull(sum(b.Amount),0) as NoDownPay from ContractMain a  "
+        //        + "inner join receipt b on a.ContractID = b.ContractID  "
+        //        + "where a.ProjectID = {0}  and b.TypeCode != 0 group by a.ContractID, DownPayAmount", Login.User.ProjectID);
+        //    DataTable dtRecTotal = SqlHelper.ExecuteDataTable(sql);
+
+        //    for (int i = 0; i < dtRecTotal.Rows.Count; i++)
+        //    {
+        //        DataRow[] dr = dtContract.Select("ContractID = " + dtRecTotal.Rows[i]["ContractID"]);
+        //        if (dr.Length == 0)
+        //            dtRecTotal.Rows[i].Delete();
+        //    }
+        //    dtRecTotal.AcceptChanges();
+
+        //    dtContract.Merge(dtRecTotal, false, MissingSchemaAction.Add);
+
+        //    // 获取绑定（附属）物业信息
+        //    for (int i = 0; i < dtContract.Rows.Count; i++)
+        //    {
+        //        string contractId = dtContract.Rows[i]["ContractID"].ToString();
+
+        //        //绑定房源信息
+        //        sql = "select ItemNum, Area, Price, Amount from ContractDetail where IsBind = 1 and ContractID = " + contractId;
+
+        //        SqlDataReader dr = SqlHelper.ExecuteReader(sql);
+
+        //        if (dr.HasRows)
+        //        {
+        //            DataTable dt = new DataTable();
+
+        //            dt.Columns.Add("ContractID", typeof(int));
+        //            dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
+
+        //            string fieldValue = contractId;
+
+        //            int itemIdx = 0;     //一个房源相同尾号
+        //            while (dr.Read())
+        //            {
+        //                for (int j = 0; j < dr.FieldCount; j++)
+        //                {
+        //                    string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
+        //                    dt.Columns.Add(fieldName, typeof(string));
+        //                    if (dr.GetName(j).Equals("Amount"))
+        //                    {
+        //                        fieldValue += "," + string.Format("{0:F0}",dr.GetValue(j));
+        //                    }
+        //                    else
+        //                    {
+        //                        fieldValue += "," + dr.GetValue(j).ToString();
+        //                    }
+        //                }
+
+        //                itemIdx++;
+
+        //                if (itemIdx > iBindQuantity)
+        //                    iBindQuantity = itemIdx;
+        //            }
+
+        //            dr.Close();
+
+        //            string[] strArray = fieldValue.Split(',');
+
+        //            dt.Rows.Add(strArray);
+
+        //            dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
+        //        }
+        //    }
+
+        //    return dtContract;
+        //}
 
 
 
@@ -451,8 +607,12 @@ namespace Commission.MenuForms
                 SetReceiptInfo(dataGridView_Agreement.CurrentRow, false);
 
                 DataTable dt = (DataTable)dataGridView_Installment.DataSource;
-                dt.Clear();
-                dataGridView_Installment.DataSource = dt;
+                if (dt != null)
+                {
+                    dt.Clear();
+                    dataGridView_Installment.DataSource = dt;
+                }
+
             }
 
             

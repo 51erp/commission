@@ -41,9 +41,13 @@ namespace Commission.Forms
             }
             else
             {
+                toolStripButton_Add.Visible = false;
+                toolStripButton_Del.Visible = false;
+                toolStripSeparator1.Visible = false;
+
                 panel_Date.Visible = true;
                 toolStripButton_OK.Visible = true;
-                comboBox_JobType.SelectedIndex = 0;
+                comboBox_JobType.Text = JobType;
             }
 
             InitDeptNode();
@@ -95,7 +99,7 @@ namespace Commission.Forms
         }
 
 
-
+        //以项目名称为根节点
         private void InitDeptNode()
         {
             TreeNode root = new TreeNode();
@@ -108,6 +112,27 @@ namespace Commission.Forms
 
             treeView_Dept.ExpandAll();
         }
+
+        //private void InitDeptNode()
+        //{
+
+        //    string sql = string.Format("select DeptID, DeptName from Department where ParentID = 0 and ProjectID = {0}", Login.User.ProjectID);
+        //    DataTable dtDept = SqlHelper.ExecuteDataTable(sql);
+
+        //    foreach (DataRow dr in dtDept.Rows)
+        //    {
+        //        TreeNode root = new TreeNode();
+        //        root.Name = dr["DeptID"].ToString();
+        //        root.Text = dr["DeptName"].ToString();
+
+        //        treeView_Dept.Nodes.Add(root);
+
+        //        LoadDeptSubNode(root);
+        //    }
+
+        //    treeView_Dept.ExpandAll();
+        //}
+
 
         private void LoadDeptSubNode(TreeNode node)
         {
@@ -194,9 +219,9 @@ namespace Commission.Forms
                 return;
             }
 
-            if (DeptID == treeView_Dept.SelectedNode.Name)
+            if ((DeptID == treeView_Dept.SelectedNode.Name) && (JobType == comboBox_JobType.Text))
             {
-                Prompt.Error("所选择的部门与原部门一致！");
+                Prompt.Error("岗位及部门未发生变更，无法保存！");
                 return;
             }
 

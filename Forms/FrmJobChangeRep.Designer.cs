@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_Cancel = new System.Windows.Forms.Button();
             this.button_Exit = new System.Windows.Forms.Button();
             this.textBox_SalesName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.button_Search = new System.Windows.Forms.Button();
             this.dataGridView_Employee = new System.Windows.Forms.DataGridView();
+            this.ColID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDeptID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +50,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_Cancel);
             this.groupBox1.Controls.Add(this.button_Exit);
             this.groupBox1.Controls.Add(this.textBox_SalesName);
             this.groupBox1.Controls.Add(this.label7);
@@ -60,12 +63,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // button_Cancel
+            // 
+            this.button_Cancel.Image = global::Commission.Properties.Resources.delete_16;
+            this.button_Cancel.Location = new System.Drawing.Point(252, 16);
+            this.button_Cancel.Name = "button_Cancel";
+            this.button_Cancel.Size = new System.Drawing.Size(75, 25);
+            this.button_Cancel.TabIndex = 18;
+            this.button_Cancel.Text = " 取消";
+            this.button_Cancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Cancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Cancel.UseVisualStyleBackColor = true;
+            this.button_Cancel.Click += new System.EventHandler(this.button_Cancel_Click);
+            // 
             // button_Exit
             // 
             this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(259, 16);
+            this.button_Exit.Location = new System.Drawing.Point(396, 16);
             this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 23);
+            this.button_Exit.Size = new System.Drawing.Size(75, 25);
             this.button_Exit.TabIndex = 17;
             this.button_Exit.Text = " 关闭";
             this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -94,7 +110,7 @@
             this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
             this.button_Search.Location = new System.Drawing.Point(171, 16);
             this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.Size = new System.Drawing.Size(75, 25);
             this.button_Search.TabIndex = 1;
             this.button_Search.Text = " 查询";
             this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -108,6 +124,7 @@
             this.dataGridView_Employee.AllowUserToDeleteRows = false;
             this.dataGridView_Employee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Employee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColID,
             this.ColSalesID,
             this.ColDeptID,
             this.ColSalesName,
@@ -118,12 +135,22 @@
             this.ColOperationType});
             this.dataGridView_Employee.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView_Employee.Location = new System.Drawing.Point(0, 50);
+            this.dataGridView_Employee.MultiSelect = false;
             this.dataGridView_Employee.Name = "dataGridView_Employee";
             this.dataGridView_Employee.ReadOnly = true;
             this.dataGridView_Employee.RowHeadersWidth = 20;
             this.dataGridView_Employee.RowTemplate.Height = 23;
+            this.dataGridView_Employee.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Employee.Size = new System.Drawing.Size(898, 442);
             this.dataGridView_Employee.TabIndex = 4;
+            // 
+            // ColID
+            // 
+            this.ColID.DataPropertyName = "ID";
+            this.ColID.HeaderText = "ID";
+            this.ColID.Name = "ColID";
+            this.ColID.ReadOnly = true;
+            this.ColID.Width = 50;
             // 
             // ColSalesID
             // 
@@ -207,6 +234,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button_Search;
         private System.Windows.Forms.DataGridView dataGridView_Employee;
+        private System.Windows.Forms.Button button_Cancel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDeptID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;

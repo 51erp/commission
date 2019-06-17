@@ -48,6 +48,8 @@ namespace Commission.Forms
 
         private bool inputValidate()
         {
+            this.Focus();
+
             if (comboBox_ReceiptType.Items.Count <= 0)
             {
                 Prompt.Warning("未获取正确的收款类型！");
@@ -88,27 +90,50 @@ namespace Commission.Forms
         /// <summary>
         /// 合同金额是否付清
         /// </summary>
-        /// <param name="contractId"></param>
+        /// <param name="agreementID"></param>
         /// <param name="amount">收款</param>
         /// <returns></returns>
-        private bool IsOverAmount(string contractId, double amount)
+        private bool IsOverAmount(string agreementID, double amount)
         {
             bool result = false;
             string sql = string.Empty;
+            string condition = string.Empty;
+
+
+
+            //if (AgreementType.Equals("签约"))
+            //{
+            //    sql = string.Format("select TotalAmount from ContractMain where ContractID = {0}", agreementID);
+            //}
+            //else
+            //{
+
+            //    sql = string.Format("select TotalAmount from  SubscribeMain where SubscribeID = {0}", agreementID);
+            //}
 
             if (AgreementType.Equals("签约"))
             {
-                sql = string.Format("select TotalAmount from ContractMain where ContractID = {0}", contractId);
+                condition = string.Format("ContractID = {0}", agreementID);
+                sql = "select TotalAmount from  ContractMain where " + condition;
             }
             else
-            {//select TotalAmount from SubscribeMain where SubscribeID = 69
+            {
 
-                sql = string.Format("select TotalAmount from  SubscribeMain where SubscribeID = {0}", contractId);
+                condition = string.Format("SubscribeID = {0}", agreementID);
+                sql = "select TotalAmount from  SubscribeMain where " + condition;
             }
 
             double totalAmount = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
 
-            sql = string.Format("select isnull(SUM(Amount),0) from Receipt where ContractID = {0}", contractId);
+            if (FrmMode == FormMode.add)
+            {
+                sql = "select isnull(SUM(Amount),0) from Receipt where  " + condition;
+            }
+            else
+            {
+                sql = "select isnull(SUM(Amount),0) from Receipt where  " + condition + " and ID != " + ReceiptID;
+            }
+
             double totalReceipt = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
 
             totalReceipt += amount;
@@ -138,7 +163,7 @@ namespace Commission.Forms
             
             string values = AgreementID
                 + "," + Login.User.ProjectID
-                + ",'" + dateTimePicker_Receipt.Value.ToShortDateString() + "'"
+                + ",'" + dateTimePicker_Receipt.Value.ToString("yyyy-MM-dd") + "'"
                 + "," + textBox_RecAmount.Text.Trim()
                 + "," + comboBox_ReceiptType.SelectedValue.ToString()
                 + ",'" + comboBox_ReceiptType.Text + "'"

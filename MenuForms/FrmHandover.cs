@@ -18,7 +18,7 @@ namespace Commission.MenuForms
         public FrmHandover()
         {
             InitializeComponent();
-            MasterData.SetSales(comboBox_Sales);
+            
             MasterData.SetSales(comboBox_NewSalesName);
             comboBox_type.SelectedIndex = 0;
         }
@@ -30,10 +30,25 @@ namespace Commission.MenuForms
 
         private void button_Search_Click(object sender, EventArgs e)
         {
-            string condition = " and ProjectID = " + Login.User.ProjectID;
+            if (textBox_Sales.Text.Equals(""))
+            {
+                Prompt.Warning("原置业顾问不能为空！");
+                return;
+            }
 
-            if (!comboBox_Sales.Text.Equals(""))
-                condition += " and  SalesID = " + textBox_Sales.Tag.ToString();
+            string condition = " and ProjectID = " + Login.User.ProjectID + " and  SalesID = " + textBox_Sales.Tag.ToString();
+
+
+            if (!textBox_CustomerName.Text.Trim().Equals(""))
+            {
+                condition += " and CustomerName like '%" + textBox_CustomerName.Text.Trim() + "%' ";
+            }
+
+            if (!textBox_ItemNum.Text.Trim().Equals(""))
+            {
+                condition += " and ItemNum = '" + textBox_ItemNum.Text.Trim() + "' "; 
+            }
+
 
             int bindQty = 0;
 
@@ -128,13 +143,17 @@ namespace Commission.MenuForms
                     {
                         if ((bool)dataGridView_Contract.Rows[i].Cells["ColCheck"].EditedFormattedValue)
                         {
-                            
+
+                            //dataGridView_Contract.Rows[i].Cells["ColSalesID"].Value.ToString();
+                            //dataGridView_Contract.Rows[i].Cells["ColSalesName"].Value.ToString();
+
                             string newSalesID = comboBox_NewSalesName.SelectedValue.ToString();
                             string newSalesName = comboBox_NewSalesName.Text;
 
 
                             if (AgreementType == 0) //认购
                             {
+                                //ColSalesID
                                 string subscribeId = dataGridView_Contract.Rows[i].Cells["ColSubscribeID"].Value.ToString();
 
                                 cmd.CommandText = string.Format("update SubscribeMain set SalesID = {0}, SalesName = '{1}' where SubscribeID = {2}", newSalesID, newSalesName, subscribeId);
@@ -142,8 +161,8 @@ namespace Commission.MenuForms
 
                                 cmd.CommandText = string.Format("insert into HandOver (SubscribeID, ExchangeType, OrigID, OrigName, NewID, NewName, ExchangeDate, MakeUserName, MakeDate) values ({0},{1},{2},'{3}',{4},'{5}',{6},'{7}',{8})",
                                     subscribeId, "2",
-                                    comboBox_Sales.SelectedValue.ToString(),
-                                    comboBox_Sales.Text,
+                                    textBox_Sales.Tag.ToString(),
+                                    textBox_Sales.Text,
                                     newSalesID,
                                     newSalesName,
                                     "GETDATE()",
@@ -160,8 +179,8 @@ namespace Commission.MenuForms
 
                                 cmd.CommandText = string.Format("insert into HandOver (ContractID, ExchangeType, OrigID, OrigName, NewID, NewName, ExchangeDate, MakeUserName, MakeDate) values ({0},{1},{2},'{3}',{4},'{5}',{6},'{7}',{8})",
                                     contractId, "2",
-                                    comboBox_Sales.SelectedValue.ToString(),
-                                    comboBox_Sales.Text,
+                                    textBox_Sales.Tag.ToString(),
+                                    textBox_Sales.Text,
                                     newSalesID,
                                     newSalesName,
                                     "GETDATE()",

@@ -142,8 +142,6 @@ namespace Commission
         }
 
 
-
-
         public static void SetColumnStyle(DataGridViewColumn col, ColType type)
         {
             if (col == null)
@@ -192,15 +190,6 @@ namespace Commission
         限价 = 5,
         退房 = 6,
         成销 = 7
-
-        //成销 = 20,
-        //退房 = 30,
-        //定金 = 40,
-        //首付 = 41,
-        //贷款 = 42,
-        //补差 = 50,
-        //交房 = 51,
-        //限价 = 52,
     }
 
     //销售类型

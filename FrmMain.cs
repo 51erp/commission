@@ -590,5 +590,22 @@ namespace Commission
             FrmPerformanceRate frmPR = new FrmPerformanceRate();
             frmPR.ShowDialog();
         }
+
+        private void ToolStripMenuItem_SubReciept_Click(object sender, EventArgs e)
+        {
+            FrmSubReceipt frmSubRec = new FrmSubReceipt();
+            FormShow(frmSubRec, sender);
+        }
+
+        private void ToolStripMenuItem_NoJobRep_Click(object sender, EventArgs e)
+        {
+            FrmNoJob frmNoJob = new FrmNoJob();
+            FormShow(frmNoJob, sender);
+        }
+
+        private void toolStripDropDownButton_Check_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
