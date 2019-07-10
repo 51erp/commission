@@ -176,18 +176,38 @@ namespace Commission.MenuForms
                 return;
             }
 
-            if (MessageBox.Show("确定要进行反审操作？", Common.MsgCaption,  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("确定要进行反审操作？\r\r\n说明：同时删除关联的业绩报表！", Common.MsgCaption,  MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
             {
-                string settleId = dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString();
-                string sql = string.Format("update SettleMain set Checker = null, CheckDate = null where SettleID = {0}", settleId);
-                if (SqlHelper.ExecuteNonQuery(sql) > 0)
+
+                using (SqlConnection connection = SqlHelper.OpenConnection())
                 {
-                    dataGridView_SettleMain.CurrentRow.Cells["ColChecker"].Value = "";
-                    dataGridView_SettleMain.CurrentRow.Cells["ColCheckDate"].Value = "";
+                    SqlTransaction sqlTran = connection.BeginTransaction();
+                    SqlCommand cmd = connection.CreateCommand();
+                    cmd.Transaction = sqlTran;
+
+                    try
+                    {
+                        string settleId = dataGridView_SettleMain.CurrentRow.Cells["ColSettleID"].Value.ToString();
+                        cmd.CommandText = string.Format("update SettleMain set Checker = null, CheckDate = null, Performance = 0 where SettleID = {0}", settleId);
+                        cmd.ExecuteNonQuery();
+
+                        cmd.CommandText = string.Format("delete PerformanceDetail where SettleID = {0} ", settleId);
+                        cmd.ExecuteNonQuery();
+
+                        dataGridView_SettleMain.CurrentRow.Cells["ColChecker"].Value = "";
+                        dataGridView_SettleMain.CurrentRow.Cells["ColCheckDate"].Value = "";
+
+                        sqlTran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        sqlTran.Rollback();
+                        Prompt.Error("操作失败， 错误：" + ex.Message);
+                    }
                 }
+
+
             }
-
-
         }
 
         private void toolStripButton_Performance_Click(object sender, EventArgs e)

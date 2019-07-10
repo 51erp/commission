@@ -83,7 +83,32 @@ namespace Commission.Forms
                 }
             }
 
+            if (IsLessIndate())
+            {
+                Prompt.Warning("收款日期不能小于置业顾问的入职日期");
+                dateTimePicker_Receipt.Focus();
+                return false;
+            }
+
+
             return true;
+        }
+
+        private bool IsLessIndate()
+        {
+            bool result = false;
+
+            string indate = SqlHelper.ExecuteScalar("select InDate from Sales where SalesID = " + SalesID).ToString();
+
+            if (!indate.Equals(""))
+            {
+                if (DateTime.Compare(dateTimePicker_Receipt.Value, Convert.ToDateTime(indate)) < 0)
+                {
+                    return true;
+                }
+            }
+
+            return result;
         }
 
       
