@@ -495,11 +495,11 @@ namespace Commission.MenuForms
             {
                 if (isContract)
                 {
-                    sql = "select ID, Source, Amount,RecDate,TypeCode,TypeName,case SettleState WHEN '0' THEN '否' ELSE  '是' END SettleState,Memo,SalesName, Maker from receipt where ContractID = " + id + " order by ID";
+                    sql = "select ID, Source, Amount,RecDate,TypeCode,TypeName,case SettleState WHEN '0' THEN '否' ELSE  '是' END SettleState,Memo,SalesID, SalesName, Maker from receipt where ContractID = " + id + " order by ID";
                 }
                 else
                 {
-                    sql = "select ID, Source, Amount,RecDate,TypeCode,TypeName,case SettleState WHEN '0' THEN '否' ELSE  '是' END SettleState,Memo,SalesName, Maker from receipt where SubscribeID = " + id + " order by ID";
+                    sql = "select ID, Source, Amount,RecDate,TypeCode,TypeName,case SettleState WHEN '0' THEN '否' ELSE  '是' END SettleState,Memo,SalesID, SalesName, Maker from receipt where SubscribeID = " + id + " order by ID";
                 }
 
                 dataGridView_Receipt.DataSource = SqlHelper.ExecuteDataTable(sql);
@@ -706,6 +706,7 @@ namespace Commission.MenuForms
             receipt.ReceiptID = dataGridView_Receipt.CurrentRow.Cells["ColRecID"].Value.ToString();
             receipt.AgreementID = agreementId;
             receipt.AgreementType = agreementType;
+            receipt.SalesID = dataGridView_Receipt.CurrentRow.Cells["ColRecSalesID"].Value.ToString();
 
             if (receipt.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

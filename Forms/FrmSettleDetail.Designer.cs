@@ -41,6 +41,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton_Del = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_Export = new System.Windows.Forms.ToolStripButton();
@@ -471,6 +474,9 @@
             // ColSubcribeDate
             // 
             this.ColSubcribeDate.DataPropertyName = "SubscribeDate";
+            dataGridViewCellStyle1.Format = "D";
+            dataGridViewCellStyle1.NullValue = null;
+            this.ColSubcribeDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColSubcribeDate.HeaderText = "认购日期";
             this.ColSubcribeDate.Name = "ColSubcribeDate";
             this.ColSubcribeDate.ReadOnly = true;
@@ -479,6 +485,8 @@
             // ColContractDate
             // 
             this.ColContractDate.DataPropertyName = "ContractDate";
+            dataGridViewCellStyle2.Format = "D";
+            this.ColContractDate.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColContractDate.HeaderText = "签约日期";
             this.ColContractDate.Name = "ColContractDate";
             this.ColContractDate.ReadOnly = true;
@@ -487,6 +495,8 @@
             // ColReciptDate
             // 
             this.ColReciptDate.DataPropertyName = "ReceiptDate";
+            dataGridViewCellStyle3.Format = "D";
+            this.ColReciptDate.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColReciptDate.HeaderText = "交款日期";
             this.ColReciptDate.Name = "ColReciptDate";
             this.ColReciptDate.ReadOnly = true;
@@ -495,9 +505,9 @@
             // ColArea
             // 
             this.ColArea.DataPropertyName = "Area";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "F2";
-            this.ColArea.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "F2";
+            this.ColArea.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColArea.HeaderText = "签约面积";
             this.ColArea.Name = "ColArea";
             this.ColArea.ReadOnly = true;
@@ -506,9 +516,9 @@
             // ColPrice
             // 
             this.ColPrice.DataPropertyName = "Price";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "F0";
-            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "F0";
+            this.ColPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColPrice.HeaderText = "签约单价";
             this.ColPrice.Name = "ColPrice";
             this.ColPrice.ReadOnly = true;
@@ -517,9 +527,9 @@
             // ColAmount
             // 
             this.ColAmount.DataPropertyName = "Amount";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "F0";
-            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "F0";
+            this.ColAmount.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColAmount.HeaderText = "签约金额";
             this.ColAmount.Name = "ColAmount";
             this.ColAmount.ReadOnly = true;
@@ -528,9 +538,9 @@
             // ColTotalAmount
             // 
             this.ColTotalAmount.DataPropertyName = "TotalAmount";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "F0";
-            this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "F0";
+            this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColTotalAmount.HeaderText = "签约总额";
             this.ColTotalAmount.Name = "ColTotalAmount";
             this.ColTotalAmount.ReadOnly = true;
@@ -563,9 +573,9 @@
             // ColDownPayRate
             // 
             this.ColDownPayRate.DataPropertyName = "DownPayRate";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.NullValue = "0";
-            this.ColDownPayRate.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.NullValue = "0";
+            this.ColDownPayRate.DefaultCellStyle = dataGridViewCellStyle8;
             this.ColDownPayRate.HeaderText = "付款比例(%)";
             this.ColDownPayRate.Name = "ColDownPayRate";
             this.ColDownPayRate.ReadOnly = true;
@@ -574,9 +584,9 @@
             // ColBottomPrice
             // 
             this.ColBottomPrice.DataPropertyName = "BottomPrice";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "F0";
-            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "F0";
+            this.ColBottomPrice.DefaultCellStyle = dataGridViewCellStyle9;
             this.ColBottomPrice.HeaderText = "销售底价";
             this.ColBottomPrice.Name = "ColBottomPrice";
             this.ColBottomPrice.ReadOnly = true;
@@ -585,9 +595,9 @@
             // ColRecDownPay
             // 
             this.ColRecDownPay.DataPropertyName = "RecDownPay";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColRecDownPay.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColRecDownPay.DefaultCellStyle = dataGridViewCellStyle10;
             this.ColRecDownPay.HeaderText = "可结首付";
             this.ColRecDownPay.Name = "ColRecDownPay";
             this.ColRecDownPay.ReadOnly = true;
@@ -596,9 +606,9 @@
             // ColRecDiffer
             // 
             this.ColRecDiffer.DataPropertyName = "RecDiffer";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColRecDiffer.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColRecDiffer.DefaultCellStyle = dataGridViewCellStyle11;
             this.ColRecDiffer.HeaderText = "可结补差";
             this.ColRecDiffer.Name = "ColRecDiffer";
             this.ColRecDiffer.ReadOnly = true;
@@ -607,9 +617,9 @@
             // ColRecLoan
             // 
             this.ColRecLoan.DataPropertyName = "RecLoan";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColRecLoan.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColRecLoan.DefaultCellStyle = dataGridViewCellStyle12;
             this.ColRecLoan.HeaderText = "可结放贷";
             this.ColRecLoan.Name = "ColRecLoan";
             this.ColRecLoan.ReadOnly = true;
@@ -642,9 +652,9 @@
             // ColSettleRate
             // 
             this.ColSettleRate.DataPropertyName = "SettleRate";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.NullValue = "0";
-            this.ColSettleRate.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.NullValue = "0";
+            this.ColSettleRate.DefaultCellStyle = dataGridViewCellStyle13;
             this.ColSettleRate.HeaderText = "提点";
             this.ColSettleRate.Name = "ColSettleRate";
             this.ColSettleRate.ReadOnly = true;
@@ -685,9 +695,9 @@
             // ColPremium
             // 
             this.ColPremium.DataPropertyName = "Premium";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
-            this.ColPremium.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ColPremium.DefaultCellStyle = dataGridViewCellStyle14;
             this.ColPremium.HeaderText = "当月溢价";
             this.ColPremium.Name = "ColPremium";
             this.ColPremium.ReadOnly = true;
@@ -696,9 +706,9 @@
             // ColCommission
             // 
             this.ColCommission.DataPropertyName = "Commission";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "F0";
-            this.ColCommission.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "F0";
+            this.ColCommission.DefaultCellStyle = dataGridViewCellStyle15;
             this.ColCommission.HeaderText = "当月佣金";
             this.ColCommission.Name = "ColCommission";
             this.ColCommission.ReadOnly = true;
@@ -707,8 +717,8 @@
             // ColCommTotal
             // 
             this.ColCommTotal.DataPropertyName = "CommTotal";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ColCommTotal.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ColCommTotal.DefaultCellStyle = dataGridViewCellStyle16;
             this.ColCommTotal.HeaderText = "当月应结";
             this.ColCommTotal.Name = "ColCommTotal";
             this.ColCommTotal.ReadOnly = true;

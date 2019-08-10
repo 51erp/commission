@@ -28,14 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button_OpenSettle = new System.Windows.Forms.Button();
+            this.textBox_SettleName = new System.Windows.Forms.TextBox();
             this.comboBox_RecType = new System.Windows.Forms.ComboBox();
+            this.button_Save = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.button_Exit = new System.Windows.Forms.Button();
+            this.button_Export = new System.Windows.Forms.Button();
+            this.button_Search = new System.Windows.Forms.Button();
             this.dataGridView_Achievement = new System.Windows.Forms.DataGridView();
-            this.textBox_SettleName = new System.Windows.Forms.TextBox();
             this.ColContractID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,11 +58,8 @@
             this.ColReceiptAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPerformance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button_OpenSettle = new System.Windows.Forms.Button();
-            this.button_Save = new System.Windows.Forms.Button();
-            this.button_Exit = new System.Windows.Forms.Button();
-            this.button_Export = new System.Windows.Forms.Button();
-            this.button_Search = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBox_RepType = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Achievement)).BeginInit();
@@ -77,8 +79,10 @@
             // 
             this.groupBox1.Controls.Add(this.button_OpenSettle);
             this.groupBox1.Controls.Add(this.textBox_SettleName);
+            this.groupBox1.Controls.Add(this.comboBox_RepType);
             this.groupBox1.Controls.Add(this.comboBox_RecType);
             this.groupBox1.Controls.Add(this.button_Save);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.button_Exit);
@@ -92,19 +96,51 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "查询条件";
             // 
+            // button_OpenSettle
+            // 
+            this.button_OpenSettle.Image = global::Commission.Properties.Resources.more;
+            this.button_OpenSettle.Location = new System.Drawing.Point(299, 16);
+            this.button_OpenSettle.Name = "button_OpenSettle";
+            this.button_OpenSettle.Size = new System.Drawing.Size(30, 23);
+            this.button_OpenSettle.TabIndex = 31;
+            this.button_OpenSettle.UseVisualStyleBackColor = true;
+            this.button_OpenSettle.Click += new System.EventHandler(this.button_OpenSettle_Click);
+            // 
+            // textBox_SettleName
+            // 
+            this.textBox_SettleName.Location = new System.Drawing.Point(68, 17);
+            this.textBox_SettleName.Name = "textBox_SettleName";
+            this.textBox_SettleName.ReadOnly = true;
+            this.textBox_SettleName.Size = new System.Drawing.Size(225, 21);
+            this.textBox_SettleName.TabIndex = 30;
+            // 
             // comboBox_RecType
             // 
             this.comboBox_RecType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_RecType.FormattingEnabled = true;
-            this.comboBox_RecType.Location = new System.Drawing.Point(409, 17);
+            this.comboBox_RecType.Location = new System.Drawing.Point(532, 16);
             this.comboBox_RecType.Name = "comboBox_RecType";
             this.comboBox_RecType.Size = new System.Drawing.Size(88, 20);
             this.comboBox_RecType.TabIndex = 29;
             // 
+            // button_Save
+            // 
+            this.button_Save.Image = global::Commission.Properties.Resources.save_16;
+            this.button_Save.Location = new System.Drawing.Point(966, 15);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(75, 23);
+            this.button_Save.TabIndex = 28;
+            this.button_Save.Text = " 保存";
+            this.button_Save.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Visible = false;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(350, 21);
+            this.label1.Location = new System.Drawing.Point(473, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 26;
@@ -118,6 +154,45 @@
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 26;
             this.label7.Text = "业绩报表";
+            // 
+            // button_Exit
+            // 
+            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
+            this.button_Exit.Location = new System.Drawing.Point(852, 15);
+            this.button_Exit.Name = "button_Exit";
+            this.button_Exit.Size = new System.Drawing.Size(75, 23);
+            this.button_Exit.TabIndex = 17;
+            this.button_Exit.Text = " 关闭";
+            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Exit.UseVisualStyleBackColor = true;
+            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
+            // 
+            // button_Export
+            // 
+            this.button_Export.Image = global::Commission.Properties.Resources.excel;
+            this.button_Export.Location = new System.Drawing.Point(733, 15);
+            this.button_Export.Name = "button_Export";
+            this.button_Export.Size = new System.Drawing.Size(75, 23);
+            this.button_Export.TabIndex = 1;
+            this.button_Export.Text = " 导出";
+            this.button_Export.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Export.UseVisualStyleBackColor = true;
+            this.button_Export.Click += new System.EventHandler(this.button_Export_Click);
+            // 
+            // button_Search
+            // 
+            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
+            this.button_Search.Location = new System.Drawing.Point(652, 15);
+            this.button_Search.Name = "button_Search";
+            this.button_Search.Size = new System.Drawing.Size(75, 23);
+            this.button_Search.TabIndex = 1;
+            this.button_Search.Text = " 查询";
+            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button_Search.UseVisualStyleBackColor = true;
+            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
             // 
             // dataGridView_Achievement
             // 
@@ -152,14 +227,6 @@
             this.dataGridView_Achievement.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView_Achievement.Size = new System.Drawing.Size(1144, 423);
             this.dataGridView_Achievement.TabIndex = 8;
-            // 
-            // textBox_SettleName
-            // 
-            this.textBox_SettleName.Location = new System.Drawing.Point(68, 17);
-            this.textBox_SettleName.Name = "textBox_SettleName";
-            this.textBox_SettleName.ReadOnly = true;
-            this.textBox_SettleName.Size = new System.Drawing.Size(225, 21);
-            this.textBox_SettleName.TabIndex = 30;
             // 
             // ColContractID
             // 
@@ -270,10 +337,10 @@
             // ColPayPercent
             // 
             this.ColPayPercent.DataPropertyName = "PayPercent";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "F2";
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.ColPayPercent.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "F2";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.ColPayPercent.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColPayPercent.HeaderText = "付款百分比(%)";
             this.ColPayPercent.Name = "ColPayPercent";
             this.ColPayPercent.ReadOnly = true;
@@ -303,68 +370,23 @@
             this.ColSalesName.ReadOnly = true;
             this.ColSalesName.Width = 78;
             // 
-            // button_OpenSettle
+            // label2
             // 
-            this.button_OpenSettle.Image = global::Commission.Properties.Resources.more;
-            this.button_OpenSettle.Location = new System.Drawing.Point(299, 16);
-            this.button_OpenSettle.Name = "button_OpenSettle";
-            this.button_OpenSettle.Size = new System.Drawing.Size(30, 23);
-            this.button_OpenSettle.TabIndex = 31;
-            this.button_OpenSettle.UseVisualStyleBackColor = true;
-            this.button_OpenSettle.Click += new System.EventHandler(this.button_OpenSettle_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(335, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 26;
+            this.label2.Text = "统计类型";
             // 
-            // button_Save
+            // comboBox_RepType
             // 
-            this.button_Save.Image = global::Commission.Properties.Resources.save_16;
-            this.button_Save.Location = new System.Drawing.Point(966, 15);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(75, 23);
-            this.button_Save.TabIndex = 28;
-            this.button_Save.Text = " 保存";
-            this.button_Save.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Visible = false;
-            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
-            // 
-            // button_Exit
-            // 
-            this.button_Exit.Image = global::Commission.Properties.Resources.exit;
-            this.button_Exit.Location = new System.Drawing.Point(714, 16);
-            this.button_Exit.Name = "button_Exit";
-            this.button_Exit.Size = new System.Drawing.Size(75, 23);
-            this.button_Exit.TabIndex = 17;
-            this.button_Exit.Text = " 关闭";
-            this.button_Exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Exit.UseVisualStyleBackColor = true;
-            this.button_Exit.Click += new System.EventHandler(this.button_Exit_Click);
-            // 
-            // button_Export
-            // 
-            this.button_Export.Image = global::Commission.Properties.Resources.excel;
-            this.button_Export.Location = new System.Drawing.Point(595, 16);
-            this.button_Export.Name = "button_Export";
-            this.button_Export.Size = new System.Drawing.Size(75, 23);
-            this.button_Export.TabIndex = 1;
-            this.button_Export.Text = " 导出";
-            this.button_Export.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Export.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Export.UseVisualStyleBackColor = true;
-            this.button_Export.Click += new System.EventHandler(this.button_Export_Click);
-            // 
-            // button_Search
-            // 
-            this.button_Search.Image = global::Commission.Properties.Resources.Find_16;
-            this.button_Search.Location = new System.Drawing.Point(514, 16);
-            this.button_Search.Name = "button_Search";
-            this.button_Search.Size = new System.Drawing.Size(75, 23);
-            this.button_Search.TabIndex = 1;
-            this.button_Search.Text = " 查询";
-            this.button_Search.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button_Search.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button_Search.UseVisualStyleBackColor = true;
-            this.button_Search.Click += new System.EventHandler(this.button_Search_Click);
+            this.comboBox_RepType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_RepType.FormattingEnabled = true;
+            this.comboBox_RepType.Location = new System.Drawing.Point(394, 17);
+            this.comboBox_RepType.Name = "comboBox_RepType";
+            this.comboBox_RepType.Size = new System.Drawing.Size(73, 20);
+            this.comboBox_RepType.TabIndex = 29;
             // 
             // AchSalesDetail
             // 
@@ -415,5 +437,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColReceiptAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColPerformance;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
+        private System.Windows.Forms.ComboBox comboBox_RepType;
+        private System.Windows.Forms.Label label2;
     }
 }

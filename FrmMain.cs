@@ -464,7 +464,7 @@ namespace Commission
         private void ToolStripMenuItem_SalesOwn_Click(object sender, EventArgs e)
         {
             AchSalesDetail salesOwn = new AchSalesDetail();
-            salesOwn.AchieveType = PerformanceType.own;
+            ///salesOwn.AchieveType = PerformanceType.own;
             FormShow(salesOwn, sender);
         }
 
@@ -566,7 +566,7 @@ namespace Commission
         private void ToolStripMenuItem_DircetorOwn_Click(object sender, EventArgs e)
         {
             AchSalesDetail performance = new AchSalesDetail();
-            performance.AchieveType = PerformanceType.own;
+            //performance.AchieveType = PerformanceType.own;
             performance.SalesType = "主管";
             FormShow(performance, sender);
         }

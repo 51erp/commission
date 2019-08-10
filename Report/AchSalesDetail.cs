@@ -22,41 +22,48 @@ namespace Commission.Report
 
         private void AchSalesOwn_Load(object sender, EventArgs e)
         {
+            
             SetReceiptType();
+            comboBox_RepType.Items.Add("个人");
+            comboBox_RepType.Items.Add("分配");
 
             if (SalesType.Equals("员工"))
             {
-                switch (AchieveType)
-                {
-                    case PerformanceType.own:
-                        this.Text = "置业顾问个人业绩统计";
-                        break;
+                this.Text = "置业顾问业绩统计";
+                comboBox_RepType.Items.Add("调岗");
+                
 
-                    case PerformanceType.allot:
-                        this.Text = "置业顾问分配业绩统计";
-                        break;
+                //switch (AchieveType)
+                //{
+                //    case PerformanceType.own:
+                //        this.Text = "置业顾问个人业绩统计";
+                //        break;
 
-                    case PerformanceType.hold:
-                        this.Text = "置业顾问调岗业绩统计";
-                        break;
-                }
+                //    case PerformanceType.allot:
+                //        this.Text = "置业顾问分配业绩统计";
+                //        break;
+
+                //    case PerformanceType.hold:
+                //        this.Text = "置业顾问调岗业绩统计";
+                //        break;
+                //}
             }
             else
             {
-                switch (AchieveType)
-                {
-                    case PerformanceType.own:
-                        this.Text = "主管个人业绩统计";
-                        break;
+                this.Text = "主管业绩统计";
+                //switch (AchieveType)
+                //{
+                //    case PerformanceType.own:
+                //        this.Text = "主管个人业绩统计";
+                //        break;
 
-                    case PerformanceType.allot:
-                        this.Text = "主管分配业绩统计";
-                        break;
-                }
+                //    case PerformanceType.allot:
+                //        this.Text = "主管分配业绩统计";
+                //        break;
+                //}
             }
 
-
-
+            comboBox_RepType.SelectedIndex = 0;
         }
 
         private void button_Exit_Click(object sender, EventArgs e)
@@ -76,7 +83,7 @@ namespace Commission.Report
 
         private void SetReceiptType()
         {
-            string sql = "select code, name from DictReceiptType where IsAchievement = 1 and State = 1 order by Code ";
+            string sql = "select code, name from DictReceiptType where IsAchievement = 1 and State = 1 order by Code desc";
 
             comboBox_RecType.DataSource = SqlHelper.ExecuteDataTable(sql);
             comboBox_RecType.DisplayMember = "name";
@@ -93,6 +100,25 @@ namespace Commission.Report
                 Prompt.Warning("未选择业绩报表！");
                 return;
             }
+
+            switch (comboBox_RepType.Text)
+            {
+                case "个人":
+                    AchieveType = PerformanceType.own;
+                    break;
+
+                case "分配":
+                    AchieveType = PerformanceType.allot;
+                    break;
+
+                case "调岗":
+                    AchieveType = PerformanceType.hold;
+                    break;
+
+                default:
+                    break;
+            }
+
 
             ShowPerformance();
         }
@@ -114,14 +140,34 @@ namespace Commission.Report
                 Prompt.Warning("没有符合条件的记录！");
         }
 
+        //------------------------------------------
+
+        //private void ShowAchievement()
+        //{
+        //    Common.SetColumnStyle(dataGridView_Achievement.Columns["ColArea"], ColType.area);
+        //    Common.SetColumnStyle(dataGridView_Achievement.Columns["ColPrice"], ColType.price);
+        //    Common.SetColumnStyle(dataGridView_Achievement.Columns["ColAmount"], ColType.amount);
+        //    Common.SetColumnStyle(dataGridView_Achievement.Columns["ColTotalAmount"], ColType.amount);
+        //    Common.SetColumnStyle(dataGridView_Achievement.Columns["ColAchievement"], ColType.amount);
+
+        //    dataGridView_Achievement.AutoGenerateColumns = false;
+
+        //    dataGridView_Achievement.DataSource = GetAchievementData(AchieveType);
+
+        //    if (dataGridView_Achievement.Rows.Count == 0)
+        //        Prompt.Warning("没有符合条件的记录！");
+        //}
+
+
+
         private DataTable GetPerformanceData(PerformanceType type)
         {
             string sql = string.Format("select a.ContractID, b.SalesID, CustomerName, Building,Unit,ItemNum, SubscribeDate, ContractDate, b.ReceiptDate, "
                 + "Area, Price, Amount, TotalAmount, b.salesName, ReceiptAmount, sum(Performance) Performance  from SettleDetail a " 
                 + "inner join PerformanceDetail b on a.SettleID = b.SettleID and a.ID = b.SettleDID "
                 + "where ReceiptTypeCode = {0} and SalesType = '{1}' and PerformanceType = {2}  and a.SettleID = {3} "
-                + "group by a.ContractID, b.SalesID, CustomerName, Building,Unit,ItemNum, SubscribeDate, ContractDate,b.ReceiptDate,Area, Price, Amount, TotalAmount,ReceiptAmount,b.salesName " 
-                + "order by b.salesID",
+                + "group by a.ContractID, b.SalesID, CustomerName, Building,Unit,ItemNum, SubscribeDate, ContractDate,b.ReceiptDate,Area, Price, Amount, TotalAmount,ReceiptAmount,b.salesName "
+                + "order by b.salesID,CustomerName",
                 comboBox_RecType.SelectedValue, SalesType, (int)type, textBox_SettleName.Tag);
 
             return SqlHelper.ExecuteDataTable(sql);
@@ -129,120 +175,104 @@ namespace Commission.Report
 
 
 
-        private void ShowAchievement()
-        {
-            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColArea"], ColType.area);
-            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColPrice"], ColType.price);
-            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColAmount"], ColType.amount);
-            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColTotalAmount"], ColType.amount);
-            Common.SetColumnStyle(dataGridView_Achievement.Columns["ColAchievement"], ColType.amount);
+        //private DataTable GetAchievementData(PerformanceType type)
+        //{
+        //    DataTable dtAchievement;
 
-            dataGridView_Achievement.AutoGenerateColumns = false;
+        //    string sql = string.Empty;
+        //    string condition = string.Empty;
+        //    //Receivables recType = (Receivables)comboBox_RecType.SelectedValue;
+        //    string receiptType = string.Empty;
 
-            dataGridView_Achievement.DataSource = GetAchievementData(AchieveType);
+        //    if ((Receivables)comboBox_RecType.SelectedValue == Receivables.成销)
+        //    {
+        //        receiptType = string.Format("(TypeCode = {0} or TypeCode = {1} ) ", (int)Receivables.定金, (int)Receivables.首付);
+        //    }
+        //    else
+        //    {
+        //        receiptType = string.Format("TypeCode = {0}", comboBox_RecType.SelectedValue);
+        //    }
 
-            if (dataGridView_Achievement.Rows.Count == 0)
-                Prompt.Warning("没有符合条件的记录！");
-        }
+        //    //string beginDate = dateTimePicker_Begin.Value.ToString("yyyy-MM-dd");
+        //    //string endDate = dateTimePicker_End.Value.ToString("yyyy-MM-dd");
 
-        private DataTable GetAchievementData(PerformanceType type)
-        {
-            DataTable dtAchievement;
+        //    //结算收款为业绩, 是否需要审核？
+        //    //condition = string.Format("ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and SettleState > 0 ",Login.User.ProjectID, beginDate, endDate);
 
-            string sql = string.Empty;
-            string condition = string.Empty;
-            //Receivables recType = (Receivables)comboBox_RecType.SelectedValue;
-            string receiptType = string.Empty;
+        //    //未审核，测试用
+        //    //condition = string.Format("a.ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and {3}", Login.User.ProjectID, beginDate, endDate, receiptType);
 
-            if ((Receivables)comboBox_RecType.SelectedValue == Receivables.成销)
-            {
-                receiptType = string.Format("(TypeCode = {0} or TypeCode = {1} ) ", (int)Receivables.定金, (int)Receivables.首付);
-            }
-            else
-            {
-                receiptType = string.Format("TypeCode = {0}", comboBox_RecType.SelectedValue);
-            }
+        //    switch (type)
+        //    {
+        //        case PerformanceType.own:   //回款业绩-个人
+        //            sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) as Achievement from Receipt a "
+        //                + "inner join ContractMain b on b.ContractID = a.ContractID "
+        //                + "where a.SalesID = b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
 
-            //string beginDate = dateTimePicker_Begin.Value.ToString("yyyy-MM-dd");
-            //string endDate = dateTimePicker_End.Value.ToString("yyyy-MM-dd");
+        //            break;
 
-            //结算收款为业绩, 是否需要审核？
-            //condition = string.Format("ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and SettleState > 0 ",Login.User.ProjectID, beginDate, endDate);
+        //        case PerformanceType.allot: //回款业绩-分配
+        //            sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) * 0.7 as Achievement from Receipt a "
+        //                + "inner join ContractMain b on b.ContractID = a.ContractID "
+        //                + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
 
-            //未审核，测试用
-            //condition = string.Format("a.ProjectID = {0} and RecDate >= '{1}' and RecDate <= '{2}' and {3}", Login.User.ProjectID, beginDate, endDate, receiptType);
+        //            break;
 
-            switch (type)
-            {
-                case PerformanceType.own:   //回款业绩-个人
-                    sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) as Achievement from Receipt a "
-                        + "inner join ContractMain b on b.ContractID = a.ContractID "
-                        + "where a.SalesID = b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
+        //        case PerformanceType.hold:  //回款业绩-调岗
+        //            sql = string.Format("select a.ContractID, b.SubscribeSalesID as SalesID,  b.SubscribeSalesName as SalesName, SUM(Amount) * 0.3 as Achievement from Receipt a "
+        //                + "inner join ContractMain b on b.ContractID = a.ContractID "
+        //                + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, b.SubscribeSalesID,  b.SubscribeSalesName order by b.SubscribeSalesID", condition);
 
-                    break;
+        //            break;
 
-                case PerformanceType.allot: //回款业绩-分配
-                    sql = string.Format("select a.ContractID, a.SalesID, a.SalesName, SUM(Amount) * 0.7 as Achievement from Receipt a "
-                        + "inner join ContractMain b on b.ContractID = a.ContractID "
-                        + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, a.SalesID, a.SalesName order by a.SalesID", condition);
+        //        default:
+        //            break;
+        //    }
 
-                    break;
-
-                case PerformanceType.hold:  //回款业绩-调岗
-                    sql = string.Format("select a.ContractID, b.SubscribeSalesID as SalesID,  b.SubscribeSalesName as SalesName, SUM(Amount) * 0.3 as Achievement from Receipt a "
-                        + "inner join ContractMain b on b.ContractID = a.ContractID "
-                        + "where a.SalesID != b.SubscribeSalesID and {0} group by a.ContractID, b.SubscribeSalesID,  b.SubscribeSalesName order by b.SubscribeSalesID", condition);
-
-                    break;
-
-                default:
-                    break;
-            }
-
-            dtAchievement = SqlHelper.ExecuteDataTable(sql);
-            dtAchievement.PrimaryKey = new DataColumn[] { dtAchievement.Columns["ContractID"], dtAchievement.Columns["SalesID"] };
+        //    dtAchievement = SqlHelper.ExecuteDataTable(sql);
+        //    dtAchievement.PrimaryKey = new DataColumn[] { dtAchievement.Columns["ContractID"], dtAchievement.Columns["SalesID"] };
 
 
-            string contractId = string.Empty;
-            string salesId = string.Empty;
+        //    string contractId = string.Empty;
+        //    string salesId = string.Empty;
 
-            for (int i = 0; i < dtAchievement.Rows.Count; i++)
-            {
-                contractId = dtAchievement.Rows[i]["ContractID"].ToString();
-                salesId = dtAchievement.Rows[i]["SalesID"].ToString();
+        //    for (int i = 0; i < dtAchievement.Rows.Count; i++)
+        //    {
+        //        contractId = dtAchievement.Rows[i]["ContractID"].ToString();
+        //        salesId = dtAchievement.Rows[i]["SalesID"].ToString();
 
-                sql = string.Format("select a.ContractID, cast('{0}' as int) as SalesID, CustomerName, Building, Unit, ItemNum, SubscribeDate, ContractDate, '' as ReceiptDate, "
-                    + "b.Area, b.Price, b.Amount, TotalAmount, '' as PayPercent from ContractMain a "
-                    + "inner join ContractDetail b on b.ContractID = a.ContractID "
-                    + "where IsBind = 0 and a.ContractID = {1}", salesId, contractId);
+        //        sql = string.Format("select a.ContractID, cast('{0}' as int) as SalesID, CustomerName, Building, Unit, ItemNum, SubscribeDate, ContractDate, '' as ReceiptDate, "
+        //            + "b.Area, b.Price, b.Amount, TotalAmount, '' as PayPercent from ContractMain a "
+        //            + "inner join ContractDetail b on b.ContractID = a.ContractID "
+        //            + "where IsBind = 0 and a.ContractID = {1}", salesId, contractId);
 
-                DataTable dtContract = SqlHelper.ExecuteDataTable(sql);
+        //        DataTable dtContract = SqlHelper.ExecuteDataTable(sql);
 
-                sql = string.Format("select MAX(CONVERT(varchar(10),RecDate,120)) as ReceiptDate from Receipt where ContractID = {0}", contractId);
-                object objResult = SqlHelper.ExecuteScalar(sql);
-                if (objResult != null)
-                {
-                    dtContract.Rows[0]["ReceiptDate"] = objResult.ToString();
-                }
+        //        sql = string.Format("select MAX(CONVERT(varchar(10),RecDate,120)) as ReceiptDate from Receipt where ContractID = {0}", contractId);
+        //        object objResult = SqlHelper.ExecuteScalar(sql);
+        //        if (objResult != null)
+        //        {
+        //            dtContract.Rows[0]["ReceiptDate"] = objResult.ToString();
+        //        }
 
-                //截止当期累计回款及占比
-               // sql = string.Format("select SUM(Amount) as ReceiptAmount from Receipt where ContractID = {0} and TypeCode ! = 6  and RecDate <= '{1}'", contractId, endDate);
-                double tmp = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
-                dtContract.Rows[0]["PayPercent"] = Math.Round(double.Parse(SqlHelper.ExecuteScalar(sql).ToString()) / double.Parse(dtContract.Rows[0]["TotalAmount"].ToString()) * 100, 2);
+        //        //截止当期累计回款及占比
+        //       // sql = string.Format("select SUM(Amount) as ReceiptAmount from Receipt where ContractID = {0} and TypeCode ! = 6  and RecDate <= '{1}'", contractId, endDate);
+        //        double tmp = double.Parse(SqlHelper.ExecuteScalar(sql).ToString());
+        //        dtContract.Rows[0]["PayPercent"] = Math.Round(double.Parse(SqlHelper.ExecuteScalar(sql).ToString()) / double.Parse(dtContract.Rows[0]["TotalAmount"].ToString()) * 100, 2);
 
-                dtAchievement.Merge(dtContract, false, MissingSchemaAction.Add);
+        //        dtAchievement.Merge(dtContract, false, MissingSchemaAction.Add);
 
-            }
+        //    }
 
-            ////回款百分比
-            //DataColumn colPayPercent = new DataColumn();
-            //colPayPercent.DataType = System.Type.GetType("System.Decimal");
-            //colPayPercent.ColumnName = "PayPercent";
-            //colPayPercent.Expression = "Achievement / TotalAmount * 100";
-            //dtAchievement.Columns.Add(colPayPercent);
+        //    ////回款百分比
+        //    //DataColumn colPayPercent = new DataColumn();
+        //    //colPayPercent.DataType = System.Type.GetType("System.Decimal");
+        //    //colPayPercent.ColumnName = "PayPercent";
+        //    //colPayPercent.Expression = "Achievement / TotalAmount * 100";
+        //    //dtAchievement.Columns.Add(colPayPercent);
 
-            return dtAchievement;
-        }
+        //    return dtAchievement;
+        //}
 
         private void button_OpenSettle_Click(object sender, EventArgs e)
         {

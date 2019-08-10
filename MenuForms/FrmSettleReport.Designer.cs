@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateTimePicker_Period = new System.Windows.Forms.DateTimePicker();
@@ -87,7 +87,7 @@
             // 
             // dateTimePicker_Period
             // 
-            this.dateTimePicker_Period.CustomFormat = "yyyy-MM";
+            this.dateTimePicker_Period.CustomFormat = "yyyy";
             this.dateTimePicker_Period.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker_Period.Location = new System.Drawing.Point(66, 24);
             this.dateTimePicker_Period.Name = "dateTimePicker_Period";
@@ -124,7 +124,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 12);
             this.label7.TabIndex = 11;
-            this.label7.Text = "结算期间";
+            this.label7.Text = "结算年度";
             // 
             // comboBox_CheckState
             // 
@@ -300,8 +300,8 @@
             // ColCheckDate
             // 
             this.ColCheckDate.DataPropertyName = "CheckDate";
-            dataGridViewCellStyle2.NullValue = null;
-            this.ColCheckDate.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.NullValue = null;
+            this.ColCheckDate.DefaultCellStyle = dataGridViewCellStyle1;
             this.ColCheckDate.HeaderText = "审核日期";
             this.ColCheckDate.Name = "ColCheckDate";
             this.ColCheckDate.ReadOnly = true;

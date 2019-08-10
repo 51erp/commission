@@ -88,7 +88,6 @@
             this.ToolStripMenuItem_DirectorSummary = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DircetorOwn = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_DircetorAllot = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItem_SalesSummary = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_SalesOwn = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_SalesAllot = new System.Windows.Forms.ToolStripMenuItem();
@@ -603,7 +602,6 @@
             this.ToolStripMenuItem_DirectorSummary,
             this.ToolStripMenuItem_DircetorOwn,
             this.ToolStripMenuItem_DircetorAllot,
-            this.toolStripMenuItem16,
             this.ToolStripMenuItem_SalesSummary,
             this.ToolStripMenuItem_SalesOwn,
             this.ToolStripMenuItem_SalesAllot,
@@ -615,55 +613,53 @@
             // ToolStripMenuItem_DirectorSummary
             // 
             this.ToolStripMenuItem_DirectorSummary.Name = "ToolStripMenuItem_DirectorSummary";
-            this.ToolStripMenuItem_DirectorSummary.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_DirectorSummary.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_DirectorSummary.Text = "主管汇总";
             this.ToolStripMenuItem_DirectorSummary.Visible = false;
             // 
             // ToolStripMenuItem_DircetorOwn
             // 
             this.ToolStripMenuItem_DircetorOwn.Name = "ToolStripMenuItem_DircetorOwn";
-            this.ToolStripMenuItem_DircetorOwn.Size = new System.Drawing.Size(124, 22);
-            this.ToolStripMenuItem_DircetorOwn.Text = "主管个人";
+            this.ToolStripMenuItem_DircetorOwn.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_DircetorOwn.Text = "主管业绩";
             this.ToolStripMenuItem_DircetorOwn.Click += new System.EventHandler(this.ToolStripMenuItem_DircetorOwn_Click);
             // 
             // ToolStripMenuItem_DircetorAllot
             // 
             this.ToolStripMenuItem_DircetorAllot.Name = "ToolStripMenuItem_DircetorAllot";
-            this.ToolStripMenuItem_DircetorAllot.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_DircetorAllot.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_DircetorAllot.Text = "主管分配";
+            this.ToolStripMenuItem_DircetorAllot.Visible = false;
             this.ToolStripMenuItem_DircetorAllot.Click += new System.EventHandler(this.ToolStripMenuItem_DircetorAllot_Click);
-            // 
-            // toolStripMenuItem16
-            // 
-            this.toolStripMenuItem16.Name = "toolStripMenuItem16";
-            this.toolStripMenuItem16.Size = new System.Drawing.Size(121, 6);
             // 
             // ToolStripMenuItem_SalesSummary
             // 
             this.ToolStripMenuItem_SalesSummary.Name = "ToolStripMenuItem_SalesSummary";
-            this.ToolStripMenuItem_SalesSummary.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_SalesSummary.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_SalesSummary.Text = "业务汇总";
             this.ToolStripMenuItem_SalesSummary.Visible = false;
             // 
             // ToolStripMenuItem_SalesOwn
             // 
             this.ToolStripMenuItem_SalesOwn.Name = "ToolStripMenuItem_SalesOwn";
-            this.ToolStripMenuItem_SalesOwn.Size = new System.Drawing.Size(124, 22);
-            this.ToolStripMenuItem_SalesOwn.Text = "业务个人";
+            this.ToolStripMenuItem_SalesOwn.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItem_SalesOwn.Text = "置业顾问";
             this.ToolStripMenuItem_SalesOwn.Click += new System.EventHandler(this.ToolStripMenuItem_SalesOwn_Click);
             // 
             // ToolStripMenuItem_SalesAllot
             // 
             this.ToolStripMenuItem_SalesAllot.Name = "ToolStripMenuItem_SalesAllot";
-            this.ToolStripMenuItem_SalesAllot.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_SalesAllot.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_SalesAllot.Text = "业务分配";
+            this.ToolStripMenuItem_SalesAllot.Visible = false;
             this.ToolStripMenuItem_SalesAllot.Click += new System.EventHandler(this.ToolStripMenuItem_SalesAllot_Click);
             // 
             // ToolStripMenuItem_SalesHold
             // 
             this.ToolStripMenuItem_SalesHold.Name = "ToolStripMenuItem_SalesHold";
-            this.ToolStripMenuItem_SalesHold.Size = new System.Drawing.Size(124, 22);
+            this.ToolStripMenuItem_SalesHold.Size = new System.Drawing.Size(152, 22);
             this.ToolStripMenuItem_SalesHold.Text = "业务调岗";
+            this.ToolStripMenuItem_SalesHold.Visible = false;
             this.ToolStripMenuItem_SalesHold.Click += new System.EventHandler(this.ToolStripMenuItem_SalesHold_Click);
             // 
             // ToolStripMenuItem_Report
@@ -1370,7 +1366,6 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DirectorSummary;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DircetorOwn;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_DircetorAllot;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem16;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SalesSummary;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SalesOwn;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_SalesAllot;

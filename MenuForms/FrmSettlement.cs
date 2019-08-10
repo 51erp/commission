@@ -80,39 +80,51 @@ namespace Commission.MenuForms
 
             string condition = string.Format(" select Distinct ContractID from Receipt where SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{0}' and ProjectID = {1} ", closingDate, Login.User.ProjectID);
 
-            //收款日期小于截止日期且未结算
+            //以收款为基准：收款日期小于截止日期且未结算，签约时间小于截止时间
             sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, CONVERT(varchar(10),SubscribeDate,120) SubscribeDate, SubscribeSalesID, SubscribeSalesName,  CONVERT(varchar(10),ContractDate,120) ContractDate, PaymentName,  "
                 + " b.ItemID, b.Building, b.Unit, b.ItemNum, b.Area, b.Price, b.Amount, "
-                + " DownPayRate, DownPayAmount, Loan, TotalAmount, a.SalesID, a.SalesName, "
+                + " DownPayRate, DownPayAmount, Loan, TotalAmount, "
                 + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate "
                 + " from ContractMain a "
                 + " inner join  ContractDetail b on a.ContractID = b.ContractID "
                 + " inner join SaleItem c on b.ItemID = c.ItemID"
-                + " where b.IsBind = 0 and a.ContractID in (" + condition + ")"
+                + " where a.ContractDate <= '" + closingDate + "' and b.IsBind = 0 and a.ContractID in (" + condition + ")"
                 + " order by a.ContractID ";
             
             //主体表
             DataTable dtContract = SqlHelper.ExecuteDataTable(sql); 
             dtContract.PrimaryKey = new DataColumn[] { dtContract.Columns["ContractID"] };
 
-            //累计收款
+            //累计收款 --是截止到结算截止日期还是系统时间??? //当前为结算截止日期的累计收款
             sql = string.Format("select ContractID, IsNull(SUM(Amount),0) as ReceiptAll from Receipt where ContractID in ({0}) group by ContractID ", condition);
             DataTable dtReceiptAll = SqlHelper.ExecuteDataTable(sql);
             dtContract.Merge(dtReceiptAll, false, MissingSchemaAction.Add);
 
-            //最后收款日期
-            sql = string.Format("select ContractID, MAX(RecDate) as ReceiptDate from Receipt  where  ContractID in ({0}) group by ContractID", condition);
+
+            //最后收款日期 － modify by 20190710 ：保证最后收款日期与相应的收款业务员匹配
+            sql = "select ContractID, SalesID, SalesName, RecDate as ReceiptDate from Receipt where 1=0";
             DataTable dtReceiptDate = SqlHelper.ExecuteDataTable(sql);
+
+            for (int i = 0; i < dtContract.Rows.Count; i++)
+            {
+                sql = string.Format("select top 1 ContractID, SalesID, SalesName, RecDate as ReceiptDate from Receipt "
+                    + "where ContractID = {0} and SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{1}' "
+                    + "order by RecDate Desc, ID Desc ", dtContract.Rows[i]["ContractID"].ToString(), closingDate);
+                DataTable dt = SqlHelper.ExecuteDataTable(sql);
+                dtReceiptDate.Rows.Add(dt.Rows[0].ItemArray);  
+            }
+
             dtContract.Merge(dtReceiptDate, false, MissingSchemaAction.Add);
 
             //可结算收款
             sql = "select ContractID, "
                 + " SUM(case TypeCode when '0' then amount else 0 end) RecLoan, "
-                + " (SUM(case TypeCode when '1' then amount else 0 end) + SUM(case TypeCode when '2' then amount else 0 end)) RecDownPay,"
+                + " (SUM(case  when TypeCode = '1' or TypeCode = '2' then amount else 0 end)) RecDownPay, "
                 + " SUM(case TypeCode when '3' then amount else 0 end) RecDiffer, "
                 + " SUM(case TypeCode when '4' then amount else 0 end) RecDeliver, "
                 + " SUM(case TypeCode when '5' then amount else 0 end) RecLimit,"
-                + " SUM(amount) RecSettleTotal"
+                + " SUM(case TypeCode when '6' then amount else 0 end) RecRetrun,"
+                + " SUM(case when TypeCode != '6' then amount else 0 end) RecSettleTotal"
                 + " from Receipt  where contractid is not null and SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '" + closingDate + "' and ProjectID = " + Login.User.ProjectID
                 + " group by ContractID ";
 
@@ -131,21 +143,23 @@ namespace Commission.MenuForms
             dtCommission.Columns.Add("CommTotal", typeof(int));
             dtCommission.Columns.Add("FirstSettle", typeof(int));
 
+
+
+            dtContract.AcceptChanges();
             int firstSettle;
-            //是否达到结算标准，否：移除
             for (int i = 0; i < dtContract.Rows.Count; i++)
             {
                 firstSettle = 0;
                 if (IsSetted(dtContract.Rows[i]["ContractID"].ToString()) == false)  //是否已有结算记录，有：直接结算，无：检测达标条件
                 {
-                    if (IsStandard(dtContract.Rows[i]) == false)
+                    if (IsStandard(dtContract.Rows[i]) == false) //是否达标
                     {
                         dtContract.Rows[i].Delete();
                         continue;
                     }
                     else
                     {
-                        firstSettle = 1; //首付结算，成销
+                        firstSettle = 1; //无结算记录且达标，视为首次结算（成销）
                     }
                 }
 
@@ -210,53 +224,6 @@ namespace Commission.MenuForms
                     dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
 
                 }
-
-                
-                
-                
-                
-                //SqlDataReader dr = SqlHelper.ExecuteReader(sql);
-
-                //if (dr.HasRows)
-                //{
-                //    DataTable dt = new DataTable();
-
-                //    dt.Columns.Add("ContractID", typeof(int));
-                //    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
-
-                //    string fieldValue = subId;
-
-
-                //    int itemIdx = 0;     //一个房源相同尾号
-                //    while (dr.Read())
-                //    {
-                //        for (int j = 0; j < dr.FieldCount; j++) //????考虑：不在重新创建表和字段，主表一次合并，提高效率??
-                //        {
-                //            string fieldName = "BIND_" + dr.GetName(j) + itemIdx;
-                //            dt.Columns.Add(fieldName, typeof(string));
-
-                //            if (dr.GetName(j).Equals("Amount"))
-                //            {
-                //                fieldValue += "," + string.Format(formatAmount, dr.GetValue(j));
-                //            }
-                //            else
-                //            {
-                //                fieldValue += "," + dr.GetValue(j).ToString();
-                //            }
-                //        }
-
-                //        itemIdx++;
-
-                //        if (itemIdx > iBindQuantity)
-                //            iBindQuantity = itemIdx;
-                //    }
-
-                //    string[] strArray = fieldValue.Split(',');
-
-                //    dt.Rows.Add(strArray);
-
-                //    dtContract.Merge(dt, false, MissingSchemaAction.Add); //合并至主体表
-                //}
             }
 
             return dtContract;
@@ -338,8 +305,8 @@ namespace Commission.MenuForms
             int result = int.Parse(SqlHelper.ExecuteScalar(sql).ToString());
             if (result > 0)  //是否存分期
             {
-                sql = string.Format("select count(*) from Installment where ContractID = {0} and Settled = 0 ", contractId); 
-                if ((int.Parse(SqlHelper.ExecuteScalar(sql).ToString()) == 0))  //是否全部结算
+                sql = string.Format("select count(*) from Installment where ContractID = {0} and Settled != 0 ", contractId); 
+                if ((int.Parse(SqlHelper.ExecuteScalar(sql).ToString()) != 0)) 
                 {
                     return true;
                 }
@@ -733,6 +700,20 @@ namespace Commission.MenuForms
                         cmd.ExecuteNonQuery();
 
                         errCode = 3;
+
+                        Console.WriteLine(dt_settle.Rows[i]["CustomerName"].ToString() +'-'+ dt_settle.Rows[i]["SettleStandardCode"].ToString() + '－' + dt_settle.Rows[i]["SettleBaseCode"].ToString());
+
+                        Console.WriteLine("" + contractId);
+
+                        if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentFirst)
+                        {
+                            if (dt_settle.Rows[i]["FirstSettle"].ToString().Equals("1"))
+                            {
+                                cmd.CommandText = string.Format("update Installment set Settled = {0} where ContractID = {1} and  Sequence = 1", settleId, dt_settle.Rows[i]["ContractID"].ToString());
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
                         //分期结算：设置分期指标的结算状态,更新为sid
                         if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentStage)
                         {
@@ -740,7 +721,7 @@ namespace Commission.MenuForms
                             string sequence = installmentStandard(contractId, receiptAll);
                             if (int.Parse(sequence) > 0)
                             {
-                                cmd.CommandText = string.Format("update Installment set Settled = {0} where Settled = 0 and Sequence <= {1}", settleId, sequence);
+                                cmd.CommandText = string.Format("update Installment set Settled = {0} where ContractID = {1} and Settled = 0 and Sequence <= {2} ", settleId, dt_settle.Rows[i]["ContractID"].ToString(), sequence);
                                 cmd.ExecuteNonQuery();
                             }
                         }

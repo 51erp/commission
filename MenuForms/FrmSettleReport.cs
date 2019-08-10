@@ -73,7 +73,7 @@ namespace Commission.MenuForms
         {
             Period = dateTimePicker_Period.Text;
 
-            string condition = "SettlePeriod  = '" + Period + "'";
+            string condition = "Left(SettlePeriod, 4)  = '" + Period + "'";
 
             if (comboBox_CheckState.Text == "未审")
             {
@@ -196,6 +196,7 @@ namespace Commission.MenuForms
 
                         dataGridView_SettleMain.CurrentRow.Cells["ColChecker"].Value = "";
                         dataGridView_SettleMain.CurrentRow.Cells["ColCheckDate"].Value = "";
+                        dataGridView_SettleMain.CurrentRow.Cells["ColPerformance"].Value = "无";
 
                         sqlTran.Commit();
                     }

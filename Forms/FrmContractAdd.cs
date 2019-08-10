@@ -858,7 +858,7 @@ namespace Commission.Forms
             SqlDataReader sdr = null;
 
             //主表信息
-            sql = string.Format("select SubscribeID,SubscribeDate,SubscribeSalesID,SubscribeSalesName, ContractNum, b.CustomerID,b.CustomerName,b.CustomerPhone,PID,Addr, SalesID, PaymentID,isnull(DownPayRate,0) DownPayRate,isnull(DownPayAmount,0) DownPayAmount,isnull(Loan,0) Loan,isnull(TotalAmount,0) TotalAmount,ContractDate, "
+            sql = string.Format("select SubscribeID,convert(varchar(10),SubscribeDate,120) SubscribeDate,SubscribeSalesID,SubscribeSalesName, ContractNum, b.CustomerID,b.CustomerName,b.CustomerPhone,PID,Addr, SalesID, PaymentID,isnull(DownPayRate,0) DownPayRate,isnull(DownPayAmount,0) DownPayAmount,isnull(Loan,0) Loan,isnull(TotalAmount,0) TotalAmount,ContractDate, "
                 + "Discount, Fund, FormalNum, FormalDate, ExtField0, ExtField1, ExtField2, ExtField3, ExtField4, ExtField5, ExtField6, ExtField7, ExtField8, ExtField9 "
                 + "from [ContractMain] a "
                 + "inner join Customer b on a.CustomerID = b.CustomerID "
@@ -957,6 +957,7 @@ namespace Commission.Forms
         /// </summary>
         private void UpdateData()
         {
+            int ErrCode = 0;
             using (SqlConnection connection = SqlHelper.OpenConnection())  //创建连接对象 
             {
                 SqlTransaction sqlTran = connection.BeginTransaction();    //开始事务 
@@ -967,22 +968,28 @@ namespace Commission.Forms
                 {
                     //业务主表
                     cmd.CommandText = GenUpdateContractMainSQL(ContractID);
+                    ErrCode = 1;
                     cmd.ExecuteNonQuery();
 
                     //业务从表 - 清除原数据
                     cmd.CommandText = string.Format("delete [ContractDetail] where ContractID = {0}",ContractID);
+                    ErrCode = 2;
                     cmd.ExecuteNonQuery();
 
                     //业务从表 - 重新添加
                     for (int i = 0; i < dataGridView_SaleItem.Rows.Count; i++)
                     {
                         cmd.CommandText = GenInsertSqlContractDetail(i, ContractID);
+                        ErrCode = 7;
                         cmd.ExecuteNonQuery();
 
+                        ErrCode = 8;
                         string itemId = dataGridView_SaleItem.Rows[i].Cells["ColItemID"].Value.ToString();
                         bool isBind = Convert.ToBoolean(dataGridView_SaleItem.Rows[i].Cells["ColIsBind"].Value);
 
+                        ErrCode = 9;
                         cmd.CommandText = GenUpdateSqlSaleItem(itemId,isBind);
+                        ErrCode = 3;
                         cmd.ExecuteNonQuery();
 
 
@@ -1002,20 +1009,23 @@ namespace Commission.Forms
                                 + " where ItemID = {2}", (int)ItemSaleState.待售, ItemSaleState.待售, row["ItemID"].ToString());
 
                         cmd.CommandText = sql;
+                        ErrCode = 4;
                         cmd.ExecuteNonQuery();
                     }
 
                     //更新分期付款设置
                     cmd.CommandText = "delete Installment where ContractID = " + ContractID;
+                    ErrCode = 5;
                     cmd.ExecuteNonQuery();
 
                     for (int i = 0; i < dtInstallment.Rows.Count; i++)
                     {
                         cmd.CommandText = string.Format("insert into Installment (ContractID, Sequence,Amount, PayDate) values ({0},{1},{2},'{3}')",
                             ContractID, dtInstallment.Rows[i]["Sequence"].ToString(), dtInstallment.Rows[i]["Amount"].ToString(), dtInstallment.Rows[i]["PayDate"].ToString());
+                        ErrCode = 6;
+                        
                         cmd.ExecuteNonQuery();
                     }
-
 
                     sqlTran.Commit();  //事务提交
                     connection.Close();
@@ -1025,7 +1035,7 @@ namespace Commission.Forms
                 catch (Exception ex)
                 {
                     sqlTran.Rollback();  //异常事务回滚
-                    Prompt.Error("操作失败! \r\n错误信息(UD-01)：" + ex.Message);
+                    Prompt.Error("操作失败! \r\n错误信息(UD-01)：" + ex.Message +  "\r\nErrCode:" + ErrCode);
                 }
             }
 
@@ -1076,6 +1086,8 @@ namespace Commission.Forms
         /// </summary>
         private void ExchangeData()
         {
+            int ErrCode = 0;
+            
             string strValues = string.Empty;
             double receiptTotal = 0;
             using (SqlConnection connection = SqlHelper.OpenConnection()) 
@@ -1094,6 +1106,7 @@ namespace Commission.Forms
 
                     //更新主表
                     cmd.CommandText = string.Format("update ContractMain set ReturnDate = CONVERT(VARCHAR(10),GETDATE(),120), RefundDate = CONVERT(VARCHAR(10),GETDATE(),120), ReturnReason = '换房' where ContractID = {0}", ContractID);
+                    ErrCode = 1;
                     cmd.ExecuteNonQuery();
 
                     //生成退款
@@ -1105,16 +1118,19 @@ namespace Commission.Forms
 
                         strValues = ContractID + "," + origSubscribeID + "," + Login.User.ProjectID + "," + refund + ",GETDATE()," + (int)Receivables.退房 + ",'" + Receivables.退房 + "','换房'," + salesId + ",'" + salesName + "',GETDATE(),'" + Login.User.UserName + "'";
                         cmd.CommandText = string.Format("insert into Receipt (ContractID,SubscribeID, ProjectID,Amount,RecDate,TypeCode,TypeName,Memo,SalesID,SalesName,MakeDate,Maker) values ({0})", strValues);
+                        ErrCode = 2;
                         cmd.ExecuteNonQuery();
                     }
 
                     //退房记录
                     strValues = ContractID + ",'" + OperationType.contract + "',GETDATE(),'换房',1," + salesId + ",'" + salesName + "','" + Login.User.UserName + "',GETDATE()";
                     cmd.CommandText = string.Format("insert into ItemReturn (AgreementID,OperationType,ReturnDate,Memo,IsRefund,SalesID, SalesName, MakeUserName,MakeDate) values ({0})", strValues);
+                    ErrCode = 3;
                     cmd.ExecuteNonQuery();
 
                     //新增签约主表
                     cmd.CommandText = GenInsertSqlContractMain();
+                    ErrCode = 4;
                     string newContractId = cmd.ExecuteScalar().ToString();
 
                     //新增认购主表
@@ -1122,7 +1138,8 @@ namespace Commission.Forms
                     cmd.CommandText = string.Format("insert into SubscribeMain output inserted.SubscribeID select '{0}' as ContractID,SubscribeNum,ProjectID,ProjectName,CustomerID,CustomerName,CustomerPhone, "
                         + "SubscribeDate,LastContractDate,ReturnDate,RefundDate,ReturnReason,ReturnUserName, '{1}' as TotalAmount, "
                         + "SalesID,SalesName,Memo,MakeDate,UserID,UserName,State, "
-                        + "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9 from SubscribeMain where  SubscribeID = {2}", newContractId, textBox_TotalAmount.Text.Trim(), dictSubscribe["SubscribeID"]);
+                        + "ExtField0,ExtField1,ExtField2,ExtField3,ExtField4,ExtField5,ExtField6,ExtField7,ExtField8,ExtField9,import from SubscribeMain where  SubscribeID = {2}", newContractId, textBox_TotalAmount.Text.Trim(), dictSubscribe["SubscribeID"]);
+                    ErrCode = 5;
                     string newSubscribeId = cmd.ExecuteScalar().ToString();
 
                     //签约从表
@@ -1130,10 +1147,12 @@ namespace Commission.Forms
                     {
                         //添加房源(签约）
                         cmd.CommandText = GenInsertSqlContractDetail(i, newContractId);
+                        ErrCode = 6;
                         cmd.ExecuteNonQuery();
 
                         //添加房源（认购）
                         cmd.CommandText = GenInsertSqlSubscribeDetail(i, newSubscribeId);
+                        ErrCode = 7;
                         cmd.ExecuteNonQuery();
 
                         string itemId = dataGridView_SaleItem.Rows[i].Cells["ColItemID"].Value.ToString();
@@ -1169,6 +1188,7 @@ namespace Commission.Forms
 
                             cmd.CommandText = string.Format("insert into ItemExchange (ProjectID,ContractID,OrigContractID, CustomerID, CustomerName, CustomerPhone, ReceiptTotal, "
                                 + " OrigItemID,OrigBuilding,OrigUnit,OrigItemNum,ItemTypeName,ItemID,Building,Unit,ItemNum,SalesName,SubscribeDate, ExchangeDate, MakeUserName,MakeDate) values ({0})", strValues);
+                            ErrCode = 8;
                             cmd.ExecuteNonQuery(); 
 
                             bool isBind = Convert.ToBoolean(dataGridView_SaleItem.Rows[i].Cells["ColIsBind"].Value);
@@ -1178,7 +1198,8 @@ namespace Commission.Forms
                                 cmd.CommandText = GenUpdateSqlSaleItem(itemId, isBind);
                             else
                                 cmd.CommandText = GenUpdateSqlSaleItem(itemId, isBind, GetSettleValue());  //主售物业获取结算数据
-                            
+
+                            ErrCode = 9;
                             cmd.ExecuteNonQuery();
                         }
              
@@ -1195,12 +1216,14 @@ namespace Commission.Forms
                                 + " where ItemID = {2}", (int)ItemSaleState.待售, ItemSaleState.待售, row["ItemID"]);
 
                         cmd.CommandText = sql;
+                        ErrCode = 10;
                         cmd.ExecuteNonQuery();
                     }
 
                     //收款信息
                     cmd.CommandText = string.Format("insert into Receipt (ContractID,ProjectID,Amount,RecDate,TypeCode,TypeName,IsLoan,Memo,SalesID,SalesName,Source,MakeDate,Maker) "
                         + "select '{0}' as ContractID,ProjectID,Amount,RecDate,TypeCode,TypeName,IsLoan,Memo,SalesID,SalesName,Source,MakeDate,Maker from Receipt where ContractID = {1} and TypeCode != {2}", newContractId, ContractID, (int)Receivables.退房);
+                    ErrCode = 11;
                     cmd.ExecuteNonQuery();
 
                     //保存分期付款设置
@@ -1208,7 +1231,7 @@ namespace Commission.Forms
                     {
                         cmd.CommandText = string.Format("insert into Installment (ContractID, Sequence,Amount, PayDate) values ({0},{1},{2},'{3}')",
                             newContractId, dtInstallment.Rows[i]["Sequence"].ToString(), dtInstallment.Rows[i]["Amount"].ToString(), dtInstallment.Rows[i]["PayDate"].ToString());
-
+                        ErrCode = 12;
                         cmd.ExecuteNonQuery();
                     }
 
@@ -1224,7 +1247,7 @@ namespace Commission.Forms
                 catch (Exception ex)
                 {
                     sqlTran.Rollback();
-                    Prompt.Error("操作失败! \r\n错误信息：" + ex.Message);
+                    Prompt.Error("操作失败! \r\n错误信息(UD-02)：" + ex.Message + "\r\nErrCode: " + ErrCode);
                 }
 
             }
