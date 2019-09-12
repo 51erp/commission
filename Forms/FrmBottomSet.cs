@@ -82,10 +82,12 @@ namespace Commission.Forms
 
             if (price == 0 && amount == 0)
             {
-                Prompt.Error("单价和总价不能同时为零");
-                textBox_BottomPrice.Focus();
-                textBox_BottomPrice.SelectAll();
-                return false;
+                if (Prompt.Question("单价和总价同时为0，确认底价设置？") != System.Windows.Forms.DialogResult.Yes)
+                {
+                    textBox_BottomPrice.Focus();
+                    textBox_BottomPrice.SelectAll();
+                    return false;
+                }
             }
 
             if (price > 0 && amount > 0)
@@ -113,13 +115,13 @@ namespace Commission.Forms
                 return false;
             }
 
-            if (result <= 0)
-            {
-                Prompt.Warning("溢价分成必须大于0！");
-                textBox_BottomPriceRate.Focus();
-                textBox_BottomPriceRate.SelectAll();
-                return false;
-            }
+            //if (result <= 0)
+            //{
+            //    Prompt.Warning("溢价分成必须大于0！");
+            //    textBox_BottomPriceRate.Focus();
+            //    textBox_BottomPriceRate.SelectAll();
+            //    return false;
+            //}
 
             return true;
         }

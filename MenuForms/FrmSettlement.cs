@@ -56,6 +56,7 @@ namespace Commission.MenuForms
             Common.SetColumnStyle(dataGridView_Settlement.Columns["ColRecDeliver"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Settlement.Columns["ColRecLimit"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Settlement.Columns["ColRecSettleTotal"], ColType.amount);
+            Common.SetColumnStyle(dataGridView_Settlement.Columns["ColRecRefund"], ColType.amount);
 
             Common.SetColumnStyle(dataGridView_Settlement.Columns["ColCommAll"], ColType.amount);
             Common.SetColumnStyle(dataGridView_Settlement.Columns["ColPremiumAll"], ColType.amount);
@@ -80,8 +81,10 @@ namespace Commission.MenuForms
 
             string condition = string.Format(" select Distinct ContractID from Receipt where SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{0}' and ProjectID = {1} ", closingDate, Login.User.ProjectID);
 
+            //NewSettle:添加是否为退款的主键，以保证收款和退款两条记录存在
+
             //以收款为基准：收款日期小于截止日期且未结算，签约时间小于截止时间
-            sql = "select a.ContractID, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, CONVERT(varchar(10),SubscribeDate,120) SubscribeDate, SubscribeSalesID, SubscribeSalesName,  CONVERT(varchar(10),ContractDate,120) ContractDate, PaymentName,  "
+            sql = "select a.ContractID, '0' as IsRefund, a.ContractNum, CustomerName, b.ItemTypeCode, b.ItemTypeName, CONVERT(varchar(10),SubscribeDate,120) SubscribeDate, SubscribeSalesID, SubscribeSalesName,  CONVERT(varchar(10),ContractDate,120) ContractDate, PaymentName,  "
                 + " b.ItemID, b.Building, b.Unit, b.ItemNum, b.Area, b.Price, b.Amount, "
                 + " DownPayRate, DownPayAmount, Loan, TotalAmount, "
                 + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate "
@@ -92,22 +95,22 @@ namespace Commission.MenuForms
                 + " order by a.ContractID ";
             
             //主体表
-            DataTable dtContract = SqlHelper.ExecuteDataTable(sql); 
-            dtContract.PrimaryKey = new DataColumn[] { dtContract.Columns["ContractID"] };
+            DataTable dtContract = SqlHelper.ExecuteDataTable(sql);
+            dtContract.PrimaryKey = new DataColumn[] { dtContract.Columns["ContractID"], dtContract.Columns["IsRefund"] };
 
             //累计收款 --是截止到结算截止日期还是系统时间??? //当前为结算截止日期的累计收款
-            sql = string.Format("select ContractID, IsNull(SUM(Amount),0) as ReceiptAll from Receipt where ContractID in ({0}) group by ContractID ", condition);
+            sql = string.Format("select ContractID,'0' as IsRefund, IsNull(SUM(Amount),0) as ReceiptAll from Receipt where ContractID in ({0}) group by ContractID ", condition);
             DataTable dtReceiptAll = SqlHelper.ExecuteDataTable(sql);
             dtContract.Merge(dtReceiptAll, false, MissingSchemaAction.Add);
 
 
             //最后收款日期 － modify by 20190710 ：保证最后收款日期与相应的收款业务员匹配
-            sql = "select ContractID, SalesID, SalesName, RecDate as ReceiptDate from Receipt where 1=0";
+            sql = "select ContractID, '0' as IsRefund, SalesID, SalesName, RecDate as ReceiptDate from Receipt where 1=0"; //创建一个空表s结构
             DataTable dtReceiptDate = SqlHelper.ExecuteDataTable(sql);
 
             for (int i = 0; i < dtContract.Rows.Count; i++)
             {
-                sql = string.Format("select top 1 ContractID, SalesID, SalesName, RecDate as ReceiptDate from Receipt "
+                sql = string.Format("select top 1 ContractID, '0' as IsRefund, SalesID, SalesName, RecDate as ReceiptDate from Receipt "
                     + "where ContractID = {0} and SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '{1}' "
                     + "order by RecDate Desc, ID Desc ", dtContract.Rows[i]["ContractID"].ToString(), closingDate);
                 DataTable dt = SqlHelper.ExecuteDataTable(sql);
@@ -117,13 +120,13 @@ namespace Commission.MenuForms
             dtContract.Merge(dtReceiptDate, false, MissingSchemaAction.Add);
 
             //可结算收款
-            sql = "select ContractID, "
+            sql = "select ContractID, '0' as IsRefund, "
                 + " SUM(case TypeCode when '0' then amount else 0 end) RecLoan, "
                 + " (SUM(case  when TypeCode = '1' or TypeCode = '2' then amount else 0 end)) RecDownPay, "
                 + " SUM(case TypeCode when '3' then amount else 0 end) RecDiffer, "
                 + " SUM(case TypeCode when '4' then amount else 0 end) RecDeliver, "
                 + " SUM(case TypeCode when '5' then amount else 0 end) RecLimit,"
-                + " SUM(case TypeCode when '6' then amount else 0 end) RecRetrun,"
+                + " SUM(case TypeCode when '6' then amount else 0 end) RecRefund,"
                 + " SUM(case when TypeCode != '6' then amount else 0 end) RecSettleTotal"
                 + " from Receipt  where contractid is not null and SettleState = 0 and Convert(Varchar(10),RecDate,120) <= '" + closingDate + "' and ProjectID = " + Login.User.ProjectID
                 + " group by ContractID ";
@@ -134,6 +137,7 @@ namespace Commission.MenuForms
             //存放佣金数据
             DataTable dtCommission = new DataTable();
             dtCommission.Columns.Add("ContractID", typeof(int));
+            dtCommission.Columns.Add("IsRefund", typeof(string));
             dtCommission.Columns.Add("PremiumAll", typeof(int));
             dtCommission.Columns.Add("CommAll", typeof(int));
             dtCommission.Columns.Add("SettleAll", typeof(int));
@@ -152,7 +156,7 @@ namespace Commission.MenuForms
                 firstSettle = 0;
                 if (IsSetted(dtContract.Rows[i]["ContractID"].ToString()) == false)  //是否已有结算记录，有：直接结算，无：检测达标条件
                 {
-                    if (IsStandard(dtContract.Rows[i]) == false) //是否达标
+                    if (IsStandard(dtContract.Rows[i]) == false) //是否达标  //NewSettle: 仅查收款（不含退款），退款基于收款生成，不存在没有收款，只有收款的情况。
                     {
                         dtContract.Rows[i].Delete();
                         continue;
@@ -163,10 +167,56 @@ namespace Commission.MenuForms
                     }
                 }
 
-                //计算佣金数据
-                object[] commissoinData = CalculateCommssion(dtContract.Rows[i], firstSettle);
-                dtCommission.Rows.Add(commissoinData);
 
+                int recRefund = Convert.ToInt32(dtContract.Rows[i]["RecRefund"]);      //可结算退款
+                int recSettle = Convert.ToInt32(dtContract.Rows[i]["RecSettleTotal"]); //可结算收款合计
+
+                if (recRefund == 0) //无退款正常结算
+                {
+                    //计算佣金数据
+                    object[] commissoinData = CalculateCommssion(dtContract.Rows[i], firstSettle);
+                    dtCommission.Rows.Add(commissoinData);
+                }
+                else
+                {
+                    if (recSettle == 0 )  //仅退款
+                    {
+                        dtContract.Rows[i]["IsRefund"] = 1; //退款标记
+                        //退款结算 不需要计算当期
+                        object[] commissoinData = CalculateCommssionRefund(dtContract.Rows[i]["ContractID"].ToString(), 0, 0, firstSettle);
+                        dtCommission.Rows.Add(commissoinData);
+                    }
+                    else
+                    {
+                        //计算佣金数据
+                        
+                        object[] commissoinData = CalculateCommssion(dtContract.Rows[i], firstSettle);
+                        dtCommission.Rows.Add(commissoinData);
+
+
+                        //主表添加行
+                        DataRow row = dtContract.NewRow();
+                        row.ItemArray = dtContract.Rows[i].ItemArray;
+                        row["IsRefund"] = 1;
+
+                        dtContract.Rows[i]["RecRefund"] = 0;
+
+                        i++; //转到新增行。
+
+                        dtContract.Rows.InsertAt(row, i);
+
+                        //退款结算
+                        dtContract.Rows[i]["RecLoan"] = 0;
+                        dtContract.Rows[i]["RecDownPay"] = 0;
+                        dtContract.Rows[i]["RecDiffer"] = 0;
+                        dtContract.Rows[i]["RecDeliver"] = 0;
+                        dtContract.Rows[i]["RecLimit"] = 0;
+                        dtContract.Rows[i]["RecSettleTotal"] = 0;
+
+                        object[] commissoinDataRefund = CalculateCommssionRefund(dtContract.Rows[i]["ContractID"].ToString(), (int)commissoinData[6], (int)commissoinData[7], firstSettle);
+                        dtCommission.Rows.Add(commissoinDataRefund);
+                    }
+                }
             }
             dtContract.AcceptChanges(); //提交删除
 
@@ -188,9 +238,10 @@ namespace Commission.MenuForms
                     DataTable dt = new DataTable();
 
                     dt.Columns.Add("ContractID", typeof(int));
-                    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"] };
+                    dt.Columns.Add("IsRefund", typeof(string));
+                    dt.PrimaryKey = new DataColumn[] { dt.Columns["ContractID"], dt.Columns["IsRefund"] };
 
-                    string fieldValue = subId;
+                    string fieldValue = subId + "," + dtContract.Rows[i]["IsRefund"].ToString(); 
 
                     int itemIdx = 0;     //一个房源相同尾号
 
@@ -249,7 +300,7 @@ namespace Commission.MenuForms
 
             //检测条件
             int receipt = Convert.ToInt32(row["RecSettleTotal"]); //可结算收款合计
-            int receiptAll = Convert.ToInt32(row["ReceiptAll"]);  //累计收款合计
+            int receiptAll = Convert.ToInt32(row["ReceiptAll"]);  //全部收款合计
 
             SettleStandard standardCode = (SettleStandard)row["SettleStandardCode"];  
 
@@ -305,8 +356,8 @@ namespace Commission.MenuForms
             int result = int.Parse(SqlHelper.ExecuteScalar(sql).ToString());
             if (result > 0)  //是否存分期
             {
-                sql = string.Format("select count(*) from Installment where ContractID = {0} and Settled != 0 ", contractId); 
-                if ((int.Parse(SqlHelper.ExecuteScalar(sql).ToString()) != 0)) 
+                sql = string.Format("select count(*)  from Installment where ContractID = {0} and Settled != 0 ", contractId);
+                if ((int.Parse(SqlHelper.ExecuteScalar(sql).ToString()) > 0)) 
                 {
                     return true;
                 }
@@ -370,6 +421,31 @@ namespace Commission.MenuForms
             return result;
         }
 
+
+        private object[] CalculateCommssionRefund(string contractId, int currPremium, int currCommission, int firstSettle)
+        {
+            int isRefund = 1;
+
+            double premiumAll = 0; //溢价总额
+            double commAll = 0;    //佣金总额
+            double settleAll = 0;  //累计已结佣金
+            double settlePremium = 0; //累计已结溢价
+            double noSettleAll = 0;//未结佣金
+            double commTotal = 0;  //当期应结
+
+            settleAll = Convert.ToDouble(SqlHelper.ExecuteScalar(string.Format("select IsNull(SUM(Commission),0) as SettleAll from SettleDetail where ContractID = {0}", contractId)));
+
+            settlePremium = Convert.ToDouble(SqlHelper.ExecuteScalar(string.Format("select IsNull(SUM(Premium),0) as SettleAll from SettleDetail where ContractID = {0}", contractId)));
+
+
+            commTotal = -(currPremium + currCommission + settleAll + settlePremium);
+
+
+            return new object[] { int.Parse(contractId), isRefund, (int)premiumAll, (int)commAll, (int)settleAll, (int)noSettleAll, (int)currPremium, (int)currCommission, (int)commTotal, firstSettle };
+        }
+
+
+
         /// <summary>
         /// 计算佣金相关数据
         /// </summary>
@@ -385,6 +461,7 @@ namespace Commission.MenuForms
             double commTotal = 0;  //当期应结
 
             string contractId = row["ContractID"].ToString();
+            int isRefund = 0;
             
             double recSettleTotal = Convert.ToInt32(row["RecSettleTotal"]);         //可结收款总额
             double recPremium = recSettleTotal - Convert.ToInt32(row["RecDiffer"]); //可结收款总额，不含补差款
@@ -418,6 +495,7 @@ namespace Commission.MenuForms
                 }
 
                 //溢价总额 = 面积 * 底价差额 * 溢价提成比例
+                
                 premiumAll = Math.Round(area * bottomDiffer * bottomPriceRate, 0, MidpointRounding.AwayFromZero);
             }
 
@@ -501,7 +579,7 @@ namespace Commission.MenuForms
             //当期应结
             commTotal = premium + commission;
 
-            return new object[] { int.Parse(contractId), (int)premiumAll, (int)commAll, (int)settleAll, (int)noSettleAll, (int)premium, (int)commission, (int)commTotal, firstSettle };
+            return new object[] { int.Parse(contractId), (int)isRefund, (int)premiumAll, (int)commAll, (int)settleAll, (int)noSettleAll, (int)premium, (int)commission, (int)commTotal, firstSettle };
         }
 
 
@@ -637,11 +715,11 @@ namespace Commission.MenuForms
                     //添加结算从表
                     DataTable dt_settle = (DataTable)dataGridView_Settlement.DataSource;
 
-                    string fields = "insert into SettleDetail (SettleID,ContractID, ContractNum, CustomerName,ItemTypeCode, ItemTypeName, "
+                    string fields = "insert into SettleDetail (SettleID,ContractID,IsRefund, ContractNum, CustomerName,ItemTypeCode, ItemTypeName, "
                         + " SubscribeDate, SubscribeSalesID, SubscribeSalesName, ContractDate,PaymentName,ReceiptDate, SalesID, SalesName,"
                         + " ItemID, Building, Unit,ItemNum, Area, Price,Amount,DownPayRate, DownPayAmount, Loan, TotalAmount, "
                         + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate, "
-                        + " RecLoan,RecDownPay,RecDiffer,RecDeliver,RecLimit,RecSettleTotal,PremiumAll,CommAll,SettleAll,NoSettleAll,Premium,Commission,CommTotal,FirstSettle) values ";
+                        + " RecLoan,RecDownPay,RecDiffer,RecDeliver,RecLimit,RecSettleTotal,RecRefund, PremiumAll,CommAll,SettleAll,NoSettleAll,Premium,Commission,CommTotal,FirstSettle) values ";
 
                     for (int i = 0; i < dt_settle.Rows.Count; i++)
                     {
@@ -649,6 +727,7 @@ namespace Commission.MenuForms
                         string contractId = dt_settle.Rows[i]["ContractID"].ToString();
 
                         values = settleId + "," + contractId
+                            + "," + dt_settle.Rows[i]["IsRefund"].ToString()
                             + ",'" + dt_settle.Rows[i]["ContractNum"].ToString() + "'"
                             + ",'" + dt_settle.Rows[i]["CustomerName"].ToString() + "'"
                             + "," + dt_settle.Rows[i]["ItemTypeCode"].ToString()
@@ -685,6 +764,7 @@ namespace Commission.MenuForms
                             + "," + dt_settle.Rows[i]["RecDeliver"].ToString()
                             + "," + dt_settle.Rows[i]["RecLimit"].ToString()
                             + "," + dt_settle.Rows[i]["RecSettleTotal"].ToString()
+                            + "," + dt_settle.Rows[i]["RecRefund"].ToString()
                             + "," + dt_settle.Rows[i]["PremiumAll"].ToString()
                             + "," + dt_settle.Rows[i]["CommAll"].ToString()
                             + "," + dt_settle.Rows[i]["SettleAll"].ToString()
@@ -700,10 +780,6 @@ namespace Commission.MenuForms
                         cmd.ExecuteNonQuery();
 
                         errCode = 3;
-
-                        Console.WriteLine(dt_settle.Rows[i]["CustomerName"].ToString() +'-'+ dt_settle.Rows[i]["SettleStandardCode"].ToString() + '－' + dt_settle.Rows[i]["SettleBaseCode"].ToString());
-
-                        Console.WriteLine("" + contractId);
 
                         if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentFirst)
                         {

@@ -47,6 +47,7 @@
             this.dateTimePicker_SettlePeriod = new System.Windows.Forms.DateTimePicker();
             this.button_Exit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button_Settle = new System.Windows.Forms.Button();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
@@ -82,6 +83,7 @@
             this.ColRecDeliver = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRecLimit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRecSettleTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColRecRefund = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSettleRate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColPremiumAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCommAll = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,7 +93,6 @@
             this.ColCommission = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCommTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColSalesName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -167,6 +168,15 @@
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 3;
             this.label3.Text = "截止日期";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(262, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "日";
             // 
             // label2
             // 
@@ -262,6 +272,7 @@
             this.ColRecDeliver,
             this.ColRecLimit,
             this.ColRecSettleTotal,
+            this.ColRecRefund,
             this.ColSettleRate,
             this.ColPremiumAll,
             this.ColCommAll,
@@ -544,6 +555,14 @@
             this.ColRecSettleTotal.ReadOnly = true;
             this.ColRecSettleTotal.Width = 78;
             // 
+            // ColRecRefund
+            // 
+            this.ColRecRefund.DataPropertyName = "RecRefund";
+            this.ColRecRefund.HeaderText = "可结退款";
+            this.ColRecRefund.Name = "ColRecRefund";
+            this.ColRecRefund.ReadOnly = true;
+            this.ColRecRefund.Width = 78;
+            // 
             // ColSettleRate
             // 
             this.ColSettleRate.DataPropertyName = "SettleRate";
@@ -628,15 +647,6 @@
             this.ColSalesName.ReadOnly = true;
             this.ColSalesName.Width = 78;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(262, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(17, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "日";
-            // 
             // FrmSettlement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -674,6 +684,7 @@
         private System.Windows.Forms.DataGridView dataGridView_Settlement;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DateTimePicker dateTimePicker_CloseDate;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSettleID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColContractNum;
@@ -702,6 +713,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRecDeliver;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRecLimit;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRecSettleTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColRecRefund;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSettleRate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColPremiumAll;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommAll;
@@ -711,7 +723,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommission;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColCommTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSalesName;
-        private System.Windows.Forms.Label label1;
 
     }
 }
