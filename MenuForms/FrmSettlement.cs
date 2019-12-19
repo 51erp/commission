@@ -597,7 +597,7 @@ namespace Commission.MenuForms
 
             string sql = string.Empty;
 
-            sql = string.Format("select Sequence,Amount, (select SUM(Amount) from Installment b where b.Sequence < a.Sequence and settled = 0 and  ContractID = {0}) as AmountSum "
+            sql = string.Format("select Sequence,Amount, (select isnull(SUM(Amount),0) from Installment b where b.Sequence < a.Sequence and settled = 0 and  ContractID = {0}) as AmountSum "
                 + " from Installment a where settled = 0 and  ContractID = {0} order by Sequence ", contractID);
 
             DataTable dtInstallment = SqlHelper.ExecuteDataTable(sql);
@@ -721,10 +721,15 @@ namespace Commission.MenuForms
                         + " SettleStandardCode, SettleBaseCode, SettleRate, SettleAmount, BottomPrice, BottomPriceLimit, BottomPriceRate, "
                         + " RecLoan,RecDownPay,RecDiffer,RecDeliver,RecLimit,RecSettleTotal,RecRefund, PremiumAll,CommAll,SettleAll,NoSettleAll,Premium,Commission,CommTotal,FirstSettle) values ";
 
+                    Console.WriteLine("ColContractID: " + ColContractID);
+
                     for (int i = 0; i < dt_settle.Rows.Count; i++)
                     {
                         values = string.Empty;
                         string contractId = dt_settle.Rows[i]["ContractID"].ToString();
+
+                        Console.WriteLine("contradId is :" + contractId );
+
 
                         values = settleId + "," + contractId
                             + "," + dt_settle.Rows[i]["IsRefund"].ToString()
@@ -779,8 +784,12 @@ namespace Commission.MenuForms
                         errMsg = cmd.CommandText;
                         cmd.ExecuteNonQuery();
 
+                        string conid = contractId;
+
                         errCode = 3;
 
+
+                        //结算条件：分期首笔
                         if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentFirst)
                         {
                             if (dt_settle.Rows[i]["FirstSettle"].ToString().Equals("1"))
@@ -790,12 +799,29 @@ namespace Commission.MenuForms
                             }
                         }
 
-                        //分期结算：设置分期指标的结算状态,更新为sid
+                        //结算条件：分期阶段：设置分期指标的结算状态,更新为sid
                         if ((SettleStandard)dt_settle.Rows[i]["SettleStandardCode"] == SettleStandard.InstallmentStage)
                         {
                             Double receiptAll = Convert.ToDouble(dt_settle.Rows[i]["ReceiptAll"]);
-                            string sequence = installmentStandard(contractId, receiptAll);
-                            if (int.Parse(sequence) > 0)
+
+                            double iAmount = 0;   //modify 20190928 by CC:事务外的SQL形成会造成操作超时。
+                            cmd.CommandText = string.Format("select Sequence,Amount from Installment where Settled = 0  and  ContractID = {0} order by Sequence", contractId);
+                            SqlDataReader sdr = cmd.ExecuteReader();
+
+                            int sequence = 0;
+                            while (sdr.Read())
+                            {
+                                //累计收款数 >= 指标累计，按符合条件的序号进行更新
+                                iAmount += double.Parse(sdr["Amount"].ToString()); //指标值累计
+                                if ((receiptAll >= iAmount))
+                                {
+                                    int.TryParse(sdr["Sequence"].ToString(), out sequence);
+                                }
+                            }
+                            sdr.Close();
+
+
+                            if (sequence > 0)
                             {
                                 cmd.CommandText = string.Format("update Installment set Settled = {0} where ContractID = {1} and Settled = 0 and Sequence <= {2} ", settleId, dt_settle.Rows[i]["ContractID"].ToString(), sequence);
                                 cmd.ExecuteNonQuery();
@@ -839,18 +865,30 @@ namespace Commission.MenuForms
             List<string[]> listAmount = new List<string[]>();
             double iAmount = 0;
             sql = string.Format("select Sequence,Amount from Installment where Settled = 0  and  ContractID = {0} order by Sequence", contractID);
-            SqlDataReader sdr = SqlHelper.ExecuteReader(sql);
+            //SqlDataReader sdr = SqlHelper.ExecuteReader(sql);
+            
+            DataTable dt = SqlHelper.ExecuteDataTable(sql);
 
-            while (sdr.Read())
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
-                //累计收款数 > 指标累计，按符合条件的序号进行更新
-                iAmount += double.Parse(sdr["Amount"].ToString()); //指标值累计
+                iAmount += double.Parse(dt.Rows[i]["Amount"].ToString()); //指标值累计
                 if ((receiptAll < iAmount))
                 {
-                    result = sdr["Sequence"].ToString();
+                    result = dt.Rows[i]["Sequence"].ToString();
                 }
             }
-            sdr.Close();
+
+
+            //while (sdr.Read())
+            //{
+            //    //累计收款数 > 指标累计，按符合条件的序号进行更新
+            //    iAmount += double.Parse(sdr["Amount"].ToString()); //指标值累计
+            //    if ((receiptAll < iAmount))
+            //    {
+            //        result = sdr["Sequence"].ToString();
+            //    }
+            //}
+            //sdr.Close();
 
             return result;
         }
@@ -862,6 +900,7 @@ namespace Commission.MenuForms
 
         private void FrmSettlement_Load(object sender, EventArgs e)
         {
+            dateTimePicker_SettlePeriod.Value = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-01"));
             object objResult = SqlHelper.ExecuteScalar(string.Format("select ClosingDate from ParaSettle where ProjectID = {0}",Login.User.ProjectID));
             if (objResult == null)
             {

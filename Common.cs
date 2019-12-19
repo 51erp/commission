@@ -233,10 +233,10 @@ namespace Commission
     //结算条件
     public enum SettleStandard
     {
-        ContractAmount = 1,
-        DownPay = 2,
-        InstallmentFirst = 3,
-        InstallmentStage = 4
+        ContractAmount = 1,    //合同全款
+        DownPay = 2,           //贷款首付
+        InstallmentFirst = 3,  //分期首笔
+        InstallmentStage = 4   //分期阶段
     }
 
     //结算基础

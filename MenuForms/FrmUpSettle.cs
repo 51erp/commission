@@ -331,7 +331,7 @@ namespace Commission.MenuForms
         /////////////////////////////////////////////////////////////////////////////////////////
         private void FrmUpSettle_Load(object sender, EventArgs e)
         {
-            string closingDate = SqlHelper.ExecuteScalar(string.Format("select MAX(ClosingDate) from SettleMain where ProjectID = {0}", Login.User.ProjectID)).ToString();
+            string closingDate = SqlHelper.ExecuteScalar(string.Format("select CONVERT(varchar(10),MAX(ClosingDate),120) from SettleMain where ProjectID = {0}", Login.User.ProjectID)).ToString();
 
             if (closingDate.Equals(""))
             {
@@ -340,7 +340,7 @@ namespace Commission.MenuForms
             else
             {
                 button_SettleUp.Enabled = true;
-                dateTimePicker_SettlePeriod.Value = Convert.ToDateTime(closingDate);
+                dateTimePicker_SettlePeriod.Value = Convert.ToDateTime(closingDate.Substring(0,8) + "01");
                 dateTimePicker_ClosingDate.Value = Convert.ToDateTime(closingDate);
             }
 

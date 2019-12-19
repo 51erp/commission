@@ -288,6 +288,10 @@ namespace Commission.MenuForms
                             break;
                     }
 
+                    string myid = drSettle["ID"].ToString();
+
+                    Console.WriteLine("the ID: " +myid);
+
                     string deptID = GetDeptID(drSettle["SalesID"].ToString(),drSettle["ReceiptDate"].ToString());
 
                     MngPerformance(drSettle, Receivables.成销, deptID, drSettle["SalesID"].ToString());
@@ -400,6 +404,7 @@ namespace Commission.MenuForms
         }
 
 
+        //主管业务统计
         private void MngPerformance(DataRow row, Receivables recType, string deptID, string recSalesID)
         {
             string sql = string.Empty;
@@ -419,6 +424,7 @@ namespace Commission.MenuForms
 
                 salesID = dr["SalesID"].ToString();
                 salesName = dr["SalesName"].ToString();
+
 
                 if (salesID == recSalesID)
                 {
@@ -461,14 +467,13 @@ namespace Commission.MenuForms
                     + ")";
 
                 SqlHelper.ExecuteNonQuery(sql);
+            }
 
-                string parentDeptID = GetParentDeptID(deptID);
+            string parentDeptID = GetParentDeptID(deptID);
 
-                if ((parentDeptID != "") && (parentDeptID != "0"))
-                {
-                    MngPerformance(row, recType, parentDeptID, recSalesID);
-                }
-
+            if ((parentDeptID != "") && (parentDeptID != "0"))
+            {
+                MngPerformance(row, recType, parentDeptID, recSalesID);
             }
 
         }
@@ -485,7 +490,7 @@ namespace Commission.MenuForms
         {
             string deptID = "0";
 
-            string sql = string.Format("select deptID from JobTrack where SalesID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}' ) or  (BeginDate <= '{1}'  or EndDate is null))", salesID, recDate);
+            string sql = string.Format("select deptID from JobTrack where SalesID = {0} and ((BeginDate <= '{1}' and EndDate > '{1}' ) or  (BeginDate <= '{1}'  and EndDate is null))", salesID, recDate);
 
             object objResult = SqlHelper.ExecuteScalar(sql);
 
