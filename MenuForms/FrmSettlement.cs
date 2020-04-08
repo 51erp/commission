@@ -31,6 +31,16 @@ namespace Commission.MenuForms
 
         private void button_Settle_Click(object sender, EventArgs e)
         {
+            if (dataGridView_Settlement.DataSource != null)
+            {
+                DataTable dt = (DataTable)dataGridView_Settlement.DataSource;
+                dt.Rows.Clear();
+                dataGridView_Settlement.DataSource = dt;
+                Refresh();
+            }
+
+
+
             Settlement();
         }
 
@@ -168,8 +178,12 @@ namespace Commission.MenuForms
                 }
 
 
+
                 int recRefund = Convert.ToInt32(dtContract.Rows[i]["RecRefund"]);      //可结算退款
                 int recSettle = Convert.ToInt32(dtContract.Rows[i]["RecSettleTotal"]); //可结算收款合计
+
+
+
 
                 if (recRefund == 0) //无退款正常结算
                 {
@@ -476,8 +490,8 @@ namespace Commission.MenuForms
             double bottomPriceLimit = Convert.ToDouble(row["BottomPriceLimit"]);
             double bottomPriceRate = Convert.ToDouble(row["BottomPriceRate"]) / 100;
 
-            double settleRate = Convert.ToDouble(row["SettleRate"]) / 100;
-            double settleAmount = Convert.ToDouble(row["SettleAmount"]);
+            double settleRate = Convert.ToDouble(row["SettleRate"]) / 100;          //佣金结算比例
+            double settleAmount = Convert.ToDouble(row["SettleAmount"]);            //单套结算金额
 
 
             double ReceiptAll = Convert.ToDouble(row["ReceiptAll"]);
@@ -501,8 +515,10 @@ namespace Commission.MenuForms
 
 
             //佣金总额:  无底价 = 合同总额 * 提点 ； 有底价 = (合同总额 - 实溢总额) * 提点，即： (合同总额 - (单价 - 底价) * 面积) * 提点
-            if (baseCode == SettleBase.Single)
+            //20191220 修改：settleAmount > 0 即为单套结算
+            if (settleAmount > 0)
             {
+                baseCode = SettleBase.Single;
                 commAll = Convert.ToDouble(row["SettleAmount"]);
             }
             else

@@ -677,22 +677,21 @@ namespace Commission.Forms
 
             string sql = string.Empty;
 
-            //提点锁定
-            sql = string.Format("select IsLocking from SaleItem where ItemID = {0}", itemId);
-            object obj = SqlHelper.ExecuteScalar(sql);
-            bool locking = bool.Parse(SqlHelper.ExecuteScalar(sql).ToString());
-            if (locking)
+            //锁定、预置提点或单套金额、跳点时，签约不获取提点
+            sql = string.Format("select IsLocking, SettleRate, SettleAmount, IsNull(UpID,0) UpID from SaleItem where ItemID = {0}", itemId);
+            DataTable dt = SqlHelper.ExecuteDataTable(sql);
+            if (dt != null)
             {
-                return result;
+                bool locking = bool.Parse(dt.Rows[0]["IsLocking"].ToString());
+                double rate = double.Parse(dt.Rows[0]["SettleRate"].ToString());
+                double amount = double.Parse(dt.Rows[0]["SettleAmount"].ToString());
+                int upid = int.Parse(dt.Rows[0]["UpID"].ToString());
+
+                if ((locking) || (rate > 0) || (amount > 0) || (upid > 0))
+                    return result;
             }
 
-            //跳点，如设置跳点，执行跳点方案
-            sql = string.Format("select IsNull(UpID,0) from SaleItem where ItemID = {0}", itemId);
-            int upId = int.Parse(SqlHelper.ExecuteScalar(sql).ToString());
-            if (upId > 0)
-            {
-                return result;
-            }
+            //引用项目提点设置，匹配房源类型或全局默认
 
             //匹配房源类型  
             sql = string.Format("select CommissionType, Rate, Amount  from SchemeRate a inner join SaleItem b on a.ItemTypeCode = b.ItemTypeCode where ItemID = {0} and ('{1}' >= BeginDate and '{1}' <= EndDate) and a.ProjectID = {2}", itemId, subscribeDate, Login.User.ProjectID);
